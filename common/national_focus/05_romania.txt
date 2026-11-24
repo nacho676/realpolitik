@@ -4143,6 +4143,8 @@ focus_tree = {
 			log = "[GetDateText]: [This.GetName]: focus ROM_monarchy_debate executed"
 			country_event = romania_politics.6
 			custom_effect_tooltip = ROM_monarchy_debate_tt
+			unlock_decision_tooltip = ROM_gain_support_within_the_government
+			unlock_decision_tooltip = ROM_attack_republican_politicians
 		}
 
 		ai_will_do = {
@@ -6814,11 +6816,17 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus ROM_greater_romania_party executed"
 			unlock_decision_category_tooltip = ROM_vadim_struggle
+			unlock_decision_tooltip = ROM_intimidate_defeatists
+			unlock_decision_tooltip = ROM_stage_marches
+			unlock_decision_tooltip = ROM_promote_patriotic_views
+			unlock_decision_tooltip = ROM_utilize_intelligence_agents
+			unlock_decision_tooltip = ROM_ukrainian_ultimatum
 			set_temp_variable = { party_index = 20 }
 			set_temp_variable = { party_popularity_increase = 0.05 }
 			set_temp_variable = { temp_outlook_increase = 0.05 }
 			change_relative_party_popularity = yes
 			custom_effect_tooltip = rom_vadim_election_win
+			custom_effect_tooltip = ROM_march_tt
 			set_country_flag = mission_vadim
 			set_country_flag = rom_vadim_decisions
 			set_power_balance = {
@@ -7034,7 +7042,6 @@ focus_tree = {
 				value = -0.05
 				tooltip_side = vadim_left_side
 			}
-			set_country_flag = ROM_united_nationalists
 			custom_effect_tooltip = noua_dreapta_integration
 			newline = yes
 			add_political_power = 25
@@ -7134,12 +7141,10 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
-		available = { always = no }
+		available = { has_country_flag = ROM_march_succeeded }
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus ROM_terror_in_bucharest executed"
-			custom_effect_tooltip = ROM_march_tt
-			newline = yes
 			add_war_support = 0.05
 		}
 
@@ -7908,6 +7913,9 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus ROM_the_reunification_of_all_romanians executed"
 			unlock_decision_category_tooltip = ROM_romanianization_category
+			unlock_decision_tooltip = ROM_998_return
+			unlock_decision_tooltip = ROM_996_return
+			unlock_decision_tooltip = ROM_122_return
 			custom_effect_tooltip = rom_reintegration
 			custom_effect_tooltip = ROM_core_compliance_tt
 			add_timed_idea = {
@@ -8271,8 +8279,6 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		available = { always = no }
-
-		completion_reward = { log = "[GetDateText]: [This.GetName]: focus ROM_death_of_the_king executed" }
 
 		ai_will_do = {
 			base = 10
@@ -9172,7 +9178,7 @@ focus_tree = {
 				name = ROM_deals_with_intel
 				bonus = 0.5
 				uses = 1
-				category = CAT_computing_tech
+				category = CAT_information_technology
 			}
 		}
 
@@ -9202,7 +9208,7 @@ focus_tree = {
 				name = ROM_deals_with_microsoft
 				bonus = 0.5
 				uses = 1
-				category = CAT_internet_tech
+				category = CAT_internet
 			}
 		}
 
@@ -9296,7 +9302,7 @@ focus_tree = {
 				name = ROM_invest_in_tech_innovations
 				bonus = 0.5
 				uses = 2
-				category = CAT_computing_tech
+				category = CAT_information_technology
 			}
 		}
 
@@ -10543,7 +10549,7 @@ focus_tree = {
 				name = ROM_import_construction_engineering_tech
 				bonus = 0.5
 				uses = 1
-				category = CAT_construction_tech
+				category = CAT_construction
 			}
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = ROM_romanian_economy_modifier }
@@ -10685,7 +10691,7 @@ focus_tree = {
 				name = ROM_focus_on_technological_improvements
 				bonus = 0.5
 				uses = 2
-				category = Cat_GENES
+				category = CAT_genetics
 			}
 		}
 
@@ -11470,11 +11476,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus ROM_burebista_military_school executed"
-			add_tech_bonus = {
+			add_doctrine_cost_reduction = {
 				name = ROM_burebista_military_school
-				bonus = 0.5
+				cost_reduction = 0.5
 				uses = 2
-				category = CAT_land_doctrine
+				category = land_doctrine
 			}
 		}
 
@@ -11882,11 +11888,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus ROM_develop_the_doctrine executed"
-			add_tech_bonus = {
+			add_doctrine_cost_reduction = {
 				name = ROM_develop_the_doctrine
-				bonus = 0.5
+				cost_reduction = 0.5
 				uses = 2
-				category = CAT_air_doctrine
+				category = air_doctrine
 			}
 		}
 
@@ -12186,7 +12192,7 @@ focus_tree = {
 				name = ROM_new_dolphin
 				bonus = 0.5
 				uses = 2
-				category = Cat_SUB
+				category = CAT_submarines
 			}
 		}
 
@@ -12212,11 +12218,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus ROM_invest_in_the_naval_academy executed"
-			add_tech_bonus = {
+			add_doctrine_cost_reduction = {
 				name = ROM_invest_in_the_naval_academy
-				bonus = 0.5
+				cost_reduction = 0.5
 				uses = 2
-				category = CAT_naval_doctrine
+				category = naval_doctrine
 			}
 		}
 

@@ -11,4 +11,4 @@
  MILITARY_FACTORIES_STATUS:0 "Industria militar en uso: §Y$USED$§!/§Y$TOTAL$§!"
  NAVAL_FACTORIES_STATUS:0 "Astilleros navales en uso: §Y$USED$§!/§Y$TOTAL$§!"
  CIVILIAN_FACTORIES_STATUS:0 "Industria civil en uso: §Y$USED$§!/§Y$TOTAL$§!"
- INDUSTRIAL_CAPACITY_DESC: "Las fábricas forman la base de la capacidad industrial del país §H§!. §HMilitary Industry§! produce equipos para el ejército y la fuerza aérea, mientras que §HNaval Yards§! producen y reparan barcos para la marina. §HLa industria civil§! construye y repara edificios e infraestructura, así como facilita el comercio.\n\nEl total §H$offices$§! cuenta está disponible en la pantalla de vista previa económica.\n"
+ INDUSTRIAL_CAPACITY_DESC: "Las fábricas son la base de la §HCapacidad Industrial§! del país. Las §HFábricas Militares§! producen equipos para el ejército y la fuerza aérea, mientras que los §HAstilleros Navales§! producen y reparan barcos para la marina. Las §HFábricas Civiles§! construyen y reparan edificios e infraestructuras, además de facilitar el comercio.\n\nEl total de §H$offices$§! se muestra en la pantalla de Vista Económica.\n"

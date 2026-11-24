@@ -15,7 +15,7 @@ mdr_fertilizers_start = {
 		limit = {
 			NOT = { has_tech = mdr_fertilizers_1 }
 			OR = {
-				has_tech = gps_agricultural_applications
+				has_tech = agriculture_1
 				has_tech = genetics_1
 			}
 		}
@@ -26,7 +26,7 @@ mdr_fertilizers_start = {
 		limit = {
 			has_tech = mdr_fertilizers_1
 			NOT = { has_tech = mdr_fertilizers_2 }
-			has_tech = automated_irrigation_systems
+			has_tech = agriculture_2
 		}
 		set_technology = { mdr_fertilizers_2 = 1 popup = no }
 		mdr_fertilizer_wheat = yes

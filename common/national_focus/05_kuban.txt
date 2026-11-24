@@ -93,14 +93,12 @@ focus_tree = {
 			newline = yes
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
-				KUB = {
-					random_owned_controlled_state = {
-						add_extra_state_shared_building_slots = 1
-						add_building_construction = {
-							type = fossil_powerplant
-							level = 1
-							instant_build = yes
-						}
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = fossil_powerplant
+						level = 1
+						instant_build = yes
 					}
 				}
 				set_temp_variable = { percent_change = 5 }
@@ -152,14 +150,12 @@ focus_tree = {
 			newline = yes
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
-				KUB = {
-					random_owned_controlled_state = {
-						add_extra_state_shared_building_slots = 1
-						add_building_construction = {
-							type = fossil_powerplant
-							level = 1
-							instant_build = yes
-						}
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = fossil_powerplant
+						level = 1
+						instant_build = yes
 					}
 				}
 				set_temp_variable = { percent_change = 5 }
@@ -210,22 +206,20 @@ focus_tree = {
 			newline = yes
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
-				KUB = {
-					random_owned_controlled_state = {
-						add_extra_state_shared_building_slots = 1
-						add_building_construction = {
-							type = industrial_complex
-							level = 1
-							instant_build = yes
-						}
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
 					}
-					random_owned_controlled_state = {
-						add_extra_state_shared_building_slots = 1
-						add_building_construction = {
-							type = offices
-							level = 1
-							instant_build = yes
-						}
+				}
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = offices
+						level = 1
+						instant_build = yes
 					}
 				}
 				set_temp_variable = { percent_change = 5 }
@@ -276,22 +270,20 @@ focus_tree = {
 			newline = yes
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
-				KUB = {
-					random_owned_controlled_state = {
-						add_extra_state_shared_building_slots = 1
-						add_building_construction = {
-							type = arms_factory
-							level = 1
-							instant_build = yes
-						}
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
 					}
-					random_owned_controlled_state = {
-						add_extra_state_shared_building_slots = 1
-						add_building_construction = {
-							type = offices
-							level = 1
-							instant_build = yes
-						}
+				}
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = offices
+						level = 1
+						instant_build = yes
 					}
 				}
 				set_temp_variable = { percent_change = 5 }
@@ -424,7 +416,7 @@ focus_tree = {
 				name = KUB_integrate_it_in_unik
 				bonus = 0.50
 				uses = 2
-				category = CAT_internet_tech
+				category = CAT_internet
 			}
 			set_temp_variable = { party_popularity_increase = 0.050 }
 			change_relative_party_popularity = yes
@@ -841,7 +833,7 @@ focus_tree = {
 				name = KUB_establichment_of_KNGC
 				bonus = 0.5
 				uses = 2
-				category = CAT_fuel_oil
+				category = CAT_fuel_refining
 			}
 			set_temp_variable = { treasury_change = -0.8 }
 			modify_treasury_effect = yes
@@ -1076,14 +1068,12 @@ focus_tree = {
 			newline = yes
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
-				KUB = {
-					random_owned_controlled_state = {
-						add_extra_state_shared_building_slots = 2
-						add_building_construction = {
-							type = industrial_complex
-							level = 1
-							instant_build = yes
-						}
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
 					}
 				}
 				set_temp_variable = { percent_change = 1.5 }
@@ -1500,7 +1490,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -1511,7 +1501,7 @@ focus_tree = {
 			change_relative_party_popularity = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectavtoritet = 4 }
 				modify_subjectavtoritet_support = yes
@@ -1609,7 +1599,7 @@ focus_tree = {
 			}
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectavtoritet = 3 }
 				modify_subjectavtoritet_support = yes
@@ -1634,7 +1624,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER }
 
 		available = {
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 			emerging_reactionaries_are_in_power = yes
 			SOV = {
 				has_completed_focus = SOV_rosguard_start_org
@@ -1703,7 +1693,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -1723,7 +1713,7 @@ focus_tree = {
 			add_war_support = 0.05
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -4 }
 				modify_subjectinped_support = yes
@@ -1751,7 +1741,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -1763,7 +1753,7 @@ focus_tree = {
 			change_relative_party_popularity = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectavtoritet = 3 }
 				modify_subjectavtoritet_support = yes
@@ -1789,7 +1779,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -1801,7 +1791,7 @@ focus_tree = {
 			add_political_power = 100
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -3 }
 				modify_subjectinped_support = yes
@@ -1831,7 +1821,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -1840,7 +1830,7 @@ focus_tree = {
 			one_office_construction = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectavtoritet = 6 }
 				modify_subjectavtoritet_support = yes
@@ -1876,7 +1866,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -1889,7 +1879,7 @@ focus_tree = {
 			add_stability = 0.05
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -5 }
 				modify_subjectinped_support = yes
@@ -1923,7 +1913,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -1954,7 +1944,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -1979,7 +1969,7 @@ focus_tree = {
 			change_influence_percentage = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -4 }
 				modify_subjectinped_support = yes
@@ -2046,7 +2036,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -2088,7 +2078,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -2098,11 +2088,11 @@ focus_tree = {
 				name = KUB_russian_it_companies
 				bonus = 0.50
 				uses = 2
-				category = CAT_internet_tech
+				category = CAT_internet
 			}
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -4 }
 				modify_subjectinped_support = yes
@@ -2142,7 +2132,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -2158,7 +2148,7 @@ focus_tree = {
 			one_office_construction = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -3 }
 				modify_subjectinped_support = yes
@@ -2198,7 +2188,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -2231,7 +2221,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		available = {
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 			has_war = yes
 			emerging_reactionaries_are_in_power = yes
 		}
@@ -2262,7 +2252,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		available = {
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 			has_war = yes
 			emerging_reactionaries_are_in_power = yes
 		}
@@ -2271,7 +2261,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus KUB_invite_cossaks"
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -6 }
 				modify_subjectinped_support = yes
@@ -2296,7 +2286,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		available = {
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 			has_war = yes
 			emerging_reactionaries_are_in_power = yes
 		}
@@ -2331,7 +2321,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER }
 
 		available = {
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 			has_war = yes
 			emerging_reactionaries_are_in_power = yes
 			SOV = {
@@ -2395,7 +2385,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_EXPENDITURE }
 
 		available = {
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 			has_war = yes
 			emerging_reactionaries_are_in_power = yes
 		}
@@ -2449,7 +2439,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		available = {
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 			has_war = yes
 			emerging_reactionaries_are_in_power = yes
 		}
@@ -2505,7 +2495,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER FOCUS_FILTER_EXPENDITURE }
 
 		available = {
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 			has_war = yes
 			emerging_reactionaries_are_in_power = yes
 		}
@@ -2561,7 +2551,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER FOCUS_FILTER_EXPENDITURE }
 
 		available = {
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 			has_war = yes
 			emerging_reactionaries_are_in_power = yes
 		}
@@ -2617,7 +2607,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER FOCUS_FILTER_EXPENDITURE }
 
 		available = {
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 			has_war = yes
 			emerging_reactionaries_are_in_power = yes
 		}
@@ -2673,7 +2663,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER }
 
 		available = {
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 			has_war = yes
 			emerging_reactionaries_are_in_power = yes
 		}
@@ -2742,7 +2732,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER FOCUS_FILTER_EXPENDITURE }
 
 		available = {
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 			has_war = yes
 			emerging_reactionaries_are_in_power = yes
 		}
@@ -2798,7 +2788,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		available = {
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 			has_war = yes
 			emerging_reactionaries_are_in_power = yes
 		}
@@ -2845,7 +2835,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -2853,7 +2843,7 @@ focus_tree = {
 			country_event = kuban.14
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -6 }
 				modify_subjectinped_support = yes
@@ -2881,7 +2871,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -2920,7 +2910,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -2953,7 +2943,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -2986,7 +2976,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -2994,7 +2984,7 @@ focus_tree = {
 			add_ideas = KUB_united_russia_four
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -2 }
 				modify_subjectinped_support = yes
@@ -3022,7 +3012,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -3030,7 +3020,7 @@ focus_tree = {
 			add_ideas = KUB_united_russia_four
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -2 }
 				modify_subjectinped_support = yes
@@ -3059,7 +3049,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		bypass = { has_completed_focus = KUB_ter_defence }
@@ -3089,7 +3079,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		bypass = { has_idea = KUB_arms_force }
@@ -3100,7 +3090,7 @@ focus_tree = {
 			URA_idea_ural_army_reforms = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 8 }
 				modify_subjectinped_support = yes
@@ -3131,7 +3121,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 			NOT = {
 				OR = {
 					has_completed_focus = KUB_deconservatization_cossacks
@@ -3149,7 +3139,8 @@ focus_tree = {
 				producer = SOV
 			}
 			add_equipment_to_stockpile = {
-				type = infantry_weapons_3
+				type = infantry_weapons_2
+				variant_name = "AK-74"
 				amount = 750
 				producer = SOV
 			}
@@ -3178,7 +3169,7 @@ focus_tree = {
 					producer = SOV
 				}
 				add_equipment_to_stockpile = {
-					type = medium_tank_amphibious_chassis_1
+					type = medium_tank_amphibious_chassis_0
 					variant_name = "MT-LB"
 					amount = 10
 					producer = SOV
@@ -3223,7 +3214,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -3239,7 +3230,7 @@ focus_tree = {
 			}
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -5 }
 				modify_subjectinped_support = yes
@@ -3268,7 +3259,7 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
@@ -3276,7 +3267,7 @@ focus_tree = {
 			one_random_infrastructure = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -4 }
 				modify_subjectinped_support = yes
@@ -3310,14 +3301,14 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KUB_republic_status"
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 10 }
 				modify_subjectinped_support = yes
@@ -3363,10 +3354,10 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
-		bypass = { KUB = { owns_state = 1127 } }
+		bypass = { owns_state = 1127 }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KUB_adygea_que"
@@ -3402,9 +3393,9 @@ focus_tree = {
 				name = "Nikolay Osadchy"
 				picture = "gfx/leaders/SOV/KUB/osadchiy.dds"
 				expire = "2045.1.1"
-				ideology = Communist-State
+				ideology = communist_state
 				traits = {
-					emerging_Communist-State
+					emerging_communist_state
 				}
 			}
 			set_temp_variable = { party_index = 4 }
@@ -3507,7 +3498,7 @@ focus_tree = {
 			}
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectavtoritet = 4 }
 				modify_subjectavtoritet_support = yes
@@ -3751,7 +3742,7 @@ focus_tree = {
 			change_domestic_influence_percentage = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 4 }
 				modify_subjectinped_support = yes
@@ -3937,7 +3928,7 @@ focus_tree = {
 			change_relative_party_popularity = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 3 }
 				modify_subjectinped_support = yes
@@ -4030,7 +4021,7 @@ focus_tree = {
 
 		available = { emerging_communist_state_are_in_power = yes }
 
-		bypass = { KUB = { owns_state = 1127 } }
+		bypass = { owns_state = 1127 }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KUB_bring_back_adygea"
@@ -4038,7 +4029,7 @@ focus_tree = {
 			custom_effect_tooltip = KUB_adygea_russia_tt
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 5 }
 				modify_subjectinped_support = yes
@@ -4070,13 +4061,11 @@ focus_tree = {
 		available = { emerging_communist_state_are_in_power = yes }
 
 		bypass = {
-			KUB = {
-				owns_state = 1125
-				owns_state = 1126
-				owns_state = 671
-				owns_state = 674
-				owns_state = 673
-			}
+			owns_state = 1125
+			owns_state = 1126
+			owns_state = 671
+			owns_state = 674
+			owns_state = 673
 		}
 
 		completion_reward = {
@@ -4086,7 +4075,7 @@ focus_tree = {
 			custom_effect_tooltip = KUB_north_caucas_russia_tt
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 4 }
 				modify_subjectinped_support = yes
@@ -4117,14 +4106,14 @@ focus_tree = {
 
 		available = { emerging_communist_state_are_in_power = yes }
 
-		bypass = { KUB = { owns_state = 670 } }
+		bypass = { owns_state = 670 }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KUB_stavropolskaya_sr"
 			unlock_decision_tooltip = KUB_stavropolskaya_sr
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 4 }
 				modify_subjectinped_support = yes
@@ -4155,7 +4144,7 @@ focus_tree = {
 
 		available = { emerging_communist_state_are_in_power = yes }
 
-		bypass = { KUB = { owns_state = 667 } }
+		bypass = { owns_state = 667 }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KUB_donskaya_sr"
@@ -4163,7 +4152,7 @@ focus_tree = {
 			custom_effect_tooltip = KUB_donskaya_russia_tt
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 4 }
 				modify_subjectinped_support = yes
@@ -4197,7 +4186,7 @@ focus_tree = {
 			is_subject = no
 		}
 
-		bypass = { KUB = { owns_state = 667 } }
+		bypass = { owns_state = 667 }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KUB_revolutions_in_russian_regions"
@@ -4211,7 +4200,7 @@ focus_tree = {
 				limit = {
 					SOV = { owns_state = 1127 } #Adygeya
 				}
-				KUB = { transfer_state = 1127 }
+				transfer_state = 1127
 				1127 = { add_core_of = KUB }
 				add_manpower = -800
 				1127 = {
@@ -4226,7 +4215,7 @@ focus_tree = {
 				limit = {
 					SOV = { owns_state = 667 } #Rostov On Don
 				}
-				KUB = { transfer_state = 667 }
+				transfer_state = 667
 				667 = { add_core_of = KUB }
 				add_manpower = -800
 				667 = {
@@ -4241,21 +4230,21 @@ focus_tree = {
 				limit = {
 					SOV = { owns_state = 1125 }
 				}
-				KUB = { transfer_state = 1125 }
+				transfer_state = 1125
 				1125 = { add_core_of = KUB }
 			}
 			if = {
 				limit = {
 					SOV = { owns_state = 1126 }
 				}
-				KUB = { transfer_state = 1126 }
+				transfer_state = 1126
 				1126 = { add_core_of = KUB }
 			}
 			if = {
 				limit = {
 					SOV = { owns_state = 670 } #Stavropol
 				}
-				KUB = { transfer_state = 670 }
+				transfer_state = 670
 				670 = { add_core_of = KUB }
 				add_manpower = -800
 				670 = {
@@ -4270,7 +4259,7 @@ focus_tree = {
 				limit = {
 					SOV = { owns_state = 1107 } #Kalmykia
 				}
-				KUB = { transfer_state = 1107 }
+				transfer_state = 1107
 				1107 = { add_core_of = KUB }
 				add_manpower = -800
 				1107 = {
@@ -4285,7 +4274,7 @@ focus_tree = {
 				limit = {
 					SOV = { owns_state = 671 }
 				}
-				KUB = { transfer_state = 671 }
+				transfer_state = 671
 				671 = { add_core_of = KUB }
 				add_manpower = -800
 			}
@@ -4293,14 +4282,14 @@ focus_tree = {
 				limit = {
 					SOV = { owns_state = 674 }
 				}
-				KUB = { transfer_state = 674 }
+				transfer_state = 674
 				674 = { add_core_of = KUB }
 			}
 			if = {
 				limit = {
 					SOV = { owns_state = 673 }
 				}
-				KUB = { transfer_state = 673 }
+				transfer_state = 673
 				673 = { add_core_of = KUB }
 			}
 		}
@@ -4327,17 +4316,15 @@ focus_tree = {
 
 		available = {
 			emerging_communist_state_are_in_power = yes
-			KUB = {
-				owns_state = 667
-				owns_state = 670
-				owns_state = 1127
-				owns_state = 1126
-				owns_state = 1125
-				owns_state = 674
-				owns_state = 673
-				owns_state = 671
-				owns_state = 672
-			}
+			owns_state = 667
+			owns_state = 670
+			owns_state = 1127
+			owns_state = 1126
+			owns_state = 1125
+			owns_state = 674
+			owns_state = 673
+			owns_state = 671
+			owns_state = 672
 		}
 
 		completion_reward = {
@@ -4345,7 +4332,7 @@ focus_tree = {
 			custom_effect_tooltip = KUB_black_sea_create_tt
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 4 }
 				modify_subjectinped_support = yes
@@ -4420,7 +4407,7 @@ focus_tree = {
 					producer = SOV
 				}
 				add_equipment_to_stockpile = {
-					type = medium_tank_amphibious_chassis_1
+					type = medium_tank_amphibious_chassis_0
 					variant_name = "MT-LB"
 					amount = 10
 					producer = SOV
@@ -4448,7 +4435,7 @@ focus_tree = {
 			change_relative_party_popularity = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 5 }
 				modify_subjectinped_support = yes
@@ -4985,7 +4972,7 @@ focus_tree = {
 			add_ideas = KUB_nationalists_one
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 5 }
 				modify_subjectinped_support = yes
@@ -5025,7 +5012,7 @@ focus_tree = {
 			increase_centralization = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 6 }
 				modify_subjectinped_support = yes
@@ -5070,7 +5057,7 @@ focus_tree = {
 			add_war_support = 0.05
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 3 }
 				modify_subjectinped_support = yes
@@ -5115,7 +5102,7 @@ focus_tree = {
 			add_ideas = KUB_patriotism_nati
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 5 }
 				modify_subjectinped_support = yes
@@ -5157,7 +5144,7 @@ focus_tree = {
 			add_timed_idea = { idea = KUB_kubanisation days = 360 }
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 5 }
 				modify_subjectinped_support = yes
@@ -5200,7 +5187,7 @@ focus_tree = {
 			}
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 6 }
 				modify_subjectinped_support = yes
@@ -5239,7 +5226,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus KUB_own_currency"
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 4 }
 				modify_subjectinped_support = yes
@@ -5283,7 +5270,7 @@ focus_tree = {
 			}
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectavtoritet = 3 }
 				modify_subjectavtoritet_support = yes
@@ -5364,7 +5351,7 @@ focus_tree = {
 			add_war_support = 0.05
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 5 }
 				modify_subjectinped_support = yes
@@ -5404,7 +5391,7 @@ focus_tree = {
 			one_random_fossil_fuel_powerplant = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 2 }
 				modify_subjectinped_support = yes
@@ -5627,7 +5614,7 @@ focus_tree = {
 			}
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 5 }
 				modify_subjectinped_support = yes
@@ -5806,11 +5793,9 @@ focus_tree = {
 						modifier = large_increase
 					}
 				}
-				KUB = {
-					add_opinion_modifier = {
-						target = UKR
-						modifier = large_increase
-					}
+				add_opinion_modifier = {
+					target = UKR
+					modifier = large_increase
 				}
 			}
 		}
@@ -6007,22 +5992,20 @@ focus_tree = {
 			newline = yes
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
-				KUB = {
-					add_equipment_to_stockpile = {
-						type = medium_tank_amphibious_chassis_1
-						amount = 150
-						producer = USA
-					}
-					add_equipment_to_stockpile = {
-						type = medium_tank_chassis_1
-						amount = 100
-						producer = USA
-					}
-					add_equipment_to_stockpile = {
-						type = infantry_weapons_1
-						amount = 6000
-						producer = USA
-					}
+				add_equipment_to_stockpile = {
+					type = medium_tank_amphibious_chassis_1
+					amount = 150
+					producer = USA
+				}
+				add_equipment_to_stockpile = {
+					type = medium_tank_chassis_1
+					amount = 100
+					producer = USA
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_weapons_1
+					amount = 6000
+					producer = USA
 				}
 				set_temp_variable = { percent_change = 5 }
 				set_temp_variable = { tag_index = USA }
@@ -6078,17 +6061,15 @@ focus_tree = {
 			newline = yes
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
-				KUB = {
-					random_owned_controlled_state = {
-						add_extra_state_shared_building_slots = 2
-						add_building_construction = {
-							type = industrial_complex
-							level = 1
-							instant_build = yes
-						}
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
 					}
-					country_event = { id = kuban.31 days = 1 }
 				}
+				country_event = { id = kuban.31 days = 1 }
 				set_temp_variable = { percent_change = 7 }
 				set_temp_variable = { tag_index = UKR }
 				set_temp_variable = { influence_target = KUB }
@@ -6281,7 +6262,7 @@ focus_tree = {
 				nationalist_right_wing_populists_are_in_power = yes
 			}
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -6318,7 +6299,7 @@ focus_tree = {
 				nationalist_right_wing_populists_are_in_power = yes
 			}
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -6328,7 +6309,7 @@ focus_tree = {
 			one_random_network_infrastructure = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -5 }
 				modify_subjectinped_support = yes
@@ -6367,7 +6348,7 @@ focus_tree = {
 				nationalist_right_wing_populists_are_in_power = yes
 			}
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -6377,7 +6358,7 @@ focus_tree = {
 			add_ideas = KUB_fsb
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -8 }
 				modify_subjectinped_support = yes
@@ -6430,7 +6411,7 @@ focus_tree = {
 			one_random_infrastructure = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -6 }
 				modify_subjectinped_support = yes
@@ -6470,7 +6451,7 @@ focus_tree = {
 				nationalist_right_wing_populists_are_in_power = yes
 			}
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 			country_exists = SOV
@@ -6495,7 +6476,7 @@ focus_tree = {
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -7 }
 				modify_subjectinped_support = yes
@@ -6503,22 +6484,20 @@ focus_tree = {
 				modify_subjectavtoritet_support = yes
 			}
 			effect_tooltip = {
-				KUB = {
-					random_owned_controlled_state = {
-						add_extra_state_shared_building_slots = 1
-						add_building_construction = {
-							type = arms_factory
-							level = 1
-							instant_build = yes
-						}
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
 					}
-					random_owned_controlled_state = {
-						add_extra_state_shared_building_slots = 1
-						add_building_construction = {
-							type = offices
-							level = 1
-							instant_build = yes
-						}
+				}
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = offices
+						level = 1
+						instant_build = yes
 					}
 				}
 				set_temp_variable = { percent_change = 5 }
@@ -6559,7 +6538,7 @@ focus_tree = {
 				has_war_with = SOV
 			}
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -6580,7 +6559,7 @@ focus_tree = {
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -4 }
 				modify_subjectinped_support = yes
@@ -6588,22 +6567,20 @@ focus_tree = {
 				modify_subjectavtoritet_support = yes
 			}
 			effect_tooltip = {
-				KUB = {
-					add_equipment_to_stockpile = {
-						type = medium_tank_amphibious_chassis_1
-						amount = 150
-						producer = SOV
-					}
-					add_equipment_to_stockpile = {
-						type = medium_tank_chassis_1
-						amount = 100
-						producer = SOV
-					}
-					add_equipment_to_stockpile = {
-						type = infantry_weapons_1
-						amount = 6000
-						producer = SOV
-					}
+				add_equipment_to_stockpile = {
+					type = medium_tank_amphibious_chassis_1
+					amount = 150
+					producer = SOV
+				}
+				add_equipment_to_stockpile = {
+					type = medium_tank_chassis_1
+					amount = 100
+					producer = SOV
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_weapons_1
+					amount = 6000
+					producer = SOV
 				}
 				set_temp_variable = { percent_change = 5 }
 				set_temp_variable = { tag_index = SOV }
@@ -6640,7 +6617,7 @@ focus_tree = {
 				nationalist_right_wing_populists_are_in_power = yes
 			}
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -6650,7 +6627,7 @@ focus_tree = {
 			add_ideas = KHM_zhir_legacy_rus2
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -6 }
 				modify_subjectinped_support = yes
@@ -6685,7 +6662,7 @@ focus_tree = {
 				nationalist_right_wing_populists_are_in_power = yes
 			}
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -6695,7 +6672,7 @@ focus_tree = {
 			one_office_construction = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -6 }
 				modify_subjectinped_support = yes
@@ -6738,10 +6715,10 @@ focus_tree = {
 				nationalist_monarchists_are_in_power = yes
 				nationalist_right_wing_populists_are_in_power = yes
 			}
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
-		bypass = { KUB = { owns_state = 1127 } }
+		bypass = { owns_state = 1127 }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KUB_return_adygea"
@@ -6773,10 +6750,10 @@ focus_tree = {
 				nationalist_monarchists_are_in_power = yes
 				nationalist_right_wing_populists_are_in_power = yes
 			}
-			KUB = { is_subject_of = SOV }
+			is_subject_of = SOV
 		}
 
-		bypass = { KUB = { owns_state = 1125 } }
+		bypass = { owns_state = 1125 }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KUB_return_karachaevo_cherkesia"
@@ -6810,7 +6787,7 @@ focus_tree = {
 				nationalist_right_wing_populists_are_in_power = yes
 			}
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -6849,7 +6826,7 @@ focus_tree = {
 				nationalist_right_wing_populists_are_in_power = yes
 			}
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -6928,7 +6905,7 @@ focus_tree = {
 			URA_idea_ural_army_reforms = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 8 }
 				modify_subjectinped_support = yes
@@ -6990,7 +6967,7 @@ focus_tree = {
 					limit = {
 						SOV = { owns_state = 667 } #Rostov On Don
 					}
-					KUB = { transfer_state = 667 }
+					transfer_state = 667
 					667 = { add_core_of = KUB }
 					add_manpower = -800
 					667 = {
@@ -7005,7 +6982,7 @@ focus_tree = {
 					limit = {
 						SOV = { owns_state = 670 } #Stavropol
 					}
-					KUB = { transfer_state = 670 }
+					transfer_state = 670
 					670 = { add_core_of = KUB }
 					add_manpower = -800
 					670 = {
@@ -7020,7 +6997,7 @@ focus_tree = {
 					limit = {
 						SOV = { owns_state = 1127 } #Adygeya
 					}
-					KUB = { transfer_state = 1127 }
+					transfer_state = 1127
 					1127 = { add_core_of = KUB }
 					add_manpower = -800
 					1127 = {
@@ -7035,7 +7012,7 @@ focus_tree = {
 					limit = {
 						SOV = { owns_state = 1107 } #Kalmykia
 					}
-					KUB = { transfer_state = 1107 }
+					transfer_state = 1107
 					1107 = { add_core_of = KUB }
 					add_manpower = -800
 					1107 = {
@@ -7050,7 +7027,7 @@ focus_tree = {
 					limit = {
 						SOV = { owns_state = 666 } #Astrakhan
 					}
-					KUB = { transfer_state = 666 }
+					transfer_state = 666
 					666 = { add_core_of = KUB }
 					add_manpower = -800
 					666 = {
@@ -7065,7 +7042,7 @@ focus_tree = {
 					limit = {
 						SOV = { owns_state = 665 } #Volgograd
 					}
-					KUB = { transfer_state = 665 }
+					transfer_state = 665
 					665 = { add_core_of = KUB }
 					add_manpower = -800
 					665 = {
@@ -7104,7 +7081,7 @@ focus_tree = {
 				nationalist_right_wing_populists_are_in_power = yes
 			}
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -7163,7 +7140,7 @@ focus_tree = {
 				nationalist_right_wing_populists_are_in_power = yes
 			}
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -7187,7 +7164,7 @@ focus_tree = {
 				}
 				if = {
 					limit = {
-						KUB = { owns_state = 668 } #Rostov On Don
+						owns_state = 668 #Rostov On Don
 					}
 					add_manpower = -800
 					668 = {
@@ -7200,7 +7177,7 @@ focus_tree = {
 				}
 				if = {
 					limit = {
-						KUB = { owns_state = 1140 } #Kalmykia
+						owns_state = 1140 #Kalmykia
 					}
 					add_manpower = -800
 					1140 = {
@@ -7241,7 +7218,7 @@ focus_tree = {
 				nationalist_right_wing_populists_are_in_power = yes
 			}
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 			NOT = {
@@ -7290,7 +7267,7 @@ focus_tree = {
 					producer = SOV
 				}
 				add_equipment_to_stockpile = {
-					type = medium_tank_amphibious_chassis_1
+					type = medium_tank_amphibious_chassis_0
 					variant_name = "MT-LB"
 					amount = 10
 					producer = SOV
@@ -7341,7 +7318,7 @@ focus_tree = {
 				nationalist_right_wing_populists_are_in_power = yes
 			}
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -7395,7 +7372,7 @@ focus_tree = {
 				nationalist_right_wing_populists_are_in_power = yes
 			}
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -7425,7 +7402,7 @@ focus_tree = {
 					limit = {
 						UKR = { owns_state = 693 } #DPR 2014 BORDERS
 					}
-					KUB = { transfer_state = 693 }
+					transfer_state = 693
 					693 = { add_core_of = KUB }
 					add_manpower = -800
 					693 = {
@@ -7440,7 +7417,7 @@ focus_tree = {
 					limit = {
 						UKR = { owns_state = 1030 } #DPR
 					}
-					KUB = { transfer_state = 1030 }
+					transfer_state = 1030
 					1030 = { add_core_of = KUB }
 					add_manpower = -800
 					1030 = {
@@ -7455,7 +7432,7 @@ focus_tree = {
 					limit = {
 						UKR = { owns_state = 1075 } #LPR 2014 BORDERS
 					}
-					KUB = { transfer_state = 1075 }
+					transfer_state = 1075
 					1075 = { add_core_of = KUB }
 					add_manpower = -800
 					1075 = {
@@ -7470,7 +7447,7 @@ focus_tree = {
 					limit = {
 						UKR = { owns_state = 1076 } #LPR
 					}
-					KUB = { transfer_state = 1076 }
+					transfer_state = 1076
 					1076 = { add_core_of = KUB }
 					add_manpower = -800
 					1076 = {
@@ -7511,7 +7488,7 @@ focus_tree = {
 				nationalist_right_wing_populists_are_in_power = yes
 			}
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -7761,7 +7738,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus KUB_eu_integration_dems"
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 6 }
 				modify_subjectinped_support = yes
@@ -7814,7 +7791,7 @@ focus_tree = {
 			one_random_fossil_fuel_powerplant = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 3 }
 				modify_subjectinped_support = yes
@@ -7883,7 +7860,7 @@ focus_tree = {
 				name = KUB_it_investments
 				bonus = 0.30
 				uses = 1
-				category = CAT_internet_tech
+				category = CAT_internet
 			}
 		}
 
@@ -8025,7 +8002,7 @@ focus_tree = {
 		available = {
 			has_government = democratic
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -8038,7 +8015,7 @@ focus_tree = {
 			}
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 4 }
 				modify_subjectinped_support = yes
@@ -8067,7 +8044,7 @@ focus_tree = {
 		available = {
 			has_government = democratic
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -8082,7 +8059,7 @@ focus_tree = {
 			change_influence_percentage = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -5 }
 				modify_subjectinped_support = yes
@@ -8121,7 +8098,7 @@ focus_tree = {
 		available = {
 			has_government = democratic
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -8132,22 +8109,20 @@ focus_tree = {
 			newline = yes
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
-				KUB = {
-					random_owned_controlled_state = {
-						add_extra_state_shared_building_slots = 1
-						add_building_construction = {
-							type = arms_factory
-							level = 1
-							instant_build = yes
-						}
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
 					}
-					random_owned_controlled_state = {
-						add_extra_state_shared_building_slots = 1
-						add_building_construction = {
-							type = offices
-							level = 1
-							instant_build = yes
-						}
+				}
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = offices
+						level = 1
+						instant_build = yes
 					}
 				}
 				set_temp_variable = { percent_change = 5 }
@@ -8159,7 +8134,7 @@ focus_tree = {
 			custom_effect_tooltip = IRQ_willingness_to_accept2_TT
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -5 }
 				modify_subjectinped_support = yes
@@ -8188,7 +8163,7 @@ focus_tree = {
 		available = {
 			has_government = democratic
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -8198,7 +8173,7 @@ focus_tree = {
 			increase_officer_training_level = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -4 }
 				modify_subjectinped_support = yes
@@ -8227,7 +8202,7 @@ focus_tree = {
 		available = {
 			has_government = democratic
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -8253,7 +8228,7 @@ focus_tree = {
 			change_influence_percentage = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -6 }
 				modify_subjectinped_support = yes
@@ -8284,7 +8259,7 @@ focus_tree = {
 		available = {
 			has_government = democratic
 			OR = {
-				KUB = { is_subject_of = SOV }
+				is_subject_of = SOV
 				is_subject = no
 			}
 		}
@@ -8351,15 +8326,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KUB_embargor_russia"
-			KUB = {
-				add_opinion_modifier = {
-					target = SOV
-					modifier = major_breach_of_trust
-				}
-				if = {
-					limit = { has_dlc = "By Blood Alone" }
-					send_embargo = SOV
-				}
+			add_opinion_modifier = {
+				target = SOV
+				modifier = major_breach_of_trust
+			}
+			if = {
+				limit = { has_dlc = "By Blood Alone" }
+				send_embargo = SOV
 			}
 			set_temp_variable = { percent_change = 5 }
 			change_domestic_influence_percentage = yes
@@ -8493,7 +8466,7 @@ focus_tree = {
 			add_ideas = KUB_economy_system
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 5 }
 				modify_subjectinped_support = yes
@@ -8585,9 +8558,9 @@ focus_tree = {
 				name = "Sergey Kolosok"
 				picture = "gfx/leaders/SOV/KUB/kolosok.dds"
 				expire = "2045.1.1"
-				ideology = Communist-State
+				ideology = communist_state
 				traits = {
-					emerging_Communist-State
+					emerging_communist_state
 				}
 			}
 			set_temp_variable = { party_index = 22 }
@@ -8651,7 +8624,7 @@ focus_tree = {
 			}
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 2 }
 				modify_subjectinped_support = yes
@@ -8754,7 +8727,7 @@ focus_tree = {
 			add_ideas = KUB_cossak_kuban_idea
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 3 }
 				modify_subjectinped_support = yes
@@ -8821,7 +8794,7 @@ focus_tree = {
 			change_relative_party_popularity = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 3 }
 				modify_subjectinped_support = yes
@@ -8917,7 +8890,7 @@ focus_tree = {
 			URA_idea_ural_army_reforms = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 4 }
 				modify_subjectinped_support = yes
@@ -9129,7 +9102,7 @@ focus_tree = {
 			change_relative_party_popularity = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 2 }
 				modify_subjectinped_support = yes
@@ -9267,7 +9240,7 @@ focus_tree = {
 			change_relative_party_popularity = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 4 }
 				modify_subjectinped_support = yes
@@ -9381,7 +9354,7 @@ focus_tree = {
 			add_ideas = KUB_integrateded_in_rus_minobr
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = -4 }
 				modify_subjectinped_support = yes
@@ -9454,19 +9427,19 @@ focus_tree = {
 				name = KUB_new_doctrine
 				cost_reduction = 0.5
 				uses = 4
-				category = CAT_land_doctrine
+				category = land_doctrine
 			}
 			add_doctrine_cost_reduction = {
 				name = KUB_new_doctrine
 				cost_reduction = 0.5
 				uses = 3
-				category = CAT_air_doctrine
+				category = air_doctrine
 			}
 			add_doctrine_cost_reduction = {
 				name = KUB_new_doctrine
 				cost_reduction = 0.5
 				uses = 2
-				category = CAT_naval_doctrine
+				category = naval_doctrine
 			}
 			set_temp_variable = { party_index = 22 }
 			set_temp_variable = { party_popularity_increase = 0.050 }
@@ -9537,7 +9510,7 @@ focus_tree = {
 					producer = SOV
 				}
 				add_equipment_to_stockpile = {
-					type = medium_tank_amphibious_chassis_1
+					type = medium_tank_amphibious_chassis_0
 					variant_name = "MT-LB"
 					amount = 10
 					producer = SOV
@@ -9562,7 +9535,7 @@ focus_tree = {
 			}
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 4 }
 				modify_subjectinped_support = yes
@@ -9596,7 +9569,7 @@ focus_tree = {
 			increase_officer_training_level = yes
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 4 }
 				modify_subjectinped_support = yes
@@ -9681,22 +9654,20 @@ focus_tree = {
 			newline = yes
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
-				KUB = {
-					add_equipment_to_stockpile = {
-						type = medium_tank_amphibious_chassis_1
-						amount = 150
-						producer = SOV
-					}
-					add_equipment_to_stockpile = {
-						type = medium_tank_chassis_1
-						amount = 100
-						producer = SOV
-					}
-					add_equipment_to_stockpile = {
-						type = infantry_weapons_1
-						amount = 6000
-						producer = SOV
-					}
+				add_equipment_to_stockpile = {
+					type = medium_tank_amphibious_chassis_1
+					amount = 150
+					producer = SOV
+				}
+				add_equipment_to_stockpile = {
+					type = medium_tank_chassis_1
+					amount = 100
+					producer = SOV
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_weapons_1
+					amount = 6000
+					producer = SOV
 				}
 				set_temp_variable = { percent_change = 5 }
 				set_temp_variable = { tag_index = SOV }
@@ -10329,7 +10300,7 @@ focus_tree = {
 			}
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 2 }
 				modify_subjectinped_support = yes
@@ -10346,7 +10317,7 @@ focus_tree = {
 				name = KUB_kuban_science
 				bonus = 0.50
 				uses = 1
-				category = CAT_internet_tech
+				category = CAT_internet
 			}
 		}
 
@@ -10427,7 +10398,7 @@ focus_tree = {
 			add_political_power = 150
 			if = {
 				limit = {
-					KUB = { is_subject_of = SOV }
+					is_subject_of = SOV
 				}
 				set_temp_variable = { modify_subjectinped = 3 }
 				modify_subjectinped_support = yes

@@ -3,7 +3,7 @@ import glob, os, re, sys
 from PIL import Image, ImageDraw, ImageFont
 
 sp = sys.argv[1]
-MD = "../Millennium-Dawn-2.0.0/"
+MD = "../Millennium-Dawn-2.0.3/"
 GAME = (__import__("os").environ.get("HOI4_DIR", "C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV").replace("\\", "/").rstrip("/") + "/")
 sprites = {}
 for f in glob.glob(GAME + "interface/*.gfx") + glob.glob(MD + "interface/*.gfx") + glob.glob("interface/*.gfx"):

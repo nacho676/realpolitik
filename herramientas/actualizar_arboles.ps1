@@ -4,7 +4,7 @@
 # Each copy differs from Millennium Dawn's file only by one line after every "focus_tree = {"; the script checks that
 # and refuses to write a file that differs in anything else. It also places the branch right of each tree's last focus.
 param(
-	[string]$md = (Join-Path $PSScriptRoot '..\..\Millennium-Dawn-2.0.0'),
+	[string]$md = (Join-Path $PSScriptRoot '..\..\Millennium-Dawn-2.0.3'),
 	[string]$mod = (Join-Path $PSScriptRoot '..')
 )
 $ErrorActionPreference = 'Stop'

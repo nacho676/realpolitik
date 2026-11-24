@@ -4,7 +4,7 @@
 import re
 import sys
 
-MD = "../Millennium-Dawn-2.0.0/common/units/equipment/"
+MD = "../Millennium-Dawn-2.0.3/common/units/equipment/"
 OUT = "common/units/equipment/"
 CATEGORIES = {
     "tank_atgm_module", "afv_atgm_module", "tank_aa_module",

@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 OUT = sys.argv[1]
 SRC = sys.argv[2] if len(sys.argv) > 2 else "interface/MD_countryeconomyview.gui"
-MD = "../Millennium-Dawn-2.0.0/"
+MD = "../Millennium-Dawn-2.0.3/"
 GAME = (__import__("os").environ.get("HOI4_DIR", "C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV").replace("\\", "/").rstrip("/") + "/")
 
 

@@ -10,7 +10,7 @@ import construir_mapa as cm
 S = sys.argv[2]
 KEEP = 0.35
 cache = os.path.join(S, 'realA.npy')
-md = cm.MD(os.path.abspath(os.path.join(cm.MOD, '..', 'Millennium-Dawn-2.0.0')))
+md = cm.MD(os.path.abspath(os.path.join(cm.MOD, '..', 'Millennium-Dawn-2.0.3')))
 if os.path.exists(cache):
     A = np.load(cache)
 else:

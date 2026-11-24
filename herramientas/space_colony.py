@@ -17,8 +17,8 @@ import space_program as sp
 import space_theme as theme
 
 T = "\t"
-ART = "../Millennium-Dawn-2.0.0/gfx/interface/scripted_gui/antarctica/"
-PHOTO = "../Millennium-Dawn-2.0.0/gfx/event_pictures/generic/space_stuff/"
+ART = "../Millennium-Dawn-2.0.3/gfx/interface/scripted_gui/antarctica/"
+PHOTO = "../Millennium-Dawn-2.0.3/gfx/event_pictures/generic/space_stuff/"
 OUT = "gfx/interface/mdr/space/colony/"
 P = "mdr_col_mars"
 V = "mdr_mars"

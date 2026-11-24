@@ -92,7 +92,7 @@ focus_tree = {
 				name = GER_expand_oil_gas
 				bonus = 0.10
 				uses = 1
-				category = CAT_fuel_oil
+				category = CAT_fuel_refining
 			}
 		}
 
@@ -123,7 +123,7 @@ focus_tree = {
 				name = GER_domestic_oil
 				bonus = 1
 				uses = 2
-				category = CAT_fuel_oil
+				category = CAT_fuel_refining
 			}
 		}
 
@@ -198,8 +198,8 @@ focus_tree = {
 			two_random_industrial_complex = yes
 			add_tech_bonus = {
 				name = GER_german_oilrig_designs
-				category = CAT_excavation_tech
-				category = CAT_fuel_oil
+				category = CAT_excavation
+				category = CAT_fuel_refining
 				uses = 2
 				bonus = 0.5
 			}
@@ -1340,11 +1340,9 @@ focus_tree = {
 					target = GER
 				}
 			}
-			GER = {
-				add_opinion_modifier = {
-					modifier = economic_mission
-					target = SOV
-				}
+			add_opinion_modifier = {
+				modifier = economic_mission
+				target = SOV
 			}
 			hidden_effect = {
 				SOV = {
@@ -1414,11 +1412,9 @@ focus_tree = {
 					target = GER
 				}
 			}
-			GER = {
-				add_opinion_modifier = {
-					modifier = economic_mission
-					target = SOV
-				}
+			add_opinion_modifier = {
+				modifier = economic_mission
+				target = SOV
 			}
 			hidden_effect = {
 				SOV = {
@@ -1513,7 +1509,7 @@ focus_tree = {
 				name = GER_mining_in_germany
 				bonus = 0.20
 				uses = 1
-				category = CAT_excavation_tech
+				category = CAT_excavation
 			}
 			if = {
 				limit = { has_idea = fossil_fuel_industry }
@@ -1634,7 +1630,7 @@ focus_tree = {
 				name = GER_increase_mining_output
 				bonus = 0.40
 				uses = 1
-				category = CAT_excavation_tech
+				category = CAT_excavation
 			}
 			if = {
 				limit = { has_idea = fossil_fuel_industry }
@@ -2001,7 +1997,7 @@ focus_tree = {
 				name = GER_modernise_mining_equipment
 				bonus = 0.40
 				uses = 1
-				category = CAT_construction_tech
+				category = CAT_construction
 			}
 			newline = yes
 			if = {
@@ -2557,7 +2553,6 @@ focus_tree = {
 			custom_effect_tooltip = GER_united_truly_TT
 			newline = yes
 			remove_ideas = GER_idea_germany_divided
-			set_country_flag = GER_united
 			hidden_effect = {
 				remove_ideas = GER_idea_east_german_debuff2
 				remove_ideas = GER_idea_east_german_debuff4
@@ -2651,7 +2646,7 @@ focus_tree = {
 				name = GER_alt_energy
 				bonus = 0.50
 				uses = 1
-				category = CAT_3d
+				category = CAT_3d_printing
 			}
 		}
 
@@ -2984,7 +2979,7 @@ focus_tree = {
 				name = GER_expand_laboratories
 				bonus = 0.10
 				uses = 2
-				category = CAT_genes
+				category = CAT_genetics
 			}
 			newline = yes
 			set_temp_variable = { treasury_change = -5.00 }
@@ -3143,13 +3138,13 @@ focus_tree = {
 				name = GER_renewable_energy_projects
 				bonus = 0.10
 				uses = 1
-				category = CAT_3d
+				category = CAT_3d_printing
 			}
 			add_tech_bonus = {
 				name = GER_renewable_energy_projects
 				bonus = 0.10
 				uses = 1
-				category = CAT_construction_tech
+				category = CAT_construction
 			}
 		}
 
@@ -3853,7 +3848,7 @@ focus_tree = {
 
 		select_effect = {
 			log = "[GetDateText]: [Root.GetName]: Focus GER_revive_greifswald"
-			GER = { country_event = { id = germany.42 days = 3 } }
+			country_event = { id = germany.42 days = 3 }
 		}
 
 		ai_will_do = {
@@ -4110,7 +4105,7 @@ focus_tree = {
 				name = GER_national_grid
 				bonus = 0.15
 				uses = 1
-				category = CAT_construction_tech
+				category = CAT_construction
 			}
 			set_temp_variable = { temp_change = 1 }
 			build_battery_park_effect = yes
@@ -4785,7 +4780,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GER_decentralized_republic"
 			custom_effect_tooltip = GER_release_bavaria_decisions_TT
-			set_country_flag = GER_AUTONOMY_BAYERN
 		}
 
 		ai_will_do = { base = 1 }
@@ -4895,7 +4889,6 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GER_will_of_the_people"
-			set_country_flag = GER_BFV_GONE
 			custom_effect_tooltip = GER_bfv_funding_cut_TT
 			newline = yes
 			custom_effect_tooltip = GER_how_to_overthrow_TT
@@ -5746,7 +5739,7 @@ focus_tree = {
 				name = GER_scientific_exchanges
 				bonus = 0.5
 				uses = 2
-				category = CAT_internet_tech
+				category = CAT_internet
 			}
 		}
 
@@ -6604,7 +6597,7 @@ focus_tree = {
 			newline = yes
 			add_doctrine_cost_reduction = {
 				name = GER_KRK_army
-				category = CAT_land_doctrine
+				category = land_doctrine
 				uses = 2
 				cost_reduction = 0.5
 			}
@@ -6986,7 +6979,7 @@ focus_tree = {
 			newline = yes
 			add_doctrine_cost_reduction = {
 				name = GER_Global_Crisis_management
-				category = CAT_land_doctrine
+				category = land_doctrine
 				uses = 2
 				cost_reduction = 0.5
 			}
@@ -7081,7 +7074,7 @@ focus_tree = {
 			newline = yes
 			add_doctrine_cost_reduction = {
 				name = GER_HVK_army
-				category = CAT_land_doctrine
+				category = land_doctrine
 				uses = 2
 				cost_reduction = 0.5
 			}
@@ -7572,7 +7565,7 @@ focus_tree = {
 					name = GER_Restructure_Airdefense
 					bonus = 0.5
 					uses = 1
-					category = CAT_aa
+					category = CAT_anti_air
 				}
 			}
 		}
@@ -7673,7 +7666,7 @@ focus_tree = {
 				name = GER_Capability_focus
 				cost_reduction = 0.5
 				uses = 2
-				category = CAT_air_doctrine
+				category = air_doctrine
 			}
 		}
 
@@ -8048,7 +8041,7 @@ focus_tree = {
 					name = GER_update_rec_equipment
 					bonus = 0.10
 					uses = 1
-					category = CAT_air_camera
+					category = CAT_targeting_pods
 				}
 			}
 			else = {
@@ -8056,7 +8049,7 @@ focus_tree = {
 					name = GER_update_rec_equipment
 					bonus = 0.10
 					uses = 1
-					category = CAT_air_eqp
+					category = CAT_aircraft
 				}
 			}
 		}
@@ -8091,7 +8084,7 @@ focus_tree = {
 				name = GER_reseach_requirents_for_airforce
 				bonus = 0.25
 				uses = 1
-				category = CAT_air_eqp
+				category = CAT_aircraft
 			}
 			set_temp_variable = { treasury_change = { value = gdp_per_capita multiply = -0.15 } }
 			modify_treasury_effect = yes
@@ -8180,7 +8173,7 @@ focus_tree = {
 					name = GER_future_of_airforce
 					bonus = 0.4
 					uses = 2
-					category = CAT_fixed_wing
+					category = CAT_aircraft
 				}
 			}
 			if = {
@@ -8438,7 +8431,7 @@ focus_tree = {
 				name = GER_own_killsat_capability
 				bonus = 0.30
 				uses = 1
-				category = CAT_satellite
+				category = CAT_satellites
 			}
 		}
 
@@ -8474,7 +8467,7 @@ focus_tree = {
 				name = GER_own_rec_sattelites
 				bonus = 0.30
 				uses = 1
-				category = CAT_satellite
+				category = CAT_satellites
 			}
 		}
 
@@ -8508,8 +8501,8 @@ focus_tree = {
 				name = GER_Navy_focus
 				bonus = 0.25
 				uses = 2
-				category = CAT_surface_ship
-				category = CAT_sub
+				category = CAT_surface_ships
+				category = CAT_submarines
 			}
 		}
 
@@ -8541,7 +8534,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus GER_Define_Brownwater_strategy"
 			add_doctrine_cost_reduction = {
 				name = GER_Define_Brownwater_strategy
-				category = CAT_naval_doctrine
+				category = naval_doctrine
 				uses = 1
 				cost_reduction = 0.5
 			}
@@ -8581,7 +8574,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus GER_Define_bluewater_strategy"
 			add_doctrine_cost_reduction = {
 				name = GER_Define_bluewater_strategy
-				category = CAT_naval_doctrine
+				category = naval_doctrine
 				uses = 1
 				cost_reduction = 0.5
 			}
@@ -8621,7 +8614,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus GER_Define_Greenwater_strategy"
 			add_doctrine_cost_reduction = {
 				name = GER_Define_Greenwater_strategy
-				category = CAT_naval_doctrine
+				category = naval_doctrine
 				uses = 1
 				cost_reduction = 0.5
 			}
@@ -9777,7 +9770,7 @@ focus_tree = {
 				name = GER_Blohm_and_Voss
 				bonus = 0.5
 				uses = 1
-				category = CAT_surface_ship
+				category = CAT_surface_ships
 			}
 			newline = yes
 			custom_effect_tooltip = {
@@ -9824,8 +9817,8 @@ focus_tree = {
 				name = GER_ThyssenKrupp_Marinesystem
 				bonus = 0.25
 				uses = 2
-				category = CAT_surface_ship
-				category = CAT_sub
+				category = CAT_surface_ships
+				category = CAT_submarines
 			}
 			newline = yes
 			custom_effect_tooltip = {
@@ -9872,7 +9865,7 @@ focus_tree = {
 				name = GER_HDW
 				bonus = 0.5
 				uses = 1
-				category = CAT_sub
+				category = CAT_submarines
 			}
 			newline = yes
 			custom_effect_tooltip = {
@@ -9915,8 +9908,8 @@ focus_tree = {
 				name = GER_GNY
 				bonus = 0.5
 				uses = 1
-				category = CAT_frigate
-				category = CAT_corvette
+				category = CAT_frigates
+				category = CAT_corvettes
 			}
 			newline = yes
 			if = {
@@ -10493,7 +10486,7 @@ focus_tree = {
 				name = GER_Update_SAM
 				bonus = 0.50
 				uses = 1
-				category = CAT_sam
+				category = CAT_surface_to_air_missiles
 			}
 			set_temp_variable = { treasury_change = { value = gdp_per_capita multiply = -0.15 } }
 			modify_treasury_effect = yes
@@ -10529,7 +10522,7 @@ focus_tree = {
 				name = GER_Update_Mobile_Airdefense
 				bonus = 0.25
 				uses = 2
-				category = CAT_aa
+				category = CAT_anti_air
 			}
 			set_temp_variable = { treasury_change = { value = gdp_per_capita multiply = -0.15 } }
 			modify_treasury_effect = yes
@@ -10570,8 +10563,7 @@ focus_tree = {
 					name = GER_Choose_future_MR
 					bonus = 0.4
 					uses = 2
-					category = CAT_mr_fighter
-					category = CAT_as_fighter
+					category = CAT_medium_aircraft
 				}
 			}
 		}
@@ -10607,7 +10599,7 @@ focus_tree = {
 					name = GER_New_heavy_Plain
 					bonus = 0.4
 					uses = 1
-					category = CAT_large_plane
+					category = CAT_heavy_aircraft
 				}
 			}
 		}
@@ -10638,7 +10630,7 @@ focus_tree = {
 				name = GER_Inrease_capability
 				bonus = 0.50
 				uses = 3
-				category = CAT_air_eqp
+				category = CAT_aircraft
 			}
 			set_temp_variable = { treasury_change = { value = gdp_per_capita multiply = -0.15 } }
 			modify_treasury_effect = yes
@@ -10676,7 +10668,7 @@ focus_tree = {
 					name = GER_future_air_rec
 					bonus = 0.25
 					uses = 2
-					category = CAT_air_camera
+					category = CAT_targeting_pods
 				}
 			}
 			else = {
@@ -10684,7 +10676,7 @@ focus_tree = {
 					name = GER_future_air_rec
 					bonus = 0.25
 					uses = 2
-					category = CAT_air_eqp
+					category = CAT_aircraft
 				}
 			}
 			set_temp_variable = { treasury_change = { value = gdp_per_capita multiply = -0.15 } }
@@ -10721,7 +10713,7 @@ focus_tree = {
 				name = GER_New_Airdefence
 				bonus = 0.25
 				uses = 1
-				category = CAT_sam
+				category = CAT_surface_to_air_missiles
 			}
 			set_temp_variable = { treasury_change = { value = gdp_per_capita multiply = -0.15 } }
 			modify_treasury_effect = yes
@@ -10757,7 +10749,7 @@ focus_tree = {
 				name = GER_future_projects_MR
 				bonus = 0.25
 				uses = 2
-				category = CAT_mr_fighter
+				category = CAT_medium_aircraft
 			}
 			set_temp_variable = { treasury_change = { value = gdp_per_capita multiply = -0.15 } }
 			modify_treasury_effect = yes
@@ -10795,7 +10787,7 @@ focus_tree = {
 					name = GER_future_projects_CAS
 					bonus = 0.25
 					uses = 2
-					category = CAT_air_ground_weapons
+					category = CAT_air_to_ground_weapons
 				}
 			}
 			else = {
@@ -10803,7 +10795,7 @@ focus_tree = {
 					name = GER_future_projects_CAS
 					bonus = 0.25
 					uses = 2
-					category = CAT_air_eqp
+					category = CAT_aircraft
 				}
 			}
 			set_temp_variable = { treasury_change = { value = gdp_per_capita multiply = -0.15 } }
@@ -10840,7 +10832,7 @@ focus_tree = {
 				name = GER_future_projects_heavy
 				bonus = 0.25
 				uses = 2
-				category = CAT_fighter
+				category = CAT_medium_aircraft
 			}
 			set_temp_variable = { treasury_change = { value = gdp_per_capita multiply = -0.15 } }
 			modify_treasury_effect = yes
@@ -10926,7 +10918,7 @@ focus_tree = {
 				name = GER_New_attach_Helo
 				bonus = 0.5
 				uses = 1
-				category = CAT_atk_heli
+				category = CAT_attack_helicopters
 				}
 			}
 			set_temp_variable = { treasury_change = -9.00 }
@@ -10970,7 +10962,7 @@ focus_tree = {
 					name = GER_New_drones
 					bonus = 0.5
 					uses = 1
-					category = CAT_a_uav
+					category = CAT_air_drones
 				}
 			}
 			set_temp_variable = { treasury_change = -9.00 }
@@ -11014,7 +11006,7 @@ focus_tree = {
 					name = GER_New_transport_Helo
 					bonus = 0.5
 					uses = 1
-					category = CAT_trans_heli
+					category = CAT_transport_helicopters
 				}
 			}
 			set_temp_variable = { treasury_change = -9.00 }
@@ -11063,7 +11055,7 @@ focus_tree = {
 				name = GER_plan_the_programm
 				bonus = 0.25
 				uses = 1
-				category = CAT_heli
+				category = CAT_helicopters
 			}
 			set_temp_variable = { treasury_change = -16.5 }
 			modify_treasury_effect = yes
@@ -11116,7 +11108,7 @@ focus_tree = {
 				name = GER_Future_Attach_helo
 				bonus = 0.5
 				uses = 1
-				category = CAT_atk_heli
+				category = CAT_attack_helicopters
 				}
 			}
 			set_temp_variable = { treasury_change = -9.00 }
@@ -11500,7 +11492,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus GER_NEW_depardments"
 			add_doctrine_cost_reduction = {
 				name = GER_NEW_depardments
-				category = CAT_land_doctrine
+				category = land_doctrine
 				uses = 2
 				cost_reduction = 0.5
 			}
@@ -11692,7 +11684,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus GER_Reform_Light_forces"
 			add_doctrine_cost_reduction = {
 				name = GER_Reform_Light_forces
-				category = CAT_land_doctrine
+				category = land_doctrine
 				uses = 2
 				cost_reduction = 0.5
 			}
@@ -11729,7 +11721,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus GER_Introduce_Medium_Forces"
 			add_doctrine_cost_reduction = {
 				name = GER_Introduce_Medium_Forces
-				category = CAT_land_doctrine
+				category = land_doctrine
 				uses = 2
 				cost_reduction = 0.5
 			}
@@ -11766,7 +11758,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus GER_Reform_Heavy_Forces"
 			add_doctrine_cost_reduction = {
 				name = GER_Reform_Heavy_Forces
-				category = CAT_land_doctrine
+				category = land_doctrine
 				uses = 2
 				cost_reduction = 0.5
 			}
@@ -11885,7 +11877,7 @@ focus_tree = {
 				name = GER_Introduce_drone_rec_troop
 				bonus = 0.4
 				uses = 1
-				category = CAT_l_drone
+				category = CAT_land_drones
 			}
 		}
 
@@ -13451,8 +13443,8 @@ focus_tree = {
 					modify_debt_effect = yes
 					add_tech_bonus = {
 						name = GER_International_cutting_edge_research
-						category = CAT_ai
-						category = CAT_computing_tech
+						category = CAT_artificial_intelligence
+						category = CAT_information_technology
 						bonus = 1.0
 						uses = 2
 					}
@@ -13467,8 +13459,8 @@ focus_tree = {
 				modify_debt_effect = yes
 				add_tech_bonus = {
 					name = GER_International_cutting_edge_research
-					category = CAT_ai
-					category = CAT_computing_tech
+					category = CAT_artificial_intelligence
+					category = CAT_information_technology
 					bonus = 1.0
 					uses = 2
 				}
@@ -13489,8 +13481,8 @@ focus_tree = {
 					modify_debt_effect = yes
 					add_tech_bonus = {
 						name = GER_International_cutting_edge_research
-						category = CAT_ai
-						category = CAT_computing_tech
+						category = CAT_artificial_intelligence
+						category = CAT_information_technology
 						bonus = 1.0
 						uses = 2
 					}
@@ -13505,8 +13497,8 @@ focus_tree = {
 				modify_debt_effect = yes
 				add_tech_bonus = {
 					name = GER_International_cutting_edge_research
-					category = CAT_ai
-					category = CAT_computing_tech
+					category = CAT_artificial_intelligence
+					category = CAT_information_technology
 					bonus = 1.0
 					uses = 2
 				}
@@ -13553,8 +13545,8 @@ focus_tree = {
 					modify_debt_effect = yes
 					add_tech_bonus = {
 						name = GER_Promote_academic_elites
-						category = CAT_ai
-						category = CAT_computing_tech
+						category = CAT_artificial_intelligence
+						category = CAT_information_technology
 						bonus = 1.0
 						uses = 2
 					}
@@ -13569,8 +13561,8 @@ focus_tree = {
 				modify_debt_effect = yes
 				add_tech_bonus = {
 					name = GER_Promote_academic_elites
-					category = CAT_ai
-					category = CAT_computing_tech
+					category = CAT_artificial_intelligence
+					category = CAT_information_technology
 					bonus = 1.0
 					uses = 2
 				}
@@ -13591,8 +13583,8 @@ focus_tree = {
 					modify_debt_effect = yes
 					add_tech_bonus = {
 						name = GER_Promote_academic_elites
-						category = CAT_ai
-						category = CAT_computing_tech
+						category = CAT_artificial_intelligence
+						category = CAT_information_technology
 						bonus = 1.0
 						uses = 2
 					}
@@ -13607,8 +13599,8 @@ focus_tree = {
 				modify_debt_effect = yes
 				add_tech_bonus = {
 					name = GER_Promote_academic_elites
-					category = CAT_ai
-					category = CAT_computing_tech
+					category = CAT_artificial_intelligence
+					category = CAT_information_technology
 					bonus = 1.0
 					uses = 2
 				}
@@ -13735,7 +13727,7 @@ focus_tree = {
 					add_ideas = GER_idea_Agriculture_I
 					add_tech_bonus = {
 						name = GER_Suitable_Agriculture_programs
-						category = CAT_Civilian
+						category = CAT_civilian
 						bonus = 1.0
 						uses = 2
 					}
@@ -13744,7 +13736,7 @@ focus_tree = {
 					add_ideas = GER_idea_Agriculture_I
 					add_tech_bonus = {
 						name = GER_Suitable_Agriculture_programs
-						category = CAT_Civilian
+						category = CAT_civilian
 						bonus = 1.0
 						uses = 2
 					}
@@ -13753,7 +13745,7 @@ focus_tree = {
 					add_ideas = GER_idea_Agriculture_I
 					add_tech_bonus = {
 						name = GER_Suitable_Agriculture_programs
-						category = CAT_Civilian
+						category = CAT_civilian
 						bonus = 1.0
 						uses = 2
 					}
@@ -13899,7 +13891,7 @@ focus_tree = {
 					name = GER_Strategic_Partnership_South_korea
 					bonus = 0.6
 					uses = 2
-					category = CAT_computing_tech
+					category = CAT_information_technology
 				}
 			}
 		}
@@ -15813,11 +15805,9 @@ focus_tree = {
 					modifier = diplomatic_proximity
 				}
 			}
-			GER = {
-				add_opinion_modifier = {
-					target = SOV
-					modifier = diplomatic_proximity
-				}
+			add_opinion_modifier = {
+				target = SOV
+				modifier = diplomatic_proximity
 			}
 		}
 
@@ -15861,11 +15851,9 @@ focus_tree = {
 					modifier = diplomatic_proximity
 				}
 			}
-			GER = {
-				add_opinion_modifier = {
-					target = CHI
-					modifier = diplomatic_proximity
-				}
+			add_opinion_modifier = {
+				target = CHI
+				modifier = diplomatic_proximity
 			}
 		}
 
@@ -15956,7 +15944,7 @@ focus_tree = {
 
 		available = {
 			western_conservatism_are_in_power = yes
-			has_tech = computing3
+			has_tech = computing_3
 		}
 
 		completion_reward = {
@@ -16129,7 +16117,7 @@ focus_tree = {
 				name = GER_Industrial_outsourcing
 				bonus = 0.3
 				uses = 1
-				category = CAT_computing_tech
+				category = CAT_information_technology
 			}
 			add_tech_bonus = {
 				name = GER_Industrial_outsourcing
@@ -16617,6 +16605,7 @@ focus_tree = {
 				for_each_scope_loop = {
 					array = global.EU_member
 					tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+					set_temp_variable = { influence_target = THIS }
 					change_influence_percentage = yes
 				}
 			}
@@ -17208,8 +17197,8 @@ focus_tree = {
 				name = GER_cyber_workforce
 				bonus = 0.5
 				uses = 2
-				category = CAT_ai
-				category = CAT_computing_tech
+				category = CAT_artificial_intelligence
+				category = CAT_information_technology
 			}
 		}
 
@@ -17241,8 +17230,8 @@ focus_tree = {
 				western_liberals_are_in_power = yes
 				western_liberals_are_in_coalition = yes
 			}
-			has_tech = computing3
-			has_tech = wifi
+			has_tech = computing_3
+			has_tech = internet_access_1
 		}
 
 		completion_reward = {
@@ -17291,7 +17280,7 @@ focus_tree = {
 				western_liberals_are_in_power = yes
 				western_liberals_are_in_coalition = yes
 			}
-			has_tech = internet3
+			has_tech = internet_3
 		}
 
 		completion_reward = {
@@ -19313,11 +19302,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GER_cut_saudi_ties"
-			GER = {
-				add_opinion_modifier = {
-					target = SAU
-					modifier = no_diplomatic_ties
-				}
+			add_opinion_modifier = {
+				target = SAU
+				modifier = no_diplomatic_ties
 			}
 			SAU = {
 				add_opinion_modifier = {
@@ -20699,10 +20686,8 @@ focus_tree = {
 					add_manpower = 52200
 				}
 			}
-			GER = {
-				random_core_state = {
-					add_manpower = -52200
-				}
+			random_core_state = {
+				add_manpower = -52200
 			}
 			set_temp_variable = { percent_change = 2 }
 			set_temp_variable = { influence_target = TUR }
@@ -23146,7 +23131,7 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_ECONOMY }
 
-		available = { has_tech = internet3 }
+		available = { has_tech = internet_3 }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GER_Network_Infrastructure"
@@ -23521,9 +23506,9 @@ focus_tree = {
 				name = GER_home_Grown_Software
 				bonus = 0.5
 				uses = 2
-				category = CAT_ai
-				category = CAT_computing_tech
-				category = CAT_internet_tech
+				category = CAT_artificial_intelligence
+				category = CAT_information_technology
+				category = CAT_internet
 			}
 		}
 
@@ -23670,7 +23655,7 @@ focus_tree = {
 				name = GER_Nature_reserve
 				bonus = 0.25
 				uses = 2
-				category = CAT_excavation_tech
+				category = CAT_excavation
 			}
 		}
 
@@ -23722,7 +23707,7 @@ focus_tree = {
 					name = GER_Deutsche_Bahn
 					bonus = 0.30
 					uses = 1
-					technology = early_high_speed_rail
+					technology = railway_system_04
 				}
 			add_timed_idea = {
 					idea = GER_idea_deutsche_bahn_investments

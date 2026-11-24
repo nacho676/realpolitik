@@ -25,8 +25,6 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
 
-		completion_reward = { log = "[GetDateText]: [Root.GetName]: Focus ERI_eritrea_puppet_federation" }
-
 		ai_will_do = { base = 1 }
 	}
 
@@ -44,8 +42,6 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
-		completion_reward = { log = "[GetDateText]: [Root.GetName]: Focus ERI_eritrea_puppet_federation_assembly" }
-
 		ai_will_do = { base = 1 }
 	}
 
@@ -62,8 +58,6 @@ focus_tree = {
 		prerequisite = { focus = ERI_eritrea_puppet_federation_assembly }
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
-
-		completion_reward = { log = "[GetDateText]: [Root.GetName]: Focus ERI_eritrea_puppet_federation_constitution" }
 
 		ai_will_do = { base = 1 }
 	}
@@ -112,8 +106,6 @@ focus_tree = {
 
 		available = { has_country_flag = ahmed_nasser_cf }
 
-		completion_reward = { log = "[GetDateText]: [Root.GetName]: Focus ERI_eritrea_puppet_federation_christian" }
-
 		ai_will_do = { base = 1 }
 	}
 
@@ -133,8 +125,6 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		available = { has_country_flag = hussein_kelifay_cf }
-
-		completion_reward = { log = "[GetDateText]: [Root.GetName]: Focus ERI_eritrea_puppet_federation_muslim" }
 
 		ai_will_do = { base = 1 }
 	}

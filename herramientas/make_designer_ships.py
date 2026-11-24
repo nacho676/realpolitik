@@ -18,7 +18,7 @@ from make_designer_art import LIT, box4, write_dds  # noqa: E402
 
 from PIL import ImageFilter  # noqa: E402
 
-MD = "../Millennium-Dawn-2.0.0/"
+MD = "../Millennium-Dawn-2.0.3/"
 TEX = "gfx/interface/equipmentdesigner/mdr_ships/"
 GFX_FILE = "interface/mdr_designer_ships.gfx"
 SS = 4

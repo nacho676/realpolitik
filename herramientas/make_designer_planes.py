@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from make_designer_art import LIT, box4, write_dds  # noqa: E402
 from make_designer_ships import Pen  # noqa: E402
 
-MD = "../Millennium-Dawn-2.0.0/"
+MD = "../Millennium-Dawn-2.0.3/"
 GUI = "interface/equipmentdesigner/MD_plane_airframe.gui"
 TEX = "gfx/interface/equipmentdesigner/mdr_planes/"
 GFX_FILE = "interface/mdr_designer_planes.gfx"

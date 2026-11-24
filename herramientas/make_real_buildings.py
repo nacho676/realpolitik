@@ -15,7 +15,7 @@ import sys
 from pathlib import Path
 
 MOD = Path(__file__).resolve().parent.parent
-MD = MOD.parent / "Millennium-Dawn-2.0.0"
+MD = MOD.parent / "Millennium-Dawn-2.0.3"
 OUT = MOD / "common" / "scripted_effects" / "mdr_real_buildings_gen.txt"
 
 # (state id, owner in 2000, level, note)

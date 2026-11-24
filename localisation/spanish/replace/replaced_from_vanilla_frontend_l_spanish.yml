@@ -130,7 +130,7 @@
  FE_DIFFICULTY_VERY_EASY_TOOLTIP: "§L\"¡Podemos hacerlo!\"§!"
  FE_DIFFICULTY_EASY: "Recluta"
  FE_DIFFICULTY_EASY_TOOLTIP: "§L\"Tengo plena confianza en tu valentía, dedicación al deber y habilidad en la batalla. No aceptaremos menos que una victoria total. ¡Buena suerte!\"§!"
- FE_DIFFICULTY_NORMAL: "Recursos ordinarios"
+ FE_DIFFICULTY_NORMAL: "Regular"
  FE_DIFFICULTY_NORMAL_TOOLTIP: "§L\"Porque el enemigo es fuerte. Puede rechazar nuestras fuerzas. El éxito puede no llegar con rapidez, pero volveremos una y otra vez.\"§!"
  FE_DIFFICULTY_HARD: "Veterano"
  FE_DIFFICULTY_HARD_TOOLTIP: "§L\"Dentro de treinta años, cuando estés sentado junto a la chimenea con tu nieto en tus rodillas y te pregunte: '¿Qué hiciste en la gran Segunda Guerra Mundial?', no tendrás que toser y decir: 'Bueno, tu abuelo pala mierda en Louisiana'.\"§!"

@@ -6,12 +6,12 @@ El detalle fino de cada dependencia con Millennium Dawn (huellas MD5, líneas ex
 
 ## Qué es
 
-Submod de realismo para **Millennium Dawn 2.0.0 (Developer Version)** de Hearts of Iron IV.
+Submod de realismo para **Millennium Dawn 2.0.3 (Developer Version)** de Hearts of Iron IV.
 Nombre en el lanzador: "Millennium Dawn: Realpolitik" (`descriptor.mod`, versión 0.1.0).
 Depende de "Millennium Dawn: Developer Version" o "Millennium Dawn: A Modern Day Mod".
 
 - Carpeta del submod: `Documents/Paradox Interactive/Hearts of Iron IV/mod/MD_Realismo`
-- Carpeta de MD (solo lectura): `.../mod/Millennium-Dawn-2.0.0`
+- Carpeta de MD (solo lectura): `.../mod/Millennium-Dawn-2.0.3`
 
 ## Reglas de trabajo (pedidas por el usuario)
 
@@ -181,7 +181,7 @@ Energía: `energy_use` de MD en `country_modifiers`, que el juego multiplica por
   `graphify-out/GRAPH_REPORT.md`. Uso: `graphify explain "mdr_ammo_weekly"`, `graphify query "pregunta"`,
   `graphify path "A" "B"`. No se actualiza solo: después de cambiar archivos, rehacerlo con
   `uv tool run --from graphifyy python herramientas/grafo_mod.py`. No cubre las ventanas `.gui` de MD.
-- **Grafo de Millennium Dawn (aparte):** `../Millennium-Dawn-2.0.0/graphify-out/graph.json` (88.000 nodos, 155 MB;
+- **Grafo de Millennium Dawn (aparte):** `../Millennium-Dawn-2.0.3/graphify-out/graph.json` (88.000 nodos, 155 MB;
   cada consulta tarda unos 20 s). Consultar desde esa carpeta o con `--graph`. Rehacer después de cada
   actualización de MD con `... grafo_mod.py --md` (unos 5 min). Es lo único que se agrega en la carpeta de MD.
 - `herramientas/make_real_buildings.py`: edificios de Realpolitik que existían en 2000 en sus estados reales (alerta temprana, desalinizadoras, reciclaje, universidades, puertos pesqueros y diques fuera de Países Bajos), sin llenar el mapa. Uranio y tierras raras se colocan en `mdr_uranium.txt` y `mdr_rare_earths_start.txt`, con niveles según la producción de 2000 (WNA y USGS).
@@ -256,6 +256,7 @@ Energía: `energy_use` de MD en `country_modifiers`, que el juego multiplica por
 2. Correr `herramientas/actualizar_arboles.ps1` y `python herramientas/construir_mapa.py instalar`.
 3. Volver a copiar los archivos de traducción al español y traducir las claves nuevas.
 4. Seguir "Cómo probar".
+5. Si algo falta o sale mal solo con el mod activo (ramas de investigación que desaparecen, pantallas corridas, textos crudos), es una copia vieja: seguir "Qué hacer cuando una actualización de MD rompe algo" en COMPATIBILIDAD.md. La herramienta `herramientas/fusionar_copia.py` ayuda a fusionar una copia con el archivo nuevo de MD.
 
 ## Ideas pendientes
 

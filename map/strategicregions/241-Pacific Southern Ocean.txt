@@ -2,7 +2,7 @@ strategic_region={
 	id=241
 	name="STRATEGICREGION_241"
 	provinces={
-		17132 17133 17134 17136 
+		17025 17026 17027 17028 17029 17136 17137 17138 17139 
 	}
 	naval_terrain=water_deep_ocean
 	weather={

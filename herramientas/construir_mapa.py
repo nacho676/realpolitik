@@ -2361,7 +2361,7 @@ def install(staging, rep):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('paso', choices=['vista-previa', 'construir', 'instalar'])
-    ap.add_argument('--md', default=os.path.join(MOD, '..', 'Millennium-Dawn-2.0.0'))
+    ap.add_argument('--md', default=os.path.join(MOD, '..', 'Millennium-Dawn-2.0.3'))
     ap.add_argument('--juego', default=GAME, help='carpeta del juego base')
     ap.add_argument('--salida', default=os.path.join(tempfile.gettempdir(), 'mdr_mapa'))
     args = ap.parse_args()

@@ -5,7 +5,7 @@
 # Run it again after each Millennium Dawn update: new generals would show the unknown portrait.
 use strict; use warnings;
 my $N = 10;
-my $MD = '../Millennium-Dawn-2.0.0';
+my $MD = '../Millennium-Dawn-2.0.3';
 sub spew { open my $f, '>:raw', $_[0] or die "$_[0]: $!"; print $f $_[1]; close $f }
 
 # Generals of Millennium Dawn: character token -> portrait, and every trait they use.

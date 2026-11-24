@@ -23,13 +23,13 @@ for gui in re.finditer(r'window_name = "(\w+)".*?(?=\n\tmdr_\w+_gui = \{|\Z)', s
         print(w, "sin elemento", sorted(used - els)[:8])
 print("ventanas con faltantes:", bad)
 sprites = set()
-for f in glob.glob("interface/*.gfx") + glob.glob("../Millennium-Dawn-2.0.0/interface/**/*.gfx", recursive=True) + glob.glob(__import__("os").environ.get("HOI4_DIR", "C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV").replace("\\", "/").rstrip("/") + "/interface/**/*.gfx", recursive=True):
+for f in glob.glob("interface/*.gfx") + glob.glob("../Millennium-Dawn-2.0.3/interface/**/*.gfx", recursive=True) + glob.glob(__import__("os").environ.get("HOI4_DIR", "C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV").replace("\\", "/").rstrip("/") + "/interface/**/*.gfx", recursive=True):
     sprites |= set(re.findall(r'name\s*=\s*"(GFX_\w+)"', open(f, encoding="utf-8", errors="ignore").read()))
 print("sprites faltantes:", sorted(set(re.findall(r'"(GFX_\w+)"', g)) - sprites)[:20])
 loc = {}
 for lang in ("spanish", "english"):
     keys = set()
-    for f in glob.glob(f"localisation/{lang}/*.yml") + glob.glob(f"localisation/{lang}/replace/*.yml") + glob.glob(f"../Millennium-Dawn-2.0.0/localisation/{lang}/*.yml"):
+    for f in glob.glob(f"localisation/{lang}/*.yml") + glob.glob(f"localisation/{lang}/replace/*.yml") + glob.glob(f"../Millennium-Dawn-2.0.3/localisation/{lang}/*.yml"):
         keys |= set(re.findall(r"^ ([\w.\-]+):\d* ", open(f, encoding="utf-8-sig", errors="ignore").read(), re.M))
     loc[lang] = keys
     need = set(re.findall(r'(?:text|buttonText|pdx_tooltip|pdx_tooltip_delayed) = "([A-Za-z_0-9]+)"', g))
@@ -62,6 +62,6 @@ print("por categoría:", [sum(1 for a in sp.PROJECTS if a[1] == k) for k in rang
 docs = open(__import__("os").environ.get("HOI4_DIR", "C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV").replace("\\", "/").rstrip("/") + "/documentation/modifiers_documentation.md", encoding="utf-8", errors="ignore").read()
 mods = set(re.findall(r"^\t\t([a-z_]+) = -?[\d.]+$", d, re.M)) - {"research_cost", "start_year", "x", "y", "research_cost_coeff", "level"}
 own = set()
-for f in glob.glob("common/modifier_definitions/*.txt") + glob.glob("../Millennium-Dawn-2.0.0/common/modifier_definitions/*.txt"):
+for f in glob.glob("common/modifier_definitions/*.txt") + glob.glob("../Millennium-Dawn-2.0.3/common/modifier_definitions/*.txt"):
     own |= set(re.findall(r"^(\w+) = \{", open(f, encoding="utf-8", errors="ignore").read(), re.M))
 print("modificadores dudosos:", sorted(m for m in mods if m not in own and not re.search(r"\b" + m + r"\b", docs))[:14])

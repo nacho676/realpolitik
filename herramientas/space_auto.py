@@ -268,7 +268,7 @@ def loc():
 
 def sprites():
     from make_space_icons import save_dds
-    src = Image.open("../Millennium-Dawn-2.0.0/gfx/interface/scripted_gui/missiles/sat_target_button.dds").convert("RGBA")
+    src = Image.open("../Millennium-Dawn-2.0.3/gfx/interface/scripted_gui/missiles/sat_target_button.dds").convert("RGBA")
     # MD's page button, narrower keeping its ends, so five fit in the window.
     w = 130
     out = Image.new("RGBA", (w, src.height), (0, 0, 0, 0))
@@ -289,7 +289,7 @@ def copy_md_window():
     # Copy of MD's Automation Settings window (interface/MD_automation_settings.gui, see COMPATIBILIDAD.md) with its four
     # page buttons narrower (130 px, our sprite), so the fifth, "Agencia espacial", fits in the same row.
     import re
-    src = open("../Millennium-Dawn-2.0.0/interface/MD_automation_settings.gui", encoding="utf-8-sig").read()
+    src = open("../Millennium-Dawn-2.0.3/interface/MD_automation_settings.gui", encoding="utf-8-sig").read()
     xs = {"20": 20, "190": 156, "360": 292, "530": 428}
 
     def narrow(m):

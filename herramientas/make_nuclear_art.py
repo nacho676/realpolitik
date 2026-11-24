@@ -445,7 +445,7 @@ def topbar_button():
 def topbar_background():
     # Millennium Dawn's top bar with its button strip one button (55 px) longer, so the nuclear button sits inside it,
     # after International Systems. Only the strip rows (36 and below) move; the bar above stays as it is.
-    src = np.array(Image.open("../Millennium-Dawn-2.0.0/gfx/interface/topbar/background_extended_missiles_officer_coprs.dds").convert("RGBA"))
+    src = np.array(Image.open("../Millennium-Dawn-2.0.3/gfx/interface/topbar/background_extended_missiles_officer_coprs.dds").convert("RGBA"))
     out = src.copy()
     x0, x1, grow, y0 = 700, 900, 55, 36
     out[y0:, x0 + grow:x1 + grow] = src[y0:, x0:x1]

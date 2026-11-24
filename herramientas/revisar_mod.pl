@@ -4,7 +4,7 @@
 use strict; use warnings;
 use File::Find; use Digest::MD5;
 
-my $MD = '../Millennium-Dawn-2.0.0';
+my $MD = '../Millennium-Dawn-2.0.3';
 my ($GAME) = grep { -d $_ } ($ENV{HOI4_DIR} // '', 'C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV');
 $GAME //= '';
 

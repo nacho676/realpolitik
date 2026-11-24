@@ -1079,9 +1079,9 @@ focus_tree = {
 				create_country_leader = {
 					name = "Alexey Savincev"
 					picture = "gfx/leaders/SOV/KHM/alexey_savincev.dds"
-					ideology = Communist-State
+					ideology = communist_state
 					traits = {
-						emerging_Communist-State
+						emerging_communist_state
 					}
 				}
 			}
@@ -1759,7 +1759,7 @@ focus_tree = {
 				name = KHM_health
 				bonus = 1.0
 				uses = 1
-				category = CAT_genes
+				category = CAT_genetics
 			}
 		}
 
@@ -2657,10 +2657,8 @@ focus_tree = {
 			}
 			custom_effect_tooltip = KHM_bund_moscow_tt
 			hidden_effect = {
-				KHM = {
-					add_state_core = 652
-					transfer_state = 652
-				}
+				add_state_core = 652
+				transfer_state = 652
 				random_owned_controlled_state = {
 					limit = { ROOT = { has_full_control_of_state = PREV } }
 					prioritize = { 652 }
@@ -3062,7 +3060,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
 
 		available = {
-			KHM = { is_subject_of = SOV }
+			is_subject_of = SOV
 			has_war = yes
 		}
 
@@ -3099,7 +3097,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		available = {
-			KHM = { is_subject_of = SOV }
+			is_subject_of = SOV
 			has_war = yes
 		}
 
@@ -3109,7 +3107,7 @@ focus_tree = {
 				name = KHM_drones
 				uses = 2
 				bonus = 0.5
-				category = CAT_l_drone
+				category = CAT_land_drones
 			}
 			set_temp_variable = { treasury_change = -1.5 }
 			modify_treasury_effect = yes
@@ -3192,7 +3190,7 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
-		available = { KHM = { is_subject_of = SOV } }
+		available = { is_subject_of = SOV }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KHM_gazprom"
@@ -3229,7 +3227,7 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
-		available = { KHM = { is_subject_of = SOV } }
+		available = { is_subject_of = SOV }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KHM_rosneft"
@@ -3237,7 +3235,7 @@ focus_tree = {
 				name = KHM_rosneft
 				bonus = 0.2
 				uses = 3
-				category = CAT_fuel_oil
+				category = CAT_fuel_refining
 			}
 			random_owned_controlled_state = {
 				add_resource = {
@@ -3328,10 +3326,8 @@ focus_tree = {
 		available = {
 			has_war = yes
 			has_manpower > 1999
-			KHM = {
-				is_subject = yes
-				has_autonomy_state = autonomy_republic_rf
-			}
+			is_subject = yes
+			has_autonomy_state = autonomy_republic_rf
 		}
 
 		completion_reward = {

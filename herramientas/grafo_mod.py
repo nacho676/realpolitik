@@ -12,7 +12,7 @@ Output: graphify-out/ (graph.json, graph.html, GRAPH_REPORT.md)
 
 Millennium Dawn itself (its files are only read; the user asked for the graph inside it):
     uv tool run --from graphifyy python herramientas/grafo_mod.py --md
-Output: Millennium-Dawn-2.0.0/graphify-out/
+Output: Millennium-Dawn-2.0.3/graphify-out/
 """
 import json
 import re
@@ -22,7 +22,7 @@ from pathlib import Path
 
 MOD = Path(__file__).resolve().parent.parent
 MD_MODE = "--md" in sys.argv
-ROOT = MOD.parent / "Millennium-Dawn-2.0.0" if MD_MODE else MOD
+ROOT = MOD.parent / "Millennium-Dawn-2.0.3" if MD_MODE else MOD
 OUT = ROOT / "graphify-out"  # only adds this folder; MD's own files are never written
 # keys whose value is a variable or flag name (used when there is no mdr_ prefix to go by)
 VAR_KEYS = {"var", "set_variable", "add_to_variable", "subtract_from_variable",

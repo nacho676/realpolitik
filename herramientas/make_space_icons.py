@@ -281,7 +281,7 @@ def save_dds(img, path):
 
 
 def earth_art():
-    src = Image.open("../Millennium-Dawn-2.0.0/gfx/interface/techtree/network_centric_techtree_bg.dds").convert("RGBA")
+    src = Image.open("../Millennium-Dawn-2.0.3/gfx/interface/techtree/network_centric_techtree_bg.dds").convert("RGBA")
     a = np.array(src, dtype=float)
     a[:, :, 3] = np.clip(a[:, :, 3] * 4.2, 0, 255)
     return Image.fromarray(a.astype(np.uint8))
@@ -496,7 +496,7 @@ def solar_map():
 
 def tab_button():
     # Millennium Dawn's tab (two frames of 90 x 53), narrower keeping its corners, so eight fit in its panel's width.
-    src = Image.open("../Millennium-Dawn-2.0.0/gfx/interface/scripted_gui/missiles/missiles_gui_ledger_btn.dds").convert("RGBA")
+    src = Image.open("../Millennium-Dawn-2.0.3/gfx/interface/scripted_gui/missiles/missiles_gui_ledger_btn.dds").convert("RGBA")
     out = Image.new("RGBA", (132, 53), (0, 0, 0, 0))
     for f in range(2):
         x = f * 90
@@ -566,7 +566,7 @@ if __name__ == "__main__":
         extras["planet_" + name] = (planet(name), 1)
     extras["header"] = (theme.header_sprite(), 1)
     # Category banners of Projects and Decisions, from Millennium Dawn's space pictures.
-    art = "../Millennium-Dawn-2.0.0/gfx/event_pictures/generic/space_stuff/"
+    art = "../Millennium-Dawn-2.0.3/gfx/event_pictures/generic/space_stuff/"
     for short, names in (("p", space_program.CAT_ART_P), ("d", space_program.CAT_ART_D)):
         for n, pic in enumerate(names):
             save_dds(theme.banner(Image.open(f"{art}{pic}.dds")), f"{OUT}banner_{short}{n + 1}.dds")

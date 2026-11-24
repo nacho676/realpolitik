@@ -8,11 +8,11 @@ state = {
 	history = {
 		owner = CAN
 		victory_points = {
-			16607 1
+			16610 1
 		}
 		buildings = {
 			infrastructure = 1
-			16607 = {
+			16610 = {
 				naval_base = 1
 			}
 		}
@@ -22,5 +22,5 @@ state = {
 		set_variable = { productivity_state_var = 500 }
 	}
 
-	provinces = { 16606 16607 16609 16610 16612 16613 16614 16615 16616 16617 16621 16654 16660 16670 16684 }
+	provinces = { 16608 16610 16612 16613 16614 16616 16617 16618 16619 16620 16623 16640 16660 16673 16689 }
 }

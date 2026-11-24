@@ -4,7 +4,7 @@ import glob, os, re, sys
 from PIL import Image, ImageDraw, ImageFont
 
 OUT = sys.argv[1]
-MD = "../Millennium-Dawn-2.0.0/"
+MD = "../Millennium-Dawn-2.0.3/"
 GAME = (__import__("os").environ.get("HOI4_DIR", "C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV").replace("\\", "/").rstrip("/") + "/")
 ICONS = "gfx/interface/mdr/space/icons/"
 

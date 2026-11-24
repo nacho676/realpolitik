@@ -1177,7 +1177,7 @@ focus_tree = {
 				name = TUR_funds_for_tubitak_mam
 				bonus = 1.0
 				uses = 1
-				category = CAT_genes
+				category = CAT_genetics
 			}
 		}
 
@@ -1770,7 +1770,7 @@ focus_tree = {
 				name = TUR_electronic_research
 				bonus = 0.5
 				uses = 2
-				category = CAT_computing_tech
+				category = CAT_information_technology
 			}
 		}
 
@@ -1955,7 +1955,7 @@ focus_tree = {
 				name = TUR_sattelite_development
 				bonus = 0.5
 				uses = 1
-				category = CAT_satellite
+				category = CAT_satellites
 			}
 		}
 
@@ -1983,7 +1983,7 @@ focus_tree = {
 				name = TUR_gokturk_launch
 				bonus = 1.0
 				uses = 1
-				category = CAT_satellite
+				category = CAT_satellites
 			}
 		}
 
@@ -2239,7 +2239,7 @@ focus_tree = {
 				name = TUR_turkish_agriculture
 				bonus = 0.25
 				uses = 1
-				category = CAT_genes
+				category = CAT_genetics
 			}
 		}
 
@@ -2277,7 +2277,7 @@ focus_tree = {
 				name = TUR_turkish_mining
 				bonus = 0.50
 				uses = 1
-				category = CAT_excavation_tech
+				category = CAT_excavation
 			}
 		}
 
@@ -2610,7 +2610,7 @@ focus_tree = {
 				name = TUR_standardize_construction_regulations
 				bonus = 0.25
 				uses = 1
-				category = CAT_construction_tech
+				category = CAT_construction
 			}
 		}
 
@@ -3191,13 +3191,13 @@ focus_tree = {
 				name = TUR_the_soldiers
 				bonus = 1
 				uses = 1
-				category = CAT_inf
+				category = CAT_infantry
 				}
 			add_doctrine_cost_reduction = {
 				name = TUR_the_soldiers
 				cost_reduction = 0.5
 				uses = 1
-				category = CAT_land_doctrine
+				category = land_doctrine
 			}
 		}
 
@@ -3230,7 +3230,7 @@ focus_tree = {
 				name = TUR_troop_carriers
 				bonus = 1
 				uses = 1
-				category = CAT_apc
+				category = CAT_armored_personnel_carriers
 			}
 		}
 
@@ -3257,7 +3257,7 @@ focus_tree = {
 				name = TUR_afvs
 				bonus = 1
 				uses = 1
-				category = CAT_ifv
+				category = CAT_infantry_fighting_vehicles
 			}
 		}
 
@@ -3284,7 +3284,7 @@ focus_tree = {
 				name = TUR_tanks
 				bonus = 1
 				uses = 1
-				category = CAT_mbt
+				category = CAT_tanks
 			}
 		}
 
@@ -3359,13 +3359,13 @@ focus_tree = {
 				name = TUR_other_use_woman
 				bonus = 0.4
 				uses = 1
-				category = CAT_internet_tech
+				category = CAT_internet
 			}
 			add_tech_bonus = {
 				name = TUR_other_use_woman
 				bonus = 0.2
 				uses = 2
-				category = CAT_computing_tech
+				category = CAT_information_technology
 			}
 		}
 
@@ -3480,7 +3480,7 @@ focus_tree = {
 				name = TUR_mediteranean_fleet
 				cost_reduction = 0.5
 				uses = 1
-				category = CAT_naval_doctrine
+				category = naval_doctrine
 			}
 		}
 
@@ -3514,7 +3514,7 @@ focus_tree = {
 				name = TUR_new_submarine
 				bonus = 0.50
 				uses = 1
-				category = CAT_atk_sub
+				category = CAT_attack_submarines
 			}
 		}
 
@@ -3548,13 +3548,13 @@ focus_tree = {
 				name = TUR_new_cruisers
 				bonus = 0.3
 				uses = 2
-				category = CAT_cruiser
+				category = CAT_cruisers
 			}
 			add_tech_bonus = {
 				name = TUR_new_cruisers
 				bonus = 0.5
 				uses = 2
-				category = CAT_cm
+				category = CAT_cruise_missiles
 			}
 		}
 
@@ -3691,7 +3691,7 @@ focus_tree = {
 				name = TUR_frigate_upgrades
 				bonus = 0.25
 				uses = 3
-				category = CAT_frigate
+				category = CAT_frigates
 			}
 		}
 
@@ -3724,7 +3724,7 @@ focus_tree = {
 				name = TUR_new_corvettes
 				bonus = 0.25
 				uses = 3
-				category = CAT_corvette
+				category = CAT_corvettes
 			}
 		}
 
@@ -3840,7 +3840,7 @@ focus_tree = {
 				name = TUR_navy_regulations
 				bonus = 0.5
 				uses = 3
-				category = CAT_naval_all
+				category = CAT_naval
 			}
 		}
 
@@ -3950,7 +3950,7 @@ focus_tree = {
 				name = TUR_baryaktars
 				uses = 2
 				bonus = 0.5
-				category = CAT_l_drone
+				category = CAT_land_drones
 			}
 		}
 
@@ -3983,7 +3983,7 @@ focus_tree = {
 				name = TUR_new_helicopters
 				bonus = 0.50
 				uses = 1
-				category = CAT_trans_heli
+				category = CAT_transport_helicopters
 			}
 		}
 
@@ -4016,13 +4016,13 @@ focus_tree = {
 				name = TUR_expand_jet_program
 				uses = 2
 				bonus = 0.5
-				category = CAT_aa
+				category = CAT_anti_air
 			}
 			add_tech_bonus = {
 				name = TUR_expand_jet_program
 				uses = 2
 				bonus = 0.5
-				category = CAT_air_eqp
+				category = CAT_aircraft
 			}
 		}
 
@@ -4079,7 +4079,7 @@ focus_tree = {
 					name = TUR_air_superiority
 					bonus = 0.5
 					uses = 1
-					category = CAT_as_fighter
+					category = CAT_medium_aircraft
 				}
 			}
 		}
@@ -4113,7 +4113,7 @@ focus_tree = {
 				name = TUR_cas
 				bonus = 0.5
 				uses = 1
-				category = CAT_mr_fighter
+				category = CAT_medium_aircraft
 			}
 		}
 
@@ -12303,9 +12303,9 @@ focus_tree = {
 				name = TUR_military_rnd_projects
 				bonus = 1.0
 				uses = 1
-				category = CAT_cnc
+				category = CAT_command_and_control_equipment
 				category = CAT_armor
-				category = CAT_special_forces
+				category = CAT_special_forces_equipment
 			}
 		}
 
@@ -12732,11 +12732,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus TUR_new_era"
-			add_tech_bonus = {
+			add_doctrine_cost_reduction = {
 				name = TUR_new_era
-				bonus = 0.5
+				cost_reduction = 0.5
 				uses = 2
-				category = CAT_unconventional
+				category = land_doctrine
 			}
 		}
 
@@ -14202,7 +14202,7 @@ focus_tree = {
 					tooltip = TUR_hizmet_in_charge
 					OR = {
 						western_autocrats_are_in_power = yes
-						has_country_flag = TUR_beacon_of_islam
+						has_completed_focus = TUR_beacon_of_islam
 					}
 				}
 			}
@@ -14214,9 +14214,9 @@ focus_tree = {
 				name = TUR_digitalization_of_turkey
 				bonus = 0.5
 				uses = 1
-				category = CAT_ai
-				category = CAT_computing_tech
-				category = CAT_internet_tech
+				category = CAT_artificial_intelligence
+				category = CAT_information_technology
+				category = CAT_internet
 			}
 		}
 
@@ -14257,7 +14257,7 @@ focus_tree = {
 					tooltip = TUR_hizmet_in_charge
 					OR = {
 						western_autocrats_are_in_power = yes
-						has_country_flag = TUR_beacon_of_islam
+						has_completed_focus = TUR_beacon_of_islam
 					}
 				}
 			}
@@ -14310,7 +14310,7 @@ focus_tree = {
 					tooltip = TUR_hizmet_in_charge
 					OR = {
 						western_autocrats_are_in_power = yes
-						has_country_flag = TUR_beacon_of_islam
+						has_completed_focus = TUR_beacon_of_islam
 					}
 				}
 			}
@@ -14361,7 +14361,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 			custom_trigger_tooltip = {
@@ -14410,7 +14410,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -14426,6 +14426,7 @@ focus_tree = {
 						}
 					}
 					random_core_state = {
+						limit = { arms_factory > 1 }
 						remove_building = {
 							type = arms_factory
 							level = 1
@@ -14468,7 +14469,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -14513,7 +14514,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -14567,7 +14568,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -14618,7 +14619,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -14681,7 +14682,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -14729,7 +14730,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -14856,7 +14857,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -14949,7 +14950,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -14994,14 +14995,13 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus TUR_beacon_of_islam"
-			set_country_flag = TUR_beacon_of_islam
 			custom_effect_tooltip = TUR_gulen_change
 			hidden_effect = {
 				set_temp_variable = { party_index = 13 }
@@ -15054,7 +15054,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -15145,7 +15145,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -15190,7 +15190,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -15240,7 +15240,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -15306,7 +15306,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -15365,7 +15365,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -15409,7 +15409,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -15472,7 +15472,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -15522,7 +15522,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 			has_idea = TUR_gulenist_educators
@@ -15572,7 +15572,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -15617,7 +15617,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 			has_idea = TUR_gulenist_intelligence_network
@@ -15667,7 +15667,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -15712,7 +15712,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 			has_idea = TUR_mobilise_the_faithful_soldiers
@@ -15762,7 +15762,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -15869,7 +15869,7 @@ focus_tree = {
 					tooltip = TUR_hizmet_in_charge
 					OR = {
 						western_autocrats_are_in_power = yes
-						has_country_flag = TUR_beacon_of_islam
+						has_completed_focus = TUR_beacon_of_islam
 					}
 				}
 				neutrality_neutral_muslim_brotherhood_are_in_power = yes
@@ -15963,7 +15963,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -16063,7 +16063,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -16112,7 +16112,7 @@ focus_tree = {
 					tooltip = TUR_hizmet_in_charge
 					OR = {
 						western_autocrats_are_in_power = yes
-						has_country_flag = TUR_beacon_of_islam
+						has_completed_focus = TUR_beacon_of_islam
 					}
 				}
 				neutrality_neutral_muslim_brotherhood_are_in_power = yes
@@ -16223,7 +16223,7 @@ focus_tree = {
 				tooltip = TUR_hizmet_in_charge
 				OR = {
 					western_autocrats_are_in_power = yes
-					has_country_flag = TUR_beacon_of_islam
+					has_completed_focus = TUR_beacon_of_islam
 				}
 			}
 		}
@@ -16763,7 +16763,6 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus TUR_pan_turkey"
 			custom_effect_tooltip = TUR_osman_mhp_decisions
 			TUR = { set_cosmetic_tag = TUR_PAN_TURKIC }
-			set_country_flag = TUR_pan_turkey
 			mark_formed_country_formable = yes
 		}
 
@@ -18726,7 +18725,6 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus TUR_only_getting_started"
-			set_country_flag = TUR_mafia_time_baby
 			TUR = { set_cosmetic_tag = TUR_ANATOLIAN_SYNDICATE }
 			mark_formed_country_formable = yes
 			if = {

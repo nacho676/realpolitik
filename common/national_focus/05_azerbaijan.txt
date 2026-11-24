@@ -54,10 +54,8 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 1
-			modifier = {
-				factor = 5
-				is_historical_focus_on = yes
-			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -87,10 +85,8 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 1
-			modifier = {
-				factor = 5
-				is_historical_focus_on = yes
-			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -117,7 +113,11 @@ focus_tree = {
 			change_relative_party_popularity = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	#AZE_absolute_loyalty
@@ -144,10 +144,8 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 1
-			modifier = {
-				factor = 5
-				is_historical_focus_on = yes
-			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -176,7 +174,11 @@ focus_tree = {
 			modify_aliev_suppport = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	#AZE_fore_agents
@@ -212,7 +214,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	#AZE_Int_enemies
@@ -239,7 +245,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 30 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	#AZE_submit_students
@@ -268,7 +278,11 @@ focus_tree = {
 			modify_aliev_suppport = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	#AZE_close_unis
@@ -291,7 +305,11 @@ focus_tree = {
 			add_ideas = AZE_limited_science
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	#AZE_hist_new
@@ -325,6 +343,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -349,7 +369,11 @@ focus_tree = {
 			modify_aliev_suppport = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	#AZE_family_matters
@@ -385,6 +409,8 @@ focus_tree = {
 				factor = 0
 				can_staff_an_industrial_complex = no
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -968,11 +994,6 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus AZE_aze_eternal_escal"
-			# TODO: Do something here with this for the former Karabkh mechanic
-		}
-
 		ai_will_do = { base = 1 }
 	}
 
@@ -1016,11 +1037,6 @@ focus_tree = {
 		prerequisite = { focus = AZE_aze_eternal_escal }
 
 		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus AZE_aze_dab_on_armen"
-			# TODO: Do something here with this for the former Karabkh mechanic
-		}
 
 		ai_will_do = { base = 1 }
 	}
@@ -1122,10 +1138,8 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 1
-			modifier = {
-				is_historical_focus_on = yes
-				factor = 0
-			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -1156,7 +1170,11 @@ focus_tree = {
 			create_intelligence_agency = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	#AZE_eatern_focus
@@ -1190,6 +1208,8 @@ focus_tree = {
 				factor = 2
 				ai_is_threatened = yes
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -1225,7 +1245,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	#AZE_prepare_the_border
@@ -1289,6 +1313,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -1324,7 +1350,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	#AZE_full_readiness
@@ -1350,7 +1380,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	#AZE_mil_network
@@ -1376,7 +1410,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	#AZE_escalate_the incident
@@ -1417,6 +1455,8 @@ focus_tree = {
 				factor = 2
 				ai_is_threatened = yes
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -1436,9 +1476,11 @@ focus_tree = {
 
 		available = { always = no }
 
-		completion_reward = { log = "[GetDateText]: [Root.GetName]: Focus AZE_aze_anew_aliev" }
-
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	#AZE_suppress_protests
@@ -1481,7 +1523,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	#AZE_cult_of_father
@@ -1507,7 +1553,11 @@ focus_tree = {
 			modify_aliev_suppport = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	#AZE_combat_for_inf
@@ -1532,7 +1582,11 @@ focus_tree = {
 			aze_increase_democratic_support = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	#AZE_state_visit
@@ -1557,7 +1611,11 @@ focus_tree = {
 			country_event = azeev.3
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	#AZE_more_media_control
@@ -1592,6 +1650,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -1626,6 +1686,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -1655,7 +1717,11 @@ focus_tree = {
 			add_political_power = 50
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	#AZE_youth_comitee
@@ -1681,7 +1747,11 @@ focus_tree = {
 			modify_aliev_suppport = yes
 		}
 
-		ai_will_do = { base = 0 }
+		ai_will_do = {
+			base = 0
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -1707,7 +1777,11 @@ focus_tree = {
 			aze_increase_democratic_support = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -1743,6 +1817,8 @@ focus_tree = {
 				factor = 0
 				can_staff_an_offices = no
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -1772,7 +1848,12 @@ focus_tree = {
 			increase_corruption = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 3 has_idea = AZE_black_market }
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -1794,7 +1875,12 @@ focus_tree = {
 
 		completion_reward = { log = "[GetDateText]: [Root.GetName]: Focus AZE_clamp_black_market" remove_ideas = { AZE_black_market } }
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 3 has_idea = AZE_black_market }
+			modifier = { factor = 30 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -1822,7 +1908,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -1854,6 +1944,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -1881,7 +1973,11 @@ focus_tree = {
 			aze_increase_democratic_support = yes
 		}
 
-		ai_will_do = { base = 5 }
+		ai_will_do = {
+			base = 5
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	#AZE_review_ind_assets
@@ -1916,6 +2012,8 @@ focus_tree = {
 				factor = 0
 				can_staff_an_industrial_complex = no
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -1953,6 +2051,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -1980,7 +2080,11 @@ focus_tree = {
 			modify_aliev_suppport = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	#AZE_turkey_deal
@@ -2024,10 +2128,8 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 1
-			modifier = {
-				factor = 5
-				is_historical_focus_on = yes
-			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -2070,13 +2172,11 @@ focus_tree = {
 		ai_will_do = {
 			base = 1
 			modifier = {
-				factor = 5
-				is_historical_focus_on = yes
-			}
-			modifier = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -2130,6 +2230,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -2157,7 +2259,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -2190,6 +2296,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -2216,7 +2324,11 @@ focus_tree = {
 			increase_social_spending = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	#AZE_russia_deal
@@ -2256,10 +2368,7 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 1
-			modifier = {
-				factor = 5
-				is_historical_focus_on = yes
-			}
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -2284,10 +2393,8 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 1
-			modifier = {
-				factor = 5
-				is_historical_focus_on = yes
-			}
+			modifier = { factor = 3 has_idea = AZE_lack_of_gas }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -2318,10 +2425,7 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 1
-			modifier = {
-				factor = 5
-				is_historical_focus_on = yes
-			}
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -2360,7 +2464,10 @@ focus_tree = {
 			add_political_power = 100
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	#AZE_gaz_iran_deal
@@ -2382,7 +2489,11 @@ focus_tree = {
 
 		completion_reward = { log = "[GetDateText]: [Root.GetName]: Focus AZE_gaz_iran_deal" remove_ideas = { AZE_lack_of_gas } }
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 3 has_idea = AZE_lack_of_gas }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -2409,7 +2520,10 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -2472,9 +2586,15 @@ focus_tree = {
 		ai_will_do = {
 			base = 1
 			modifier = {
+				factor = 2
+				ai_is_threatened = yes
+			}
+			modifier = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -2501,7 +2621,11 @@ focus_tree = {
 			add_political_power = 100
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -2533,6 +2657,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -2559,7 +2685,11 @@ focus_tree = {
 			aze_increase_democratic_support = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -2586,7 +2716,11 @@ focus_tree = {
 			increase_economic_growth = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -2610,7 +2744,11 @@ focus_tree = {
 			decrease_corruption = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -2636,7 +2774,11 @@ focus_tree = {
 			change_international_bankers_opinion = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -2684,7 +2826,11 @@ focus_tree = {
 			custom_effect_tooltip = AZE_2006_summit_investment_tt
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -2710,7 +2856,11 @@ focus_tree = {
 			decrease_corruption = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -2743,6 +2893,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -2774,7 +2926,11 @@ focus_tree = {
 			change_fossil_fuel_industry_opinion = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -2811,6 +2967,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -2846,6 +3004,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -2882,6 +3042,7 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -2912,7 +3073,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -2939,7 +3104,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -2971,7 +3140,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -2997,7 +3170,11 @@ focus_tree = {
 			disable_elections_with_no_leader_change = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -3022,7 +3199,10 @@ focus_tree = {
 			add_political_power = 200
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -3049,7 +3229,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -3088,6 +3272,7 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -3119,7 +3304,11 @@ focus_tree = {
 			change_influence_percentage = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -3158,6 +3347,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -3183,7 +3374,11 @@ focus_tree = {
 			add_war_support = 0.05
 		}
 
-		ai_will_do = { base = 5 }
+		ai_will_do = {
+			base = 5
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	#AZE_army_loyalty
@@ -3210,7 +3405,11 @@ focus_tree = {
 			add_political_power = 100
 		}
 
-		ai_will_do = { base = 5 }
+		ai_will_do = {
+			base = 5
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -3234,11 +3433,19 @@ focus_tree = {
 			add_tech_bonus = {
 				name = AZE_UAV_prod
 				bonus = 0.35
-				category = CAT_a_uav
+				category = CAT_air_drones
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 2
+				ai_is_threatened = yes
+			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -3257,12 +3464,11 @@ focus_tree = {
 
 		available = { neutrality_neutral_autocracy_are_in_power = yes }
 
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus AZE_hitrun_skirm"
-			# TODO: Do something here with this for the former Karabkh mechanic
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
-
-		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3292,7 +3498,11 @@ focus_tree = {
 			add_war_support = 0.05
 		}
 
-		ai_will_do = { base = 100 }
+		ai_will_do = {
+			base = 100
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -3320,7 +3530,11 @@ focus_tree = {
 			set_country_flag = AZE_hunta_not_possible
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -3351,10 +3565,7 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 1
-			modifier = {
-				is_historical_focus_on = yes
-				factor = 0
-			}
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -3379,7 +3590,11 @@ focus_tree = {
 			add_political_power = 100
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -3404,7 +3619,7 @@ focus_tree = {
 			army_experience = 35
 			add_doctrine_cost_reduction = {
 				name = AZE_land_exercises
-				category = CAT_land_doctrine
+				category = land_doctrine
 				uses = 2
 				cost_reduction = 0.5
 			}
@@ -3416,6 +3631,8 @@ focus_tree = {
 				factor = 2
 				ai_is_threatened = yes
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -3444,7 +3661,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -3464,12 +3685,11 @@ focus_tree = {
 
 		available = { neutrality_neutral_autocracy_are_in_power = yes }
 
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus AZE_double_down"
-			# TODO: Do something here with this for the former Karabkh mechanic
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
-
-		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3495,7 +3715,10 @@ focus_tree = {
 			add_stability = 0.05
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -3525,6 +3748,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
 	}
 
@@ -3544,12 +3769,11 @@ focus_tree = {
 
 		available = { neutrality_neutral_autocracy_are_in_power = yes }
 
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus AZE_prepare_for_war"
-			# TODO: Do something here with this for the former Karabkh mechanic
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
 		}
-
-		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3575,7 +3799,10 @@ focus_tree = {
 			add_political_power = 100
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -3599,7 +3826,11 @@ focus_tree = {
 			decrease_corruption = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -3625,7 +3856,12 @@ focus_tree = {
 			remove_ideas = AZE_narcotraffic_idea
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 3 has_idea = AZE_narcotraffic_idea }
+			modifier = { factor = 30 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	focus = {
@@ -3653,7 +3889,12 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 3 has_idea = AZE_narcotraffic_idea }
+			modifier = { factor = 25 AZE_ai_historical_path = yes }
+			modifier = { factor = 0 AZE_ai_not_historical_path = yes }
+		}
 	}
 
 	######### Region: Hunta ##############
@@ -3679,10 +3920,8 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 1
-			modifier = {
-				factor = 0
-				is_historical_focus_on = yes
-			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -3708,7 +3947,11 @@ focus_tree = {
 			change_the_military_opinion = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -3742,6 +3985,8 @@ focus_tree = {
 				factor = 0
 				can_staff_an_industrial_complex = no
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -3782,6 +4027,8 @@ focus_tree = {
 				factor = 0
 				can_staff_an_industrial_complex = no
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -3807,7 +4054,11 @@ focus_tree = {
 			change_domestic_influence_percentage = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -3833,7 +4084,11 @@ focus_tree = {
 			change_relative_party_popularity = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -3859,7 +4114,11 @@ focus_tree = {
 			add_political_power = 150
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -3889,7 +4148,11 @@ focus_tree = {
 			change_labour_unions_opinion = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -3916,7 +4179,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -3949,6 +4216,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -3975,7 +4244,11 @@ focus_tree = {
 			add_war_support = -0.05
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -4003,14 +4276,22 @@ focus_tree = {
 			else = {
 				add_doctrine_cost_reduction = {
 					name = AZE_draft_commitments
-					category = CAT_land_doctrine
+					category = land_doctrine
 					uses = 1
 					cost_reduction = 0.5
 				}
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 2
+				ai_is_threatened = yes
+			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -4034,7 +4315,11 @@ focus_tree = {
 			add_political_power = 100
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -4066,6 +4351,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -4090,7 +4377,11 @@ focus_tree = {
 			add_ideas = AZE_birth_rates_stimulated
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -4114,7 +4405,11 @@ focus_tree = {
 			add_ideas = AZE_military_society_idea
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -4141,7 +4436,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -4171,7 +4470,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -4199,7 +4502,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -4239,6 +4546,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -4278,6 +4587,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -4308,6 +4619,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -4335,7 +4648,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -4365,7 +4682,12 @@ focus_tree = {
 			increase_corruption = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 3 OR = { has_idea = AZE_black_market has_idea = AZE_narcotraffic_idea } }
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -4387,7 +4709,12 @@ focus_tree = {
 
 		completion_reward = { log = "[GetDateText]: [Root.GetName]: Focus AZE_motivate_work" remove_ideas = { AZE_black_market AZE_narcotraffic_idea } }
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 3 OR = { has_idea = AZE_black_market has_idea = AZE_narcotraffic_idea } }
+			modifier = { factor = 30 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -4426,6 +4753,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -4452,7 +4781,11 @@ focus_tree = {
 			change_small_medium_business_owners_opinion = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -4485,6 +4818,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -4512,7 +4847,11 @@ focus_tree = {
 			add_stability = 0.05
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -4537,7 +4876,11 @@ focus_tree = {
 			# TODO: Do something here with this for the former Karabkh mechanic
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -4569,6 +4912,8 @@ focus_tree = {
 				factor = 2
 				ai_is_threatened = yes
 			}
+			modifier = { factor = 30 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -4589,12 +4934,11 @@ focus_tree = {
 
 		available = { has_nationalist_government = yes }
 
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus AZE_operational_concentartion"
-			# TODO: Do something here with this for the former Karabkh mechanic
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
-
-		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -4642,9 +4986,15 @@ focus_tree = {
 		ai_will_do = {
 			base = 1
 			modifier = {
+				factor = 2
+				ai_is_threatened = yes
+			}
+			modifier = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -4664,12 +5014,11 @@ focus_tree = {
 
 		available = { has_nationalist_government = yes }
 
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus AZE_mark_escalation"
-			# TODO: Do something here with this for the former Karabkh mechanic
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
-
-		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -4700,6 +5049,8 @@ focus_tree = {
 				factor = 2
 				ai_is_threatened = yes
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -4727,7 +5078,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -4763,7 +5118,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -4813,6 +5172,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 30 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -4857,6 +5218,8 @@ focus_tree = {
 				factor = 0
 				can_staff_an_industrial_complex = no
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -4882,7 +5245,11 @@ focus_tree = {
 			add_war_support = 0.05
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -4913,11 +5280,16 @@ focus_tree = {
 					}
 				}
 				set_temp_variable = { percent_change = 2 }
+				set_temp_variable = { influence_target = THIS }
 				change_influence_percentage = yes
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -4953,6 +5325,8 @@ focus_tree = {
 				factor = 2
 				ai_is_threatened = yes
 			}
+			modifier = { factor = 30 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -4976,13 +5350,21 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus AZE_prepare_the_army_naz"
 			add_doctrine_cost_reduction = {
 				name = AZE_prepare_the_army_naz
-				category = CAT_land_doctrine
+				category = land_doctrine
 				uses = 2
 				cost_reduction = 0.5
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 2
+				ai_is_threatened = yes
+			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -5018,7 +5400,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -5044,11 +5430,19 @@ focus_tree = {
 				name = AZE_air_control
 				bonus = 0.50
 				uses = 1
-				category = CAT_mr_fighter
+				category = CAT_medium_aircraft
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 2
+				ai_is_threatened = yes
+			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -5074,11 +5468,19 @@ focus_tree = {
 				name = AZE_land_control
 				bonus = 0.25
 				uses = 2
-				category = CAT_inf_wep
+				category = CAT_small_arms
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 2
+				ai_is_threatened = yes
+			}
+			modifier = { factor = 30 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -5116,13 +5518,11 @@ focus_tree = {
 		ai_will_do = {
 			base = 1
 			modifier = {
-				factor = 0
-				is_historical_focus_on = yes
-			}
-			modifier = {
 				factor = 2
 				ai_is_threatened = yes
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -5157,7 +5557,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -5181,7 +5585,11 @@ focus_tree = {
 			increase_military_spending = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -5206,7 +5614,11 @@ focus_tree = {
 			add_war_support = 0.03
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -5238,6 +5650,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -5276,13 +5690,11 @@ focus_tree = {
 		ai_will_do = {
 			base = 1
 			modifier = {
-				factor = 0
-				is_historical_focus_on = yes
-			}
-			modifier = {
 				factor = 2
 				ai_is_threatened = yes
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -5317,7 +5729,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -5344,7 +5760,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -5382,6 +5802,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -5418,7 +5840,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -5466,9 +5892,15 @@ focus_tree = {
 		ai_will_do = {
 			base = 1
 			modifier = {
+				factor = 2
+				ai_is_threatened = yes
+			}
+			modifier = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -5507,13 +5939,11 @@ focus_tree = {
 		ai_will_do = {
 			base = 1
 			modifier = {
-				factor = 0
-				is_historical_focus_on = yes
-			}
-			modifier = {
 				factor = 2
 				ai_is_threatened = yes
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -5548,6 +5978,8 @@ focus_tree = {
 				factor = 0
 				can_staff_an_arms_industry = no
 			}
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -5573,7 +6005,11 @@ focus_tree = {
 			add_war_support = 0.05
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -5599,7 +6035,11 @@ focus_tree = {
 			add_political_power = 50
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -5639,6 +6079,8 @@ focus_tree = {
 				factor = 0
 				can_staff_an_arms_industry = no
 			}
+			modifier = { factor = 30 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
 		}
 	}
 
@@ -5674,7 +6116,11 @@ focus_tree = {
 			custom_effect_tooltip = AZE_stop_aliev_cult_tt
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	focus = {
@@ -5700,7 +6146,11 @@ focus_tree = {
 			add_war_support = 0.02
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_JUNTA_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_junta_path = yes }
+		}
 	}
 
 	########## Region: Early democtratic ##############
@@ -5730,10 +6180,8 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 1
-			modifier = {
-				factor = 0
-				is_historical_focus_on = yes
-			}
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
 		}
 	}
 
@@ -5767,7 +6215,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -5795,7 +6247,11 @@ focus_tree = {
 			add_stability = 0.05
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -5823,7 +6279,11 @@ focus_tree = {
 			change_the_military_opinion = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -5852,7 +6312,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -5883,7 +6347,11 @@ focus_tree = {
 			retire_character = AZE_najmeddin_sadikov
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -5914,7 +6382,11 @@ focus_tree = {
 			retire_character = AZE_zakir_hasanov
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 30 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -5939,12 +6411,11 @@ focus_tree = {
 			neutrality_neutral_autocracy_are_in_power = no
 		}
 
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus AZE_UN_karabakh_observers"
-			# TODO: Do something here with this for the former Karabkh mechanic
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
 		}
-
-		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -5971,7 +6442,11 @@ focus_tree = {
 			country_event = azeev.5
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -5998,7 +6473,11 @@ focus_tree = {
 			aze_increase_democratic_support = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -6029,7 +6508,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -6068,6 +6551,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 30 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
 		}
 	}
 
@@ -6103,6 +6588,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
 		}
 	}
 
@@ -6139,7 +6626,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 30 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -6175,7 +6666,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -6208,7 +6703,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -6239,7 +6738,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 30 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -6267,7 +6770,11 @@ focus_tree = {
 			add_political_power = 100
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -6310,6 +6817,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
 		}
 	}
 
@@ -6338,7 +6847,11 @@ focus_tree = {
 			custom_effect_tooltip = AZE_final_solution_tt
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -6365,7 +6878,11 @@ focus_tree = {
 			increase_officer_training_level = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -6402,6 +6919,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
 		}
 	}
 
@@ -6439,6 +6958,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
 		}
 	}
 
@@ -6482,6 +7003,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 30 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
 		}
 	}
 
@@ -6523,6 +7046,8 @@ focus_tree = {
 				factor = 0
 				can_staff_an_offices = no
 			}
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
 		}
 	}
 
@@ -6565,7 +7090,11 @@ focus_tree = {
 			add_political_power = 100
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 30 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -6612,7 +7141,12 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 3 has_idea = AZE_lack_of_gas }
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -6651,7 +7185,11 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus AZE_Our_own_future"
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 27 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -6683,7 +7221,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -6738,6 +7280,8 @@ focus_tree = {
 				factor = 0
 				can_staff_an_arms_industry = no
 			}
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
 		}
 	}
 
@@ -6780,6 +7324,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
 		}
 	}
 
@@ -6808,7 +7354,11 @@ focus_tree = {
 			custom_effect_tooltip = AZE_indian_ports_TT
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -6843,7 +7393,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -6887,7 +7441,15 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 2
+				ai_is_threatened = yes
+			}
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -6927,6 +7489,8 @@ focus_tree = {
 				factor = 0
 				can_staff_an_offices = no
 			}
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
 		}
 	}
 
@@ -6958,11 +7522,16 @@ focus_tree = {
 				array = global.EU_member
 				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				set_temp_variable = { percent_change = 5 }
+				set_temp_variable = { influence_target = THIS }
 				change_influence_percentage = yes
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 30 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -6996,7 +7565,11 @@ focus_tree = {
 			change_influence_percentage = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -7029,7 +7602,11 @@ focus_tree = {
 			change_farmers_opinion = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -7056,7 +7633,11 @@ focus_tree = {
 			aze_increase_democratic_support = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -7089,7 +7670,12 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 3 has_idea = AZE_lack_of_gas }
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -7134,7 +7720,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	##### Region: makeshift democracy ######
@@ -7157,14 +7747,10 @@ focus_tree = {
 			has_western_aligned_government = yes
 		}
 
-		completion_reward = { log = "[GetDateText]: [Root.GetName]: Focus AZE_Unlikely_event" }
-
 		ai_will_do = {
 			base = 1
-			modifier = {
-				factor = 0
-				is_historical_focus_on = yes
-			}
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
 		}
 	}
 
@@ -7203,7 +7789,11 @@ focus_tree = {
 			custom_effect_tooltip = AZE_stop_aliev_cult_tt
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -7230,7 +7820,11 @@ focus_tree = {
 			aze_increase_democratic_support = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -7258,7 +7852,11 @@ focus_tree = {
 			add_stability = 0.05
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -7288,7 +7886,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -7321,7 +7923,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -7359,6 +7965,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
 		}
 	}
 
@@ -7396,6 +8004,8 @@ focus_tree = {
 				factor = 0
 				can_staff_an_industrial_complex = no
 			}
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
 		}
 	}
 
@@ -7430,6 +8040,8 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
 		}
 	}
 
@@ -7460,7 +8072,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	### Region - Late democratic tree
@@ -7487,10 +8103,6 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 1
-			modifier = {
-				factor = 0
-				is_historical_focus_on = yes
-			}
 		}
 	}
 
@@ -7658,7 +8270,7 @@ focus_tree = {
 			army_experience = 25
 			add_doctrine_cost_reduction = {
 				name = AZE_Army_maneuvers
-				category = CAT_land_doctrine
+				category = land_doctrine
 				uses = 1
 				cost_reduction = 0.5
 			}
@@ -7762,7 +8374,7 @@ focus_tree = {
 				name = AZE_surface_ships
 				uses = 2
 				bonus = 0.5
-				category = CAT_surface_ship
+				category = CAT_surface_ships
 			}
 		}
 
@@ -7787,7 +8399,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus AZE_naval_doctrine_innovations"
 			add_doctrine_cost_reduction = {
 				name = AZE_naval_doctrine_innovations
-				category = CAT_naval_doctrine
+				category = naval_doctrine
 				uses = 2
 				cost_reduction = 0.5
 			}
@@ -7818,12 +8430,16 @@ focus_tree = {
 				name = AZE_Helicopter_plant
 				bonus = 0.50
 				uses = 1
-				category = CAT_heli
+				category = CAT_helicopters
 			}
 		}
 
 		ai_will_do = {
 			base = 1
+			modifier = {
+				factor = 2
+				ai_is_threatened = yes
+			}
 			modifier = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
@@ -7857,10 +8473,10 @@ focus_tree = {
 				if = {
 				limit = { has_dlc = "No Step Back" }
 				add_equipment_to_stockpile = {
-					type = heavy_tank_chassis_0
+					type = heavy_tank_chassis_1
 					amount = 25
 					producer = SOV
-					variant_name = "Mi-35"
+					variant_name = "Mi-35M"
 				}
 			} else = {
 			add_equipment_to_stockpile = {
@@ -7873,6 +8489,10 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 1
+			modifier = {
+				factor = 2
+				ai_is_threatened = yes
+			}
 			modifier = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
@@ -7900,11 +8520,17 @@ focus_tree = {
 				name = AZE_Domestic_air
 				bonus = 0.50
 				uses = 1
-				category = CAT_mr_fighter
+				category = CAT_medium_aircraft
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 2
+				ai_is_threatened = yes
+			}
+		}
 	}
 
 	focus = {
@@ -7957,6 +8583,10 @@ focus_tree = {
 		ai_will_do = {
 			base = 1
 			modifier = {
+				factor = 2
+				ai_is_threatened = yes
+			}
+			modifier = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
@@ -7984,13 +8614,19 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus AZE_Air_doctrine"
 			add_doctrine_cost_reduction = {
 				name = AZE_Air_doctrine
-				category = CAT_air_doctrine
+				category = air_doctrine
 				uses = 2
 				cost_reduction = 0.5
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 2
+				ai_is_threatened = yes
+			}
+		}
 	}
 
 	focus = {
@@ -8013,11 +8649,17 @@ focus_tree = {
 				name = AZE_Home_dominance
 				bonus = 0.4
 				uses = 1
-				category = CAT_as_fighter
+				category = CAT_medium_aircraft
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 2
+				ai_is_threatened = yes
+			}
+		}
 	}
 
 	focus = {
@@ -8114,13 +8756,19 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus AZE_Learn_from_recent_conflicts"
 			add_doctrine_cost_reduction = {
 				name = AZE_Learn_from_recent_conflicts
-				category = CAT_land_doctrine
+				category = land_doctrine
 				uses = 2
 				cost_reduction = 0.5
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 2
+				ai_is_threatened = yes
+			}
+		}
 	}
 
 	focus = {
@@ -8167,11 +8815,17 @@ focus_tree = {
 			add_tech_bonus = {
 				name = AZE_Motorized_drive
 				bonus = 0.35
-				category = CAT_util
+				category = CAT_utility_vehicles
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 2
+				ai_is_threatened = yes
+			}
+		}
 	}
 
 	focus = {
@@ -8272,6 +8926,7 @@ focus_tree = {
 			for_each_scope_loop = {
 				array = global.guam_member_state
 				set_temp_variable = { percent_change = 4 }
+				set_temp_variable = { influence_target = THIS }
 				change_influence_percentage = yes
 			}
 			custom_effect_tooltip = AZE_GUAM_cooperation_TT
@@ -8300,6 +8955,7 @@ focus_tree = {
 				array = global.EU_member
 				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				set_temp_variable = { percent_change = 3 }
+				set_temp_variable = { influence_target = THIS }
 				change_influence_percentage = yes
 			}
 		}
@@ -8526,7 +9182,11 @@ focus_tree = {
 			custom_effect_tooltip = aze_nato_TT
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -8608,7 +9268,11 @@ focus_tree = {
 			decrease_corruption = yes
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -8634,7 +9298,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -8660,7 +9328,11 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 30 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -8686,7 +9358,11 @@ focus_tree = {
 			add_stability = 0.03
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 25 has_global_flag = AZE_DEMOCRATIC_FOCUS_PATH }
+			modifier = { factor = 0 AZE_ai_not_democratic_path = yes }
+		}
 	}
 
 	focus = {
@@ -8867,7 +9543,10 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 3 has_idea = AZE_black_market }
+		}
 	}
 
 	focus = {
@@ -8906,7 +9585,10 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 3 has_idea = AZE_black_market }
+		}
 	}
 
 	focus = {
@@ -9009,6 +9691,10 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus AZE_Pipeline_initiative"
 			set_temp_variable = { treasury_change = -4.68 }
 			modify_treasury_effect = yes
+			if = {
+				limit = { has_idea = AZE_lack_of_gas }
+				remove_ideas = AZE_lack_of_gas
+			}
 			custom_effect_tooltip = AZE_allied_pipelines_TT
 			random_owned_controlled_state = {
 				add_resource = {
@@ -9039,6 +9725,7 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 1
+			modifier = { factor = 3 has_idea = AZE_lack_of_gas }
 			modifier = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
@@ -9196,7 +9883,10 @@ focus_tree = {
 			remove_ideas = AZE_narcotraffic_idea
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 3 has_idea = AZE_narcotraffic_idea }
+		}
 	}
 
 	focus = {

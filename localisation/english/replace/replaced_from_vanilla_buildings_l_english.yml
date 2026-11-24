@@ -10,19 +10,19 @@
  # 3
  internet_station: "Network Infrastructure"
  internet_station_plural: "Network Infrastructure"
- internet_station_desc: "§YNetwork Infrastructure§! are tall structures used in the telecommunication and radio communication fields in order to push transmissions across great distances or underground fiber optic cables and cloud computing systems.\n\nProvides the state with:\nBase Number of Required Workers: §Y12K§!\nBase GDP Output per §YNetwork Infrastructure§!: $§Y3.5 Billion§!\n\nEach level of §YNetwork Infrastructure§! improves local productivity growth speed by §G+5.00%§!.\nEach level of §YNetwork Infrastructure§! reduces the duration of §YInternational Investments§! by §G-5.00%§!.\n\nBase Number of Required Workers per level: §Y12K§!\nBase Energy Consumption per level: §R-0.06§! GW"
+ internet_station_desc: "§YNetwork Infrastructure§! are tall structures used in the telecommunication and radio communication fields in order to push transmissions across great distances or underground fiber optic cables and cloud computing systems.\n\nProvides the state with:\nBase Number of Required Workers: §Y12K§!\nBase GDP Output per §YNetwork Infrastructure§!: $§Y3.5 Billion§!\n\nEach level of §YNetwork Infrastructure§! improves local productivity growth speed by §G+5.00%§!.\nEach level of §YNetwork Infrastructure§! reduces the duration of §YInternational Investments§! by §G-5.00%§!."
  # 4
  dockyard: "Naval Yard"
  dockyard_plural: "Naval Yards"
  dockyard_desc: "§YNaval Yards§! are representative of a state's ability to produce military vessels of all sorts ranging from §YPatrol Boats§!, §YConvoys§!, §YDestroyers§!, §YCarriers§! and more.\n\nProvides the state with:\nBase Number of Required Workers: §Y18.8K§!\nBase GDP Output per §YNaval Yard§!: $§Y1.5 Billion§!\nBase Energy Consumption: §R-0.5§! GW"
  # 5
- air_base_desc: "An §YAir Base§! is a storage facility and a military compound for the deployment and preparation of your air forces. It can be stacked to level ten adding additional capacity of §Y50§! Planes per level.\n\nBase Number of Required Workers per level: §Y200§!\nBase Energy Consumption per level: §R-0.012§! GW"
+ air_base_desc: "An §YAir Base§! is a storage facility and a military compound for the deployment and preparation of your air forces. It can be stacked to level ten adding additional capacity of §Y50§! Planes per level."
  # 6
- radar_station_desc: "§YRadar Stations§! allows you to gain intel on enemy troops in nearby states. It consists of various radars and sensors, as well as intel assets and capacity to analyse the evolving situation.\nA higher level will increase it's effective range.\nIt's radars also provides the state with better detection of enemy air forces, giving your aircraft a better chance to engage them.\nIn addition the radars are increasing detection of enemy fleets at sea.\n\nBase Number of Required Workers per level: §Y150§!\nBase Energy Consumption per level: §R-0.006§! GW"
+ radar_station_desc: "§YRadar Stations§! allows you to gain intel on enemy troops in nearby states. It consists of various radars and sensors, as well as intel assets and capacity to analyse the evolving situation.\nA higher level will increase it's effective range.\nIt's radars also provides the state with better detection of enemy air forces, giving your aircraft a better chance to engage them.\nIn addition the radars are increasing detection of enemy fleets at sea."
  # 7
  anti_air_building: "SHORAD Sites"
  anti_air_building_plural: "SHORAD Sites"
- anti_air_building_desc: "§YSHORAD Sites§! (Short Range Air Defense) are complexes and groups of anti-aircraft weapons and tactics that handle air defence against low-altitude air threats. These sites work together to divide airspace into defensible areas providing local military targets and infrastructure air coverage from everything ranging from helicopters to low-flying aircraft to jets.\n\nBase Number of Required Workers per level: §Y200§!\nBase Energy Consumption per level: §R-0.003§! GW"
+ anti_air_building_desc: "§YSHORAD Sites§! (Short Range Air Defense) are complexes and groups of anti-aircraft weapons and tactics that handle air defence against low-altitude air threats. These sites work together to divide airspace into defensible areas providing local military targets and infrastructure air coverage from everything ranging from helicopters to low-flying aircraft to jets."
  # 8
  nuclear_reactor_desc: "This building converts nuclear energy into electrical energy, consuming moderately enriched uranium in the process.\n\nProvides the state with:\nBase Number of Required Workers: §Y115K§!\nBase GDP Output per §YNuclear Reactor§!: $§Y4 Billion§!\nBase Power Gain: §G+5§! GW\n"
  # 9
@@ -34,7 +34,7 @@
  # 10
  fuel_silo: "Strategic Resource Reserve"
  fuel_silo_plural: "Strategic Resource Reserves"
- fuel_silo_desc: "The §YStrategic Resource Reserve§! is an amalgamation of warehouses, dry storage, and other §YFuel§! like storage. This building provides your nation with more room for stockpiling §HFuel§! and §HResources§!.\n\nNOTE: §YResource Storage§! has an engine limitation to where if you are on §Y$export_economy$§! or §Y$globalized_trade_economy$§! you may end up sending more resources to export then to your needed production lines. If you need to start to withdraw from storage it is recommended you switch to §Y$mixed_economy$§! or lower.\n\n\nBase Number of Required Workers per level: §Y400§!"
+ fuel_silo_desc: "The §YStrategic Resource Reserve§! is an amalgamation of warehouses, dry storage, and other §YFuel§! like storage. This building provides your nation with more room for stockpiling §HFuel§! and §HResources§!.\n\nNOTE: §YResource Storage§! has an engine limitation to where if you are on §Y$export_economy$§! or §Y$globalized_trade_economy$§! you may end up sending more resources to export then to your needed production lines. If you need to start to withdraw from storage it is recommended you switch to §Y$mixed_economy$§! or lower.\n"
  # 11
  offices: "Office Sector"
  offices_plural: "Office Sectors"
@@ -48,24 +48,24 @@
  fossil_powerplant_amount: "$VALUE|Y0=$"
  fossil_powerplant_resource: "£resources_strip|$FRAME$"
  # 18 - Commercialized Agriculture District
- agriculture_district: "Agro-Industrial District"
- agriculture_district_plural: "Agro-Industrial Districts"
- agriculture_district_desc: "§YAgro-Industrial Districts§! gather the industry that turns the harvest into food: flour mills, meatpacking plants, food factories, oil mills, grain silos and biofuel plants.\n\nProvides the state with:\nBase Number of Required Workers: §Y75K§!\nBase GDP Output per §YAgro-Industrial District§!: $§Y4 Billion§!\nBase Energy Consumption: §R-0.10§! GW\n§YFuel Gain§! from States: 8 (biofuels)\n§YLocal Supplies§!: 1.5%\n§G+3%§! §YGrain§! from §YCropland§! in the same state, as processing the harvest on site cuts losses\n§G+1§! million tonnes of food storage capacity (silos)\n"
+ agriculture_district: "Commercialized Agriculture District"
+ agriculture_district_plural: "Commercialized Agriculture Districts"
+ agriculture_district_desc: "§YCommercialized Agriculture Districts§! represents a catch-all for all non-subsistence Agriculture within our nation. It includes Agro-Industry, arable land, grain silos, butcherhouses and more.\n\nProvides the state with:\nBase Number of Required Workers: §Y188K§!\nBase GDP Output per §YCommercialized Agriculture District§!: $§Y25 Billion§!\nBase Energy Consumption: §R-0.10§! GW\n§YFuel Gain§! from States: 8\n§YLocal Supplies§!: 1.5%\n"
  agriculture_district_amount: "$VALUE|Y0=$"
  # 19 - Missile Launch Sites
  rocket_site: "Missile Launch Site"
  rocket_site_plural: "Missile Launch Sites"
- rocket_site_desc: "§YMissile Launch Sites§! represent a catch-all for all theatre level missile equipment ranging from §YSurface-Air Missiles§! to §YIntercontinental Ballistic Missiles§!. It provides the state with the ability to deploy these strategic assets in our strategic air zones to either aid in our air defense, or provide offensive capabilities.\n\nBase Number of Required Workers per level: §Y300§!\nBase Energy Consumption per level: §R-0.1§! GW"
+ rocket_site_desc: "§YMissile Launch Sites§! represent a catch-all for all theatre level missile equipment ranging from §YSurface-Air Missiles§! to §YIntercontinental Ballistic Missiles§!. It provides the state with the ability to deploy these strategic assets in our strategic air zones to either aid in our air defense, or provide offensive capabilities."
  # New Buildings
  nuclear_facility: "Civilian R&D Facility"
  nuclear_facility_plural: "Civilian R&D Facilities"
- nuclear_facility_desc: "A §YCivilian R&D Facility§! includes all types of special projects relating to the civilian industrial capacity, nuclear facilities, and more.\n\nBase Number of Required Workers: §Y2K§!\nBase Energy Consumption: §R-0.3§! GW"
+ nuclear_facility_desc: "A §YCivilian R&D Facility§! includes all types of special projects relating to the civilian industrial capacity, nuclear facilities, and more."
  air_facility: "Aerodynamics & Avionics Facility"
- air_facility_desc: "Experimental Facilities for Aerodynamics and Avionics allow you to start research projects for aircraft, advanced rockets, related electronics and space projects.\n\nBase Number of Required Workers: §Y1.5K§!\nBase Energy Consumption: §R-0.35§! GW"
- naval_facility_desc: "Experimental Facilities for Naval Engineering allow you to start research projects related to Surface Ships and Submarines.\nA Naval Engineering can only be created in a coastal province.\n\nBase Number of Required Workers: §Y1.2K§!\nBase Energy Consumption: §R-0.2§! GW"
+ air_facility_desc: "Experimental Facilities for Aerodynamics and Avionics allow you to start research projects for aircraft, advanced rockets, related electronics and space projects."
+ naval_facility_desc: "Experimental Facilities for Naval Engineering allow you to start research projects related to Surface Ships and Submarines.\nA Naval Engineering can only be created in a coastal province."
  stronghold_network: "State-Wide Defensive Network"
  stronghold_network_plural: "State-Wide Defensive Networks"
- stronghold_network_desc: "An extensive defensive network consisting of tunnels, hardpoints, trenches, bomb shelters, weapon dumps and pre-planned demolition sites give the defenders a decisive edge against any attacker.\n\nBase Number of Required Workers: §Y500§!"
+ stronghold_network_desc: "An extensive defensive network consisting of tunnels, hardpoints, trenches, bomb shelters, weapon dumps and pre-planned demolition sites give the defenders a decisive edge against any attacker."
 
  microchip_plant: "Microchip Plant"
  microchip_plant_plural: "Microchip Plants"
@@ -81,7 +81,7 @@
 
  rail_terminal: "Rail Terminal"
  rail_terminal_plural: "Rail Terminals"
- rail_terminal_desc: "A state served by a dense terminal network moves both people and goods faster, so factories see steadier inputs, workers reach jobs more reliably, and the surrounding economy gains room to expand.\n\nBase Number of Required Workers per level: §Y500§!"
+ rail_terminal_desc: "A state served by a dense terminal network moves both people and goods faster, so factories see steadier inputs, workers reach jobs more reliably, and the surrounding economy gains room to expand."
 
  # Building Construction Speed Interface
  show_construction_speed: "When checked, you can see the current £construction_speed_texticon §YConstruction Speed Bonus§! for each §YBuilding Type§!\n\nThis modifier shows only the building specific modifier. Its does not take into account the §YGlobal £construction_speed_texticon Construction Speed.§!"
@@ -164,6 +164,7 @@
  landmark_hofburg_palace_desc: "The Hofburg, in the heart of Vienna, served for centuries as the principal imperial palace of the Habsburg dynasty. Today its halls house the offices of the Austrian Federal President, the Spanish Riding School, the Imperial Treasury, and several major museums. It remains one of Vienna's defining landmarks and a centerpiece of Austrian cultural tourism."
 
  landmark_berlin_reichstag_desc: "The Reichstag building on Platz der Republik has stood at the political center of Berlin for over a century. Heavily damaged in 1933 and again during the Second World War, it was restored after reunification under Norman Foster's redesign and reopened in 1999 as the seat of the Bundestag, the German federal parliament. Its glass dome has become a defining symbol of modern German democracy and a major attraction in central Berlin."
+ # Realpolitik: keys that Millennium Dawn does not have
  infrastructure_desc: "This building provides the state with improvement of infrastructure. It increases your supply power in strategic regions and increases your divisions' speed, as well as increasing your raw resource extraction.\n\nBase Number of Required Workers per level: §Y100§!"
  bunker_desc: "This building inflicts an attack penalty of $VALUE|+%0$ for each fort level on the attacker in combat. Attacking from multiple directions will reduce forts effect.\n\nBase Number of Required Workers per level: §Y50§!\nBase Energy Consumption per level: §R-0.001§! GW"
  coastal_bunker_desc: "This building inflicts an attack penalty of $VALUE|+%0$ for each fort level on the attacker in naval invasion combat.\n\nBase Number of Required Workers per level: §Y80§!\nBase Energy Consumption per level: §R-0.002§! GW"

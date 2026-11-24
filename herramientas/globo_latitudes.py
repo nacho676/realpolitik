@@ -106,7 +106,7 @@ def emit(name, c, comment):
 
 def main():
     sys.stdout.reconfigure(encoding='utf-8')
-    md = cm.MD(os.path.abspath(os.path.join(cm.MOD, '..', 'Millennium-Dawn-2.0.0')))
+    md = cm.MD(os.path.abspath(os.path.join(cm.MOD, '..', 'Millennium-Dawn-2.0.3')))
     x, z, lon, lat, cx, cz, clon, clat = samples(md)
     keep = (z + cm.SOUTH >= 0) & (z + cm.SOUTH <= cm.TOTAL)
     x, z, lon, lat = x[keep], z[keep], lon[keep], lat[keep]

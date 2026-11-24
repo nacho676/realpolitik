@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from make_designer_art import box4, drawing, fill_mask, write_dds  # noqa: E402
 from make_designer_ships import Pen, lit  # noqa: E402
 
-MD = "../Millennium-Dawn-2.0.0/"
+MD = "../Millennium-Dawn-2.0.3/"
 ED = "gfx/interface/equipmentdesigner/"
 T = ED + "tanks/Countries/Ghana/gah_heavy_tank_"
 TEX = ED + "mdr_walkers/"

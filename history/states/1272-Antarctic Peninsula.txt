@@ -19,5 +19,5 @@ state = {
 
 	impassable = yes
 
-	provinces = { 17144 17145 17164 }
+	provinces = { 17143 17144 17162 }
 }

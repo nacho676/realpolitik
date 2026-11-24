@@ -19,7 +19,7 @@ import statistics
 from pathlib import Path
 
 MOD = Path(__file__).resolve().parent.parent
-MD = MOD.parent / "Millennium-Dawn-2.0.0"
+MD = MOD.parent / "Millennium-Dawn-2.0.3"
 DATA = MOD / "herramientas" / "datos_economia"
 OUT = MOD / "common" / "scripted_effects" / "mdr_real_economy_gen.txt"
 

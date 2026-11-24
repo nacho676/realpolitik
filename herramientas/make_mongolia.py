@@ -13,7 +13,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-MD = ROOT.parent / "Millennium-Dawn-2.0.0"
+MD = ROOT.parent / "Millennium-Dawn-2.0.3"
 
 E, W = 596, 597  # Eastern (Ulaanbaatar, Gobi) and Western Mongolia
 P_MPP, P_DP, P_NAT = 4, 18, 20  # MD party slots in Mongolia: People's Party, Democratic Party, nationalists

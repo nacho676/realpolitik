@@ -8,7 +8,7 @@ import sys
 
 from PIL import Image
 
-MD = "../Millennium-Dawn-2.0.0/"
+MD = "../Millennium-Dawn-2.0.3/"
 TEXTURE = "gfx/interface/equipmentdesigner/tanks/resources_bg.dds"
 EXTRA = 24
 EDGE = 20

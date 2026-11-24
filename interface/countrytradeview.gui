@@ -70,6 +70,41 @@ guiTypes = {
 
 		instantTextboxType = {
 			name = "factories_total"
+			position = { x = 350 y = 57 }
+			font = "hoi_18mbs"
+			maxWidth = 45
+			maxHeight = 18
+			format = left
+			alwaystransparent = yes
+		}
+
+		iconType = {
+			name = "consumer_goods_icon"
+			position = { x = 385 y = 56 }
+			spriteType = "GFX_consumer_goods_icon"
+			scale = 0.55
+			alwaystransparent = yes
+		}
+		instantTextboxType = {
+			name = "factories_consumer"
+			position = { x = 412 y = 57 }
+			font = "hoi_18mbs"
+			maxWidth = 45
+			maxHeight = 18
+			format = left
+			alwaystransparent = yes
+		}
+
+		iconType = {
+			name = "traded_factories_icon"
+			position = { x = 443 y = 55 }
+			spriteType = "GFX_traded_factories_icon"
+			scale = 0.55
+			alwaystransparent = yes
+		}
+
+		instantTextboxType = {
+			name = "factories_trade"
 			position = { x = 470 y = 57 }
 			font = "hoi_18mbs"
 			maxWidth = 45

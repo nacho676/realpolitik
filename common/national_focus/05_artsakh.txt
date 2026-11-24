@@ -497,9 +497,7 @@ focus_tree = {
 			ARM = {
 				has_completed_focus = ARM_police
 			}
-			NKR = {
-				is_subject_of = ARM
-			}
+			is_subject_of = ARM
 		}
 
 		completion_reward = {
@@ -533,9 +531,7 @@ focus_tree = {
 			ARM = {
 				has_completed_focus = ARM_nss
 			}
-			NKR = {
-				is_subject_of = ARM
-			}
+			is_subject_of = ARM
 		}
 
 		completion_reward = {
@@ -570,9 +566,7 @@ focus_tree = {
 			ARM = {
 				has_completed_focus = ARM_take_border_troops
 			}
-			NKR = {
-				is_subject_of = ARM
-			}
+			is_subject_of = ARM
 		}
 
 		completion_reward = {
@@ -626,9 +620,7 @@ focus_tree = {
 			ARM = {
 				has_completed_focus = ARM_air_fedence_force
 			}
-			NKR = {
-				is_subject_of = ARM
-			}
+			is_subject_of = ARM
 		}
 
 		completion_reward = {
@@ -701,9 +693,7 @@ focus_tree = {
 			ARM = {
 				has_completed_focus = ARM_vazgen_academy
 			}
-			NKR = {
-				is_subject_of = ARM
-			}
+			is_subject_of = ARM
 		}
 
 		completion_reward = {
@@ -733,9 +723,7 @@ focus_tree = {
 			ARM = {
 				has_completed_focus = ARM_institute_mo_ra
 			}
-			NKR = {
-				is_subject_of = ARM
-			}
+			is_subject_of = ARM
 		}
 
 		completion_reward = {
@@ -764,9 +752,7 @@ focus_tree = {
 			ARM = {
 				has_completed_focus = ARM_pvo_troops
 			}
-			NKR = {
-				is_subject_of = ARM
-			}
+			is_subject_of = ARM
 		}
 
 		completion_reward = {
@@ -799,9 +785,7 @@ focus_tree = {
 			ARM = {
 				has_completed_focus = ARM_aspar_arms
 			}
-			NKR = {
-				is_subject_of = ARM
-			}
+			is_subject_of = ARM
 		}
 
 		completion_reward = {
@@ -831,9 +815,7 @@ focus_tree = {
 			ARM = {
 				has_completed_focus = ARM_davisur_arm
 			}
-			NKR = {
-				is_subject_of = ARM
-			}
+			is_subject_of = ARM
 		}
 
 		completion_reward = {
@@ -873,9 +855,7 @@ focus_tree = {
 
 		available = {
 			NKR_integrate_army_of_armenia_available = yes
-			NKR = {
-				is_subject_of = ARM
-			}
+			is_subject_of = ARM
 		}
 
 		completion_reward = {

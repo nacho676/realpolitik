@@ -11,9 +11,6 @@ focus_tree = {
 	}
 	continuous_focus_position = { x = 300 y = 1400 }
 
-	#Commonwealth of Nations Focus Tree
-	# shared_focus = CMW_Aso_Rock_Declaration
-
 	# Focus Shortcuts
 	shortcut = {
 		name = CAN_Canadian_Economy
@@ -2195,7 +2192,7 @@ focus_tree = {
 				name = CAN_Petrochemical_Industrialization
 				bonus = 0.50
 				uses = 2
-				category = CAT_fuel_oil
+				category = CAT_fuel_refining
 			}
 			set_temp_variable = { temp_opinion = 5 }
 			change_fossil_fuel_industry_opinion = yes
@@ -2642,13 +2639,13 @@ focus_tree = {
 				name = CAN_clean_vehicles
 				bonus = 0.50
 				uses = 2
-				category = CAT_computing_tech
+				category = CAT_information_technology
 			}
 			add_tech_bonus = {
 				name = CAN_clean_vehicles
 				bonus = 0.50
 				uses = 2
-				category = CAT_fuel_oil
+				category = CAT_fuel_efficiency
 			}
 		}
 
@@ -3495,6 +3492,7 @@ focus_tree = {
 					}
 				}
 				set_temp_variable = { percent_change = 3 }
+				set_temp_variable = { influence_target = THIS }
 				change_influence_percentage = yes
 			}
 		}
@@ -6011,13 +6009,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CAN_Propose_NAFTA_Improvements"
-			CAN = {
-				set_temp_variable = { percent_change = 1 }
-				set_temp_variable = { tag_index = MEX.id }
-				change_influence_percentage = yes
-				set_temp_variable = { tag_index = USA.id }
-				change_influence_percentage = yes
-			}
+			set_temp_variable = { percent_change = 1 }
+			set_temp_variable = { tag_index = MEX.id }
+			change_influence_percentage = yes
+			set_temp_variable = { tag_index = USA.id }
+			change_influence_percentage = yes
 			add_opinion_modifier = { target = USA modifier = na_agreements2 }
 			add_opinion_modifier = { target = MEX modifier = na_agreements2 }
 		}
@@ -6076,7 +6072,7 @@ focus_tree = {
 				name = CAN_american_canadian_military
 				uses = 1
 				bonus = 0.50
-				category = CAT_mbt
+				category = CAT_tanks
 			}
 		}
 
@@ -6108,6 +6104,7 @@ focus_tree = {
 				if = {
 					limit = { NOT = { tag = ROOT } }
 					set_temp_variable = { percent_change = 2 }
+					set_temp_variable = { influence_target = THIS }
 					change_influence_percentage = yes
 				}
 			}
@@ -6314,7 +6311,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus CAN_study_american_war_doctrine"
 			add_doctrine_cost_reduction = {
 				name = CAN_study_american_war_doctrine
-				category = CAT_land_doctrine
+				category = land_doctrine
 				uses = 1
 				cost_reduction = 0.5
 			}
@@ -6614,7 +6611,7 @@ focus_tree = {
 				name = CAN_Expand_Arctic_Routes
 				bonus = 0.50
 				uses = 1
-				category = CAT_sub
+				category = CAT_submarines
 			}
 		}
 
@@ -6669,7 +6666,7 @@ focus_tree = {
 				name = CAN_Russo_Canadian_Trade_Agreement
 				bonus = 0.50
 				uses = 2
-				category = CAT_fuel_oil
+				category = CAT_fuel_refining
 			}
 			set_temp_variable = { temp_opinion = 5 }
 			change_fossil_fuel_industry_opinion = yes
@@ -6925,7 +6922,7 @@ focus_tree = {
 				name = CAN_chinese_lavs
 				bonus = 0.50
 				uses = 1
-				category = CAT_ifv
+				category = CAT_infantry_fighting_vehicles
 			}
 		}
 
@@ -6982,7 +6979,7 @@ focus_tree = {
 				name = CAN_rus_dockyards
 				bonus = 0.50
 				uses = 1
-				category = CAT_sub
+				category = CAT_submarines
 			}
 		}
 
@@ -7088,7 +7085,7 @@ focus_tree = {
 				name = CAN_increase_ship_production
 				bonus = 0.50
 				uses = 2
-				category = CAT_naval_all
+				category = CAT_naval
 			}
 		}
 
@@ -7280,7 +7277,7 @@ focus_tree = {
 				name = CAN_global_army
 				bonus = 0.50
 				uses = 2
-				category = CAT_inf
+				category = CAT_infantry
 			}
 		}
 
@@ -7516,7 +7513,7 @@ focus_tree = {
 				name = CAN_airburst_weapons
 				bonus = 0.50
 				uses = 2
-				category = CAT_inf_wep
+				category = CAT_small_arms
 			}
 		}
 
@@ -7543,7 +7540,7 @@ focus_tree = {
 				name = CAN_vehicle_industry
 				bonus = 0.50
 				uses = 2
-				category = CAT_ifv
+				category = CAT_infantry_fighting_vehicles
 			}
 		}
 
@@ -7570,7 +7567,7 @@ focus_tree = {
 				name = CAN_advanced_ultility_vehicle
 				bonus = 0.50
 				uses = 2
-				category = CAT_util
+				category = CAT_utility_vehicles
 			}
 		}
 
@@ -7597,7 +7594,7 @@ focus_tree = {
 				name = CAN_sat_tech
 				bonus = 0.50
 				uses = 2
-				category = CAT_computing_tech
+				category = CAT_information_technology
 			}
 		}
 
@@ -7624,7 +7621,7 @@ focus_tree = {
 				name = CAN_advanced_radar
 				bonus = 0.50
 				uses = 2
-				category = CAT_internet_tech
+				category = CAT_internet
 			}
 		}
 
@@ -7724,7 +7721,7 @@ focus_tree = {
 				name = CAN_new_rifles
 				bonus = 0.50
 				uses = 1
-				category = CAT_inf_wep
+				category = CAT_small_arms
 			}
 		}
 
@@ -8083,13 +8080,13 @@ focus_tree = {
 				name = CAN_mechanized
 				bonus = 1.00
 				uses = 1
-				category = CAT_ifv
+				category = CAT_infantry_fighting_vehicles
 			}
 			add_tech_bonus = {
 				name = CAN_mechanized
 				bonus = 1.00
 				uses = 1
-				category = CAT_apc
+				category = CAT_armored_personnel_carriers
 			}
 		}
 
@@ -8130,7 +8127,7 @@ focus_tree = {
 				name = CAN_infantry_focus
 				bonus = 1.0
 				uses = 2
-				category = CAT_inf
+				category = CAT_infantry
 			}
 		}
 
@@ -8163,7 +8160,7 @@ focus_tree = {
 				name = CAN_specops
 				bonus = 0.50
 				uses = 1
-				category = CAT_special_forces
+				category = CAT_special_forces_equipment
 			}
 		}
 
@@ -8259,7 +8256,7 @@ focus_tree = {
 				name = CAN_tanks
 				bonus = 1.0
 				uses = 1
-				category = CAT_mbt
+				category = CAT_tanks
 			}
 		}
 
@@ -8392,7 +8389,7 @@ focus_tree = {
 				name = CAN_air_focus
 				bonus = 0.50
 				uses = 2
-				category = CAT_fighter
+				category = CAT_medium_aircraft
 			}
 		}
 
@@ -8426,7 +8423,7 @@ focus_tree = {
 				name = CAN_air_model_us
 				bonus = 0.50
 				uses = 2
-				category = CAT_str_bomber
+				category = CAT_heavy_aircraft
 			}
 		}
 
@@ -8460,7 +8457,7 @@ focus_tree = {
 				name = CAN_air_model_uk
 				bonus = 0.50
 				uses = 2
-				category = CAT_mr_fighter
+				category = CAT_medium_aircraft
 			}
 		}
 
@@ -8538,11 +8535,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CAN_nato_air"
-			add_tech_bonus = {
+			add_doctrine_cost_reduction = {
 				name = CAN_nato_air
-				bonus = 0.1
+				cost_reduction = 0.1
 				uses = 1
-				category = CAT_battlefield_support_tree
+				category = air_doctrine
 			}
 			add_ideas = CAN_air_nato
 		}
@@ -8578,7 +8575,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus CAN_nato_train"
 			add_doctrine_cost_reduction = {
 				name = CAN_nato_train
-				category = CAT_air_doctrine
+				category = air_doctrine
 				uses = 1
 				cost_reduction = 0.25
 			}
@@ -8607,7 +8604,7 @@ focus_tree = {
 				name = CAN_us_planes
 				bonus = 0.1
 				uses = 1
-				category = CAT_as_fighter
+				category = CAT_medium_aircraft
 			}
 		}
 
@@ -8634,7 +8631,7 @@ focus_tree = {
 				name = CAN_new_helicopters
 				bonus = 0.50
 				uses = 2
-				category = CAT_heli
+				category = CAT_helicopters
 			}
 		}
 
@@ -8662,7 +8659,7 @@ focus_tree = {
 				name = CAN_new_doctrine
 				bonus = 0.25
 				uses = 1
-				category = CAT_as_fighter
+				category = CAT_medium_aircraft
 			}
 			add_ideas = CAN_air_new
 		}
@@ -8694,7 +8691,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus CAN_russia_train"
 			add_doctrine_cost_reduction = {
 				name = CAN_russia_train
-				category = CAT_air_doctrine
+				category = air_doctrine
 				uses = 1
 				cost_reduction = 0.1
 			}
@@ -8722,7 +8719,7 @@ focus_tree = {
 				name = CAN_russia_planes
 				bonus = 0.1
 				uses = 1
-				category = CAT_str_bomber
+				category = CAT_heavy_aircraft
 			}
 		}
 
@@ -8836,7 +8833,7 @@ focus_tree = {
 				name = CAN_navy_carrier
 				bonus = 0.50
 				uses = 1
-				category = CAT_carrier
+				category = CAT_aircraft_carriers
 			}
 		}
 
@@ -8863,7 +8860,7 @@ focus_tree = {
 				name = CAN_destroyers
 				bonus = 0.50
 				uses = 2
-				category = CAT_destroyer
+				category = CAT_destroyers
 			}
 		}
 
@@ -8916,7 +8913,7 @@ focus_tree = {
 				name = CAN_naval_aircraft
 				bonus = 0.50
 				uses = 2
-				category = CAT_cv_l_s_fighter
+				category = CAT_light_aircraft
 			}
 		}
 
@@ -8947,7 +8944,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus CAN_naval_doctrines"
 			add_doctrine_cost_reduction = {
 				name = CAN_naval_doctrines
-				category = CAT_naval_doctrine
+				category = naval_doctrine
 				uses = 2
 				cost_reduction = 0.5
 			}

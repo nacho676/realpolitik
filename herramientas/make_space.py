@@ -10,7 +10,7 @@ import space_program
 import numpy as np
 from PIL import Image, ImageDraw
 
-MD = "../Millennium-Dawn-2.0.0"
+MD = "../Millennium-Dawn-2.0.3"
 FOLDER = "mdr_space_program_folder"
 CATEGORY = "CAT_mdr_space"
 OUT = "gfx/interface/mdr/space/"

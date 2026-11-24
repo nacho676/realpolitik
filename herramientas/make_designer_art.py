@@ -15,7 +15,7 @@ import sys
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 
-MD = "../Millennium-Dawn-2.0.0/"
+MD = "../Millennium-Dawn-2.0.3/"
 TEX = "gfx/interface/equipmentdesigner/mdr/"
 GFX_FILE = "interface/mdr_designer.gfx"
 GUI_DIR = "interface/equipmentdesigner/tanks/"
