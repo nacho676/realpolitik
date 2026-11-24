@@ -131,6 +131,24 @@ mdr_buildings_tax = {
 	}
 }
 
+# Country scope, weekly, AI only. Runs the building passes on the first call and then every fourth week. Players run them on
+# their own schedule (weekly and daily), so what they see does not change.
+mdr_buildings_ai_tick = {
+	if = { limit = { NOT = { has_variable = mdr_bld_tick } }
+		set_variable = { mdr_bld_tick = 0 }
+		mdr_buildings_weekly = yes
+		mdr_buildings_monthly = yes
+	}
+	else = {
+		add_to_variable = { mdr_bld_tick = 1 }
+		if = { limit = { check_variable = { mdr_bld_tick > 2 } }
+			set_variable = { mdr_bld_tick = 0 }
+			mdr_buildings_weekly = yes
+			mdr_buildings_monthly = yes
+		}
+	}
+}
+
 # Country scope, weekly. Capped national bonuses of universities, smart grids and science campuses,
 # applied by the dynamic modifier mdr_buildings_modifier.
 mdr_buildings_weekly = {

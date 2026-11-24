@@ -51,134 +51,42 @@ mdr_ai_monthly = {
 # Never during a war between them, never on a nuclear attacker, never on a country under Western sanctions.
 # The game may embargo again on its own; if the deficit lasts, this lifts it again next month.
 mdr_ai_embargo_monthly = {
-	if = { limit = { check_variable = { resource@oil < -10 } }
-		every_country = {
-			limit = {
-				is_embargoed_by = ROOT
-				NOT = { has_war_with = ROOT }
-				NOT = { has_country_flag = mdr_nuke_user }
-				mdr_is_under_western_sanctions = no
-				check_variable = { resource@oil > 10 }
+	# One pass over the world instead of one per resource: same countries, same result (a lifted embargo cannot be lifted twice).
+	if = {
+		limit = {
+			OR = {
+			check_variable = { resource@oil < -10 }
+			check_variable = { resource@aluminium < -10 }
+			check_variable = { resource@rubber < -10 }
+			check_variable = { resource@tungsten < -10 }
+			check_variable = { resource@steel < -10 }
+			check_variable = { resource@chromium < -10 }
+			check_variable = { resource@microchips < -10 }
+			check_variable = { resource@composites < -10 }
+			check_variable = { resource@uranium < -10 }
+			check_variable = { resource@wheat < -10 }
+			check_variable = { resource@rare_earths < -10 }
 			}
-			mdr_ai_lift_embargo = yes
 		}
-	}
-	if = { limit = { check_variable = { resource@aluminium < -10 } }
 		every_country = {
 			limit = {
 				is_embargoed_by = ROOT
 				NOT = { has_war_with = ROOT }
 				NOT = { has_country_flag = mdr_nuke_user }
 				mdr_is_under_western_sanctions = no
-				check_variable = { resource@aluminium > 10 }
-			}
-			mdr_ai_lift_embargo = yes
-		}
-	}
-	if = { limit = { check_variable = { resource@rubber < -10 } }
-		every_country = {
-			limit = {
-				is_embargoed_by = ROOT
-				NOT = { has_war_with = ROOT }
-				NOT = { has_country_flag = mdr_nuke_user }
-				mdr_is_under_western_sanctions = no
-				check_variable = { resource@rubber > 10 }
-			}
-			mdr_ai_lift_embargo = yes
-		}
-	}
-	if = { limit = { check_variable = { resource@tungsten < -10 } }
-		every_country = {
-			limit = {
-				is_embargoed_by = ROOT
-				NOT = { has_war_with = ROOT }
-				NOT = { has_country_flag = mdr_nuke_user }
-				mdr_is_under_western_sanctions = no
-				check_variable = { resource@tungsten > 10 }
-			}
-			mdr_ai_lift_embargo = yes
-		}
-	}
-	if = { limit = { check_variable = { resource@steel < -10 } }
-		every_country = {
-			limit = {
-				is_embargoed_by = ROOT
-				NOT = { has_war_with = ROOT }
-				NOT = { has_country_flag = mdr_nuke_user }
-				mdr_is_under_western_sanctions = no
-				check_variable = { resource@steel > 10 }
-			}
-			mdr_ai_lift_embargo = yes
-		}
-	}
-	if = { limit = { check_variable = { resource@chromium < -10 } }
-		every_country = {
-			limit = {
-				is_embargoed_by = ROOT
-				NOT = { has_war_with = ROOT }
-				NOT = { has_country_flag = mdr_nuke_user }
-				mdr_is_under_western_sanctions = no
-				check_variable = { resource@chromium > 10 }
-			}
-			mdr_ai_lift_embargo = yes
-		}
-	}
-	if = { limit = { check_variable = { resource@microchips < -10 } }
-		every_country = {
-			limit = {
-				is_embargoed_by = ROOT
-				NOT = { has_war_with = ROOT }
-				NOT = { has_country_flag = mdr_nuke_user }
-				mdr_is_under_western_sanctions = no
-				check_variable = { resource@microchips > 10 }
-			}
-			mdr_ai_lift_embargo = yes
-		}
-	}
-	if = { limit = { check_variable = { resource@composites < -10 } }
-		every_country = {
-			limit = {
-				is_embargoed_by = ROOT
-				NOT = { has_war_with = ROOT }
-				NOT = { has_country_flag = mdr_nuke_user }
-				mdr_is_under_western_sanctions = no
-				check_variable = { resource@composites > 10 }
-			}
-			mdr_ai_lift_embargo = yes
-		}
-	}
-	if = { limit = { check_variable = { resource@uranium < -10 } }
-		every_country = {
-			limit = {
-				is_embargoed_by = ROOT
-				NOT = { has_war_with = ROOT }
-				NOT = { has_country_flag = mdr_nuke_user }
-				mdr_is_under_western_sanctions = no
-				check_variable = { resource@uranium > 10 }
-			}
-			mdr_ai_lift_embargo = yes
-		}
-	}
-	if = { limit = { check_variable = { resource@wheat < -10 } }
-		every_country = {
-			limit = {
-				is_embargoed_by = ROOT
-				NOT = { has_war_with = ROOT }
-				NOT = { has_country_flag = mdr_nuke_user }
-				mdr_is_under_western_sanctions = no
-				check_variable = { resource@wheat > 10 }
-			}
-			mdr_ai_lift_embargo = yes
-		}
-	}
-	if = { limit = { check_variable = { resource@rare_earths < -10 } }
-		every_country = {
-			limit = {
-				is_embargoed_by = ROOT
-				NOT = { has_war_with = ROOT }
-				NOT = { has_country_flag = mdr_nuke_user }
-				mdr_is_under_western_sanctions = no
-				check_variable = { resource@rare_earths > 10 }
+				OR = {
+				AND = { ROOT = { check_variable = { resource@oil < -10 } } check_variable = { resource@oil > 10 } }
+				AND = { ROOT = { check_variable = { resource@aluminium < -10 } } check_variable = { resource@aluminium > 10 } }
+				AND = { ROOT = { check_variable = { resource@rubber < -10 } } check_variable = { resource@rubber > 10 } }
+				AND = { ROOT = { check_variable = { resource@tungsten < -10 } } check_variable = { resource@tungsten > 10 } }
+				AND = { ROOT = { check_variable = { resource@steel < -10 } } check_variable = { resource@steel > 10 } }
+				AND = { ROOT = { check_variable = { resource@chromium < -10 } } check_variable = { resource@chromium > 10 } }
+				AND = { ROOT = { check_variable = { resource@microchips < -10 } } check_variable = { resource@microchips > 10 } }
+				AND = { ROOT = { check_variable = { resource@composites < -10 } } check_variable = { resource@composites > 10 } }
+				AND = { ROOT = { check_variable = { resource@uranium < -10 } } check_variable = { resource@uranium > 10 } }
+				AND = { ROOT = { check_variable = { resource@wheat < -10 } } check_variable = { resource@wheat > 10 } }
+				AND = { ROOT = { check_variable = { resource@rare_earths < -10 } } check_variable = { resource@rare_earths > 10 } }
+				}
 			}
 			mdr_ai_lift_embargo = yes
 		}

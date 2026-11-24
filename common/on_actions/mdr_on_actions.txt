@@ -102,9 +102,10 @@ on_actions = {
 			if = { limit = { mdr_ammo_on = yes } mdr_ammo_weekly = yes }
 			mdr_uranium_weekly = yes
 			mdr_rare_earths_weekly = yes
-			mdr_buildings_weekly = yes
+			# Players keep the weekly pass (and the daily one above); the AI runs both every fourth week, they are the heaviest state loops.
+			if = { limit = { is_ai = no } mdr_buildings_weekly = yes }
+			else = { mdr_buildings_ai_tick = yes }
 			mdr_pandemic_relief_weekly = yes
-			mdr_buildings_monthly = yes
 			if = { limit = { mdr_climate_on = yes } mdr_climate_weekly = yes }
 			mdr_war_exhaustion_weekly = yes
 			mdr_radiation_country_weekly = yes
@@ -190,7 +191,7 @@ on_actions = {
 			if = { limit = { original_tag = MON } mdr_mon_monthly = yes }
 			if = { limit = { mdr_ships_on = yes } mdr_sale_monthly = yes }
 			if = { limit = { mdr_diag_on = yes } mdr_ai_log_monthly = yes }
-			mdr_ai_track_states = yes
+			if = { limit = { NOT = { has_variable = mdr_ai_start_states } } mdr_ai_track_states = yes }
 			if = { limit = { is_ai = yes } mdr_ai_monthly = yes }
 
 			# Natural disasters roll by region, once a month for the whole world.
