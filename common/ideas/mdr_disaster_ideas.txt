@@ -1,0 +1,60 @@
+ideas = {
+	country = {
+		mdr_disaster_moderate = {
+			allowed_civil_war = { always = yes }
+			picture = generic_stockpile_preparation
+
+			modifier = {
+				stability_factor = -0.03
+				industrial_capacity_factory = -0.05
+			}
+		}
+
+		mdr_disaster_severe = {
+			allowed_civil_war = { always = yes }
+			picture = dpr_ruins
+
+			modifier = {
+				stability_factor = -0.06
+				industrial_capacity_factory = -0.10
+				production_speed_buildings_factor = -0.10
+			}
+		}
+
+		mdr_disaster_catastrophe = {
+			allowed_civil_war = { always = yes }
+			picture = fire
+
+			modifier = {
+				stability_factor = -0.10
+				industrial_capacity_factory = -0.15
+				production_speed_buildings_factor = -0.20
+				health_cost_multiplier_modifier = 0.10
+			}
+		}
+
+		# A nuclear plant disaster also turns the public against reactors.
+		mdr_disaster_nuclear = {
+			allowed_civil_war = { always = yes }
+			picture = chernobyl_zone
+
+			modifier = {
+				stability_factor = -0.10
+				industrial_capacity_factory = -0.15
+				production_speed_buildings_factor = -0.20
+				health_cost_multiplier_modifier = 0.10
+				nuclear_reactor_fuel_production_factor = -0.50
+			}
+		}
+
+		mdr_disaster_coverup = {
+			allowed_civil_war = { always = yes }
+			picture = propaganda
+
+			modifier = {
+				stability_factor = -0.05
+				political_power_factor = -0.10
+			}
+		}
+	}
+}

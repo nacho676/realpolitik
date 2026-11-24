@@ -1,0 +1,52 @@
+ideas = {
+	country = {
+		# Oil producers whose export route runs through a closed strait.
+		mdr_strait_route_blocked = {
+			allowed_civil_war = { always = yes }
+			picture = suez_canal_blocked
+
+			cancel = {
+				NOT = {
+					OR = {
+						has_global_flag = mdr_strait_1_closed
+						has_global_flag = mdr_strait_2_closed
+						has_global_flag = mdr_strait_3_closed
+						has_global_flag = mdr_strait_4_closed
+						has_global_flag = mdr_strait_7_closed
+					}
+				}
+			}
+
+			modifier = {
+				oil_export_multiplier_modifier = -0.20
+				max_fuel_factor = -0.10
+			}
+		}
+
+		# East Asian importers cut off by a closed Strait of Malacca.
+		mdr_strait_supply_shock = {
+			allowed_civil_war = { always = yes }
+			picture = lack_of_fuel
+
+			cancel = {
+				NOT = { has_global_flag = mdr_strait_4_closed }
+			}
+
+			modifier = {
+				max_fuel_factor = -0.15
+				industrial_capacity_factory = -0.05
+				consumer_goods_factor = 0.02
+			}
+		}
+
+		mdr_panama_drought = {
+			allowed_civil_war = { always = yes }
+			picture = full_control_of_panama
+
+			modifier = {
+				stability_factor = -0.02
+				political_power_factor = -0.05
+			}
+		}
+	}
+}

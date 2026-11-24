@@ -1,0 +1,106 @@
+add_namespace = mdr_shocks
+
+# Market shocks (common/scripted_effects/mdr_shocks.txt). The cause line comes from global.mdr_shock_cause.
+news_event = {
+	id = mdr_shocks.1
+	title = mdr_shocks.1.t
+	desc = mdr_shocks.1.d
+	picture = GFX_burning_oil_refinery
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_shocks_news_a
+	}
+}
+
+news_event = {
+	id = mdr_shocks.2
+	title = mdr_shocks.2.t
+	desc = mdr_shocks.2.d
+	picture = GFX_generic_oil_field
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_shocks_news_a
+	}
+}
+
+news_event = {
+	id = mdr_shocks.3
+	title = mdr_shocks.3.t
+	desc = mdr_shocks.3.d
+	picture = GFX_generic_grain_silo
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_shocks_news_a
+	}
+}
+
+news_event = {
+	id = mdr_shocks.4
+	title = mdr_shocks.4.t
+	desc = mdr_shocks.4.d
+	picture = GFX_grain_deal
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_shocks_news_a
+	}
+}
+
+news_event = {
+	id = mdr_shocks.5
+	title = mdr_shocks.5.t
+	desc = mdr_shocks.5.d
+	picture = GFX_news_nuclear_plant
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_shocks_news_a
+	}
+}
+
+news_event = {
+	id = mdr_shocks.6
+	title = mdr_shocks.6.t
+	desc = mdr_shocks.6.d
+	picture = GFX_news_nuclear_plant
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_shocks_news_a
+	}
+}
+
+news_event = {
+	id = mdr_shocks.7
+	title = mdr_shocks.7.t
+	desc = mdr_shocks.7.d
+	picture = GFX_world_stockmarket
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_shocks_news_a
+	}
+}
+
+news_event = {
+	id = mdr_shocks.8
+	title = mdr_shocks.8.t
+	desc = mdr_shocks.8.d
+	picture = GFX_world_stockmarket
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_shocks_news_a
+	}
+}

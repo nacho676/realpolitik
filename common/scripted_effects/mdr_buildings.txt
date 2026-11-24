@@ -1,0 +1,273 @@
+# Realpolitik buildings (common/buildings/mdr_buildings.txt). The four mdr_buildings_* money effects run inside
+# Millennium Dawn's economy update (common/scripted_effects/00_money_system.txt), next to the cropland, and share one
+# worker pool: workers (millions), GDP and taxes (billions) per level below.
+#                       workers  GDP    tax
+# desalination plant    0.0035   0.42   0.044
+# recycling plant       0.0062   0.47   0.049   (plus the resource sector's GDP for its steel and light metals)
+# regional university   0.0118   0.97   0.1
+# electric arc furnace  0.009    3.9    0.41    (plus the resource sector's GDP for its steel)
+# data center           0.0093   23.5   1.27
+# smart grid center     0.0041   0.78   0.081
+# fishing port          0.0029   0.21   0.022
+# uranium mine          0.0042   0.5    0.052
+# rare earth complex    0.0068   1.0    0.104
+
+# Inside the hidden_effect of Millennium Dawn's building count, with its controlled_states_collection.
+mdr_buildings_totals = {
+	set_variable = { mdr_desal_total = { value = 0 every_collection = { named_collection = controlled_states_collection add = building_level@mdr_desalination_plant } } }
+	set_variable = { mdr_recycling_total = { value = 0 every_collection = { named_collection = controlled_states_collection add = building_level@mdr_recycling_plant } } }
+	set_variable = { mdr_university_total = { value = 0 every_collection = { named_collection = controlled_states_collection add = building_level@mdr_regional_university } } }
+	set_variable = { mdr_arc_furnace_total = { value = 0 every_collection = { named_collection = controlled_states_collection add = building_level@mdr_electric_arc_furnace } } }
+	set_variable = { mdr_data_center_total = { value = 0 every_collection = { named_collection = controlled_states_collection add = building_level@mdr_data_center } } }
+	set_variable = { mdr_smart_grid_total = { value = 0 every_collection = { named_collection = controlled_states_collection add = building_level@mdr_smart_grid_center } } }
+	set_variable = { mdr_uranium_mine_total = { value = 0 every_collection = { named_collection = controlled_states_collection add = building_level@mdr_uranium_mine } } }
+	set_variable = { mdr_ree_complex_total = { value = 0 every_collection = { named_collection = controlled_states_collection add = building_level@mdr_rare_earth_complex } } }
+	# State buildings that need few people: thousands of workers per level, kept in thousands because the game keeps three decimals.
+	set_variable = {
+		mdr_support_workers_k = {
+			value = 0
+			every_collection = {
+				named_collection = controlled_states_collection
+				add = { value = building_level@infrastructure multiply = 0.1 }
+				add = { value = building_level@air_base multiply = 0.2 }
+				add = { value = building_level@radar_station multiply = 0.15 }
+				add = { value = building_level@anti_air_building multiply = 0.2 }
+				add = { value = building_level@fuel_silo multiply = 0.4 }
+				add = { value = building_level@rocket_site multiply = 0.3 }
+				add = { value = building_level@mdr_spaceport multiply = 1.1 }
+				add = { value = building_level@enrichment_facility multiply = 2.2 }
+				add = { value = building_level@mdr_early_warning_center multiply = 0.25 }
+				add = { value = building_level@stronghold_network multiply = 0.5 }
+			}
+		}
+	}
+	# Fishing ports are provincial: their count comes from the food they add (140 each).
+	set_variable = { mdr_fishing_total = { value = modifier@mdr_fishing_food divide = 140 } }
+}
+
+# After the cropland's employment block: temp variables workforce_total and worker_requirement_gdp_multiplier.
+mdr_buildings_employment = {
+	set_temp_variable = {
+		max_workers_in_mdr_buildings = {
+			value = 0
+			add = { value = mdr_desal_total multiply = 0.0035 }
+			add = { value = mdr_recycling_total multiply = 0.0062 }
+			add = { value = mdr_university_total multiply = 0.0118 }
+			add = { value = mdr_arc_furnace_total multiply = 0.009 }
+			add = { value = mdr_data_center_total multiply = 0.0093 }
+			add = { value = mdr_smart_grid_total multiply = 0.0041 }
+			add = { value = mdr_fishing_total multiply = 0.0029 }
+			add = { value = mdr_uranium_mine_total multiply = 0.0042 }
+			add = { value = mdr_ree_complex_total multiply = 0.0068 }
+			add = { value = mdr_support_workers_k divide = 1000 }
+			add = { value = modifier@mdr_province_workers_k divide = 1000 }
+			multiply = worker_requirement_gdp_multiplier
+			multiply = {
+				value = 1
+				add = modifier@buildings_worker_requirement_modifier
+				clamp = { min = 0.10 max = 999999 }
+			}
+		}
+	}
+	if = { limit = { check_variable = { max_workers_in_mdr_buildings < 0.0001 } }
+		set_variable = { mdr_buildings_manpower_fulfillment = 1 }
+		set_variable = { workers_in_mdr_buildings = 0 }
+	}
+	else = {
+		set_variable = {
+			workers_in_mdr_buildings = {
+				value = max_workers_in_mdr_buildings
+				clamp = { min = 0 max = workforce_total }
+			}
+		}
+		set_variable = {
+			mdr_buildings_manpower_fulfillment = {
+				value = workers_in_mdr_buildings
+				divide = { value = max_workers_in_mdr_buildings clamp = { min = 0.001 max = 999999 } }
+			}
+		}
+		subtract_from_temp_variable = { workforce_total = workers_in_mdr_buildings }
+	}
+}
+
+# Output: temp variable gdp_from_mdr_buildings, added to gdp_total.
+mdr_buildings_gdp = {
+	set_temp_variable = {
+		gdp_from_mdr_buildings = {
+			value = 0
+			add = { value = mdr_desal_total multiply = 0.42 }
+			add = { value = mdr_recycling_total multiply = 0.47 }
+			add = { value = mdr_university_total multiply = 0.97 }
+			add = { value = mdr_arc_furnace_total multiply = 3.9 }
+			add = { value = mdr_data_center_total multiply = 23.5 }
+			add = { value = mdr_smart_grid_total multiply = 0.78 }
+			add = { value = mdr_fishing_total multiply = 0.21 }
+			add = { value = mdr_uranium_mine_total multiply = 0.5 }
+			add = { value = mdr_ree_complex_total multiply = 1.0 }
+			multiply = mdr_buildings_manpower_fulfillment
+		}
+	}
+	set_variable = { mdr_buildings_gdp = gdp_from_mdr_buildings }
+}
+
+# Output: variable mdr_buildings_tax, added to corporate_tax.
+mdr_buildings_tax = {
+	set_variable = {
+		mdr_buildings_tax = {
+			value = 0
+			add = { value = mdr_desal_total multiply = 0.044 }
+			add = { value = mdr_recycling_total multiply = 0.049 }
+			add = { value = mdr_university_total multiply = 0.1 }
+			add = { value = mdr_arc_furnace_total multiply = 0.41 }
+			add = { value = mdr_data_center_total multiply = 1.27 }
+			add = { value = mdr_smart_grid_total multiply = 0.081 }
+			add = { value = mdr_fishing_total multiply = 0.022 }
+			add = { value = mdr_uranium_mine_total multiply = 0.052 }
+			add = { value = mdr_ree_complex_total multiply = 0.104 }
+			multiply = mdr_buildings_manpower_fulfillment
+			multiply = unified_building_multiplier
+			clamp = { min = 0 max = 100000000 }
+		}
+	}
+}
+
+# Country scope, weekly. Capped national bonuses of universities, smart grids and science campuses,
+# applied by the dynamic modifier mdr_buildings_modifier.
+mdr_buildings_weekly = {
+	set_temp_variable = { mdr_univ_n = 0 }
+	set_temp_variable = { mdr_grid_saving = 0 }
+	set_temp_variable = { mdr_campus_land_n = 0 }
+	set_temp_variable = { mdr_campus_naval_n = 0 }
+	set_temp_variable = { mdr_campus_air_n = 0 }
+	set_temp_variable = { mdr_campus_nuclear_n = 0 }
+	every_controlled_state = {
+		add_to_temp_variable = { mdr_univ_n = building_level@mdr_regional_university }
+		# Smart grid: 15% of what the state's buildings use (Millennium Dawn's base figures), at most 1.25 GW.
+		if = { limit = { check_variable = { building_level@mdr_smart_grid_center > 0 } }
+			set_temp_variable = {
+				mdr_grid_state = {
+					value = 0
+					add = { value = building_level@industrial_complex multiply = 0.5 }
+					add = { value = building_level@arms_factory multiply = 0.5 }
+					add = { value = building_level@dockyard multiply = 0.5 }
+					add = { value = building_level@offices multiply = 0.25 }
+					add = { value = building_level@agriculture_district multiply = 0.1 }
+					add = { value = building_level@microchip_plant multiply = 0.75 }
+					add = { value = building_level@composite_plant multiply = 0.8 }
+					add = { value = building_level@synthetic_refinery multiply = 0.2 }
+					add = { value = building_level@mdr_electric_arc_furnace multiply = 1.35 }
+					add = { value = building_level@mdr_data_center multiply = 1.6 }
+					add = { value = building_level@mdr_desalination_plant multiply = 0.17 }
+					add = { value = building_level@mdr_recycling_plant multiply = 0.09 }
+					add = { value = building_level@mdr_regional_university multiply = 0.05 }
+					add = { value = building_level@mdr_uranium_mine multiply = 0.03 }
+					add = { value = building_level@mdr_rare_earth_complex multiply = 0.11 }
+					multiply = 0.15
+					clamp = { min = 0 max = 1.25 }
+				}
+			}
+			add_to_temp_variable = { mdr_grid_saving = mdr_grid_state }
+		}
+		# Science campus: speeds up the special project facility of its own state.
+		if = {
+			limit = {
+				any_province_building_level = {
+					province = { all_provinces = yes }
+					building = mdr_science_campus
+					level > 0
+				}
+			}
+			if = { limit = { any_province_building_level = { province = { all_provinces = yes } building = land_facility level > 0 } }
+				add_to_temp_variable = { mdr_campus_land_n = 1 }
+			}
+			if = { limit = { any_province_building_level = { province = { all_provinces = yes } building = naval_facility level > 0 } }
+				add_to_temp_variable = { mdr_campus_naval_n = 1 }
+			}
+			if = { limit = { any_province_building_level = { province = { all_provinces = yes } building = air_facility level > 0 } }
+				add_to_temp_variable = { mdr_campus_air_n = 1 }
+			}
+			if = { limit = { any_province_building_level = { province = { all_provinces = yes } building = nuclear_facility level > 0 } }
+				add_to_temp_variable = { mdr_campus_nuclear_n = 1 }
+			}
+		}
+	}
+	# Universities: +0.4% research each, up to +4%.
+	clamp_temp_variable = { var = mdr_univ_n max = 10 }
+	set_variable = { mdr_bld_research = mdr_univ_n }
+	multiply_variable = { mdr_bld_research = 0.004 }
+	set_variable = { mdr_bld_energy = mdr_grid_saving }
+	multiply_variable = { mdr_bld_energy = -1 }
+	# Each uranium mining technology: mines use 15% more of their 0.03 GW (0.0045 per level).
+	set_temp_variable = { mdr_uranium_tech_n = 0 }
+	if = { limit = { has_tech = mdr_uranium_tech_1 } add_to_temp_variable = { mdr_uranium_tech_n = 1 } }
+	if = { limit = { has_tech = mdr_uranium_tech_2 } add_to_temp_variable = { mdr_uranium_tech_n = 1 } }
+	if = { limit = { has_tech = mdr_uranium_tech_3 } add_to_temp_variable = { mdr_uranium_tech_n = 1 } }
+	if = { limit = { has_tech = mdr_uranium_tech_4 } add_to_temp_variable = { mdr_uranium_tech_n = 1 } }
+	if = { limit = { has_tech = mdr_uranium_tech_5 } add_to_temp_variable = { mdr_uranium_tech_n = 1 } }
+	set_temp_variable = { mdr_uranium_tech_energy = mdr_uranium_mine_total }
+	multiply_temp_variable = { mdr_uranium_tech_energy = mdr_uranium_tech_n }
+	multiply_temp_variable = { mdr_uranium_tech_energy = 45 }
+	divide_temp_variable = { mdr_uranium_tech_energy = 10000 }
+	add_to_variable = { mdr_bld_energy = mdr_uranium_tech_energy }
+	# Campuses: +7% each to the speed of their facility type, up to three.
+	clamp_temp_variable = { var = mdr_campus_land_n max = 3 }
+	clamp_temp_variable = { var = mdr_campus_naval_n max = 3 }
+	clamp_temp_variable = { var = mdr_campus_air_n max = 3 }
+	clamp_temp_variable = { var = mdr_campus_nuclear_n max = 3 }
+	set_variable = { mdr_bld_campus_land = mdr_campus_land_n }
+	multiply_variable = { mdr_bld_campus_land = 0.07 }
+	set_variable = { mdr_bld_campus_naval = mdr_campus_naval_n }
+	multiply_variable = { mdr_bld_campus_naval = 0.07 }
+	set_variable = { mdr_bld_campus_air = mdr_campus_air_n }
+	multiply_variable = { mdr_bld_campus_air = 0.07 }
+	set_variable = { mdr_bld_campus_nuclear = mdr_campus_nuclear_n }
+	multiply_variable = { mdr_bld_campus_nuclear = 0.07 }
+	# Only shown while one of these buildings gives something.
+	if = {
+		limit = {
+			OR = {
+				check_variable = { mdr_univ_n > 0 }
+				check_variable = { mdr_grid_saving > 0 }
+				check_variable = { mdr_uranium_tech_energy > 0 }
+				check_variable = { mdr_campus_land_n > 0 }
+				check_variable = { mdr_campus_naval_n > 0 }
+				check_variable = { mdr_campus_air_n > 0 }
+				check_variable = { mdr_campus_nuclear_n > 0 }
+			}
+		}
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = mdr_buildings_modifier } } }
+			add_dynamic_modifier = { modifier = mdr_buildings_modifier }
+		}
+	}
+	else_if = { limit = { has_dynamic_modifier = { modifier = mdr_buildings_modifier } }
+		remove_dynamic_modifier = { modifier = mdr_buildings_modifier }
+	}
+}
+
+# Country scope, daily for players and weekly for the rest. Desalination waters poor or dry soil: a poor-soil state loses its penalty while the plant
+# stands, and a dry coastal state without farmland becomes arable.
+mdr_buildings_monthly = {
+	every_controlled_state = {
+		limit = {
+			OR = {
+				check_variable = { building_level@mdr_desalination_plant > 0 }
+				has_state_flag = mdr_soil_irrigated
+			}
+		}
+		if = { limit = { check_variable = { building_level@mdr_desalination_plant > 0 } }
+			if = { limit = { has_state_flag = mdr_soil_poor NOT = { has_state_flag = mdr_soil_irrigated } }
+				remove_dynamic_modifier = { modifier = mdr_soil_poor }
+				set_state_flag = mdr_soil_irrigated
+			}
+			if = { limit = { NOT = { has_state_flag = mdr_arable_land } }
+				mdr_cropland_arable_normal = yes
+			}
+		}
+		else = {
+			add_dynamic_modifier = { modifier = mdr_soil_poor }
+			clr_state_flag = mdr_soil_irrigated
+		}
+	}
+}
+
+

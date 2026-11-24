@@ -1,0 +1,23 @@
+state = {
+	id = 1272
+	name = "STATE_1272" # Antarctic Peninsula
+	manpower = 10
+
+	state_category = state_inhospitable
+
+	history = {
+		buildings = {
+			infrastructure = 1
+		}
+		add_claim_by = ARG
+		add_claim_by = ENG
+		add_claim_by = CHL
+		set_state_flag = mdr_polar   # low disaster risk (common/scripted_effects/mdr_disasters.txt)
+		set_variable = { state_renewable_capacity_factor_modifier_var = 0.400 }
+		set_variable = { productivity_state_var = 300 }
+	}
+
+	impassable = yes
+
+	provinces = { 17144 17145 17164 }
+}

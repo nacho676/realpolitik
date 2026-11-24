@@ -1,0 +1,75 @@
+mdr_military_category = {
+	mdr_mobilize_reservists = {
+		icon = generic_army_support
+		cost = 75
+		fire_only_once = no
+
+		visible = {
+			has_war = yes
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = mdr_mobilization_cooldown_tt
+				NOT = { has_country_flag = mdr_mobilization_cooldown }
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_mobilize_reservists"
+			mdr_mobilize_reservists = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 5
+				has_manpower < 20000
+			}
+		}
+	}
+
+	mdr_recruitment_campaign = {
+		icon = generic_army_support
+		cost = 50
+		fire_only_once = no
+
+		visible = {
+			has_idea = mdr_recruitment_crisis
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_recruitment_campaign"
+			set_temp_variable = { treasury_change = gdp_total }
+			divide_temp_variable = { treasury_change = -2000 }
+			modify_treasury_effect = yes
+			remove_ideas = mdr_recruitment_crisis
+			set_country_flag = { flag = mdr_recruitment_campaign days = 365 value = 1 }
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	# Courts-martial stop desertion (mdr_desertion_weekly) for 90 days.
+	mdr_military_tribunals = {
+		icon = generic_army_support
+		cost = 25
+		fire_only_once = no
+
+		visible = {
+			has_country_flag = mdr_desertion_active
+		}
+
+		available = {
+			NOT = { has_country_flag = mdr_military_tribunals }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_military_tribunals"
+			add_stability = -0.05
+			set_country_flag = { flag = mdr_military_tribunals days = 90 value = 1 }
+		}
+
+		ai_will_do = { base = 5 }
+	}
+}

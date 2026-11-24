@@ -1,0 +1,84 @@
+common/terrain/00_terrain.txt
+history/states/1251-Svalbard.txt
+history/states/1252-Franz Josef Land.txt
+history/states/1253-Severnaya Zemlya.txt
+history/states/1254-Northern Taymyr.txt
+history/states/1255-New Siberian Islands.txt
+history/states/1256-Wrangel Island.txt
+history/states/1257-North Slope.txt
+history/states/1258-Avannaata North.txt
+history/states/1259-Northeast Greenland.txt
+history/states/1260-Peary Land.txt
+history/states/1261-Greenland Ice Sheet.txt
+history/states/1262-Ellesmere Island.txt
+history/states/1263-Western Queen Elizabeth Islands.txt
+history/states/1264-Banks and Victoria Islands.txt
+history/states/1265-Northern Baffin Island.txt
+history/states/1266-Igloolik.txt
+history/states/1267-Kitikmeot.txt
+history/states/1268-Beaufort Coast.txt
+history/states/1269-South Georgia and the South Sandwich Islands.txt
+history/states/1270-Kerguelen and Crozet Islands.txt
+history/states/1271-Coats Land.txt
+history/states/1272-Antarctic Peninsula.txt
+history/states/1273-O'Higgins Land.txt
+history/states/1274-Marie Byrd Land.txt
+history/states/1275-Ross Dependency.txt
+history/states/1276-Queen Maud Land.txt
+history/states/1277-Enderby and Mac. Robertson Lands.txt
+history/states/1278-Wilkes Land.txt
+history/states/1279-Adélie Land.txt
+history/states/1280-George V and Oates Lands.txt
+history/states/679-Yamalo-Nenets.txt
+history/states/682-Krasnoyarsk.txt
+localisation/english/mdr_arctic_map_l_english.yml
+localisation/spanish/mdr_arctic_map_l_spanish.yml
+map/adjacencies.csv
+map/ambient_object.txt
+map/buildings.txt
+map/cities.bmp
+map/definition.csv
+map/heightmap.bmp
+map/provinces.bmp
+map/rivers.bmp
+map/strategicregions/20-Northern Siberia.txt
+map/strategicregions/223-Central Arctic Ocean.txt
+map/strategicregions/224-Chukchi Sea.txt
+map/strategicregions/225-Beaufort Sea.txt
+map/strategicregions/226-Northwest Passage.txt
+map/strategicregions/227-Northern Baffin Bay.txt
+map/strategicregions/228-Greenland Sea.txt
+map/strategicregions/229-Northern Barents Sea.txt
+map/strategicregions/230-Kara Sea.txt
+map/strategicregions/231-Laptev Sea.txt
+map/strategicregions/232-East Siberian Sea.txt
+map/strategicregions/233-Scotia Sea.txt
+map/strategicregions/234-Weddell Sea.txt
+map/strategicregions/235-Bellingshausen Sea.txt
+map/strategicregions/236-Amundsen Sea.txt
+map/strategicregions/237-Ross Sea.txt
+map/strategicregions/238-Cooperation and Davis Seas.txt
+map/strategicregions/239-South Atlantic Southern Ocean.txt
+map/strategicregions/240-Indian Southern Ocean.txt
+map/strategicregions/241-Pacific Southern Ocean.txt
+map/strategicregions/242-Svalbard.txt
+map/strategicregions/243-Western Russian Arctic.txt
+map/strategicregions/244-Taymyr.txt
+map/strategicregions/245-Eastern Russian Arctic.txt
+map/strategicregions/246-North Slope and Beaufort.txt
+map/strategicregions/247-Western Arctic Archipelago.txt
+map/strategicregions/248-Eastern Arctic Archipelago.txt
+map/strategicregions/249-Northern Greenland.txt
+map/strategicregions/250-Subantarctic Islands.txt
+map/strategicregions/251-West Antarctica.txt
+map/strategicregions/252-East Antarctica.txt
+map/strategicregions/88-Bering Sea.txt
+map/terrain.bmp
+map/terrain/colormap_rgb_cityemissivemask_a.dds
+map/terrain/colormap_water_0.dds
+map/terrain/colormap_water_1.dds
+map/terrain/colormap_water_2.dds
+map/trees.bmp
+map/unitstacks.txt
+map/weatherpositions.txt
+map/world_normal.bmp

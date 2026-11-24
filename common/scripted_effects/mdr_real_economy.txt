@@ -1,0 +1,120 @@
+# Real 2000 economy. Targets come from mdr_real_economy_gen.txt (herramientas/make_real_economy.py).
+# GDP: Millennium Dawn rebuilds gdp_total every week from buildings, so writing it once would not last.
+# Instead each country gets a fixed factor (mdr_gdp_calib) that turns MD's figure into the real 2000 one;
+# MD's own growth (productivity, new buildings) keeps working on top of it.
+# The factor is re-measured on every calculation during the first four weeks (MD's figures settle after the
+# start-up effects), then frozen by mdr_real_economy_lock.
+
+# Game start, after Millennium Dawn's own start-up.
+mdr_real_economy_start = {
+	if = {
+		limit = { NOT = { has_global_flag = mdr_real_economy_done } }
+		set_global_flag = mdr_real_economy_done
+		mdr_real_economy_targets = yes
+		every_country = {
+			limit = { has_variable = mdr_debt_ratio_2000 }
+			# Public debt with the real 2000 debt/GDP ratio, on the real GDP when there is one
+			if = {
+				limit = { has_variable = mdr_gdp_target }
+				set_variable = { debt = { value = mdr_gdp_target multiply = mdr_debt_ratio_2000 divide = 100 } }
+			}
+			else = {
+				set_variable = { debt = { value = gdp_total multiply = mdr_debt_ratio_2000 divide = 100 } }
+			}
+		}
+		every_country = {
+			limit = { has_variable = mdr_gdp_target }
+			calculate_gdp = yes # day-1 GDP already real
+		}
+		mdr_real_economy_reset_graph = yes
+	}
+}
+
+# MD's GDP graph (00_gdp_display_scripted_effects.txt) fills its history with the GDP of its own start-up, before
+# ours: the scale came out at $0 and the current point above the chart. Refill it with the real figure.
+# resize_array only fills new slots, so the arrays are emptied first (the USA started with them full of zeros).
+mdr_real_economy_reset_graph = {
+	every_country = {
+		limit = { is_ai = no }
+		clear_array = gdp_graphx
+		clear_array = gdp_graph
+		clear_array = gdp_array
+		clear_array = gdpc_array
+		clear_array = prod_array
+		graph_initial_setup = yes
+	}
+}
+
+# Called inside calculate_gdp (00_money_system.txt), after MD's productivity multiplier.
+mdr_gdp_calibrate = {
+	if = {
+		limit = {
+			has_variable = mdr_gdp_target
+			NOT = { has_global_flag = mdr_gdp_calib_locked }
+			check_variable = { gdp_total > 0.1 }
+		}
+		set_variable = {
+			mdr_gdp_calib = {
+				value = mdr_gdp_target
+				divide = gdp_total
+				clamp = { min = 0.37 max = 2.71 } # a gap beyond this means MD's own data is off; keep its balance
+			}
+		}
+	}
+	if = {
+		limit = { has_variable = mdr_gdp_calib }
+		multiply_variable = { gdp_total = mdr_gdp_calib }
+	}
+}
+
+# Weekly (mdr_weekly_global): freeze the factors once MD's economy has settled.
+mdr_real_economy_lock = {
+	if = {
+		limit = {
+			NOT = { has_global_flag = mdr_gdp_calib_locked }
+			date > 2000.1.28
+		}
+		set_global_flag = mdr_gdp_calib_locked
+		mdr_real_economy_reset_graph = yes # the factor moved a little during the first weeks
+	}
+}
+
+# Daily, player only. MD's graph never repairs itself: if its history was filled while gdp_total was still 0 (or before
+# the year was known) the axes show 0 for the rest of the game. Rebuild it as soon as the real figures exist.
+mdr_gdp_graph_heal = {
+	if = {
+		limit = {
+			has_game_rule = { rule = disable_gdp_graph option = no }
+			check_variable = { gdp_total > 0.1 }
+			OR = {
+				check_variable = { gdp_array^0 = 0 }
+				check_variable = { date_scale^0 = 0 }
+			}
+		}
+		clear_array = gdp_graphx
+		clear_array = gdp_graph
+		clear_array = gdp_array
+		clear_array = gdpc_array
+		clear_array = prod_array
+		graph_initial_setup = yes
+		if = {
+			limit = { has_country_flag = open_gdp_screen }
+			recalculate_gdp_display = yes
+		}
+	}
+}
+
+# Daily, player only, after mdr_gdp_graph_heal. The history is fine but the scale labels were never filled (MD only fills
+# them when a graph tab is clicked, and an old save can keep the window open with the labels at 0).
+mdr_gdp_scale_heal = {
+	if = {
+		limit = {
+			has_country_flag = open_gdp_screen
+			check_variable = { gdp_array^0 > 0 }
+			check_variable = { gdp_scale^0 = 0 }
+		}
+		if = { limit = { has_country_flag = gdpc_subgraph_opened } recalculate_gdp_c_display = yes }
+		else_if = { limit = { has_country_flag = prod_subgraph_opened } recalculate_prod_display = yes }
+		else = { recalculate_gdp_display = yes }
+	}
+}

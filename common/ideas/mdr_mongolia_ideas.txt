@@ -1,0 +1,411 @@
+# Mongolia focus tree spirits (herramientas/make_mongolia.py). Pictures are Millennium Dawn's.
+ideas = {
+	country = {
+		mdr_mon_dzud = {
+			picture = famine
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				stability_factor = -0.05
+				political_power_gain = -0.11
+				monthly_population = -0.07
+			}
+		}
+		mdr_mon_dzud_mild = {
+			picture = risk_of_famine
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				stability_factor = -0.02
+				political_power_gain = -0.04
+			}
+		}
+		mdr_mon_civil_service = {
+			picture = CZE_reform_of_the_ministries_idea
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				political_power_factor = 0.07
+				stability_factor = 0.02
+			}
+		}
+		mdr_mon_democracy = {
+			picture = KOR_democracy
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				stability_factor = 0.05
+				political_power_factor = -0.03
+				receiving_investment_cost_modifier = -0.07
+			}
+		}
+		mdr_mon_party_state = {
+			picture = national_unity
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				political_power_factor = 0.11
+				stability_factor = -0.02
+			}
+		}
+		mdr_mon_strongman = {
+			picture = goal_generic_military_dictatorship
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				political_power_factor = 0.13
+				stability_factor = -0.03
+				war_support_factor = 0.05
+			}
+		}
+		mdr_mon_strongman_unrest = {
+			picture = parliament_burn
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				stability_factor = -0.11
+			}
+		}
+		mdr_mon_mining_patronage = {
+			picture = mining_smear_campaign
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				political_power_factor = 0.07
+				productivity_growth_modifier = -0.007
+			}
+		}
+		mdr_mon_loyal_army = {
+			picture = CUB_army_modern
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				army_org_factor = 0.05
+				war_support_factor = 0.03
+			}
+		}
+		mdr_mon_leader_referendum = {
+			picture = national_unity
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				stability_factor = 0.13
+			}
+		}
+		mdr_mon_open_mining = {
+			picture = foreign_capital
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				receiving_investment_cost_modifier = -0.17
+				productivity_growth_modifier = 0.007
+			}
+		}
+		mdr_mon_stock_exchange = {
+			picture = foreign_capital
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				productivity_growth_modifier = 0.005
+				receiving_investment_cost_modifier = -0.05
+			}
+		}
+		mdr_mon_resource_nationalism = {
+			picture = BRA_nationalized_industries
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				corporate_tax_income_multiplier_modifier = 0.23
+				receiving_investment_cost_modifier = 0.23
+			}
+		}
+		mdr_mon_erdenes = {
+			picture = bul_nationalized_industry
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				corporate_tax_income_multiplier_modifier = 0.07
+				productivity_growth_modifier = -0.005
+			}
+		}
+		mdr_mon_copper_exports = {
+			picture = economic_motivated_mining
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				tax_gain_multiplier_modifier = 0.07
+			}
+		}
+		mdr_mon_china_dependence = {
+			picture = CHI_japanese_collaboration
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				stability_factor = -0.02
+				tax_gain_multiplier_modifier = 0.03
+			}
+		}
+		mdr_mon_human_development_fund = {
+			picture = ARG_social_welfare_fund_ns
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				stability_factor = 0.11
+				inflation_cost_multiplier_modifier = 0.03
+			}
+		}
+		mdr_mon_imf_program = {
+			picture = imf
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				stability_factor = -0.03
+				interest_rate_multiplier_modifier = -0.23
+			}
+		}
+		mdr_mon_stable_togrog = {
+			picture = well_balanced
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				interest_rate_multiplier_modifier = -0.11
+				inflation_cost_multiplier_modifier = -0.03
+			}
+		}
+		mdr_mon_diversified = {
+			picture = agricultural_investments_idea
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				productivity_growth_modifier = 0.007
+				stability_factor = 0.03
+			}
+		}
+		mdr_mon_tourism = {
+			picture = bsh_tourism_idea
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				tax_gain_multiplier_modifier = 0.03
+				stability_factor = 0.02
+			}
+		}
+		mdr_mon_tourism_statue = {
+			picture = CUB_touristhub
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				tax_gain_multiplier_modifier = 0.02
+			}
+		}
+		mdr_mon_herder_coops = {
+			picture = farmers
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				stability_factor = 0.02
+				political_power_factor = 0.03
+			}
+		}
+		mdr_mon_modern_nomads = {
+			picture = agricultural_reforms
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				stability_factor = 0.05
+				monthly_population = 0.05
+			}
+		}
+		mdr_mon_ger_districts = {
+			picture = PRC_urbanization_idea
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				stability_factor = -0.03
+				monthly_population = 0.03
+			}
+		}
+		mdr_mon_remittances = {
+			picture = kaz_migr
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				tax_gain_multiplier_modifier = 0.02
+			}
+		}
+		mdr_mon_gsp_plus = {
+			picture = European_Commission
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				tax_gain_multiplier_modifier = 0.02
+				stability_factor = 0.01
+			}
+		}
+		mdr_mon_third_neighbor = {
+			picture = west_east_rivalry_balanced
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				stability_factor = 0.05
+				political_power_factor = 0.05
+			}
+		}
+		mdr_mon_beijing_tilt = {
+			picture = CHI_bank_of_china
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				productivity_growth_modifier = 0.007
+				stability_factor = -0.02
+			}
+		}
+		mdr_mon_moscow_tilt = {
+			picture = CHI_russian_collaboration
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				political_power_factor = 0.03
+				army_org_factor = 0.03
+			}
+		}
+		mdr_mon_no_master = {
+			picture = generic_neutrality
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				stability_factor = 0.07
+				political_power_factor = 0.05
+			}
+		}
+		mdr_mon_army_reform = {
+			picture = CUB_army_modern
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				army_org_factor = 0.05
+				experience_gain_army = 0.05
+			}
+		}
+		mdr_mon_peacekeepers = {
+			picture = BOT_army_of_peacekeepers
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				experience_gain_army = 0.11
+			}
+		}
+		mdr_mon_khaan_quest = {
+			picture = NATO_member
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				army_org_factor = 0.07
+			}
+		}
+		mdr_mon_helicopters = {
+			picture = helicopter_cavalry_spirit
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				army_speed_factor = 0.03
+			}
+		}
+		mdr_mon_expeditionary = {
+			picture = ETH_peacekeeping_forces
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				experience_gain_army = 0.15
+				army_defence_factor = 0.05
+			}
+		}
+		mdr_mon_total_defense = {
+			picture = national_mobilization
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				army_defence_factor = 0.11
+				conscription_factor = 0.15
+			}
+		}
+		mdr_mon_steppe_mobility = {
+			picture = helicopter_cavalry_spirit
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				army_speed_factor = 0.05
+			}
+		}
+		mdr_mon_khan_guard = {
+			picture = praetorian_guard_spirit
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+			}
+		}
+		mdr_mon_chinggis = {
+			picture = temujin_heir
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				stability_factor = 0.05
+			}
+		}
+		mdr_mon_800_years = {
+			picture = national_unity
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				stability_factor = 0.11
+			}
+		}
+		mdr_mon_script_transition = {
+			picture = CHI_new_culture_movement
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				research_speed_factor = -0.03
+			}
+		}
+		mdr_mon_nation_of_mongols = {
+			picture = state_religion_buddhism
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				stability_factor = 0.07
+			}
+		}
+		mdr_mon_mongol_world = {
+			picture = bsh_tourism_idea
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				stability_factor = 0.03
+				political_power_factor = 0.05
+				tax_gain_multiplier_modifier = 0.02
+			}
+		}
+		mdr_mon_khanate_law = {
+			picture = mnt_royal_guard_idea
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				conscription_factor = 0.15
+				stability_factor = -0.07
+			}
+		}
+		mdr_mon_pax_mongolica = {
+			picture = generic_neutrality
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				productivity_growth_modifier = 0.007
+				stability_factor = 0.05
+				tax_gain_multiplier_modifier = 0.05
+			}
+		}
+	}
+}

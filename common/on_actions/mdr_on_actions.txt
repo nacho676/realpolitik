@@ -1,0 +1,208 @@
+on_actions = {
+	# on_startup has no scope of its own: scripted effects need a country, so the world-level setup runs inside one.
+	on_startup = {
+		effect = {
+			random_country = {
+				# Guarded so the one-time slot bonus can never be added twice.
+				if = { limit = { NOT = { has_global_flag = mdr_core_init } }
+					mdr_init_constants = yes
+				}
+				if = { limit = { NOT = { has_global_flag = mdr_state_slots_added } }
+					mdr_add_state_slots = yes
+				}
+				mdr_uranium_start = yes
+				mdr_disaster_buildings_start = yes
+				mdr_disaster_zones_start = yes
+				mdr_cropland_start = yes
+				mdr_rare_earths_start = yes
+				mdr_mnc_start = yes
+				if = { limit = { mdr_climate_on = yes } mdr_climate_start = yes }
+				# Marks the historical events dated before the start as done, so a later start date does not fire them all at once.
+				set_temp_variable = { mdr_dis_mute = 1 }
+				mdr_disasters_historical = yes
+				mdr_history_mark_past = yes
+				set_temp_variable = { mdr_dis_mute = 0 }
+			}
+			every_country = {
+				limit = { NOT = { has_country_flag = mdr_country_init } }
+				mdr_country_init = yes
+			}
+			# Real 2000 GDP and public debt (after the start-up buildings, which count in GDP).
+			random_country = { mdr_real_economy_start = yes }
+			# Fill the world markets on day one, so food and uranium show real numbers from the start.
+			random_country = {
+				if = { limit = { mdr_food_on = yes } mdr_food_world_market = yes }
+				mdr_uranium_world_market = yes
+				mdr_rare_earths_world_market = yes
+				mdr_refresh_md_guis = yes
+				mdr_gdp_graph_heal = yes
+				mdr_space_sites_refresh = yes
+			}
+		}
+	}
+
+	# Players only: redraw Millennium Dawn's panels every day, so they never stay on raw text after loading a game.
+	on_daily = {
+		effect = {
+			if = { limit = { is_ai = no }
+				add_to_variable = { global.mdr_diag_days = 1 }
+				if = { limit = { has_game_rule = { rule = mdr_rule_diagnostics option = yes } } mdr_diag_auto_daily = yes }
+				mdr_refresh_md_guis = yes
+				mdr_gdp_graph_heal = yes
+				mdr_gdp_scale_heal = yes
+				if = { limit = { mdr_food_on = yes } mdr_food_daily_player = yes }
+				if = { limit = { mdr_ammo_on = yes } mdr_ammo_daily_player = yes }
+				mdr_buildings_monthly = yes
+				mdr_treaties_gui_daily = yes
+				mdr_alerts_update = yes
+				mdr_pow_slots_update = yes
+				if = { limit = { mdr_ships_on = yes } mdr_sale_daily = yes }
+			}
+		}
+	}
+
+	# Fallback for saves started before the submod was enabled and for tags created later (civil wars, releases).
+	on_weekly = {
+		effect = {
+			if = { limit = { NOT = { has_global_flag = mdr_core_init } }
+				mdr_init_constants = yes
+			}
+			if = { limit = { NOT = { has_global_flag = mdr_state_slots_added } }
+				mdr_add_state_slots = yes
+			}
+			if = { limit = { NOT = { has_global_flag = mdr_uranium_deposits_added } }
+				mdr_uranium_start = yes
+			}
+			if = { limit = { NOT = { has_global_flag = mdr_disaster_buildings_added } }
+				mdr_disaster_buildings_start = yes
+			}
+			if = { limit = { NOT = { has_global_flag = mdr_disaster_zones_added } }
+				mdr_disaster_zones_start = yes
+			}
+			if = { limit = { NOT = { has_global_flag = mdr_cropland_added } }
+				mdr_cropland_start = yes
+			}
+			if = { limit = { NOT = { has_global_flag = mdr_rare_earths_added } }
+				mdr_rare_earths_start = yes
+			}
+			if = { limit = { NOT = { has_global_flag = mdr_mnc_started } }
+				mdr_mnc_start = yes
+			}
+			if = { limit = { mdr_climate_on = yes NOT = { has_global_flag = mdr_climate_started } }
+				mdr_climate_start = yes
+			}
+			if = { limit = { NOT = { has_country_flag = mdr_country_init } }
+				mdr_country_init = yes
+			}
+			mdr_media_realign = yes
+			mdr_civil_laws_weekly = yes
+			mdr_economy_weekly = yes
+			mdr_military_weekly = yes
+			if = { limit = { mdr_food_on = yes } mdr_food_weekly = yes }
+			if = { limit = { mdr_ammo_on = yes } mdr_ammo_weekly = yes }
+			mdr_uranium_weekly = yes
+			mdr_rare_earths_weekly = yes
+			mdr_buildings_weekly = yes
+			mdr_pandemic_relief_weekly = yes
+			mdr_buildings_monthly = yes
+			if = { limit = { mdr_climate_on = yes } mdr_climate_weekly = yes }
+			mdr_war_exhaustion_weekly = yes
+			mdr_radiation_country_weekly = yes
+			mdr_capitulation_update = yes
+			mdr_desertion_weekly = yes
+			mdr_pow_weekly = yes
+			if = { limit = { mdr_ships_on = yes } mdr_sale_weekly_ai = yes }
+			mdr_space_weekly = yes
+
+			# World-level checks, once per week for the whole game.
+			if = { limit = { NOT = { has_global_flag = mdr_weekly_global } }
+				set_global_flag = { flag = mdr_weekly_global days = 6 value = 1 }
+				add_to_variable = { global.mdr_diag_weeks = 1 }
+				mdr_weekly_global = yes
+			}
+		}
+	}
+
+	# ROOT is the new controller, FROM the old one, FROM.FROM the state. Only the owner's territory share changes, so
+	# a paradrop on a capital is counted the same day instead of at the next weekly check.
+	on_state_control_changed = {
+		effect = {
+			FROM.FROM = {
+				owner = { mdr_capitulation_update = yes }
+			}
+			# A capital or a big state falling can bring in one of the enemy's best generals.
+			if = {
+				limit = {
+					has_war_with = FROM
+					FROM.FROM = {
+						is_owned_by = FROM
+						OR = {
+							is_capital = yes
+							check_variable = { state_population_k > 1200 }
+						}
+					}
+				}
+				random = {
+					chance = 25
+					FROM = { mdr_pow_take_territory = yes }
+				}
+			}
+		}
+	}
+
+	# ROOT annexes FROM, which still has its generals when this fires.
+	on_annex = {
+		effect = {
+			FROM = { mdr_pow_take_annexation = yes }
+		}
+	}
+
+	# ROOT capitulated to FROM.
+	on_capitulation = {
+		effect = {
+			set_country_flag = { flag = mdr_pow_lost_war days = 60 value = 1 }
+			FROM = { country_event = { id = mdr_prisoners.2 } }
+		}
+	}
+
+	# ROOT is the general, FROM the country that beat his division. Millennium Dawn's 00_on_actions.txt replaces the base game's, which
+	# captured him here, so captured generals only exist with this.
+	on_deployed_leader_defeated = {
+		effect = {
+			mdr_pow_take_in_battle = yes
+		}
+	}
+
+	# ROOT launches, FROM is the state hit.
+	on_nuke_drop = {
+		effect = {
+			mdr_nuclear_strike = yes
+		}
+	}
+
+	on_monthly = {
+		effect = {
+			mdr_disasters_monthly = yes
+			mdr_treaties_monthly = yes
+			mdr_reserves_monthly = yes
+			mdr_oil_dependency_monthly = yes
+			mdr_wounded_monthly = yes
+			if = { limit = { original_tag = MON } mdr_mon_monthly = yes }
+			if = { limit = { mdr_ships_on = yes } mdr_sale_monthly = yes }
+			if = { limit = { mdr_diag_on = yes } mdr_ai_log_monthly = yes }
+			mdr_ai_track_states = yes
+			if = { limit = { is_ai = yes } mdr_ai_monthly = yes }
+
+			# Natural disasters roll by region, once a month for the whole world.
+			if = { limit = { NOT = { has_global_flag = mdr_monthly_global } }
+				set_global_flag = { flag = mdr_monthly_global days = 25 value = 1 }
+				add_to_variable = { global.mdr_diag_months = 1 }
+				mdr_disasters_world_monthly = yes
+				mdr_radiation_world_monthly = yes
+				mdr_mnc_world_monthly = yes
+				if = { limit = { mdr_climate_on = yes } mdr_climate_world_monthly = yes }
+				if = { limit = { mdr_ai_expert = yes } mdr_ai_world_monthly = yes }
+			}
+		}
+	}
+}

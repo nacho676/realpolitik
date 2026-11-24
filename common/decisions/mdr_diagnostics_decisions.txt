@@ -1,0 +1,233 @@
+mdr_diagnostics_category = {
+	mdr_diag_show_status = {
+		icon = generic_research
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: MDR status: version [?global.mdr_version], media init [?global.mdr_media_init], media level [?mdr_media_level]"
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# The game has no console command to change the date, so these start the timed systems now.
+	mdr_diag_start_covid = {
+		icon = generic_decision
+		fire_only_once = no
+
+		available = {
+			NOT = { has_global_flag = COVID_start_of_pandemic }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: MDR diagnostics started the historical COVID"
+			mdr_covid_launch = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	mdr_diag_start_vaccines = {
+		icon = generic_decision
+		fire_only_once = no
+
+		available = {
+			has_global_flag = COVID_start_of_pandemic
+			NOT = { has_global_flag = mdr_covid_vaccines_started }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: MDR diagnostics started the vaccination campaigns"
+			mdr_covid_vaccines = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	mdr_diag_disaster = {
+		icon = generic_decision
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: MDR diagnostics forced a disaster"
+			# The rolls are random, so the tooltip would only show one possible outcome: describe it instead.
+			custom_effect_tooltip = mdr_diag_disaster_tt
+			hidden_effect = {
+				clr_country_flag = mdr_disaster_cooldown
+				# Type 0: picked from the struck state's region and season, like a real random disaster.
+				set_temp_variable = { mdr_dis_type = 0 }
+				mdr_disaster_random_strike = yes
+			}
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	mdr_diag_rerun_country_init = {
+		icon = generic_decision
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: MDR diagnostics re-ran country init"
+			mdr_init_constants = yes
+			mdr_country_init = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# The whole self check: one line per check in game.log, and a summary event.
+	mdr_diag_full = {
+		icon = generic_decision
+		fire_only_once = no
+
+		complete_effect = {
+			hidden_effect = { mdr_diag_run = yes }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# Means to test without waiting.
+	mdr_diag_give_resources = {
+		icon = generic_decision
+		fire_only_once = no
+
+		complete_effect = {
+			add_political_power = 500
+			set_temp_variable = { treasury_change = 10 }
+			modify_treasury_effect = yes
+			log = "[GetDateText]: [Root.GetName]: MDR diagnostics gave political power and money"
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	mdr_diag_ammo_empty = {
+		icon = generic_decision
+		fire_only_once = no
+
+		visible = { mdr_ammo_on = yes }
+
+		complete_effect = {
+			set_variable = { mdr_ammo_k = 0 }
+			mdr_ammo_update_display = yes
+			log = "[GetDateText]: [Root.GetName]: MDR diagnostics emptied the ammunition"
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	mdr_diag_food_empty = {
+		icon = generic_decision
+		fire_only_once = no
+
+		visible = { mdr_food_on = yes }
+
+		complete_effect = {
+			set_variable = { mdr_food_stock = 0 }
+			log = "[GetDateText]: [Root.GetName]: MDR diagnostics emptied the food stockpile"
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	mdr_diag_strait_close = {
+		icon = generic_decision
+		fire_only_once = no
+
+		visible = {
+			mdr_straits_on = yes
+			NOT = { has_global_flag = mdr_strait_2_closed }
+		}
+
+		complete_effect = {
+			set_temp_variable = { mdr_strait_id = 2 }
+			mdr_strait_close = yes
+			log = "[GetDateText]: [Root.GetName]: MDR diagnostics closed Suez"
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	mdr_diag_strait_reopen = {
+		icon = generic_decision
+		fire_only_once = no
+
+		visible = { has_global_flag = mdr_strait_2_closed }
+
+		complete_effect = {
+			set_temp_variable = { mdr_strait_id = 2 }
+			mdr_strait_reopen = yes
+			log = "[GetDateText]: [Root.GetName]: MDR diagnostics reopened Suez"
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	mdr_diag_oil_shock = {
+		icon = generic_decision
+		fire_only_once = no
+
+		complete_effect = {
+			set_temp_variable = { mdr_shock_res = 1 }
+			set_temp_variable = { mdr_shock_target = 1.6 }
+			set_temp_variable = { mdr_shock_weeks = 8 }
+			set_temp_variable = { mdr_shock_cause = 0 }
+			mdr_shock_start = yes
+			log = "[GetDateText]: [Root.GetName]: MDR diagnostics started an oil shock"
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# Takes one of a neighbour's best generals, as if a state of weight had just fallen.
+	mdr_diag_capture = {
+		icon = generic_decision
+		fire_only_once = no
+
+		target_array = global.countries
+		target_trigger = {
+			FROM = {
+				exists = yes
+				NOT = { tag = ROOT }
+				is_neighbor_of = ROOT
+			}
+		}
+
+		complete_effect = {
+			FROM = {
+				set_temp_variable = { mdr_pow_max = mdr_pow_lost }
+				add_to_temp_variable = { mdr_pow_max = 1 }
+				mdr_pow_take = yes
+			}
+			log = "[GetDateText]: [Root.GetName]: MDR diagnostics captured a general of [From.GetName]"
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# A neighbour asks to buy a ship, without waiting for the AI's rare offer.
+	mdr_diag_ship_offer = {
+		icon = generic_decision
+		fire_only_once = no
+
+		visible = { mdr_ships_on = yes }
+
+		target_array = global.countries
+		target_trigger = {
+			FROM = {
+				exists = yes
+				NOT = { tag = ROOT }
+				is_neighbor_of = ROOT
+			}
+		}
+
+		complete_effect = {
+			FROM = { country_event = { id = mdr_diag.2 } }
+			log = "[GetDateText]: [Root.GetName]: MDR diagnostics made [From.GetName] ask for a ship"
+		}
+
+		ai_will_do = { base = 0 }
+	}
+}

@@ -1,0 +1,61 @@
+ideas = {
+	country = {
+		# Industrial subsidies (CHIPS Act style): the treasury pays to attract strategic industry.
+		mdr_industrial_subsidies = {
+			allowed_civil_war = { always = yes }
+			picture = foreign_capital
+
+			modifier = {
+				receiving_investment_cost_modifier = -0.20
+				production_speed_microchip_plant_factor = 0.25
+				production_speed_composite_plant_factor = 0.25
+				production_speed_industrial_complex_factor = 0.05
+			}
+		}
+
+		# Ammunition shortages, by weeks of combat use left in the stockpile.
+		mdr_ammo_shortage_1 = {
+			allowed_civil_war = { always = yes }
+			picture = SWE_severe_lack_of_ammunition
+
+			modifier = {
+				army_attack_factor = -0.05
+				army_defence_factor = -0.03
+			}
+		}
+
+		mdr_ammo_shortage_2 = {
+			allowed_civil_war = { always = yes }
+			picture = SWE_severe_lack_of_ammunition
+
+			modifier = {
+				army_attack_factor = -0.15
+				army_defence_factor = -0.10
+			}
+		}
+
+		mdr_ammo_shortage_3 = {
+			allowed_civil_war = { always = yes }
+			picture = SWE_severe_lack_of_ammunition
+
+			modifier = {
+				army_attack_factor = -0.30
+				army_defence_factor = -0.20
+			}
+		}
+
+		# Ammunition decisions: the military industry works for the depots for 60 days.
+		mdr_ammo_focus_idea = {
+			allowed_civil_war = { always = yes }
+			picture = mdr_ammo_focus
+
+			modifier = {
+				production_speed_buildings_factor = -0.10
+				production_factory_max_efficiency_factor = -0.15
+				production_factory_efficiency_gain_factor = -0.15
+				industrial_capacity_factory = -0.10
+				mdr_ammo_gain_factor = 2
+			}
+		}
+	}
+}

@@ -1,0 +1,6 @@
+﻿l_english:
+ MDR_AUTOIMPORT_TITLE: "AUTOMATIC IMPORTS"
+ MDR_AUTOIMPORT_ON: "Automatic imports"
+ MDR_AUTOIMPORT_BUDGET: "Factories:"
+ MDR_AUTOIMPORT_PRIORITIES: "Priorities"
+ MDR_AUTOIMPORT_HELP: "Imports only what is missing, within the civilian factories set here. Priorities: order of the resources, the shortage each one may keep, and fuel reserve."

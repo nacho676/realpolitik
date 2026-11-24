@@ -1,0 +1,104 @@
+# Radiation after nuclear strikes. Each strike kills part of the state's people and raises two levels from 0 to 100:
+# the state's (mdr_rad, fades about 6% a month) and the world's (global.mdr_rad_world, fades 2% a month, about three years
+# to halve). A hot state loses output and, while the world level is also high, keeps losing people. The world level weighs
+# on every country. Deaths are counted in thousands (global.mdr_nuke_deaths_k): whole people would overflow.
+
+# State scope (the state hit), from mdr_nuclear_strike.
+mdr_radiation_strike = {
+	# 7.3% of the people die at once. Population is capped first so the count stays under the variable limit (~1.1 million).
+	set_temp_variable = { mdr_rad_pop_k = state_population_k }
+	clamp_temp_variable = { var = mdr_rad_pop_k min = 0 max = 15068 }
+	set_temp_variable = { mdr_rad_dead = mdr_rad_pop_k }
+	multiply_temp_variable = { mdr_rad_dead = 73 }
+	set_temp_variable = { mdr_rad_loss = mdr_rad_dead }
+	multiply_temp_variable = { mdr_rad_loss = -1 }
+	add_manpower = mdr_rad_loss
+	set_temp_variable = { mdr_rad_dead_k = mdr_rad_dead }
+	divide_temp_variable = { mdr_rad_dead_k = 1000 }
+	set_variable = { global.mdr_nuke_last_deaths_k = mdr_rad_dead_k }
+	add_to_variable = { global.mdr_nuke_deaths_k = mdr_rad_dead_k }
+
+	if = { limit = { NOT = { has_variable = mdr_rad } } set_variable = { mdr_rad = 0 } }
+	add_to_variable = { mdr_rad = 37 }
+	clamp_variable = { var = mdr_rad min = 0 max = 100 }
+	if = { limit = { NOT = { is_in_array = { global.mdr_rad_states = THIS } } }
+		add_to_array = { global.mdr_rad_states = THIS }
+	}
+	mdr_radiation_state_update = yes
+
+	add_to_variable = { global.mdr_rad_world = 4.3 }
+	clamp_variable = { var = global.mdr_rad_world min = 0 max = 100 }
+}
+
+# State scope: penalties per point of radiation (at 100: resources -47%, construction -31%).
+mdr_radiation_state_update = {
+	set_variable = { mdr_rad_resources = mdr_rad }
+	multiply_variable = { mdr_rad_resources = -0.47 }
+	divide_variable = { mdr_rad_resources = 100 }
+	set_variable = { mdr_rad_build = mdr_rad }
+	multiply_variable = { mdr_rad_build = -0.31 }
+	divide_variable = { mdr_rad_build = 100 }
+	if = { limit = { check_variable = { mdr_rad > 0 } NOT = { has_dynamic_modifier = { modifier = mdr_radiation_state } } }
+		add_dynamic_modifier = { modifier = mdr_radiation_state }
+	}
+}
+
+# Once a month for the world (mdr_on_actions.txt).
+mdr_radiation_world_monthly = {
+	if = { limit = { check_variable = { global.mdr_rad_states^num > 0 } }
+		for_each_scope_loop = {
+			array = global.mdr_rad_states
+			multiply_variable = { mdr_rad = 0.94 }
+			# A hot state in a contaminated world keeps losing people: up to 0.3% a month (3 per thousand).
+			if = { limit = { check_variable = { mdr_rad > 50 } check_variable = { global.mdr_rad_world > 30 } }
+				set_temp_variable = { mdr_rad_pop_k = state_population_k }
+				clamp_temp_variable = { var = mdr_rad_pop_k min = 0 max = 15068 }
+				set_temp_variable = { mdr_rad_loss = mdr_rad }
+				subtract_from_temp_variable = { mdr_rad_loss = 50 }
+				# Divided before multiplying here: the product would pass the variable limit.
+				divide_temp_variable = { mdr_rad_loss = 50 }
+				multiply_temp_variable = { mdr_rad_loss = mdr_rad_pop_k }
+				multiply_temp_variable = { mdr_rad_loss = -3 }
+				add_manpower = mdr_rad_loss
+				set_temp_variable = { mdr_rad_dead_k = mdr_rad_loss }
+				divide_temp_variable = { mdr_rad_dead_k = -1000 }
+				add_to_variable = { global.mdr_nuke_deaths_k = mdr_rad_dead_k }
+			}
+			if = { limit = { check_variable = { mdr_rad < 1 } }
+				set_variable = { mdr_rad = 0 }
+				remove_dynamic_modifier = { modifier = mdr_radiation_state }
+				remove_from_array = { global.mdr_rad_states = THIS }
+			}
+			else = { mdr_radiation_state_update = yes }
+		}
+	}
+	if = { limit = { check_variable = { global.mdr_rad_world > 0 } }
+		multiply_variable = { global.mdr_rad_world = 0.98 }
+		if = { limit = { check_variable = { global.mdr_rad_world < 0.5 } } set_variable = { global.mdr_rad_world = 0 } }
+	}
+}
+
+# Country scope, weekly. From 10 the world level weighs on everyone (at 100: population growth -29%, factory output -11%,
+# attrition +13%, stability -7%).
+mdr_radiation_country_weekly = {
+	if = { limit = { check_variable = { global.mdr_rad_world > 9.99 } }
+		set_variable = { mdr_radw_pop = global.mdr_rad_world }
+		multiply_variable = { mdr_radw_pop = -0.29 }
+		divide_variable = { mdr_radw_pop = 100 }
+		set_variable = { mdr_radw_factory = global.mdr_rad_world }
+		multiply_variable = { mdr_radw_factory = -0.11 }
+		divide_variable = { mdr_radw_factory = 100 }
+		set_variable = { mdr_radw_attrition = global.mdr_rad_world }
+		multiply_variable = { mdr_radw_attrition = 0.13 }
+		divide_variable = { mdr_radw_attrition = 100 }
+		set_variable = { mdr_radw_stability = global.mdr_rad_world }
+		multiply_variable = { mdr_radw_stability = -0.07 }
+		divide_variable = { mdr_radw_stability = 100 }
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = mdr_radiation_world } } }
+			add_dynamic_modifier = { modifier = mdr_radiation_world }
+		}
+	}
+	else_if = { limit = { has_dynamic_modifier = { modifier = mdr_radiation_world } }
+		remove_dynamic_modifier = { modifier = mdr_radiation_world }
+	}
+}

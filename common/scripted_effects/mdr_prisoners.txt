@@ -1,0 +1,155 @@
+# Captured generals: real enemy generals, taken as territory falls and at the end of a war. Menu: common/scripted_guis/mdr_prisoners_gui.txt.
+# A captured general leaves his country's list, so he can only be reached through the global event target of his slot (mdr_pow_<n>);
+# an annexed country's generals stay in its dead list, where nobody uses them. Slots and their actions: mdr_prisoners_slots.txt (generated).
+# AI captors keep no slots: at the end of the war they recruit the best and send the rest home (mdr_pow_ai_weekly).
+
+# Origin scope. Output: temp mdr_pow_table, how many generals a whole defeat can cost. Fixed at the first capture of the war.
+mdr_pow_table = {
+	if = { limit = { check_variable = { mdr_pow_lost = 0 } }
+		set_temp_variable = { mdr_pow_n = 0 }
+		every_army_leader = { add_to_temp_variable = { mdr_pow_n = 1 } }
+		set_variable = { mdr_pow_table_size = 1 }
+		if = { limit = { check_variable = { mdr_pow_n > 10 } } set_variable = { mdr_pow_table_size = 2 } }
+		if = { limit = { check_variable = { mdr_pow_n > 25 } } set_variable = { mdr_pow_table_size = 3 } }
+		if = { limit = { check_variable = { mdr_pow_n > 50 } } set_variable = { mdr_pow_table_size = 4 } }
+		if = { limit = { check_variable = { mdr_pow_n > 80 } } set_variable = { mdr_pow_table_size = 5 } }
+	}
+	set_temp_variable = { mdr_pow_table = mdr_pow_table_size }
+}
+
+# Origin scope, ROOT the captor. Input: temp mdr_pow_max, the most this country can have lost by now.
+mdr_pow_take = {
+	set_temp_variable = { mdr_pow_origin = THIS.id }
+	set_variable = { global.mdr_pow_holder_now = ROOT.id }
+	set_temp_variable = { mdr_pow_opp = 1 }
+	if = { limit = { ROOT = { has_government = PREV } } set_temp_variable = { mdr_pow_opp = 0 } }
+	set_temp_variable = { mdr_pow_taken = 0 }
+	set_temp_variable = { mdr_pow_go = 1 }
+	while_loop_effect = {
+		limit = { check_variable = { mdr_pow_go = 1 } check_variable = { mdr_pow_lost < mdr_pow_max } }
+		set_temp_variable = { mdr_pow_found = 0 }
+		if = { limit = { check_variable = { mdr_pow_found = 0 } } random_army_leader = { limit = { NOT = { has_unit_leader_flag = mdr_pow } is_field_marshal = yes skill > 3 } mdr_pow_seize = yes } }
+		if = { limit = { check_variable = { mdr_pow_found = 0 } } random_army_leader = { limit = { NOT = { has_unit_leader_flag = mdr_pow } skill > 4 } mdr_pow_seize = yes } }
+		if = { limit = { check_variable = { mdr_pow_found = 0 } } random_army_leader = { limit = { NOT = { has_unit_leader_flag = mdr_pow } skill > 3 } mdr_pow_seize = yes } }
+		if = { limit = { check_variable = { mdr_pow_found = 0 } } random_army_leader = { limit = { NOT = { has_unit_leader_flag = mdr_pow } skill > 2 } mdr_pow_seize = yes } }
+		if = { limit = { check_variable = { mdr_pow_found = 0 } } random_army_leader = { limit = { NOT = { has_unit_leader_flag = mdr_pow } skill > 1 } mdr_pow_seize = yes } }
+		if = { limit = { check_variable = { mdr_pow_found = 0 } } random_army_leader = { limit = { NOT = { has_unit_leader_flag = mdr_pow } } mdr_pow_seize = yes } }
+		if = { limit = { check_variable = { mdr_pow_found = 1 } } add_to_variable = { mdr_pow_lost = 1 } add_to_temp_variable = { mdr_pow_taken = 1 } }
+		else = { set_temp_variable = { mdr_pow_go = 0 } }
+	}
+	# One notice for the whole batch.
+	if = { limit = { check_variable = { mdr_pow_taken > 0 } ROOT = { is_ai = no } }
+		set_variable = { global.mdr_pow_news_n = mdr_pow_taken }
+		set_variable = { global.mdr_pow_news_from = THIS.id }
+		ROOT = { country_event = { id = mdr_prisoners.4 } }
+	}
+}
+
+# General scope, ROOT the captor.
+mdr_pow_seize = {
+	set_temp_variable = { mdr_pow_found = 1 }
+	set_unit_leader_flag = mdr_pow
+	capture_by = ROOT
+	if = { limit = { ROOT = { is_ai = no } } mdr_pow_register = yes }
+	else = { ROOT = { add_to_variable = { mdr_pow_ai_held = 1 } } }
+}
+
+# A state of weight falls (on_state_control_changed): half the table during the war, rounded up. Origin scope, ROOT the new controller.
+mdr_pow_take_territory = {
+	mdr_pow_table = yes
+	set_temp_variable = { mdr_pow_max = mdr_pow_table }
+	add_to_temp_variable = { mdr_pow_max = 1 }
+	divide_temp_variable = { mdr_pow_max = 2 }
+	round_temp_variable = mdr_pow_max
+	mdr_pow_take = yes
+}
+
+# Origin scope, ROOT the winner: it capitulated. Three quarters of the table.
+mdr_pow_take_capitulation = {
+	mdr_pow_table = yes
+	set_temp_variable = { mdr_pow_max = mdr_pow_table }
+	multiply_temp_variable = { mdr_pow_max = 0.75 }
+	round_temp_variable = mdr_pow_max
+	mdr_pow_take = yes
+}
+
+# Origin scope, ROOT the annexer: the whole table. An AI annexer keeps no prisoners, it recruits the best.
+mdr_pow_take_annexation = {
+	mdr_pow_mark_annexed = yes
+	if = { limit = { ROOT = { is_ai = no } }
+		mdr_pow_table = yes
+		set_temp_variable = { mdr_pow_max = mdr_pow_table }
+		mdr_pow_take = yes
+		mdr_pow_mark_annexed = yes
+	}
+	else = {
+		random_army_leader = {
+			limit = { NOT = { has_unit_leader_flag = mdr_pow } skill > 3 }
+			set_nationality = ROOT
+			add_timed_unit_leader_trait = { trait = mdr_doubtful_loyalty days = 180 }
+		}
+	}
+}
+
+# General scope, ROOT the general and FROM the winner: his division was beaten (on_deployed_leader_defeated).
+mdr_pow_take_in_battle = {
+	if = { limit = { can_be_captured = yes }
+		capture_by = FROM
+		set_unit_leader_flag = mdr_pow
+		set_variable = { global.mdr_pow_holder_now = FROM.id }
+		set_temp_variable = { mdr_pow_origin = 0 }
+		set_temp_variable = { mdr_pow_opp = 1 }
+		FROM = {
+			random_enemy_country = {
+				limit = { has_any_general_captured_by = PREV }
+				set_temp_variable = { mdr_pow_origin = THIS.id }
+				add_to_variable = { mdr_pow_lost = 1 }
+				if = { limit = { has_government = PREV } set_temp_variable = { mdr_pow_opp = 0 } }
+			}
+		}
+		if = { limit = { FROM = { is_ai = no } } mdr_pow_register = yes }
+		else = { FROM = { add_to_variable = { mdr_pow_ai_held = 1 } } }
+	}
+}
+
+# Country scope, weekly. A country at peace starts its next war with a clean count.
+mdr_pow_weekly = {
+	if = { limit = { has_war = no check_variable = { mdr_pow_lost > 0 } } set_variable = { mdr_pow_lost = 0 } }
+	if = { limit = { is_ai = yes check_variable = { mdr_pow_ai_held > 0 } } mdr_pow_ai_weekly = yes }
+}
+
+# Country scope, AI captor. The war with each country holding a prisoner of ours is over: if that country capitulated, the best
+# general joins us and, in a dictatorship, sometimes one is shot. Everyone else goes home.
+mdr_pow_ai_weekly = {
+	every_country = {
+		limit = { has_any_general_captured_by = ROOT NOT = { has_war_with = ROOT } }
+		release_captured_generals_from = ROOT
+		if = { limit = { has_country_flag = mdr_pow_lost_war }
+			random_army_leader = {
+				limit = { has_unit_leader_flag = mdr_pow skill > 3 }
+				clr_unit_leader_flag = mdr_pow
+				save_global_event_target_as = mdr_pow_news
+				set_nationality = ROOT
+				add_timed_unit_leader_trait = { trait = mdr_doubtful_loyalty days = 180 }
+				if = { limit = { PREV = { is_ai = no } } PREV = { country_event = { id = mdr_prisoners.3 } } }
+			}
+			if = { limit = { ROOT = { has_elections = no } }
+				random = {
+					chance = 15
+					random_army_leader = {
+						limit = { has_unit_leader_flag = mdr_pow }
+						retire = yes
+					}
+				}
+			}
+		}
+		every_army_leader = {
+			limit = { has_unit_leader_flag = mdr_pow }
+			clr_unit_leader_flag = mdr_pow
+		}
+		ROOT = {
+			add_to_variable = { mdr_pow_ai_held = -1 }
+			clamp_variable = { var = mdr_pow_ai_held min = 0 }
+		}
+	}
+}

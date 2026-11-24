@@ -1,0 +1,6 @@
+# Science campus (common/buildings/mdr_buildings.txt). No project belongs to it: it only places the campus among the
+# special project facilities in the construction screen. Its bonus to the facility of its state is in mdr_buildings_weekly.
+specialization_mdr_campus = {
+	color = { 120 140 200 }
+	program_background = "GFX_sp_facility_card_bg"
+}

@@ -1,0 +1,99 @@
+# Capitulation by territory and morale. Called weekly for every country and when one of its states changes controller.
+# T: share of the population and industry of its own cores (all its states if it has none) that it still controls.
+# B: break point set by war support and stability. The surrender limit (base 0.8 in MD defines) follows straight lines:
+# T >= 0.85 cannot surrender, 0.85 to B goes from 1.0 to 0.8, B to 0.30 goes from 0.8 to 0.3, below 0.30 always surrenders.
+mdr_capitulation_update = {
+	if = { limit = { has_war = no }
+		if = { limit = { has_dynamic_modifier = { modifier = mdr_national_resistance } }
+			remove_dynamic_modifier = { modifier = mdr_national_resistance }
+		}
+	}
+	else = {
+		set_temp_variable = { mdr_cap_pop_all = 0 }
+		set_temp_variable = { mdr_cap_pop_held = 0 }
+		set_temp_variable = { mdr_cap_ind_all = 0 }
+		set_temp_variable = { mdr_cap_ind_held = 0 }
+		if = { limit = { any_owned_state = { is_core_of = PREV } }
+			every_owned_state = {
+				limit = { is_core_of = PREV }
+				mdr_capitulation_count_state = yes
+			}
+		}
+		else = {
+			every_owned_state = { mdr_capitulation_count_state = yes }
+		}
+
+		set_variable = { mdr_cap_t = 1 }
+		if = { limit = { check_variable = { mdr_cap_pop_all > 0 } }
+			set_variable = { mdr_cap_t = mdr_cap_pop_held }
+			divide_variable = { mdr_cap_t = mdr_cap_pop_all }
+		}
+		# A country without factories is measured by its population alone.
+		if = { limit = { check_variable = { mdr_cap_ind_all > 0 } }
+			set_temp_variable = { mdr_cap_ind_share = mdr_cap_ind_held }
+			divide_temp_variable = { mdr_cap_ind_share = mdr_cap_ind_all }
+			add_to_variable = { mdr_cap_t = mdr_cap_ind_share }
+			divide_variable = { mdr_cap_t = 2 }
+		}
+
+		if = { limit = { has_stability < 0.3 } set_variable = { mdr_cap_b = 0.6 } }
+		else_if = { limit = { has_war_support > 0.9 has_stability > 0.8 } set_variable = { mdr_cap_b = 0.35 } }
+		else_if = { limit = { has_war_support > 0.7 } set_variable = { mdr_cap_b = 0.4 } }
+		else = { set_variable = { mdr_cap_b = 0.5 } }
+
+		set_variable = { mdr_cap_offset = 0 }
+		set_variable = { mdr_cap_forced = 0 }
+		if = { limit = { check_variable = { mdr_cap_t > 0.849 } }
+			set_variable = { mdr_cap_limit = 1 }
+			set_variable = { mdr_cap_offset = 1 }
+		}
+		else_if = { limit = { check_variable = { mdr_cap_t > 0.299 } }
+			# limit = (T - B) * k / span: k 0.2 over 0.85 to B, k 0.5 over B to 0.30.
+			set_variable = { mdr_cap_limit = mdr_cap_t }
+			subtract_from_variable = { mdr_cap_limit = mdr_cap_b }
+			if = { limit = { check_variable = { mdr_cap_limit > 0 } }
+				set_temp_variable = { mdr_cap_span = 0.85 }
+				subtract_from_temp_variable = { mdr_cap_span = mdr_cap_b }
+				multiply_variable = { mdr_cap_limit = 0.2 }
+			}
+			else = {
+				set_temp_variable = { mdr_cap_span = mdr_cap_b }
+				subtract_from_temp_variable = { mdr_cap_span = 0.3 }
+				multiply_variable = { mdr_cap_limit = 0.5 }
+			}
+			divide_variable = { mdr_cap_limit = mdr_cap_span }
+		}
+		else = {
+			set_variable = { mdr_cap_limit = -0.5 }
+			set_variable = { mdr_cap_forced = -1 }
+		}
+
+		# Tooltip numbers, in percent. The limit shown is ours alone, without other surrender modifiers.
+		set_variable = { mdr_cap_t_pct = mdr_cap_t }
+		multiply_variable = { mdr_cap_t_pct = 100 }
+		set_variable = { mdr_cap_b_pct = mdr_cap_b }
+		multiply_variable = { mdr_cap_b_pct = 100 }
+		set_variable = { mdr_cap_l_pct = mdr_cap_limit }
+		add_to_variable = { mdr_cap_l_pct = 0.8 }
+		clamp_variable = { var = mdr_cap_l_pct min = 0 max = 1 }
+		if = { limit = { check_variable = { mdr_cap_forced < 0 } } set_variable = { mdr_cap_l_pct = 0 } }
+		multiply_variable = { mdr_cap_l_pct = 100 }
+
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = mdr_national_resistance } } }
+			add_dynamic_modifier = { modifier = mdr_national_resistance }
+		}
+		force_update_dynamic_modifier = yes
+	}
+}
+
+# State scope, PREV is the country.
+mdr_capitulation_count_state = {
+	set_temp_variable = { mdr_cap_ind = building_level@industrial_complex }
+	add_to_temp_variable = { mdr_cap_ind = building_level@arms_factory }
+	add_to_temp_variable = { mdr_cap_pop_all = state_population_k }
+	add_to_temp_variable = { mdr_cap_ind_all = mdr_cap_ind }
+	if = { limit = { is_controlled_by = PREV }
+		add_to_temp_variable = { mdr_cap_pop_held = state_population_k }
+		add_to_temp_variable = { mdr_cap_ind_held = mdr_cap_ind }
+	}
+}

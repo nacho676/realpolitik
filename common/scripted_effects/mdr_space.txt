@@ -1,0 +1,351 @@
+# National space programme. mdr_space_tier: 0 no agency, 1 agency without a launcher, 2 own launcher, 3 space power.
+# mdr_space_budget: hundredths of a percent of GDP a year (0 to 500). Technologies: common/technologies/mdr_space.txt (generated).
+# Tab in Millennium Dawn's Space Programme: common/scripted_guis/mdr_space_gui.txt, interface/mdr_space.gui.
+
+# Country init: who had what in 2000.
+mdr_space_start = {
+	set_variable = { mdr_space_tier = 0 }
+	set_variable = { mdr_space_budget = 0 }
+	set_variable = { mdr_space_science = 0 }
+	mdr_space_load_default_name = yes
+	if = { limit = { OR = { original_tag = USA original_tag = SOV } }
+		set_variable = { mdr_space_tier = 3 }
+		set_technology = { mdr_sp_foundations = 1 mdr_sp_launcher = 1 mdr_sp_heavy = 1 mdr_sp_crewed = 1 mdr_sp_station = 1 mdr_sp_tracking = 1 mdr_sp_debris = 1 mdr_sp_microgravity = 1 mdr_sp_navigation = 1 mdr_sp_gravityassist = 1 mdr_sp_translunar = 1 mdr_sp_deepnet = 1 popup = no }	}
+	else_if = { limit = { OR = { original_tag = CHI original_tag = JAP original_tag = RAJ original_tag = FRA original_tag = UKR original_tag = ISR } }
+		set_variable = { mdr_space_tier = 2 }
+		set_technology = { mdr_sp_foundations = 1 mdr_sp_launcher = 1 mdr_sp_tracking = 1 mdr_sp_navigation = 1 popup = no }
+		# Long March, H-II, Ariane and Zenit were already heavy launchers; PSLV and Shavit were not.
+		if = { limit = { OR = { original_tag = CHI original_tag = JAP original_tag = FRA original_tag = UKR } }
+			set_technology = { mdr_sp_heavy = 1 popup = no }
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				original_tag = CAN original_tag = GER original_tag = ITA original_tag = ENG original_tag = BRA original_tag = ARG
+				original_tag = KOR original_tag = PAK original_tag = IND original_tag = SPR original_tag = HOL original_tag = BEL
+				original_tag = SWE original_tag = SWI original_tag = NRY original_tag = DEN original_tag = AUS original_tag = FIN
+				original_tag = IRE original_tag = POR
+			}
+		}
+		set_variable = { mdr_space_tier = 1 }
+		set_technology = { mdr_sp_foundations = 1 popup = no }
+	}
+	# Civil space budgets of 2000, in hundredths of a percent of GDP (NASA 0.13%, CNES with the ESA share 0.12%, JAXA's three agencies 0.04%).
+	if = { limit = { original_tag = USA } set_variable = { mdr_space_budget = 13 } }
+	else_if = { limit = { original_tag = SOV } set_variable = { mdr_space_budget = 7 } }
+	else_if = { limit = { original_tag = CHI } set_variable = { mdr_space_budget = 9 } }
+	else_if = { limit = { original_tag = JAP } set_variable = { mdr_space_budget = 4 } }
+	else_if = { limit = { original_tag = RAJ } set_variable = { mdr_space_budget = 9 } }
+	else_if = { limit = { original_tag = FRA } set_variable = { mdr_space_budget = 12 } }
+	else_if = { limit = { original_tag = UKR } set_variable = { mdr_space_budget = 14 } }
+	else_if = { limit = { original_tag = ISR } set_variable = { mdr_space_budget = 3 } }
+	else_if = { limit = { original_tag = CAN } set_variable = { mdr_space_budget = 4 } }
+	else_if = { limit = { original_tag = GER } set_variable = { mdr_space_budget = 4 } }
+	else_if = { limit = { original_tag = ITA } set_variable = { mdr_space_budget = 5 } }
+	else_if = { limit = { original_tag = ENG } set_variable = { mdr_space_budget = 2 } }
+	else_if = { limit = { original_tag = BRA } set_variable = { mdr_space_budget = 2 } }
+	else_if = { limit = { original_tag = ARG } set_variable = { mdr_space_budget = 2 } }
+	else_if = { limit = { original_tag = KOR } set_variable = { mdr_space_budget = 4 } }
+	else_if = { limit = { original_tag = PAK } set_variable = { mdr_space_budget = 1 } }
+	else_if = { limit = { original_tag = IND } set_variable = { mdr_space_budget = 1 } }
+	else_if = { limit = { original_tag = SPR } set_variable = { mdr_space_budget = 3 } }
+	else_if = { limit = { original_tag = HOL } set_variable = { mdr_space_budget = 3 } }
+	else_if = { limit = { original_tag = BEL } set_variable = { mdr_space_budget = 6 } }
+	else_if = { limit = { original_tag = SWE } set_variable = { mdr_space_budget = 3 } }
+	else_if = { limit = { original_tag = SWI } set_variable = { mdr_space_budget = 3 } }
+	else_if = { limit = { original_tag = NRY } set_variable = { mdr_space_budget = 3 } }
+	else_if = { limit = { original_tag = DEN } set_variable = { mdr_space_budget = 1 } }
+	else_if = { limit = { original_tag = AUS } set_variable = { mdr_space_budget = 2 } }
+	else_if = { limit = { original_tag = FIN } set_variable = { mdr_space_budget = 2 } }
+	else_if = { limit = { original_tag = IRE } set_variable = { mdr_space_budget = 1 } }
+	else_if = { limit = { original_tag = POR } set_variable = { mdr_space_budget = 1 } }
+	# The 15 members of the European Space Agency in 2000.
+	if = {
+		limit = {
+			OR = {
+				original_tag = FRA original_tag = GER original_tag = ITA original_tag = ENG original_tag = SPR original_tag = HOL
+				original_tag = BEL original_tag = SWE original_tag = SWI original_tag = NRY original_tag = DEN original_tag = AUS
+				original_tag = FIN original_tag = IRE original_tag = POR
+			}
+		}
+		add_ideas = mdr_space_esa
+	}
+	mdr_space_start_sites = yes
+	mdr_space_program_start = yes
+	set_country_flag = mdr_space_ready
+	mdr_space_refresh = yes
+	mdr_space_claim_past_goals = yes
+}
+
+# Country init: the launch bases working in 2000. Those without a rocket that reaches orbit have level 1. Some countries host one without having an agency.
+mdr_space_start_sites = {
+	if = { limit = { OR = { original_tag = KAZ original_tag = NKO original_tag = AST original_tag = TAI } } set_technology = { mdr_sp_foundations = 1 popup = no } }
+	if = { limit = { original_tag = USA }
+		795 = { if = { limit = { is_controlled_by = USA } add_building_construction = { type = mdr_spaceport level = 3 instant_build = yes } } } # Cape Canaveral and Kennedy
+		811 = { if = { limit = { is_controlled_by = USA } add_building_construction = { type = mdr_spaceport level = 2 instant_build = yes } } } # Vandenberg
+		773 = { if = { limit = { is_controlled_by = USA } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # Wallops
+		814 = { if = { limit = { is_controlled_by = USA } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # Kodiak
+	}
+	if = { limit = { original_tag = SOV }
+		647 = { if = { limit = { is_controlled_by = SOV } add_building_construction = { type = mdr_spaceport level = 3 instant_build = yes } } } # Plesetsk
+		666 = { if = { limit = { is_controlled_by = SOV } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # Kapustin Yar
+		1069 = { if = { limit = { is_controlled_by = SOV } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # Svobodny
+	}
+	if = { limit = { original_tag = KAZ }
+		717 = { if = { limit = { is_controlled_by = KAZ } add_building_construction = { type = mdr_spaceport level = 3 instant_build = yes } } } # Baikonur, leased to Russia
+	}
+	if = { limit = { original_tag = CHI }
+		560 = { if = { limit = { is_controlled_by = CHI } add_building_construction = { type = mdr_spaceport level = 2 instant_build = yes } } } # Jiuquan
+		558 = { if = { limit = { is_controlled_by = CHI } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # Taiyuan
+		586 = { if = { limit = { is_controlled_by = CHI } add_building_construction = { type = mdr_spaceport level = 2 instant_build = yes } } } # Xichang
+	}
+	if = { limit = { original_tag = JAP }
+		609 = { if = { limit = { is_controlled_by = JAP } add_building_construction = { type = mdr_spaceport level = 2 instant_build = yes } } } # Tanegashima and Uchinoura
+	}
+	if = { limit = { original_tag = RAJ }
+		460 = { if = { limit = { is_controlled_by = RAJ } add_building_construction = { type = mdr_spaceport level = 2 instant_build = yes } } } # Sriharikota
+		465 = { if = { limit = { is_controlled_by = RAJ } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # Thumba, sounding rockets
+	}
+	if = { limit = { original_tag = FRA }
+		67 = { if = { limit = { is_controlled_by = FRA } add_building_construction = { type = mdr_spaceport level = 3 instant_build = yes } } } # Kourou
+	}
+	if = { limit = { original_tag = ISR }
+		204 = { if = { limit = { is_controlled_by = ISR } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # Palmachim
+	}
+	if = { limit = { original_tag = NKO }
+		601 = { if = { limit = { is_controlled_by = NKO } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # Tonghae
+	}
+	if = { limit = { original_tag = BRA }
+		890 = { if = { limit = { is_controlled_by = BRA } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # Alcantara
+		1027 = { if = { limit = { is_controlled_by = BRA } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # Barreira do Inferno, sounding rockets
+	}
+	if = { limit = { original_tag = AST }
+		745 = { if = { limit = { is_controlled_by = AST } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # Woomera
+	}
+	if = { limit = { original_tag = ITA }
+		84 = { if = { limit = { is_controlled_by = ITA } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # Salto di Quirra, sounding rockets
+	}
+	if = { limit = { original_tag = NRY }
+		31 = { if = { limit = { is_controlled_by = NRY } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # Andoya, sounding rockets
+		1251 = { if = { limit = { is_controlled_by = NRY } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # SvalRak, sounding rockets
+	}
+	if = { limit = { original_tag = SWE }
+		442 = { if = { limit = { is_controlled_by = SWE } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # Esrange, sounding rockets
+	}
+	if = { limit = { original_tag = SPR }
+		93 = { if = { limit = { is_controlled_by = SPR } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # El Arenosillo, sounding rockets
+	}
+	if = { limit = { original_tag = IND }
+		631 = { if = { limit = { is_controlled_by = IND } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # Pameungpeuk, sounding rockets
+	}
+	if = { limit = { original_tag = PAK }
+		416 = { if = { limit = { is_controlled_by = PAK } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # Sonmiani, sounding rockets
+	}
+	if = { limit = { original_tag = KOR }
+		606 = { if = { limit = { is_controlled_by = KOR } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # Anheung, sounding rockets
+	}
+	if = { limit = { original_tag = TAI }
+		599 = { if = { limit = { is_controlled_by = TAI } add_building_construction = { type = mdr_spaceport level = 1 instant_build = yes } } } # Gangzi, sounding rockets
+	}
+}
+
+# Country scope: figures for the menu and the modifier.
+mdr_space_refresh = {
+	mdr_space_count_techs = yes
+	set_variable = { mdr_space_sites = 0 }
+	set_variable = { mdr_space_site_levels = 0 }
+	clear_array = mdr_space_site_states
+	every_controlled_state = {
+		if = { limit = { check_variable = { building_level@mdr_spaceport > 0 } }
+			add_to_array = { PREV.mdr_space_site_states = THIS.id }
+			add_to_variable = { PREV.mdr_space_sites = 1 }
+			add_to_variable = { PREV.mdr_space_site_levels = building_level@mdr_spaceport }
+		}
+	}
+	# The agency grows: its own launcher and a base make it level 2; heavy launchers and its own crewed capsule, level 3.
+	if = { limit = { check_variable = { mdr_space_tier = 1 } has_tech = mdr_sp_launcher check_variable = { mdr_space_sites > 0 } }
+		set_variable = { mdr_space_tier = 2 }
+	}
+	if = { limit = { check_variable = { mdr_space_tier = 2 } has_tech = mdr_sp_heavy has_tech = mdr_sp_crewed has_country_flag = mdr_sa_crew_capsule_done }
+		set_variable = { mdr_space_tier = 3 }
+	}
+	# What the levels give, for the menu. The modifiers themselves are in the building.
+	set_variable = { mdr_space_site_speed_pct = mdr_space_site_levels }
+	multiply_variable = { mdr_space_site_speed_pct = 4.3 }
+	set_variable = { mdr_space_site_reliability_pct = mdr_space_site_levels }
+	multiply_variable = { mdr_space_site_reliability_pct = 1.7 }
+	set_variable = { mdr_space_site_cost_pct = mdr_space_site_levels }
+	multiply_variable = { mdr_space_site_cost_pct = 1.2 }
+	# Russia leases Baikonur while Kazakhstan holds it: it is not one of its own, and only its science counts.
+	set_variable = { mdr_space_leased_levels = 0 }
+	if = { limit = { original_tag = SOV }
+		717 = {
+			if = { limit = { is_controlled_by = KAZ check_variable = { building_level@mdr_spaceport > 0 } }
+				add_to_variable = { PREV.mdr_space_leased_levels = building_level@mdr_spaceport }
+			}
+		}
+	}
+	set_variable = { mdr_space_year_cost = gdp_total }
+	multiply_variable = { mdr_space_year_cost = mdr_space_budget }
+	divide_variable = { mdr_space_year_cost = 10000 }
+	set_temp_variable = { mdr_space_cost_factor = 1 }
+	add_to_temp_variable = { mdr_space_cost_factor = modifier@mdr_space_budget_cost_factor }
+	multiply_variable = { mdr_space_year_cost = mdr_space_cost_factor }
+	mdr_space_standing_update = yes
+	set_variable = { mdr_space_week_cost = mdr_space_year_cost }
+	divide_variable = { mdr_space_week_cost = 52 }
+	set_variable = { mdr_space_budget_week = mdr_space_week_cost }
+	add_to_variable = { mdr_space_week_cost = mdr_space_payroll }
+	set_variable = { mdr_space_chance_pct = modifier@olv_launch_reliability_modifier }
+	add_to_variable = { mdr_space_chance_pct = 0.84 }
+	if = { limit = { check_variable = { mdr_space_chance_pct > 0.97 } } set_variable = { mdr_space_chance_pct = 0.97 } }
+	multiply_variable = { mdr_space_chance_pct = 100 }
+	set_variable = { mdr_space_hq_science_cost = mdr_space_hq }
+	multiply_variable = { mdr_space_hq_science_cost = 40 }
+	set_variable = { mdr_space_hq_money_cost = mdr_space_hq }
+	multiply_variable = { mdr_space_hq_money_cost = 1.2 }
+	set_variable = { mdr_st_olv_c = mdr_st_debris_c }
+	add_to_variable = { mdr_st_olv_c = mdr_sm_olv_c }
+	add_to_variable = { mdr_st_olv_c = mdr_pc_olv_c }
+	set_variable = { mdr_st_budget = mdr_sm_budget }
+	add_to_variable = { mdr_st_budget = mdr_pc_budget }
+	# The bar has a frame for each tenth of a percent.
+	set_variable = { mdr_space_budget_frame = mdr_space_budget }
+	divide_variable = { mdr_space_budget_frame = 10 }
+	round_variable = mdr_space_budget_frame
+	add_to_variable = { mdr_space_budget_frame = 1 }
+	set_variable = { mdr_space_budget_pct = mdr_space_budget }
+	divide_variable = { mdr_space_budget_pct = 100 }
+	# What the budget is worth, in tenths of a percent: above 1% of GDP each tenth returns 0.35 of a normal one.
+	set_variable = { mdr_space_budget_worth = mdr_space_budget }
+	divide_variable = { mdr_space_budget_worth = 10 }
+	if = { limit = { check_variable = { mdr_space_budget > 100 } }
+		set_temp_variable = { mdr_space_budget_extra = mdr_space_budget_worth }
+		subtract_from_temp_variable = { mdr_space_budget_extra = 10 }
+		multiply_temp_variable = { mdr_space_budget_extra = 0.35 }
+		set_variable = { mdr_space_budget_worth = 10 }
+		add_to_variable = { mdr_space_budget_worth = mdr_space_budget_extra }
+	}
+	# Science: 0.7 points a week per tenth of a percent and agency level, plus 0.8 per level of launch base, and what the technologies add.
+	set_variable = { mdr_space_science_week = mdr_space_budget_worth }
+	multiply_variable = { mdr_space_science_week = mdr_space_tier }
+	multiply_variable = { mdr_space_science_week = 0.7 }
+	set_temp_variable = { mdr_space_site_gain = 0.8 }
+	add_to_temp_variable = { mdr_space_site_gain = modifier@mdr_space_site_science }
+	set_temp_variable = { mdr_space_site_count = mdr_space_site_levels }
+	add_to_temp_variable = { mdr_space_site_count = mdr_space_leased_levels }
+	multiply_temp_variable = { mdr_space_site_gain = mdr_space_site_count }
+	set_variable = { mdr_space_site_science_week = mdr_space_site_gain }
+	add_to_variable = { mdr_space_science_week = mdr_space_site_gain }
+	# Every agency has a staff that produces something, whatever its size.
+	add_to_variable = { mdr_space_science_week = 1.4 }
+	set_temp_variable = { mdr_space_science_mult = 1 }
+	add_to_temp_variable = { mdr_space_science_mult = modifier@mdr_space_science_factor }
+	set_temp_variable = { mdr_space_hq_bonus = mdr_space_hq }
+	multiply_temp_variable = { mdr_space_hq_bonus = 0.05 }
+	add_to_temp_variable = { mdr_space_science_mult = mdr_space_hq_bonus }
+	multiply_variable = { mdr_space_science_week = mdr_space_science_mult }
+	# Spin-offs: +2% research and +10% launch base construction at 1% of GDP, +4.8% and +24% at 5%.
+	set_variable = { mdr_space_bonus_research = mdr_space_budget_worth }
+	multiply_variable = { mdr_space_bonus_research = 0.002 }
+	set_variable = { mdr_space_bonus_sites = mdr_space_budget_worth }
+	multiply_variable = { mdr_space_bonus_sites = 0.01 }
+	set_variable = { mdr_space_bonus_research_pct = mdr_space_budget_worth }
+	multiply_variable = { mdr_space_bonus_research_pct = 0.2 }
+	set_variable = { mdr_space_bonus_sites_pct = mdr_space_budget_worth }
+	if = { limit = { check_variable = { mdr_space_tier > 0 } check_variable = { mdr_space_budget > 0 } }
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = mdr_space_modifier } } }
+			add_dynamic_modifier = { modifier = mdr_space_modifier }
+		}
+	}
+	else_if = { limit = { has_dynamic_modifier = { modifier = mdr_space_modifier } }
+		remove_dynamic_modifier = { modifier = mdr_space_modifier }
+	}
+	mdr_space_spend_chart = yes
+	if = { limit = { is_ai = no } add_to_variable = { global.international_systems_updated = 1 } }
+}
+
+# Country scope, weekly: adds science and counts the launch bases. The budget is paid as an additional expense (00_money_system.txt).
+mdr_space_weekly = {
+	if = { limit = { NOT = { has_variable = mdr_space_tier } } mdr_space_start = yes }
+	if = { limit = { check_variable = { mdr_space_tier > 0 } }
+		mdr_space_program_weekly = yes
+		mdr_space_spend_track = yes
+		mdr_space_refresh = yes
+		if = { limit = { check_variable = { mdr_space_budget > 0 } }
+			add_to_variable = { mdr_space_science = mdr_space_science_week }
+		}
+	}
+	else_if = { limit = { is_ai = no } mdr_space_refresh = yes }
+	# The AI founds its own agency when it is rich enough, after some three years on average.
+	else_if = {
+		limit = {
+			has_tech = mdr_sp_foundations
+			check_variable = { gdp_total > 200 }
+			check_variable = { treasury > 10 }
+			has_political_power > 96
+		}
+		# About one week in 170: some three years.
+		random_list = {
+			6 = { mdr_space_create = yes }
+			994 = { }
+		}
+	}
+}
+
+# Country scope. Founds the agency with the smallest budget. Without a typed or real name it shows the generic one.
+mdr_space_found = {
+	set_variable = { mdr_space_hq = 1 }
+	set_variable = { mdr_space_scientists = 60 }
+	set_variable = { mdr_space_engineers = 180 }
+	set_variable = { mdr_space_tier = 1 }
+	set_variable = { mdr_space_budget = 6 }
+	# Spending chart: it starts this year, with nothing before.
+	set_variable = { mdr_space_spend_year = global.year }
+	set_variable = { mdr_space_spend_0 = 0 }
+	set_variable = { mdr_space_spend_1 = 0 }
+	set_variable = { mdr_space_spend_2 = 0 }
+	set_variable = { mdr_space_spend_3 = 0 }
+	set_variable = { mdr_space_spend_4 = 0 }
+	mdr_space_refresh = yes
+}
+
+# World, weekly, with the historical rule: agencies founded after 2000, if the country can pay for one.
+mdr_space_historical = {
+	if = { limit = { has_game_rule = { rule = mdr_rule_world_events option = historical } }
+		if = { limit = { date > 2004.02.01 NOT = { has_global_flag = mdr_space_hist_per } }
+			set_global_flag = mdr_space_hist_per
+			if = { limit = { country_exists = PER } PER = { mdr_space_historical_found = yes } }
+		}
+		if = { limit = { date > 2014.07.22 NOT = { has_global_flag = mdr_space_hist_uae } }
+			set_global_flag = mdr_space_hist_uae
+			if = { limit = { country_exists = UAE } UAE = { mdr_space_historical_found = yes } }
+		}
+		if = { limit = { date > 2018.07.01 NOT = { has_global_flag = mdr_space_hist_ast } }
+			set_global_flag = mdr_space_hist_ast
+			if = { limit = { country_exists = AST } AST = { mdr_space_historical_found = yes } }
+		}
+		if = { limit = { date > 2018.12.13 NOT = { has_global_flag = mdr_space_hist_tur } }
+			set_global_flag = mdr_space_hist_tur
+			if = { limit = { country_exists = TUR } TUR = { mdr_space_historical_found = yes } }
+		}
+	}
+}
+
+# Country scope. Only an AI country with no agency and the money: a player decides for himself.
+mdr_space_historical_found = {
+	if = { limit = { is_ai = yes check_variable = { mdr_space_tier = 0 } check_variable = { gdp_total > 48 } }
+		set_technology = { mdr_sp_foundations = 1 popup = no }
+		mdr_space_found = yes
+	}
+}
+
+# Country scope: the create button of the menu, and the AI.
+mdr_space_create = {
+	add_political_power = -96
+	set_temp_variable = { treasury_change = -1.8 }
+	modify_treasury_effect = yes
+	mdr_space_found = yes
+	add_to_variable = { mdr_space_spend_0 = 1.8 }
+}

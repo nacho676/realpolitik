@@ -1,0 +1,31 @@
+add_namespace = mdr_climate
+
+# World news: the planet passes 1 degree of warming (mdr_climate_world_monthly)
+news_event = {
+	id = mdr_climate.1
+	title = mdr_climate.1.t
+	desc = mdr_climate.1.d
+	picture = GFX_politics_green
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = mdr_climate.1.a
+		log = "[GetDateText]: [This.GetName]: mdr_climate.1.a executed"
+	}
+}
+
+# World news: the planet passes 1.5 degrees, the Paris limit
+news_event = {
+	id = mdr_climate.2
+	title = mdr_climate.2.t
+	desc = mdr_climate.2.d
+	picture = GFX_politics_green
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = mdr_climate.2.a
+		log = "[GetDateText]: [This.GetName]: mdr_climate.2.a executed"
+	}
+}

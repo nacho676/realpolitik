@@ -1,0 +1,14 @@
+ideas = {
+	country = {
+		# After a nationalization (mdr_mnc_decisions.txt): investors price in the risk.
+		mdr_mnc_expropriation_risk = {
+			picture = BRA_nationalized_industries
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				receiving_investment_cost_modifier = 0.23
+				productivity_growth_modifier = -0.017
+			}
+		}
+	}
+}

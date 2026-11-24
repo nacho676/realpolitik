@@ -1,0 +1,109 @@
+# Rare earths: mined and separated by rare earth complexes (common/buildings/mdr_buildings.txt), used by microchip plants
+# (1 per plant, common/buildings/00_buildings.txt) and by production lines with electronics (herramientas/make_rare_earth_costs.py). Levels of 2000: mdr_rare_earths_start (generated).
+
+# Country scope, weekly: figures for the trade screen and export income with Millennium Dawn's formula for the other
+# resources (exported x price x export multiplier x 0.00298 per week). Only what importers bought counts as exported.
+mdr_rare_earths_weekly = {
+	# What is left after plants and production lines take their share; negative means a deficit (read by the AI).
+	set_variable = { mdr_ree_shortfall = resource@rare_earths }
+	clamp_variable = { var = mdr_ree_shortfall max = 0 }
+	set_variable = { mdr_ree_produced = resource_produced@rare_earths }
+	set_variable = { mdr_ree_imported = resource_imported@rare_earths }
+	set_variable = { mdr_ree_exported = resource_exported@rare_earths }
+	multiply_variable = { mdr_ree_exported = global.mdr_ree_sold_share }
+	set_variable = { mdr_ree_income = 0 }
+	if = { limit = { check_variable = { mdr_ree_exported > 0 } }
+		set_variable = { mdr_ree_income = mdr_ree_exported }
+		multiply_variable = { mdr_ree_income = global.mdr_ree_price }
+		set_temp_variable = { mdr_ree_export_mult = modifier@resource_export_multiplier_modifier }
+		add_to_temp_variable = { mdr_ree_export_mult = 1 }
+		multiply_variable = { mdr_ree_income = mdr_ree_export_mult }
+		multiply_variable = { mdr_ree_income = 298 }
+		divide_variable = { mdr_ree_income = 100000 }
+		set_temp_variable = { treasury_change = mdr_ree_income }
+		modify_treasury_effect = yes
+	}
+}
+
+# Once a week for the whole world. The price starts at 1.0 and moves with how much plants and production lines consume
+# against what the world produces, compared to the first week with consumption; then market shocks.
+mdr_rare_earths_world_market = {
+	set_temp_variable = { mdr_ree_supply = 0 }
+	set_temp_variable = { mdr_ree_demand = 0 }
+	set_temp_variable = { mdr_ree_offered = 0 }
+	set_temp_variable = { mdr_ree_bought = 0 }
+	every_country = {
+		add_to_temp_variable = { mdr_ree_supply = resource_produced@rare_earths }
+		add_to_temp_variable = { mdr_ree_demand = resource_consumed@rare_earths }
+		add_to_temp_variable = { mdr_ree_offered = resource_exported@rare_earths }
+		add_to_temp_variable = { mdr_ree_bought = resource_imported@rare_earths }
+	}
+	set_variable = { global.mdr_ree_supply = mdr_ree_supply }
+	set_variable = { global.mdr_ree_demand = mdr_ree_demand }
+	set_variable = { global.mdr_ree_sold_share = 0 }
+	if = { limit = { check_variable = { mdr_ree_offered > 0 } }
+		set_variable = { global.mdr_ree_sold_share = mdr_ree_bought }
+		divide_variable = { global.mdr_ree_sold_share = mdr_ree_offered }
+		clamp_variable = { var = global.mdr_ree_sold_share min = 0 max = 1 }
+	}
+
+	set_variable = { global.mdr_ree_price = 1 }
+	if = { limit = { check_variable = { mdr_ree_supply > 0 } }
+		set_temp_variable = { mdr_ree_ratio = mdr_ree_demand }
+		divide_temp_variable = { mdr_ree_ratio = mdr_ree_supply }
+		# Taken the first week with any consumption.
+		if = { limit = { NOT = { has_variable = global.mdr_ree_ratio_start } check_variable = { mdr_ree_demand > 0 } }
+			set_variable = { global.mdr_ree_ratio_start = mdr_ree_ratio }
+			log = "MDR REE start: world supply [?global.mdr_ree_supply|0] demand [?global.mdr_ree_demand|0] (target: supply about 1.3 times demand)"
+			every_country = {
+				limit = { OR = { original_tag = USA original_tag = SOV original_tag = CHI original_tag = FRA original_tag = GER original_tag = JAP original_tag = ENG } }
+				log = "MDR REE start [This.GetName]: produced [?resource_produced@rare_earths|0] consumed [?resource_consumed@rare_earths|0] imported [?resource_imported@rare_earths|0]"
+			}
+		}
+		if = { limit = { check_variable = { global.mdr_ree_ratio_start > 0 } }
+			multiply_variable = { global.mdr_ree_price = mdr_ree_ratio }
+			divide_variable = { global.mdr_ree_price = global.mdr_ree_ratio_start }
+		}
+	}
+	clamp_variable = { var = global.mdr_ree_price min = 0.3 max = 5 }
+	# Market shocks (mdr_shocks.txt): Chinese export quotas, wars.
+	if = { limit = { check_variable = { global.mdr_shock_ree > 0 } } multiply_variable = { global.mdr_ree_price = global.mdr_shock_ree } }
+}
+
+# Real openings and closures, in the global weekly pass. Each acts only if the state is still owned by its country.
+mdr_rare_earths_historical = {
+	# Mountain Pass closes: Chinese prices undercut it.
+	if = { limit = { date > 2002.06.01 NOT = { has_global_flag = mdr_hree_2002_mountain_pass } }
+		set_global_flag = mdr_hree_2002_mountain_pass
+		811 = {
+			if = { limit = { is_owned_by = USA check_variable = { building_level@mdr_rare_earth_complex > 2 } }
+				remove_building = { type = mdr_rare_earth_complex level = 3 }
+			}
+		}
+	}
+	# Lynas opens Mount Weld in Western Australia.
+	if = { limit = { date > 2011.09.01 NOT = { has_global_flag = mdr_hree_2011_mount_weld } }
+		set_global_flag = mdr_hree_2011_mount_weld
+		746 = {
+			if = { limit = { is_owned_by = AST }
+				add_building_construction = { type = mdr_rare_earth_complex level = 3 instant_build = yes }
+			}
+		}
+	}
+	# Mountain Pass reopens after the Chinese export quotas.
+	if = { limit = { date > 2012.06.01 NOT = { has_global_flag = mdr_hree_2012_mountain_pass } }
+		set_global_flag = mdr_hree_2012_mountain_pass
+		811 = {
+			if = { limit = { is_owned_by = USA }
+				add_building_construction = { type = mdr_rare_earth_complex level = 3 instant_build = yes }
+			}
+		}
+	}
+	# The Kachin rare earth boom, along the Chinese border.
+	if = { limit = { date > 2015.06.01 NOT = { has_global_flag = mdr_hree_2015_kachin } }
+		set_global_flag = mdr_hree_2015_kachin
+		496 = {
+			add_building_construction = { type = mdr_rare_earth_complex level = 4 instant_build = yes }
+		}
+	}
+}

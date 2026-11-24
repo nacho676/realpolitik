@@ -1,0 +1,14 @@
+ideas = {
+	country = {
+		# The 15 members of the European Space Agency in 2000 (mdr_space_start).
+		mdr_space_esa = {
+			allowed_civil_war = { always = yes }
+			picture = generic_research
+
+			modifier = {
+				research_speed_factor = 0.004
+				production_speed_mdr_spaceport_factor = 0.05
+			}
+		}
+	}
+}

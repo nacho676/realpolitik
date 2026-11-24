@@ -1,0 +1,345 @@
+technologies = {
+	# Fertilizers branch, in Millennium Dawn's Agricultural Digitalization category (civilian folder),
+	# column 25, left of the agriculture branch (column 27 = @row10 in industry.txt). Rows: 1985 = 2 ... 2075 = 38.
+	# Each level adds 1 wheat to every cropland level, plus its own effects.
+
+	mdr_fertilizers_1 = {
+		research_cost = 1.75
+		start_year = 1985
+
+		agricolture_productivity_modifier = 0.04
+		mdr_food_storage_factor = 0.08
+
+		on_research_complete = {
+			mdr_fertilizer_wheat = yes
+		}
+
+		categories = {
+			CAT_industry
+			CAT_agriculture_tech
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_fertilizers_2
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 25 y = 2 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 5 } }
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 25 } }
+			modifier = { add = 10 check_variable = { resource@wheat < 0 } }
+		}
+	}
+
+	mdr_fertilizers_2 = {
+		research_cost = 1.75
+		start_year = 1995
+
+		agricolture_productivity_modifier = 0.04
+		mdr_pollution_factor = -0.01
+
+		on_research_complete = {
+			mdr_fertilizer_wheat = yes
+		}
+
+		categories = {
+			CAT_industry
+			CAT_agriculture_tech
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_fertilizers_3
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 25 y = 6 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 5 } }
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 25 } }
+			modifier = { add = 10 check_variable = { resource@wheat < 0 } }
+		}
+	}
+
+	mdr_fertilizers_3 = {
+		research_cost = 1.75
+		start_year = 2005
+
+		agricolture_productivity_modifier = 0.03
+		agriculture_workers_modifier = -0.02
+
+		on_research_complete = {
+			mdr_fertilizer_wheat = yes
+		}
+
+		categories = {
+			CAT_industry
+			CAT_agriculture_tech
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_fertilizers_4
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 25 y = 10 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 5 } }
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 25 } }
+			modifier = { add = 10 check_variable = { resource@wheat < 0 } }
+		}
+	}
+
+	mdr_fertilizers_4 = {
+		research_cost = 1.75
+		start_year = 2015
+
+		agricolture_productivity_modifier = 0.02
+		mdr_pollution_factor = -0.02
+		mdr_food_spoilage_factor = -0.05
+
+		on_research_complete = {
+			mdr_fertilizer_wheat = yes
+		}
+
+		categories = {
+			CAT_industry
+			CAT_agriculture_tech
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_fertilizers_5
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 25 y = 14 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 5 } }
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 25 } }
+			modifier = { add = 10 check_variable = { resource@wheat < 0 } }
+		}
+	}
+
+	mdr_fertilizers_5 = {
+		research_cost = 1.75
+		start_year = 2025
+
+		agricolture_productivity_modifier = 0.03
+		mdr_food_spoilage_factor = -0.15
+
+		on_research_complete = {
+			mdr_fertilizer_wheat = yes
+		}
+
+		categories = {
+			CAT_industry
+			CAT_agriculture_tech
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_fertilizers_6
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 25 y = 18 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 5 } }
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 25 } }
+			modifier = { add = 10 check_variable = { resource@wheat < 0 } }
+		}
+	}
+
+	mdr_fertilizers_6 = {
+		research_cost = 1.75
+		start_year = 2035
+
+		agricolture_productivity_modifier = 0.02
+		mdr_pollution_factor = -0.03
+
+		on_research_complete = {
+			mdr_fertilizer_wheat = yes
+		}
+
+		categories = {
+			CAT_industry
+			CAT_agriculture_tech
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_fertilizers_7
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 25 y = 22 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 5 } }
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 25 } }
+			modifier = { add = 10 check_variable = { resource@wheat < 0 } }
+		}
+	}
+
+	mdr_fertilizers_7 = {
+		research_cost = 1.75
+		start_year = 2045
+
+		agricolture_productivity_modifier = 0.02
+		production_speed_mdr_recycling_plant_factor = 0.1
+		mdr_food_storage_factor = 0.1
+
+		on_research_complete = {
+			mdr_fertilizer_wheat = yes
+		}
+
+		categories = {
+			CAT_industry
+			CAT_agriculture_tech
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_fertilizers_8
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 25 y = 26 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 5 } }
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 25 } }
+			modifier = { add = 10 check_variable = { resource@wheat < 0 } }
+		}
+	}
+
+	mdr_fertilizers_8 = {
+		research_cost = 1.75
+		start_year = 2055
+
+		agricolture_productivity_modifier = 0.05
+		mdr_food_storage_factor = 0.08
+
+		on_research_complete = {
+			mdr_fertilizer_wheat = yes
+		}
+
+		categories = {
+			CAT_industry
+			CAT_agriculture_tech
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_fertilizers_9
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 25 y = 30 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 5 } }
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 25 } }
+			modifier = { add = 10 check_variable = { resource@wheat < 0 } }
+		}
+	}
+
+	mdr_fertilizers_9 = {
+		research_cost = 1.75
+		start_year = 2065
+
+		agricolture_productivity_modifier = 0.03
+		mdr_food_spoilage_factor = -0.2
+
+		on_research_complete = {
+			mdr_fertilizer_wheat = yes
+		}
+
+		categories = {
+			CAT_industry
+			CAT_agriculture_tech
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_fertilizers_10
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 25 y = 34 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 5 } }
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 25 } }
+			modifier = { add = 10 check_variable = { resource@wheat < 0 } }
+		}
+	}
+
+	mdr_fertilizers_10 = {
+		research_cost = 1.75
+		start_year = 2075
+
+		agricolture_productivity_modifier = 0.03
+		agriculture_workers_modifier = -0.03
+		mdr_food_spoilage_factor = -0.1
+		mdr_food_storage_factor = 0.14
+
+		on_research_complete = {
+			mdr_fertilizer_wheat = yes
+		}
+
+		categories = {
+			CAT_industry
+			CAT_agriculture_tech
+			CAT_Civilian
+		}
+
+		folder = {
+			name = civilian_folder
+			position = { x = 25 y = 38 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 5 } }
+			modifier = { add = 10 check_variable = { mdr_cropland_total > 25 } }
+			modifier = { add = 10 check_variable = { resource@wheat < 0 } }
+		}
+	}
+}

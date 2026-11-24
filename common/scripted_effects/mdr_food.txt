@@ -1,0 +1,317 @@
+# Food, counted in thousand tonnes (kt) of grain. 1 grain (resource wheat) is 100,000 tonnes (100 kt) a year;
+# one cropland level grows 10. Balance each week: stock = stock + production - consumption + imports - exports,
+# always between 0 and capacity.
+
+mdr_food_start = {
+	set_variable = { mdr_food_stock = -1 }
+}
+
+# Production, consumption and storage, without touching the stockpile. Weekly for everyone, daily for players,
+# so new cropland shows in the top bar at once.
+mdr_food_calc = {
+	mdr_wheat_read = yes
+	# Own count of cropland: Millennium Dawn counts its buildings on its own schedule, which lags behind on the first days.
+	set_variable = { mdr_food_cropland_levels = 0 }
+	every_controlled_state = {
+		add_to_variable = { PREV.mdr_food_cropland_levels = building_level@mdr_cropland }
+	}
+	if = { limit = { check_variable = { population_total_m > 0 } }
+		# Grain per person per year, in tonnes: richer diets eat more meat, and animals eat grain.
+		if = { limit = { check_variable = { gdp_per_capita < 3 } } set_variable = { mdr_food_per_capita = 0.22 } }
+		else_if = { limit = { check_variable = { gdp_per_capita < 10 } } set_variable = { mdr_food_per_capita = 0.32 } }
+		else_if = { limit = { check_variable = { gdp_per_capita < 25 } } set_variable = { mdr_food_per_capita = 0.45 } }
+		else = { set_variable = { mdr_food_per_capita = 0.6 } }
+		set_variable = { mdr_food_need = population_total_m }
+		multiply_variable = { mdr_food_need = mdr_food_per_capita }
+		multiply_variable = { mdr_food_need = 1000 }
+
+		# Grain that stays in the country: grown, minus exported, plus imported. Food comes only from grain.
+		set_variable = { mdr_food_wheat = mdr_wheat_produced }
+		subtract_from_variable = { mdr_food_wheat = mdr_wheat_exported }
+		add_to_variable = { mdr_food_wheat = mdr_wheat_imported }
+		clamp_variable = { var = mdr_food_wheat min = 0 }
+		multiply_variable = { mdr_food_wheat = 100 }
+		set_variable = { mdr_food_production = mdr_food_wheat }
+
+		# Droughts (Millennium Dawn agrarian system) and floods or heatwaves cut the harvest.
+		if = { limit = { has_idea = AGRI_extreme_drought_ongoing } multiply_variable = { mdr_food_production = 0.5 } }
+		else_if = { limit = { has_idea = AGRI_harsh_drought_ongoing } multiply_variable = { mdr_food_production = 0.7 } }
+		else_if = { limit = { has_idea = AGRI_standard_drought_ongoing } multiply_variable = { mdr_food_production = 0.85 } }
+		if = {
+			limit = {
+				OR = { check_variable = { mdr_disaster_type = 4 } check_variable = { mdr_disaster_type = 6 } }
+				OR = { has_idea = mdr_disaster_severe has_idea = mdr_disaster_catastrophe }
+			}
+			multiply_variable = { mdr_food_production = 0.85 }
+		}
+
+		# Fish from the fishing ports (mdr_buildings.txt), after the harvest losses: droughts do not touch the sea.
+		add_to_variable = { mdr_food_production = modifier@mdr_fishing_food }
+
+		set_variable = { mdr_food_self_sufficiency = mdr_food_production }
+		divide_variable = { mdr_food_self_sufficiency = mdr_food_need }
+		multiply_variable = { mdr_food_self_sufficiency = 100 }
+
+		# Storage: three months of consumption, 2 million tonnes per Strategic Resource Reserve, 1 per agro-industrial district.
+		set_variable = { mdr_food_cap_base = mdr_food_need }
+		multiply_variable = { mdr_food_cap_base = 0.25 }
+		set_variable = { mdr_food_cap_reserves = fuel_silos }
+		multiply_variable = { mdr_food_cap_reserves = 2000 }
+		set_variable = { mdr_food_cap_silos = agriculture_district_total }
+		multiply_variable = { mdr_food_cap_silos = 1000 }
+		set_variable = { mdr_food_capacity = mdr_food_cap_base }
+		add_to_variable = { mdr_food_capacity = mdr_food_cap_reserves }
+		add_to_variable = { mdr_food_capacity = mdr_food_cap_silos }
+		# Fertilizer technologies also store grain better.
+		set_variable = { mdr_food_tech_cap = modifier@mdr_food_storage_factor }
+		# Shown as a positive reduction in the top bar tooltip.
+		set_variable = { mdr_food_tech_spoil = modifier@mdr_food_spoilage_factor }
+		multiply_variable = { mdr_food_tech_spoil = -1 }
+		set_temp_variable = { mdr_food_cap_mult = mdr_food_tech_cap }
+		add_to_temp_variable = { mdr_food_cap_mult = 1 }
+		multiply_variable = { mdr_food_capacity = mdr_food_cap_mult }
+	}
+}
+
+mdr_food_weekly = {
+	mdr_food_calc = yes
+	mdr_wheat_pay_exports = yes
+	if = { limit = { check_variable = { population_total_m > 0 } }
+		# A new country starts with half-full stores.
+		if = { limit = { check_variable = { mdr_food_stock < 0 } }
+			set_variable = { mdr_food_stock = mdr_food_capacity }
+			multiply_variable = { mdr_food_stock = 0.5 }
+		}
+		set_variable = { mdr_food_stock_last = mdr_food_stock }
+		# Stored grain spoils at about 1% a month, less with fertilizer technologies. Divided last, for the 3-decimal variables.
+		set_temp_variable = { mdr_food_spoil = modifier@mdr_food_spoilage_factor }
+		add_to_temp_variable = { mdr_food_spoil = 1 }
+		multiply_temp_variable = { mdr_food_spoil = mdr_food_stock }
+		multiply_temp_variable = { mdr_food_spoil = 2 }
+		divide_temp_variable = { mdr_food_spoil = 1000 }
+		subtract_from_variable = { mdr_food_stock = mdr_food_spoil }
+
+		set_temp_variable = { mdr_food_week = mdr_food_production }
+		subtract_from_temp_variable = { mdr_food_week = mdr_food_need }
+		divide_temp_variable = { mdr_food_week = 52 }
+		add_to_variable = { mdr_food_stock = mdr_food_week }
+		set_variable = { mdr_food_export = 0 }
+		set_variable = { mdr_food_import = 0 }
+		set_variable = { mdr_food_unmet = 0 }
+		set_variable = { mdr_food_import_request = 0 }
+		set_variable = { mdr_food_income = 0 }
+		set_variable = { mdr_food_cost = 0 }
+
+		if = { limit = { check_variable = { mdr_food_stock > mdr_food_capacity } }
+			# The surplus goes to the world market and is paid at the world price (billions per million tonnes).
+			set_variable = { mdr_food_export = mdr_food_stock }
+			subtract_from_variable = { mdr_food_export = mdr_food_capacity }
+			set_variable = { mdr_food_stock = mdr_food_capacity }
+			set_variable = { mdr_food_income = mdr_food_export }
+			divide_variable = { mdr_food_income = 1000 }
+			multiply_variable = { mdr_food_income = global.mdr_food_price }
+			set_temp_variable = { treasury_change = mdr_food_income }
+			modify_treasury_effect = yes
+		}
+		else_if = { limit = { check_variable = { mdr_food_stock < 0 } }
+			# Imports are limited by what exporters offered last week, shared among all buyers.
+			set_variable = { mdr_food_import_request = mdr_food_stock }
+			multiply_variable = { mdr_food_import_request = -1 }
+			set_variable = { mdr_food_import = mdr_food_import_request }
+			multiply_variable = { mdr_food_import = global.mdr_food_import_ratio }
+			# A country that cannot pay cannot import.
+			if = { limit = { check_variable = { treasury < 0 } }
+				set_variable = { mdr_food_import = 0 }
+			}
+			set_variable = { mdr_food_cost = mdr_food_import }
+			divide_variable = { mdr_food_cost = 1000 }
+			multiply_variable = { mdr_food_cost = global.mdr_food_price }
+			set_temp_variable = { treasury_change = mdr_food_cost }
+			multiply_temp_variable = { treasury_change = -1 }
+			modify_treasury_effect = yes
+			set_variable = { mdr_food_unmet = mdr_food_import_request }
+			subtract_from_variable = { mdr_food_unmet = mdr_food_import }
+			set_variable = { mdr_food_stock = 0 }
+		}
+		mdr_food_hunger = yes
+		mdr_food_update_display = yes
+	}
+}
+
+# Share of the population without enough food, and penalties that grow with it: 5% hungry is a nuisance, 50% a disaster.
+# Smoothed over about a month (a quarter of each week's figure), so one bad week does not swing the country.
+mdr_food_hunger = {
+	set_temp_variable = { mdr_food_unfed_now = 0 }
+	if = { limit = { check_variable = { mdr_food_unmet > 0 } check_variable = { mdr_food_need > 0 } }
+		# Unmet is weekly, need is yearly: unmet x 52 / need x 100 percent.
+		set_temp_variable = { mdr_food_unfed_now = mdr_food_unmet }
+		divide_temp_variable = { mdr_food_unfed_now = mdr_food_need }
+		multiply_temp_variable = { mdr_food_unfed_now = 5200 }
+		clamp_temp_variable = { var = mdr_food_unfed_now min = 0 max = 100 }
+	}
+	multiply_variable = { mdr_food_unfed = 0.75 }
+	multiply_temp_variable = { mdr_food_unfed_now = 0.25 }
+	add_to_variable = { mdr_food_unfed = mdr_food_unfed_now }
+	if = { limit = { check_variable = { mdr_food_unfed < 0.5 } check_variable = { mdr_food_unmet = 0 } }
+		set_variable = { mdr_food_unfed = 0 }
+	}
+	set_variable = { mdr_food_fed_pct = 100 }
+	subtract_from_variable = { mdr_food_fed_pct = mdr_food_unfed }
+
+	# Per point of hungry population: -0.4% stability, -0.5% political power, -0.2% war support, -0.6% population growth,
+	# +0.2% inflation cost.
+	set_variable = { mdr_food_pen_stability = mdr_food_unfed }
+	multiply_variable = { mdr_food_pen_stability = -0.004 }
+	set_variable = { mdr_food_pen_pp = mdr_food_unfed }
+	multiply_variable = { mdr_food_pen_pp = -0.005 }
+	set_variable = { mdr_food_pen_ws = mdr_food_unfed }
+	multiply_variable = { mdr_food_pen_ws = -0.002 }
+	set_variable = { mdr_food_pen_pop = mdr_food_unfed }
+	multiply_variable = { mdr_food_pen_pop = -0.006 }
+	set_variable = { mdr_food_pen_inflation = mdr_food_unfed }
+	multiply_variable = { mdr_food_pen_inflation = 0.002 }
+
+	if = { limit = { check_variable = { mdr_food_unfed > 0 } }
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = mdr_food_shortage } } }
+			add_dynamic_modifier = { modifier = mdr_food_shortage }
+		}
+	}
+	else_if = { limit = { has_dynamic_modifier = { modifier = mdr_food_shortage } }
+		remove_dynamic_modifier = { modifier = mdr_food_shortage }
+	}
+}
+
+# Top bar and tooltip, laid out like the game's fuel: stock in millions of tonnes, flows in thousand tonnes a day.
+mdr_food_update_display = {
+	set_variable = { mdr_food_stock_mt = mdr_food_stock }
+	divide_variable = { mdr_food_stock_mt = 1000 }
+	set_variable = { mdr_food_capacity_mt = mdr_food_capacity }
+	divide_variable = { mdr_food_capacity_mt = 1000 }
+	set_variable = { mdr_food_cap_base_mt = mdr_food_cap_base }
+	divide_variable = { mdr_food_cap_base_mt = 1000 }
+	set_variable = { mdr_food_cap_reserves_mt = mdr_food_cap_reserves }
+	divide_variable = { mdr_food_cap_reserves_mt = 1000 }
+	set_variable = { mdr_food_cap_silos_mt = mdr_food_cap_silos }
+	divide_variable = { mdr_food_cap_silos_mt = 1000 }
+
+	# Yearly kt / 365 and weekly kt / 7 give thousand tonnes a day.
+	set_variable = { mdr_food_grown_k = mdr_wheat_produced }
+	multiply_variable = { mdr_food_grown_k = 100 }
+	divide_variable = { mdr_food_grown_k = 365 }
+	set_variable = { mdr_food_trade_in_k = mdr_wheat_imported }
+	multiply_variable = { mdr_food_trade_in_k = 100 }
+	divide_variable = { mdr_food_trade_in_k = 365 }
+	set_variable = { mdr_food_trade_out_k = mdr_wheat_exported }
+	multiply_variable = { mdr_food_trade_out_k = 100 }
+	divide_variable = { mdr_food_trade_out_k = 365 }
+	set_variable = { mdr_food_loss_k = mdr_food_wheat }
+	subtract_from_variable = { mdr_food_loss_k = mdr_food_production }
+	divide_variable = { mdr_food_loss_k = 365 }
+	set_variable = { mdr_food_need_k = mdr_food_need }
+	divide_variable = { mdr_food_need_k = 365 }
+	set_variable = { mdr_food_buy_k = mdr_food_import }
+	divide_variable = { mdr_food_buy_k = 7 }
+	set_variable = { mdr_food_sell_k = mdr_food_export }
+	divide_variable = { mdr_food_sell_k = 7 }
+	set_variable = { mdr_food_unmet_k = mdr_food_unmet }
+	divide_variable = { mdr_food_unmet_k = 7 }
+	# Stored grain spoils at 0.2% a week (mdr_food_weekly).
+	set_variable = { mdr_food_spoil_k = mdr_food_stock_last }
+	multiply_variable = { mdr_food_spoil_k = 0.002 }
+	divide_variable = { mdr_food_spoil_k = 7 }
+	# Today's pace (production minus consumption, minus spoilage), so new cropland or a lost harvest shows at once.
+	set_variable = { mdr_food_gain_k = mdr_food_production }
+	subtract_from_variable = { mdr_food_gain_k = mdr_food_need }
+	divide_variable = { mdr_food_gain_k = 365 }
+	subtract_from_variable = { mdr_food_gain_k = mdr_food_spoil_k }
+
+	# Days of consumption left in storage.
+	set_variable = { mdr_food_days = 0 }
+	if = { limit = { check_variable = { mdr_food_need > 0 } }
+		set_variable = { mdr_food_days = mdr_food_stock }
+		divide_variable = { mdr_food_days = mdr_food_need }
+		multiply_variable = { mdr_food_days = 365 }
+	}
+
+	# The game's fuel bar (GFX_topbar_fuel_bar) takes the fill as a percentage. Divided first: big stocks x 100 would overflow.
+	set_variable = { mdr_food_bar_pct = 0 }
+	if = { limit = { check_variable = { mdr_food_capacity > 0 } }
+		set_variable = { mdr_food_bar_pct = mdr_food_stock }
+		divide_variable = { mdr_food_bar_pct = mdr_food_capacity }
+		multiply_variable = { mdr_food_bar_pct = 100 }
+		round_variable = mdr_food_bar_pct
+		clamp_variable = { var = mdr_food_bar_pct min = 0 max = 100 }
+	}
+
+	# Arrow frames, in the order of the game's fuel icon: 1 steady, 2 rising, 3 falling.
+	set_variable = { mdr_food_trend_frame = 1 }
+	if = {
+		limit = {
+			OR = {
+				check_variable = { mdr_food_unmet > 0 }
+				check_variable = { mdr_food_gain_k < 0 }
+			}
+		}
+		set_variable = { mdr_food_trend_frame = 3 }
+	}
+	else_if = { limit = { check_variable = { mdr_food_gain_k > 0 } check_variable = { mdr_food_stock < mdr_food_capacity } }
+		set_variable = { mdr_food_trend_frame = 2 }
+	}
+}
+
+# Players: refresh production and the tooltip every day; the stockpile still moves once a week.
+mdr_food_daily_player = {
+	if = { limit = { has_variable = mdr_food_stock_last }
+		mdr_food_calc = yes
+		mdr_food_update_display = yes
+	}
+}
+
+# Once a week for the whole world: last week's offers and requests set this week's import share and the grain price.
+mdr_food_world_market = {
+	# The trade law puts grain on the market whether or not anyone buys it: only the share that importers took is exported.
+	set_temp_variable = { mdr_wheat_offered = 0 }
+	set_temp_variable = { mdr_wheat_bought = 0 }
+	every_country = {
+		add_to_temp_variable = { mdr_wheat_offered = resource_exported@wheat }
+		add_to_temp_variable = { mdr_wheat_bought = resource_imported@wheat }
+	}
+	set_variable = { global.mdr_wheat_sold_share = 0 }
+	if = { limit = { check_variable = { mdr_wheat_offered > 0 } }
+		set_variable = { global.mdr_wheat_sold_share = mdr_wheat_bought }
+		divide_variable = { global.mdr_wheat_sold_share = mdr_wheat_offered }
+		clamp_variable = { var = global.mdr_wheat_sold_share min = 0 max = 1 }
+	}
+
+	set_temp_variable = { mdr_food_supply = 0 }
+	set_temp_variable = { mdr_food_demand = 0 }
+	every_country = {
+		add_to_temp_variable = { mdr_food_supply = mdr_food_export }
+		add_to_temp_variable = { mdr_food_demand = mdr_food_import_request }
+	}
+	set_variable = { global.mdr_food_supply = mdr_food_supply }
+	set_variable = { global.mdr_food_demand = mdr_food_demand }
+	set_variable = { global.mdr_food_import_ratio = 1 }
+	if = { limit = { check_variable = { mdr_food_demand > 0 } }
+		set_variable = { global.mdr_food_import_ratio = mdr_food_supply }
+		divide_variable = { global.mdr_food_import_ratio = mdr_food_demand }
+		clamp_variable = { var = global.mdr_food_import_ratio min = 0 max = 1 }
+	}
+
+	# 0.077 per unit (100,000 tonnes) is about 120 dollars a tonne, the 2000 grain price, through Millennium Dawn's export
+	# formula (price x 0.00298 a week per unit). It moves with buyers against sellers, from 0.7x to 3.5x (the 2008 spike).
+	set_temp_variable = { mdr_food_tightness = 3.5 }
+	if = { limit = { check_variable = { mdr_food_supply > 0 } }
+		set_temp_variable = { mdr_food_tightness = mdr_food_demand }
+		divide_temp_variable = { mdr_food_tightness = mdr_food_supply }
+	}
+	clamp_temp_variable = { var = mdr_food_tightness min = 0.7 max = 3.5 }
+	set_variable = { global.mdr_wheat_price = 0.077 }
+	multiply_variable = { global.mdr_wheat_price = mdr_food_tightness }
+	# Market shocks (mdr_shocks.txt): droughts, wars, the 2007-2008 food crisis.
+	if = { limit = { check_variable = { global.mdr_shock_grain > 0 } } multiply_variable = { global.mdr_wheat_price = global.mdr_shock_grain } }
+	# The same price per million tonnes (10 units), in billions: 0.00298 x 52 x 10 = 1.55.
+	set_variable = { global.mdr_food_price = global.mdr_wheat_price }
+	multiply_variable = { global.mdr_food_price = 1.55 }
+}
+

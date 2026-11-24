@@ -1,0 +1,20 @@
+state = {
+	id = 1261
+	name = "STATE_1261" # Greenland Ice Sheet
+	manpower = 10
+
+	state_category = state_00
+
+	history = {
+		owner = GRN
+		buildings = {
+			infrastructure = 1
+		}
+		add_core_of = GRN
+		set_state_flag = mdr_polar   # low disaster risk (common/scripted_effects/mdr_disasters.txt)
+		set_variable = { state_renewable_capacity_factor_modifier_var = 0.600 }
+		set_variable = { productivity_state_var = 500 }
+	}
+
+	provinces = { 16611 16618 16623 16624 16627 16628 16629 16631 16643 16645 16656 16691 16698 16727 16746 16751 16755 16762 16766 16791 16807 16848 16893 16904 16928 16935 16944 17012 }
+}

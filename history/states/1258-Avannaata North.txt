@@ -1,0 +1,26 @@
+state = {
+	id = 1258
+	name = "STATE_1258" # Avannaata North
+	manpower = 750
+
+	state_category = state_00
+
+	history = {
+		owner = GRN
+		victory_points = {
+			16634 1
+		}
+		buildings = {
+			infrastructure = 1
+			16634 = {
+				naval_base = 1
+			}
+		}
+		add_core_of = GRN
+		set_state_flag = mdr_polar   # low disaster risk (common/scripted_effects/mdr_disasters.txt)
+		set_variable = { state_renewable_capacity_factor_modifier_var = 0.600 }
+		set_variable = { productivity_state_var = 500 }
+	}
+
+	provinces = { 16626 16634 16641 16666 16846 16955 17000 }
+}

@@ -1,0 +1,62 @@
+# Population aging in 2000, applied from day one.
+mdr_demography_start = {
+	if = { limit = { NOT = { OR = { has_idea = mdr_aging_1 has_idea = mdr_aging_2 has_idea = mdr_aging_3 has_idea = mdr_demographic_bonus } } OR = { original_tag = JAP original_tag = ITA } }
+		add_ideas = mdr_aging_3
+	}
+	else_if = { limit = { NOT = { OR = { has_idea = mdr_aging_1 has_idea = mdr_aging_2 has_idea = mdr_aging_3 has_idea = mdr_demographic_bonus } } OR = { original_tag = GER original_tag = SPR original_tag = GRE original_tag = POR original_tag = SOV original_tag = UKR original_tag = BLR original_tag = BUL original_tag = LAT original_tag = LIT original_tag = EST original_tag = HUN original_tag = CRO original_tag = SLV original_tag = AUS original_tag = SWE original_tag = FIN original_tag = SWI original_tag = CZE original_tag = ROM } }
+		add_ideas = mdr_aging_2
+	}
+	else_if = { limit = { NOT = { OR = { has_idea = mdr_aging_1 has_idea = mdr_aging_2 has_idea = mdr_aging_3 has_idea = mdr_demographic_bonus } } OR = { original_tag = FRA original_tag = ENG original_tag = BEL original_tag = HOL original_tag = DEN original_tag = NRY original_tag = CAN original_tag = USA original_tag = AST original_tag = NZL original_tag = CHI original_tag = KOR original_tag = TAI original_tag = SIN original_tag = POL original_tag = SLO original_tag = CUB original_tag = URG } }
+		add_ideas = mdr_aging_1
+	}
+	else_if = { limit = { NOT = { OR = { has_idea = mdr_aging_1 has_idea = mdr_aging_2 has_idea = mdr_aging_3 has_idea = mdr_demographic_bonus } } OR = { original_tag = NIG original_tag = NGR original_tag = ETH original_tag = PAK original_tag = AFG original_tag = YEM original_tag = IRQ original_tag = UGA original_tag = KEN original_tag = TNZ original_tag = DRC original_tag = CHA original_tag = SOM original_tag = SUD original_tag = AGL original_tag = MAL original_tag = BAN original_tag = PHI original_tag = EGY } }
+		add_ideas = mdr_demographic_bonus
+	}
+}
+
+# Countries that aged fast after 2000, in the global weekly pass.
+mdr_demography_historical = {
+	if = { limit = { date > 2010.01.01 NOT = { has_global_flag = mdr_hdemo_2010_korea } }
+		set_global_flag = mdr_hdemo_2010_korea
+		if = { limit = { country_exists = KOR KOR = { has_idea = mdr_aging_1 } }
+			KOR = { swap_ideas = { remove_idea = mdr_aging_1 add_idea = mdr_aging_2 } }
+		}
+	}
+	if = { limit = { date > 2015.01.01 NOT = { has_global_flag = mdr_hdemo_2015_east_asia } }
+		set_global_flag = mdr_hdemo_2015_east_asia
+		if = { limit = { country_exists = CHI CHI = { has_idea = mdr_aging_1 } }
+			CHI = { swap_ideas = { remove_idea = mdr_aging_1 add_idea = mdr_aging_2 } }
+		}
+		if = { limit = { country_exists = TAI TAI = { has_idea = mdr_aging_1 } }
+			TAI = { swap_ideas = { remove_idea = mdr_aging_1 add_idea = mdr_aging_2 } }
+		}
+	}
+	if = { limit = { date > 2020.01.01 NOT = { has_global_flag = mdr_hdemo_2020_korea } }
+		set_global_flag = mdr_hdemo_2020_korea
+		if = { limit = { country_exists = KOR KOR = { has_idea = mdr_aging_2 } }
+			KOR = { swap_ideas = { remove_idea = mdr_aging_2 add_idea = mdr_aging_3 } }
+		}
+	}
+}
+
+# A finished reform path (common/national_focus/mdr_demography.txt) lowers aging one level.
+mdr_demography_path_complete = {
+	if = { limit = { has_idea = mdr_aging_3 }
+		swap_ideas = { remove_idea = mdr_aging_3 add_idea = mdr_aging_2 }
+	}
+	else_if = { limit = { has_idea = mdr_aging_2 }
+		swap_ideas = { remove_idea = mdr_aging_2 add_idea = mdr_aging_1 }
+	}
+	else_if = { limit = { has_idea = mdr_aging_1 }
+		remove_ideas = mdr_aging_1
+	}
+}
+
+# Input: temp variable mdr_demo_cost_permille (thousandths of GDP, paid once).
+# Variables keep only three decimals, so multiply first and divide last.
+mdr_demography_pay = {
+	set_temp_variable = { treasury_change = gdp_total }
+	multiply_temp_variable = { treasury_change = mdr_demo_cost_permille }
+	divide_temp_variable = { treasury_change = -1000 }
+	modify_treasury_effect = yes
+}

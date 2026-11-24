@@ -1,0 +1,95 @@
+add_namespace = mdr_ship_sale
+
+# An AI country asks the player to sell it a ship (mdr_sale_monthly). FROM is the buyer.
+country_event = {
+	id = mdr_ship_sale.1
+	title = mdr_ship_sale.1.t
+	desc = mdr_ship_sale.1.d
+	picture = GFX_treaty_rejected
+	is_triggered_only = yes
+
+	trigger = {
+		mdr_ships_on = yes
+		FROM = { exists = yes }
+		NOT = { has_war_with = FROM }
+	}
+
+	immediate = {
+		hidden_effect = { mdr_sale_offer_prepare = yes }
+	}
+
+	option = {
+		name = mdr_ship_sale.1.a
+		log = "[GetDateText]: [This.GetName]: mdr_ship_sale.1.a executed"
+		trigger = {
+			check_variable = { global.mdr_sale_offer_type > 0 }
+		}
+		set_variable = { global.mdr_sale_to = FROM.id }
+		set_temp_variable = { mdr_sale_n_type = global.mdr_sale_offer_type }
+		set_temp_variable = { mdr_sale_n_gen = 0 }
+		set_temp_variable = { mdr_sale_n_qty = 1 }
+		set_temp_variable = { mdr_sale_n_unit = global.mdr_sale_offer_price }
+		set_temp_variable = { mdr_sale_n_wait = 0 }
+		mdr_sale_open_order = yes
+		ai_chance = { base = 1 }
+	}
+
+	option = {
+		name = mdr_ship_sale.1.b
+		log = "[GetDateText]: [This.GetName]: mdr_ship_sale.1.b executed"
+		ai_chance = { base = 1 }
+	}
+}
+
+# A seller offers ships (mdr_sale_send_offer); a player or the AI answers. FROM is the seller; the offer is in its
+# mdr_sale_p_* variables.
+country_event = {
+	id = mdr_ship_sale.2
+	title = mdr_ship_sale.2.t
+	desc = mdr_ship_sale.2.d
+	picture = GFX_treaty_rejected
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_ship_sale.2.a
+		log = "[GetDateText]: [This.GetName]: mdr_ship_sale.2.a executed"
+		trigger = { NOT = { check_variable = { treasury < FROM.mdr_sale_p_total } } }
+		FROM = { mdr_sale_pending_accept = yes }
+		# The AI accepts with the chance the seller saw in the window, in steps of 10%.
+		ai_chance = {
+			base = 0
+			modifier = { add = 10 check_variable = { FROM.mdr_sale_p_prob > 5 } }
+			modifier = { add = 10 check_variable = { FROM.mdr_sale_p_prob > 15 } }
+			modifier = { add = 10 check_variable = { FROM.mdr_sale_p_prob > 25 } }
+			modifier = { add = 10 check_variable = { FROM.mdr_sale_p_prob > 35 } }
+			modifier = { add = 10 check_variable = { FROM.mdr_sale_p_prob > 45 } }
+			modifier = { add = 10 check_variable = { FROM.mdr_sale_p_prob > 55 } }
+			modifier = { add = 10 check_variable = { FROM.mdr_sale_p_prob > 65 } }
+			modifier = { add = 10 check_variable = { FROM.mdr_sale_p_prob > 75 } }
+			modifier = { add = 10 check_variable = { FROM.mdr_sale_p_prob > 85 } }
+			modifier = { add = 10 check_variable = { FROM.mdr_sale_p_prob > 95 } }
+		}
+	}
+
+	option = {
+		name = mdr_ship_sale.2.b
+		log = "[GetDateText]: [This.GetName]: mdr_ship_sale.2.b executed"
+		FROM = {
+			clr_country_flag = mdr_sale_pending
+			set_country_flag = { flag = mdr_sale_cd@PREV days = 30 value = 1 }
+		}
+		ai_chance = {
+			base = 100
+			modifier = { add = -10 check_variable = { FROM.mdr_sale_p_prob > 5 } }
+			modifier = { add = -10 check_variable = { FROM.mdr_sale_p_prob > 15 } }
+			modifier = { add = -10 check_variable = { FROM.mdr_sale_p_prob > 25 } }
+			modifier = { add = -10 check_variable = { FROM.mdr_sale_p_prob > 35 } }
+			modifier = { add = -10 check_variable = { FROM.mdr_sale_p_prob > 45 } }
+			modifier = { add = -10 check_variable = { FROM.mdr_sale_p_prob > 55 } }
+			modifier = { add = -10 check_variable = { FROM.mdr_sale_p_prob > 65 } }
+			modifier = { add = -10 check_variable = { FROM.mdr_sale_p_prob > 75 } }
+			modifier = { add = -10 check_variable = { FROM.mdr_sale_p_prob > 85 } }
+			modifier = { add = -10 check_variable = { FROM.mdr_sale_p_prob > 95 } }
+		}
+	}
+}

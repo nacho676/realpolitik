@@ -1,0 +1,33 @@
+add_namespace = mdr_ai
+
+# An AI country lifted its embargo on the player because it needs our resources (mdr_ai_lift_embargo in mdr_ai.txt).
+country_event = {
+	id = mdr_ai.1
+	title = mdr_ai.1.t
+	desc = mdr_ai.1.d
+	picture = GFX_politics_negotiations
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_ai.1.a
+	}
+}
+
+# A losing AI asks the player for a white peace (mdr_ai_peace_monthly in mdr_ai.txt).
+country_event = {
+	id = mdr_ai.2
+	title = mdr_ai.2.t
+	desc = mdr_ai.2.d
+	picture = GFX_politics_negotiations
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_ai.2.a
+		log = "[GetDateText]: [This.GetName]: MDR AI el jugador acepta la paz con [mdr_ai_peace_asker.GetName]"
+		white_peace = { tag = event_target:mdr_ai_peace_asker message = mdr_ai_peace_msg }
+	}
+	option = {
+		name = mdr_ai.2.b
+		log = "[GetDateText]: [This.GetName]: MDR AI el jugador rechaza la paz con [mdr_ai_peace_asker.GetName]"
+	}
+}

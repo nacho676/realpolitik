@@ -1,0 +1,58 @@
+ideas = {
+	country = {
+		mdr_aging_1 = {
+			allowed_civil_war = { always = yes }
+			picture = population_stagnation
+
+			modifier = {
+				monthly_population = -0.10
+				social_cost_multiplier_modifier = 0.03
+			}
+		}
+
+		mdr_aging_2 = {
+			allowed_civil_war = { always = yes }
+			picture = population_down
+
+			modifier = {
+				monthly_population = -0.20
+				social_cost_multiplier_modifier = 0.07
+				productivity_growth_modifier = -0.01
+			}
+		}
+
+		mdr_aging_3 = {
+			allowed_civil_war = { always = yes }
+			picture = demographic_crisis
+
+			modifier = {
+				monthly_population = -0.30
+				social_cost_multiplier_modifier = 0.12
+				productivity_growth_modifier = -0.02
+				conscription_factor = -0.05
+			}
+		}
+
+		# Closing focus of the demography branch (common/national_focus/mdr_demography.txt).
+		mdr_demo_pact_idea = {
+			allowed_civil_war = { always = yes }
+			picture = family_supports
+
+			modifier = {
+				monthly_population = 0.05
+				social_cost_multiplier_modifier = -0.05
+				stability_factor = 0.02
+			}
+		}
+
+		mdr_demographic_bonus = {
+			allowed_civil_war = { always = yes }
+			picture = demographic_boom
+
+			modifier = {
+				monthly_population = 0.15
+				productivity_growth_modifier = 0.01
+			}
+		}
+	}
+}

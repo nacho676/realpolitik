@@ -1,0 +1,869 @@
+guiTypes = {
+	# Treaties tab button, in the title row of Millennium Dawn's International Systems window, left of its close button.
+	containerWindowType = {
+		name = "mdr_treaties_tab_window"
+		position = { x = 458 y = 10 }
+		size = { width = 44 height = 30 }
+
+		buttonType = {
+			name = "mdr_treaties_tab_off"
+			position = { x = 0 y = 0 }
+			spriteType = "GFX_mdr_treaties_tab_off"
+			pdx_tooltip = "MDR_TREATIES_TAB_TT"
+			pdx_tooltip_delayed = "MDR_TREATIES_TAB_TT_DELAYED"
+			clicksound = click_checkbox
+		}
+
+		buttonType = {
+			name = "mdr_treaties_tab_on"
+			position = { x = 0 y = 0 }
+			spriteType = "GFX_mdr_treaties_tab_on"
+			pdx_tooltip = "MDR_TREATIES_TAB_TT"
+			pdx_tooltip_delayed = "MDR_TREATIES_TAB_TT_DELAYED"
+		}
+	}
+
+	# Treaties panel, where Millennium Dawn draws its own tabs (like MD_antarctica_system_window).
+	containerWindowType = {
+		name = "mdr_treaties_window"
+		position = { x = 20 y = 100 }
+		size = { width = 510 height = 660 }
+
+		instantTextboxType = {
+			name = "mdr_treaties_title"
+			position = { x = 0 y = 0 }
+			font = "hoi_20b"
+			text = "MDR_TREATIES_PANEL_TITLE"
+			maxWidth = 510
+			maxHeight = 26
+			format = centre
+		}
+
+		instantTextboxType = {
+			name = "mdr_treaties_intro"
+			position = { x = 0 y = 32 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATIES_PANEL_INTRO"
+			maxWidth = 505
+			maxHeight = 90
+			fixedsize = yes
+			format = left
+		}
+
+		iconType = {
+			name = "mdr_tr_divider_1"
+			spriteType = "GFX_divider"
+			position = { x = 0 y = 168 }
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_name_1"
+			position = { x = 5 y = 137 }
+			font = "hoi_18mbs"
+			text = "MDR_TREATY_NAME_1"
+			maxWidth = 215
+			maxHeight = 22
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_member_1"
+			position = { x = 225 y = 139 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_MEMBER"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_out_1"
+			position = { x = 225 y = 139 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_OUT"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_na_1"
+			position = { x = 225 y = 139 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_NA"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		buttonType = {
+			name = "mdr_tr_join_1"
+			position = { x = 380 y = 130 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_JOIN"
+			pdx_tooltip = "mdr_treaty_join_1"
+			pdx_tooltip_delayed = "mdr_treaty_join_1_desc"
+			clicksound = click_default
+		}
+
+		buttonType = {
+			name = "mdr_tr_leave_1"
+			position = { x = 380 y = 130 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_LEAVE"
+			pdx_tooltip = "mdr_treaty_leave_1"
+			pdx_tooltip_delayed = "mdr_treaty_leave_1_desc"
+			clicksound = click_default
+		}
+
+		iconType = {
+			name = "mdr_tr_divider_2"
+			spriteType = "GFX_divider"
+			position = { x = 0 y = 212 }
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_name_2"
+			position = { x = 5 y = 181 }
+			font = "hoi_18mbs"
+			text = "MDR_TREATY_NAME_2"
+			maxWidth = 215
+			maxHeight = 22
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_member_2"
+			position = { x = 225 y = 183 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_MEMBER"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_out_2"
+			position = { x = 225 y = 183 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_OUT"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_na_2"
+			position = { x = 225 y = 183 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_NA"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		buttonType = {
+			name = "mdr_tr_join_2"
+			position = { x = 380 y = 174 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_JOIN"
+			pdx_tooltip = "mdr_treaty_join_2"
+			pdx_tooltip_delayed = "mdr_treaty_join_2_desc"
+			clicksound = click_default
+		}
+
+		buttonType = {
+			name = "mdr_tr_leave_2"
+			position = { x = 380 y = 174 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_LEAVE"
+			pdx_tooltip = "mdr_treaty_leave_2"
+			pdx_tooltip_delayed = "mdr_treaty_leave_2_desc"
+			clicksound = click_default
+		}
+
+		iconType = {
+			name = "mdr_tr_divider_3"
+			spriteType = "GFX_divider"
+			position = { x = 0 y = 256 }
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_name_3"
+			position = { x = 5 y = 225 }
+			font = "hoi_18mbs"
+			text = "MDR_TREATY_NAME_3"
+			maxWidth = 215
+			maxHeight = 22
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_member_3"
+			position = { x = 225 y = 227 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_MEMBER"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_out_3"
+			position = { x = 225 y = 227 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_OUT"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_na_3"
+			position = { x = 225 y = 227 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_NA"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		buttonType = {
+			name = "mdr_tr_propose_3"
+			position = { x = 380 y = 218 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_PROPOSE_50"
+			pdx_tooltip = "mdr_treaty_propose_3"
+			pdx_tooltip_delayed = "mdr_treaty_propose_3_desc"
+			clicksound = click_default
+		}
+
+		buttonType = {
+			name = "mdr_tr_leave_3"
+			position = { x = 380 y = 218 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_LEAVE"
+			pdx_tooltip = "mdr_treaty_leave_3"
+			pdx_tooltip_delayed = "mdr_treaty_leave_3_desc"
+			clicksound = click_default
+		}
+
+		iconType = {
+			name = "mdr_tr_divider_4"
+			spriteType = "GFX_divider"
+			position = { x = 0 y = 300 }
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_name_4"
+			position = { x = 5 y = 269 }
+			font = "hoi_18mbs"
+			text = "MDR_TREATY_NAME_4"
+			maxWidth = 215
+			maxHeight = 22
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_member_4"
+			position = { x = 225 y = 271 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_MEMBER"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_out_4"
+			position = { x = 225 y = 271 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_OUT"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_na_4"
+			position = { x = 225 y = 271 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_NA"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		buttonType = {
+			name = "mdr_tr_propose_4"
+			position = { x = 380 y = 262 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_PROPOSE_50"
+			pdx_tooltip = "mdr_treaty_propose_4"
+			pdx_tooltip_delayed = "mdr_treaty_propose_4_desc"
+			clicksound = click_default
+		}
+
+		buttonType = {
+			name = "mdr_tr_leave_4"
+			position = { x = 380 y = 262 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_LEAVE"
+			pdx_tooltip = "mdr_treaty_leave_4"
+			pdx_tooltip_delayed = "mdr_treaty_leave_4_desc"
+			clicksound = click_default
+		}
+
+		iconType = {
+			name = "mdr_tr_divider_5"
+			spriteType = "GFX_divider"
+			position = { x = 0 y = 344 }
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_name_5"
+			position = { x = 5 y = 313 }
+			font = "hoi_18mbs"
+			text = "MDR_TREATY_NAME_5"
+			maxWidth = 215
+			maxHeight = 22
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_member_5"
+			position = { x = 225 y = 315 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_MEMBER"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_out_5"
+			position = { x = 225 y = 315 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_OUT"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_na_5"
+			position = { x = 225 y = 315 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_NA"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		buttonType = {
+			name = "mdr_tr_propose_5"
+			position = { x = 380 y = 306 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_PROPOSE_50"
+			pdx_tooltip = "mdr_treaty_propose_5"
+			pdx_tooltip_delayed = "mdr_treaty_propose_5_desc"
+			clicksound = click_default
+		}
+
+		buttonType = {
+			name = "mdr_tr_leave_5"
+			position = { x = 380 y = 306 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_LEAVE"
+			pdx_tooltip = "mdr_treaty_leave_5"
+			pdx_tooltip_delayed = "mdr_treaty_leave_5_desc"
+			clicksound = click_default
+		}
+
+		iconType = {
+			name = "mdr_tr_divider_6"
+			spriteType = "GFX_divider"
+			position = { x = 0 y = 388 }
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_name_6"
+			position = { x = 5 y = 357 }
+			font = "hoi_18mbs"
+			text = "MDR_TREATY_NAME_6"
+			maxWidth = 215
+			maxHeight = 22
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_member_6"
+			position = { x = 225 y = 359 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_MEMBER"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_out_6"
+			position = { x = 225 y = 359 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_OUT"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_na_6"
+			position = { x = 225 y = 359 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_NA"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		buttonType = {
+			name = "mdr_tr_join_6"
+			position = { x = 380 y = 350 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_JOIN"
+			pdx_tooltip = "mdr_treaty_join_6"
+			pdx_tooltip_delayed = "mdr_treaty_join_6_desc"
+			clicksound = click_default
+		}
+
+		buttonType = {
+			name = "mdr_tr_leave_6"
+			position = { x = 380 y = 350 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_LEAVE"
+			pdx_tooltip = "mdr_treaty_leave_6"
+			pdx_tooltip_delayed = "mdr_treaty_leave_6_desc"
+			clicksound = click_default
+		}
+
+		iconType = {
+			name = "mdr_tr_divider_7"
+			spriteType = "GFX_divider"
+			position = { x = 0 y = 432 }
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_name_7"
+			position = { x = 5 y = 401 }
+			font = "hoi_18mbs"
+			text = "MDR_TREATY_NAME_7"
+			maxWidth = 215
+			maxHeight = 22
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_member_7"
+			position = { x = 225 y = 403 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_MEMBER"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_out_7"
+			position = { x = 225 y = 403 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_OUT"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_na_7"
+			position = { x = 225 y = 403 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_NA"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		buttonType = {
+			name = "mdr_tr_join_7"
+			position = { x = 380 y = 394 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_JOIN"
+			pdx_tooltip = "mdr_treaty_join_7"
+			pdx_tooltip_delayed = "mdr_treaty_join_7_desc"
+			clicksound = click_default
+		}
+
+		buttonType = {
+			name = "mdr_tr_leave_7"
+			position = { x = 380 y = 394 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_LEAVE"
+			pdx_tooltip = "mdr_treaty_leave_7"
+			pdx_tooltip_delayed = "mdr_treaty_leave_7_desc"
+			clicksound = click_default
+		}
+
+		iconType = {
+			name = "mdr_tr_divider_8"
+			spriteType = "GFX_divider"
+			position = { x = 0 y = 476 }
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_name_8"
+			position = { x = 5 y = 445 }
+			font = "hoi_18mbs"
+			text = "MDR_TREATY_NAME_8"
+			maxWidth = 215
+			maxHeight = 22
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_member_8"
+			position = { x = 225 y = 447 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_MEMBER"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_out_8"
+			position = { x = 225 y = 447 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_OUT"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_na_8"
+			position = { x = 225 y = 447 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_NA"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		buttonType = {
+			name = "mdr_tr_join_8"
+			position = { x = 380 y = 438 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_JOIN"
+			pdx_tooltip = "mdr_treaty_join_8"
+			pdx_tooltip_delayed = "mdr_treaty_join_8_desc"
+			clicksound = click_default
+		}
+
+		buttonType = {
+			name = "mdr_tr_leave_8"
+			position = { x = 380 y = 438 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_LEAVE"
+			pdx_tooltip = "mdr_treaty_leave_8"
+			pdx_tooltip_delayed = "mdr_treaty_leave_8_desc"
+			clicksound = click_default
+		}
+
+		iconType = {
+			name = "mdr_tr_divider_9"
+			spriteType = "GFX_divider"
+			position = { x = 0 y = 520 }
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_name_9"
+			position = { x = 5 y = 489 }
+			font = "hoi_18mbs"
+			text = "MDR_TREATY_NAME_9"
+			maxWidth = 215
+			maxHeight = 22
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_member_9"
+			position = { x = 225 y = 491 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_MEMBER"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_out_9"
+			position = { x = 225 y = 491 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_OUT"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_na_9"
+			position = { x = 225 y = 491 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_NA"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		buttonType = {
+			name = "mdr_tr_join_9"
+			position = { x = 380 y = 482 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_JOIN"
+			pdx_tooltip = "mdr_treaty_join_9"
+			pdx_tooltip_delayed = "mdr_treaty_join_9_desc"
+			clicksound = click_default
+		}
+
+		buttonType = {
+			name = "mdr_tr_leave_9"
+			position = { x = 380 y = 482 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_LEAVE"
+			pdx_tooltip = "mdr_treaty_leave_9"
+			pdx_tooltip_delayed = "mdr_treaty_leave_9_desc"
+			clicksound = click_default
+		}
+
+		iconType = {
+			name = "mdr_tr_divider_10"
+			spriteType = "GFX_divider"
+			position = { x = 0 y = 564 }
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_name_10"
+			position = { x = 5 y = 533 }
+			font = "hoi_18mbs"
+			text = "MDR_TREATY_NAME_10"
+			maxWidth = 215
+			maxHeight = 22
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_member_10"
+			position = { x = 225 y = 535 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_MEMBER"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_out_10"
+			position = { x = 225 y = 535 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_OUT"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_na_10"
+			position = { x = 225 y = 535 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_NA"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		buttonType = {
+			name = "mdr_tr_propose_10"
+			position = { x = 380 y = 526 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_PROPOSE_75"
+			pdx_tooltip = "mdr_treaty_propose_10"
+			pdx_tooltip_delayed = "mdr_treaty_propose_10_desc"
+			clicksound = click_default
+		}
+
+		buttonType = {
+			name = "mdr_tr_leave_10"
+			position = { x = 380 y = 526 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_LEAVE"
+			pdx_tooltip = "mdr_treaty_leave_10"
+			pdx_tooltip_delayed = "mdr_treaty_leave_10_desc"
+			clicksound = click_default
+		}
+
+		iconType = {
+			name = "mdr_tr_divider_11"
+			spriteType = "GFX_divider"
+			position = { x = 0 y = 608 }
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_name_11"
+			position = { x = 5 y = 577 }
+			font = "hoi_18mbs"
+			text = "MDR_TREATY_NAME_11"
+			maxWidth = 215
+			maxHeight = 22
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_member_11"
+			position = { x = 225 y = 579 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_MEMBER"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_out_11"
+			position = { x = 225 y = 579 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_OUT"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_na_11"
+			position = { x = 225 y = 579 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_NA"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		buttonType = {
+			name = "mdr_tr_join_11"
+			position = { x = 380 y = 570 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_JOIN"
+			pdx_tooltip = "mdr_treaty_join_11"
+			pdx_tooltip_delayed = "mdr_treaty_join_11_desc"
+			clicksound = click_default
+		}
+
+		buttonType = {
+			name = "mdr_tr_leave_11"
+			position = { x = 380 y = 570 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_LEAVE"
+			pdx_tooltip = "mdr_treaty_leave_11"
+			pdx_tooltip_delayed = "mdr_treaty_leave_11_desc"
+			clicksound = click_default
+		}
+
+		iconType = {
+			name = "mdr_tr_divider_12"
+			spriteType = "GFX_divider"
+			position = { x = 0 y = 652 }
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_name_12"
+			position = { x = 5 y = 621 }
+			font = "hoi_18mbs"
+			text = "MDR_TREATY_NAME_12"
+			maxWidth = 215
+			maxHeight = 22
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_member_12"
+			position = { x = 225 y = 623 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_MEMBER"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_out_12"
+			position = { x = 225 y = 623 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_OUT"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextboxType = {
+			name = "mdr_tr_na_12"
+			position = { x = 225 y = 623 }
+			font = "hoi_16mbs"
+			text = "MDR_TREATY_STATUS_NA"
+			maxWidth = 140
+			maxHeight = 20
+			format = left
+		}
+
+		buttonType = {
+			name = "mdr_tr_join_12"
+			position = { x = 380 y = 614 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_JOIN"
+			pdx_tooltip = "mdr_treaty_join_12"
+			pdx_tooltip_delayed = "mdr_treaty_join_12_desc"
+			clicksound = click_default
+		}
+
+		buttonType = {
+			name = "mdr_tr_leave_12"
+			position = { x = 380 y = 614 }
+			quadTextureSprite = "GFX_button_123x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "MDR_TREATY_BTN_LEAVE"
+			pdx_tooltip = "mdr_treaty_leave_12"
+			pdx_tooltip_delayed = "mdr_treaty_leave_12_desc"
+			clicksound = click_default
+		}
+	}
+}

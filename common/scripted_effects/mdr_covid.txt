@@ -1,0 +1,94 @@
+# Historical COVID-19. COVID_events.0 fires on the owner of Hubei (state 570) in the first week of December 2019.
+# Each country gets MD's COVID_events.4 (lockdown and COVID_pandemic_impact) on the date its outbreak hit hard.
+# Day 0 is about 5 December 2019. COVID_events.4 already skips the origin country.
+mdr_covid_launch = {
+	set_global_flag = mdr_covid_launched
+	random_country = {
+		limit = { owns_state = 570 }
+		country_event = { id = COVID_events.0 }
+	}
+	log = "[GetDateText]: MDR historical COVID launched"
+}
+
+mdr_covid_schedule_waves = {
+	if = { limit = { country_exists = KOR } KOR = { country_event = { id = COVID_events.4 days = 77 } } }
+	if = { limit = { country_exists = PER } PER = { country_event = { id = COVID_events.4 days = 79 } } }
+	if = { limit = { country_exists = ITA } ITA = { country_event = { id = COVID_events.4 days = 80 } } }
+	if = { limit = { country_exists = JAP } JAP = { country_event = { id = COVID_events.4 days = 84 } } }
+	if = { limit = { country_exists = TUR } TUR = { country_event = { id = COVID_events.4 days = 97 } } }
+	if = { limit = { country_exists = USA } USA = { country_event = { id = COVID_events.4 days = 99 } } }
+	if = { limit = { country_exists = SPR } SPR = { country_event = { id = COVID_events.4 days = 100 } } }
+	if = { limit = { country_exists = CAN } CAN = { country_event = { id = COVID_events.4 days = 102 } } }
+	if = { limit = { country_exists = FRA } FRA = { country_event = { id = COVID_events.4 days = 103 } } }
+	if = { limit = { country_exists = AST } AST = { country_event = { id = COVID_events.4 days = 103 } } }
+	if = { limit = { country_exists = CHL } CHL = { country_event = { id = COVID_events.4 days = 104 } } }
+	if = { limit = { country_exists = ARG } ARG = { country_event = { id = COVID_events.4 days = 106 } } }
+	if = { limit = { country_exists = BRA } BRA = { country_event = { id = COVID_events.4 days = 106 } } }
+	if = { limit = { country_exists = GER } GER = { country_event = { id = COVID_events.4 days = 108 } } }
+	if = { limit = { country_exists = ENG } ENG = { country_event = { id = COVID_events.4 days = 109 } } }
+	if = { limit = { country_exists = COL } COL = { country_event = { id = COVID_events.4 days = 109 } } }
+	if = { limit = { country_exists = RAJ } RAJ = { country_event = { id = COVID_events.4 days = 110 } } }
+	if = { limit = { country_exists = EGY } EGY = { country_event = { id = COVID_events.4 days = 110 } } }
+	if = { limit = { country_exists = SAF } SAF = { country_event = { id = COVID_events.4 days = 112 } } }
+	if = { limit = { country_exists = MEX } MEX = { country_event = { id = COVID_events.4 days = 113 } } }
+	if = { limit = { country_exists = SOV } SOV = { country_event = { id = COVID_events.4 days = 116 } } }
+
+	# Everyone else between mid-March and late April 2020.
+	every_country = {
+		limit = {
+			has_capitulated = no
+			NOT = {
+				OR = {
+					tag = KOR
+					tag = PER
+					tag = ITA
+					tag = JAP
+					tag = TUR
+					tag = USA
+					tag = SPR
+					tag = CAN
+					tag = FRA
+					tag = AST
+					tag = CHL
+					tag = ARG
+					tag = BRA
+					tag = GER
+					tag = ENG
+					tag = COL
+					tag = RAJ
+					tag = EGY
+					tag = SAF
+					tag = MEX
+					tag = SOV
+				}
+			}
+		}
+		country_event = { id = COVID_events.4 days = 100 random_days = 40 }
+	}
+
+	# Late March 2020, when factory closures and port shutdowns peaked.
+	news_event = { id = COVID_events.5 days = 115 }
+}
+
+# Mass vaccination from mid-December 2020. Rich countries clear the pandemic first,
+# middle-income ones in spring 2021, the rest wait for the spirit to expire.
+mdr_covid_vaccines = {
+	set_global_flag = mdr_covid_vaccines_started
+	every_country = {
+		limit = {
+			OR = {
+				has_idea = COVID_pandemic_impact
+				has_idea = COVID_pandemic_origin
+			}
+		}
+		if = {
+			limit = { check_variable = { gdp_per_capita > 19.999 } }
+			country_event = { id = mdr_covid.1 days = 1 random_days = 60 }
+		}
+		else_if = {
+			limit = { check_variable = { gdp_per_capita > 6.999 } }
+			country_event = { id = mdr_covid.1 days = 90 random_days = 90 }
+		}
+	}
+	log = "[GetDateText]: MDR COVID vaccination campaigns scheduled"
+}

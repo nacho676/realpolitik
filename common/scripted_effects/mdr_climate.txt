@@ -1,0 +1,223 @@
+# Climate and environment.
+# Pollution: every state has mdr_pollution (0 to 100), which moves each month a fifth of the way toward what its industry
+# emits plus 12% of what each neighbouring state emits (smoke and dirty rivers cross borders, weaker). It only penalizes while it lasts: three exclusive levels (mdr_pollution_moderate, _high, _severe) come and go
+# with it. Cleaner technology lowers emissions over time; Kyoto and Paris lower them for their members (not cumulative).
+# Global warming: global.mdr_warming in degrees above pre-industrial times (0.62 in 2000) grows with world emissions.
+# It raises the weight of storms, floods, wildfires and heatwaves (global.mdr_climate_factor, at most +30%).
+# Treaties 11 (Kyoto) and 12 (Paris) live in mdr_treaties.txt like the arms control ones.
+
+# Game start: every state gets its pollution at once, so the map and the state view show it from day one.
+mdr_climate_start = {
+	set_global_flag = mdr_climate_started
+	mdr_climate_init = yes
+	every_state = { mdr_pollution_emissions = yes }
+	every_state = { mdr_pollution_state = yes }
+}
+
+mdr_climate_init = {
+	if = { limit = { NOT = { has_variable = global.mdr_warming } }
+		set_variable = { global.mdr_warming = 0.62 }
+		set_variable = { global.mdr_clean_tech = 1 }
+		set_variable = { global.mdr_climate_factor = 1 }
+	}
+}
+
+# Once a month for the whole world.
+mdr_climate_world_monthly = {
+	mdr_climate_init = yes
+	# Cleaner engines and power spread around the world on their own, slowly: down to 80%, one step every other month. The rest is
+	# each country's own research (mdr_pollution_factor).
+	add_to_variable = { global.mdr_clean_tech_tick = 1 }
+	if = { limit = { check_variable = { global.mdr_clean_tech_tick > 1 } }
+		set_variable = { global.mdr_clean_tech_tick = 0 }
+		multiply_variable = { global.mdr_clean_tech = 0.999 }
+	}
+	clamp_variable = { var = global.mdr_clean_tech min = 0.8 max = 1 }
+
+	set_temp_variable = { mdr_world_emissions = 0 }
+	every_state = {
+		mdr_pollution_emissions = yes
+		add_to_temp_variable = { mdr_world_emissions = mdr_pol_own }
+	}
+	every_state = { mdr_pollution_state = yes }
+
+	# 2000 emissions warm the planet about 0.0225 degrees a year.
+	if = { limit = { NOT = { has_variable = global.mdr_emissions_start } check_variable = { mdr_world_emissions > 0 } }
+		set_variable = { global.mdr_emissions_start = mdr_world_emissions }
+	}
+	if = { limit = { check_variable = { global.mdr_emissions_start > 0 } }
+		set_temp_variable = { mdr_warm_step = mdr_world_emissions }
+		divide_temp_variable = { mdr_warm_step = global.mdr_emissions_start }
+		multiply_temp_variable = { mdr_warm_step = 0.00188 }
+		add_to_variable = { global.mdr_warming = mdr_warm_step }
+		set_variable = { global.mdr_emissions_index = mdr_world_emissions }
+		divide_variable = { global.mdr_emissions_index = global.mdr_emissions_start }
+		multiply_variable = { global.mdr_emissions_index = 100 }
+	}
+	# Extreme weather: +4% per tenth of a degree above 2000, at most +30%.
+	set_variable = { global.mdr_climate_factor = global.mdr_warming }
+	subtract_from_variable = { global.mdr_climate_factor = 0.62 }
+	multiply_variable = { global.mdr_climate_factor = 0.4 }
+	add_to_variable = { global.mdr_climate_factor = 1 }
+	clamp_variable = { var = global.mdr_climate_factor min = 1 max = 1.3 }
+
+	if = { limit = { check_variable = { global.mdr_warming > 0.999 } NOT = { has_global_flag = mdr_warming_1 } }
+		set_global_flag = mdr_warming_1
+		news_event = { id = mdr_climate.1 }
+	}
+	if = { limit = { check_variable = { global.mdr_warming > 1.499 } NOT = { has_global_flag = mdr_warming_15 } }
+		set_global_flag = mdr_warming_15
+		news_event = { id = mdr_climate.2 }
+	}
+
+	mdr_climate_treaties_world = yes
+}
+
+# State scope, first pass. Output: state variable mdr_pol_own, what the state itself emits this month (0 to 100).
+mdr_pollution_emissions = {
+	set_variable = {
+		mdr_pol_own = {
+			value = 0
+			add = { value = building_level@industrial_complex multiply = 0.9 }
+			add = { value = building_level@arms_factory multiply = 1.1 }
+			add = { value = building_level@dockyard multiply = 0.8 }
+			add = { value = building_level@fossil_powerplant multiply = 3.2 }
+			add = { value = building_level@synthetic_refinery multiply = 2.6 }
+			add = { value = building_level@agriculture_district multiply = 0.35 }
+			add = { value = building_level@microchip_plant multiply = 0.45 }
+			add = { value = building_level@composite_plant multiply = 0.7 }
+			add = { value = building_level@mdr_cropland multiply = 0.12 }
+			add = { value = building_level@mdr_electric_arc_furnace multiply = 0.65 }
+			add = { value = building_level@mdr_rare_earth_complex multiply = 2.3 }
+			add = { value = building_level@mdr_uranium_mine multiply = 1.4 }
+			add = { value = building_level@mdr_recycling_plant multiply = -4.5 }
+			multiply = global.mdr_clean_tech
+		}
+	}
+	# Paris binds every member; Kyoto only bound the rich ones. Real emissions kept rising after 2016: rich members cut
+	# about 14%, the rest only bent their growth (about 6%).
+	# Polar states may have no owner (Antarctica).
+	if = { limit = { has_state_flag = mdr_polar }
+	}
+	else_if = { limit = { OWNER = { has_country_flag = mdr_treaty_12 check_variable = { gdp_per_capita > 15 } } }
+		multiply_variable = { mdr_pol_own = 0.86 }
+	}
+	else_if = { limit = { OWNER = { has_country_flag = mdr_treaty_12 } }
+		multiply_variable = { mdr_pol_own = 0.94 }
+	}
+	else_if = { limit = { OWNER = { has_country_flag = mdr_treaty_11 check_variable = { gdp_per_capita > 15 } } }
+		multiply_variable = { mdr_pol_own = 0.88 }
+	}
+	# Clean technology of the owner (common/technologies/mdr_green_techs.txt).
+	if = { limit = { NOT = { has_state_flag = mdr_polar } }
+		OWNER = { set_temp_variable = { mdr_pol_mult = modifier@mdr_pollution_factor } }
+		add_to_temp_variable = { mdr_pol_mult = 1 }
+		multiply_variable = { mdr_pol_own = mdr_pol_mult }
+	}
+	clamp_variable = { var = mdr_pol_own min = 0 max = 100 }
+}
+
+# State scope, second pass (after every state has mdr_pol_own): the state's own emissions plus 12% of each neighbour's.
+mdr_pollution_state = {
+	set_temp_variable = { mdr_pol = mdr_pol_own }
+	set_temp_variable = { mdr_pol_spill = 0 }
+	every_neighbor_state = {
+		add_to_temp_variable = { mdr_pol_spill = mdr_pol_own }
+	}
+	multiply_temp_variable = { mdr_pol_spill = 0.12 }
+	add_to_temp_variable = { mdr_pol = mdr_pol_spill }
+	clamp_temp_variable = { var = mdr_pol min = 0 max = 100 }
+
+	if = { limit = { NOT = { has_variable = mdr_pollution } }
+		set_variable = { mdr_pollution = mdr_pol }
+	}
+	else = {
+		set_temp_variable = { mdr_pol_step = mdr_pol }
+		subtract_from_temp_variable = { mdr_pol_step = mdr_pollution }
+		multiply_temp_variable = { mdr_pol_step = 0.2 }
+		add_to_variable = { mdr_pollution = mdr_pol_step }
+	}
+
+	if = { limit = { check_variable = { mdr_pollution > 69.99 } }
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = mdr_pollution_severe } } }
+			mdr_pollution_clear = yes
+			add_dynamic_modifier = { modifier = mdr_pollution_severe }
+		}
+	}
+	else_if = { limit = { check_variable = { mdr_pollution > 44.99 } }
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = mdr_pollution_high } } }
+			mdr_pollution_clear = yes
+			add_dynamic_modifier = { modifier = mdr_pollution_high }
+		}
+	}
+	else_if = { limit = { check_variable = { mdr_pollution > 24.99 } }
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = mdr_pollution_moderate } } }
+			mdr_pollution_clear = yes
+			add_dynamic_modifier = { modifier = mdr_pollution_moderate }
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				has_dynamic_modifier = { modifier = mdr_pollution_moderate }
+				has_dynamic_modifier = { modifier = mdr_pollution_high }
+				has_dynamic_modifier = { modifier = mdr_pollution_severe }
+			}
+		}
+		mdr_pollution_clear = yes
+	}
+}
+
+mdr_pollution_clear = {
+	remove_dynamic_modifier = { modifier = mdr_pollution_moderate }
+	remove_dynamic_modifier = { modifier = mdr_pollution_high }
+	remove_dynamic_modifier = { modifier = mdr_pollution_severe }
+}
+
+# Kyoto opens with the game (signed in 1997) and comes into force on 16 February 2005; Paris is adopted on 12 December 2015
+# and comes into force on 4 November 2016. On those dates most of the world joins; human players choose in an event.
+mdr_climate_treaties_world = {
+	if = { limit = { NOT = { has_global_flag = mdr_kyoto_open } }
+		set_global_flag = mdr_kyoto_open
+	}
+	if = { limit = { date > 2005.02.15 NOT = { has_global_flag = mdr_kyoto_in_force } }
+		set_global_flag = mdr_kyoto_in_force
+		every_country = {
+			limit = {
+				NOT = { has_country_flag = mdr_treaty_11 }
+				NOT = { OR = { original_tag = USA original_tag = AST original_tag = TUR original_tag = KAZ original_tag = TAI } }
+			}
+			set_temp_variable = { mdr_hist_id = 17 }
+			mdr_treaty_hist_action = yes
+		}
+	}
+	if = { limit = { date > 2015.12.11 NOT = { has_global_flag = mdr_paris_open } }
+		set_global_flag = mdr_paris_open
+	}
+	if = { limit = { date > 2016.11.03 NOT = { has_global_flag = mdr_paris_in_force } }
+		set_global_flag = mdr_paris_in_force
+		every_country = {
+			limit = {
+				NOT = { has_country_flag = mdr_treaty_12 }
+				NOT = { OR = { original_tag = PER original_tag = LBA original_tag = YEM original_tag = IRQ original_tag = TUR original_tag = TAI } }
+			}
+			set_temp_variable = { mdr_hist_id = 19 }
+			mdr_treaty_hist_action = yes
+		}
+	}
+}
+
+# Country scope, weekly. Rich members pay for their targets for a time: Kyoto about 0.2% of GDP a year for seven years,
+# Paris about 0.25% a year for ten. Only one cost at a time.
+mdr_climate_weekly = {
+	if = { limit = { check_variable = { gdp_per_capita > 15 } OR = { has_country_flag = mdr_paris_cost has_country_flag = mdr_kyoto_cost } }
+		set_temp_variable = { treasury_change = gdp_total }
+		if = { limit = { has_country_flag = mdr_paris_cost }
+			multiply_temp_variable = { treasury_change = -0.000048 }
+		}
+		else = {
+			multiply_temp_variable = { treasury_change = -0.0000385 }
+		}
+		modify_treasury_effect = yes
+	}
+}

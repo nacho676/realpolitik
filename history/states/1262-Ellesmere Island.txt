@@ -1,0 +1,26 @@
+state = {
+	id = 1262
+	name = "STATE_1262" # Ellesmere Island
+	manpower = 150
+
+	state_category = state_00
+
+	history = {
+		owner = CAN
+		victory_points = {
+			16607 1
+		}
+		buildings = {
+			infrastructure = 1
+			16607 = {
+				naval_base = 1
+			}
+		}
+		add_core_of = CAN
+		set_state_flag = mdr_polar   # low disaster risk (common/scripted_effects/mdr_disasters.txt)
+		set_variable = { state_renewable_capacity_factor_modifier_var = 0.600 }
+		set_variable = { productivity_state_var = 500 }
+	}
+
+	provinces = { 16606 16607 16609 16610 16612 16613 16614 16615 16616 16617 16621 16654 16660 16670 16684 }
+}

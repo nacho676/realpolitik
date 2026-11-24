@@ -1,0 +1,879 @@
+add_namespace = mdr_disasters
+
+# Earthquake
+country_event = {
+	id = mdr_disasters.1
+	title = mdr_disasters.1.t
+	desc = {
+		text = mdr_disasters.1.d1
+		trigger = { check_variable = { mdr_disaster_tier = 1 } }
+	}
+	desc = {
+		text = mdr_disasters.1.d2
+		trigger = { check_variable = { mdr_disaster_tier = 2 } }
+	}
+	desc = {
+		text = mdr_disasters.1.d3
+		trigger = { check_variable = { mdr_disaster_tier = 3 } }
+	}
+	picture = GFX_asian_earthquakes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters_opt_help
+		trigger = { check_variable = { mdr_disaster_tier = 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.1 help executed"
+		mdr_disaster_opt_help = yes
+	}
+
+	option = {
+		name = mdr_disasters_opt_own
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.1 own funds executed"
+		mdr_disaster_opt_own_funds = yes
+		ai_chance = {
+			base = 3
+			modifier = {
+				factor = 0
+				check_variable = { treasury < mdr_disaster_cost }
+			}
+		}
+	}
+
+	option = {
+		name = mdr_disasters_opt_aid
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.1 international aid executed"
+		mdr_disaster_opt_aid = yes
+		ai_chance = { base = 2 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_army
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.1 army executed"
+		mdr_disaster_opt_army = yes
+		ai_chance = { base = 1 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_fund
+		trigger = {
+			check_variable = { mdr_disaster_tier > 1 }
+			check_variable = { mdr_fund_balance > mdr_disaster_cost }
+		}
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.1 stabilization fund executed"
+		mdr_disaster_opt_fund = yes
+		ai_chance = { base = 6 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_coverup
+		trigger = {
+			check_variable = { mdr_disaster_tier > 1 }
+			has_elections = no
+		}
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.1 cover-up executed"
+		mdr_disaster_opt_coverup = yes
+		ai_chance = { base = 1 }
+	}
+}
+
+# Tsunami
+country_event = {
+	id = mdr_disasters.2
+	title = mdr_disasters.2.t
+	desc = {
+		text = mdr_disasters.2.d1
+		trigger = { check_variable = { mdr_disaster_tier = 1 } }
+	}
+	desc = {
+		text = mdr_disasters.2.d2
+		trigger = { check_variable = { mdr_disaster_tier = 2 } }
+	}
+	desc = {
+		text = mdr_disasters.2.d3
+		trigger = { check_variable = { mdr_disaster_tier = 3 } }
+	}
+	picture = GFX_asian_earthquakes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters_opt_help
+		trigger = { check_variable = { mdr_disaster_tier = 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.2 help executed"
+		mdr_disaster_opt_help = yes
+	}
+
+	option = {
+		name = mdr_disasters_opt_own
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.2 own funds executed"
+		mdr_disaster_opt_own_funds = yes
+		ai_chance = {
+			base = 3
+			modifier = {
+				factor = 0
+				check_variable = { treasury < mdr_disaster_cost }
+			}
+		}
+	}
+
+	option = {
+		name = mdr_disasters_opt_aid
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.2 international aid executed"
+		mdr_disaster_opt_aid = yes
+		ai_chance = { base = 2 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_army
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.2 army executed"
+		mdr_disaster_opt_army = yes
+		ai_chance = { base = 1 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_fund
+		trigger = {
+			check_variable = { mdr_disaster_tier > 1 }
+			check_variable = { mdr_fund_balance > mdr_disaster_cost }
+		}
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.2 stabilization fund executed"
+		mdr_disaster_opt_fund = yes
+		ai_chance = { base = 6 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_coverup
+		trigger = {
+			check_variable = { mdr_disaster_tier > 1 }
+			has_elections = no
+		}
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.2 cover-up executed"
+		mdr_disaster_opt_coverup = yes
+		ai_chance = { base = 1 }
+	}
+}
+
+# Tropical storm
+country_event = {
+	id = mdr_disasters.3
+	title = mdr_disasters.3.t
+	desc = {
+		text = mdr_disasters.3.d1
+		trigger = { check_variable = { mdr_disaster_tier = 1 } }
+	}
+	desc = {
+		text = mdr_disasters.3.d2
+		trigger = { check_variable = { mdr_disaster_tier = 2 } }
+	}
+	desc = {
+		text = mdr_disasters.3.d3
+		trigger = { check_variable = { mdr_disaster_tier = 3 } }
+	}
+	picture = GFX_BRA_event_cyclone_catarina
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters_opt_help
+		trigger = { check_variable = { mdr_disaster_tier = 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.3 help executed"
+		mdr_disaster_opt_help = yes
+	}
+
+	option = {
+		name = mdr_disasters_opt_own
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.3 own funds executed"
+		mdr_disaster_opt_own_funds = yes
+		ai_chance = {
+			base = 3
+			modifier = {
+				factor = 0
+				check_variable = { treasury < mdr_disaster_cost }
+			}
+		}
+	}
+
+	option = {
+		name = mdr_disasters_opt_aid
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.3 international aid executed"
+		mdr_disaster_opt_aid = yes
+		ai_chance = { base = 2 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_army
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.3 army executed"
+		mdr_disaster_opt_army = yes
+		ai_chance = { base = 1 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_fund
+		trigger = {
+			check_variable = { mdr_disaster_tier > 1 }
+			check_variable = { mdr_fund_balance > mdr_disaster_cost }
+		}
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.3 stabilization fund executed"
+		mdr_disaster_opt_fund = yes
+		ai_chance = { base = 6 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_coverup
+		trigger = {
+			check_variable = { mdr_disaster_tier > 1 }
+			has_elections = no
+		}
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.3 cover-up executed"
+		mdr_disaster_opt_coverup = yes
+		ai_chance = { base = 1 }
+	}
+}
+
+# Tornado
+country_event = {
+	id = mdr_disasters.9
+	title = mdr_disasters.9.t
+	desc = {
+		text = mdr_disasters.9.d1
+		trigger = { check_variable = { mdr_disaster_tier = 1 } }
+	}
+	desc = {
+		text = mdr_disasters.9.d2
+		trigger = { check_variable = { mdr_disaster_tier = 2 } }
+	}
+	desc = {
+		text = mdr_disasters.9.d3
+		trigger = { check_variable = { mdr_disaster_tier = 3 } }
+	}
+	picture = GFX_amazon_rainforest_tropical_storm
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters_opt_help
+		trigger = { check_variable = { mdr_disaster_tier = 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.9 help executed"
+		mdr_disaster_opt_help = yes
+	}
+
+	option = {
+		name = mdr_disasters_opt_own
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.9 own funds executed"
+		mdr_disaster_opt_own_funds = yes
+		ai_chance = {
+			base = 3
+			modifier = {
+				factor = 0
+				check_variable = { treasury < mdr_disaster_cost }
+			}
+		}
+	}
+
+	option = {
+		name = mdr_disasters_opt_aid
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.9 international aid executed"
+		mdr_disaster_opt_aid = yes
+		ai_chance = { base = 2 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_army
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.9 army executed"
+		mdr_disaster_opt_army = yes
+		ai_chance = { base = 1 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_fund
+		trigger = {
+			check_variable = { mdr_disaster_tier > 1 }
+			check_variable = { mdr_fund_balance > mdr_disaster_cost }
+		}
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.9 stabilization fund executed"
+		mdr_disaster_opt_fund = yes
+		ai_chance = { base = 6 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_coverup
+		trigger = {
+			check_variable = { mdr_disaster_tier > 1 }
+			has_elections = no
+		}
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.9 cover-up executed"
+		mdr_disaster_opt_coverup = yes
+		ai_chance = { base = 1 }
+	}
+}
+
+# Flood
+country_event = {
+	id = mdr_disasters.4
+	title = mdr_disasters.4.t
+	desc = {
+		text = mdr_disasters.4.d1
+		trigger = { check_variable = { mdr_disaster_tier = 1 } }
+	}
+	desc = {
+		text = mdr_disasters.4.d2
+		trigger = { check_variable = { mdr_disaster_tier = 2 } }
+	}
+	desc = {
+		text = mdr_disasters.4.d3
+		trigger = { check_variable = { mdr_disaster_tier = 3 } }
+	}
+	picture = GFX_czech_flooding
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters_opt_help
+		trigger = { check_variable = { mdr_disaster_tier = 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.4 help executed"
+		mdr_disaster_opt_help = yes
+	}
+
+	option = {
+		name = mdr_disasters_opt_own
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.4 own funds executed"
+		mdr_disaster_opt_own_funds = yes
+		ai_chance = {
+			base = 3
+			modifier = {
+				factor = 0
+				check_variable = { treasury < mdr_disaster_cost }
+			}
+		}
+	}
+
+	option = {
+		name = mdr_disasters_opt_aid
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.4 international aid executed"
+		mdr_disaster_opt_aid = yes
+		ai_chance = { base = 2 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_army
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.4 army executed"
+		mdr_disaster_opt_army = yes
+		ai_chance = { base = 1 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_fund
+		trigger = {
+			check_variable = { mdr_disaster_tier > 1 }
+			check_variable = { mdr_fund_balance > mdr_disaster_cost }
+		}
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.4 stabilization fund executed"
+		mdr_disaster_opt_fund = yes
+		ai_chance = { base = 6 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_coverup
+		trigger = {
+			check_variable = { mdr_disaster_tier > 1 }
+			has_elections = no
+		}
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.4 cover-up executed"
+		mdr_disaster_opt_coverup = yes
+		ai_chance = { base = 1 }
+	}
+}
+
+# Wildfire
+country_event = {
+	id = mdr_disasters.5
+	title = mdr_disasters.5.t
+	desc = {
+		text = mdr_disasters.5.d1
+		trigger = { check_variable = { mdr_disaster_tier = 1 } }
+	}
+	desc = {
+		text = mdr_disasters.5.d2
+		trigger = { check_variable = { mdr_disaster_tier = 2 } }
+	}
+	desc = {
+		text = mdr_disasters.5.d3
+		trigger = { check_variable = { mdr_disaster_tier = 3 } }
+	}
+	picture = GFX_bushfire1
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters_opt_help
+		trigger = { check_variable = { mdr_disaster_tier = 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.5 help executed"
+		mdr_disaster_opt_help = yes
+	}
+
+	option = {
+		name = mdr_disasters_opt_own
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.5 own funds executed"
+		mdr_disaster_opt_own_funds = yes
+		ai_chance = {
+			base = 3
+			modifier = {
+				factor = 0
+				check_variable = { treasury < mdr_disaster_cost }
+			}
+		}
+	}
+
+	option = {
+		name = mdr_disasters_opt_aid
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.5 international aid executed"
+		mdr_disaster_opt_aid = yes
+		ai_chance = { base = 2 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_army
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.5 army executed"
+		mdr_disaster_opt_army = yes
+		ai_chance = { base = 1 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_fund
+		trigger = {
+			check_variable = { mdr_disaster_tier > 1 }
+			check_variable = { mdr_fund_balance > mdr_disaster_cost }
+		}
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.5 stabilization fund executed"
+		mdr_disaster_opt_fund = yes
+		ai_chance = { base = 6 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_coverup
+		trigger = {
+			check_variable = { mdr_disaster_tier > 1 }
+			has_elections = no
+		}
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.5 cover-up executed"
+		mdr_disaster_opt_coverup = yes
+		ai_chance = { base = 1 }
+	}
+}
+
+# Heatwave
+country_event = {
+	id = mdr_disasters.6
+	title = mdr_disasters.6.t
+	desc = {
+		text = mdr_disasters.6.d1
+		trigger = { check_variable = { mdr_disaster_tier = 1 } }
+	}
+	desc = {
+		text = mdr_disasters.6.d2
+		trigger = { check_variable = { mdr_disaster_tier = 2 } }
+	}
+	desc = {
+		text = mdr_disasters.6.d3
+		trigger = { check_variable = { mdr_disaster_tier = 3 } }
+	}
+	picture = GFX_amazon_rainforest_drought
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters_opt_help
+		trigger = { check_variable = { mdr_disaster_tier = 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.6 help executed"
+		mdr_disaster_opt_help = yes
+	}
+
+	option = {
+		name = mdr_disasters_opt_own
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.6 own funds executed"
+		mdr_disaster_opt_own_funds = yes
+		ai_chance = {
+			base = 3
+			modifier = {
+				factor = 0
+				check_variable = { treasury < mdr_disaster_cost }
+			}
+		}
+	}
+
+	option = {
+		name = mdr_disasters_opt_aid
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.6 international aid executed"
+		mdr_disaster_opt_aid = yes
+		ai_chance = { base = 2 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_army
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.6 army executed"
+		mdr_disaster_opt_army = yes
+		ai_chance = { base = 1 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_fund
+		trigger = {
+			check_variable = { mdr_disaster_tier > 1 }
+			check_variable = { mdr_fund_balance > mdr_disaster_cost }
+		}
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.6 stabilization fund executed"
+		mdr_disaster_opt_fund = yes
+		ai_chance = { base = 6 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_coverup
+		trigger = {
+			check_variable = { mdr_disaster_tier > 1 }
+			has_elections = no
+		}
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.6 cover-up executed"
+		mdr_disaster_opt_coverup = yes
+		ai_chance = { base = 1 }
+	}
+}
+
+# Industrial accident
+country_event = {
+	id = mdr_disasters.7
+	title = mdr_disasters.7.t
+	desc = {
+		text = mdr_disasters.7.d1
+		trigger = { check_variable = { mdr_disaster_tier = 1 } }
+	}
+	desc = {
+		text = mdr_disasters.7.d2
+		trigger = { check_variable = { mdr_disaster_tier = 2 } }
+	}
+	desc = {
+		text = mdr_disasters.7.d3
+		trigger = { check_variable = { mdr_disaster_tier = 3 } }
+	}
+	picture = GFX_UKR_warehouse_explosions_main
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters_opt_help
+		trigger = { check_variable = { mdr_disaster_tier = 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.7 help executed"
+		mdr_disaster_opt_help = yes
+	}
+
+	option = {
+		name = mdr_disasters_opt_own
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.7 own funds executed"
+		mdr_disaster_opt_own_funds = yes
+		ai_chance = {
+			base = 3
+			modifier = {
+				factor = 0
+				check_variable = { treasury < mdr_disaster_cost }
+			}
+		}
+	}
+
+	option = {
+		name = mdr_disasters_opt_aid
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.7 international aid executed"
+		mdr_disaster_opt_aid = yes
+		ai_chance = { base = 2 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_army
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.7 army executed"
+		mdr_disaster_opt_army = yes
+		ai_chance = { base = 1 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_fund
+		trigger = {
+			check_variable = { mdr_disaster_tier > 1 }
+			check_variable = { mdr_fund_balance > mdr_disaster_cost }
+		}
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.7 stabilization fund executed"
+		mdr_disaster_opt_fund = yes
+		ai_chance = { base = 6 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_coverup
+		trigger = {
+			check_variable = { mdr_disaster_tier > 1 }
+			has_elections = no
+		}
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.7 cover-up executed"
+		mdr_disaster_opt_coverup = yes
+		ai_chance = { base = 1 }
+	}
+}
+
+# Nuclear accident
+country_event = {
+	id = mdr_disasters.8
+	title = mdr_disasters.8.t
+	desc = {
+		text = mdr_disasters.8.d1
+		trigger = { check_variable = { mdr_disaster_tier = 1 } }
+	}
+	desc = {
+		text = mdr_disasters.8.d2
+		trigger = { check_variable = { mdr_disaster_tier = 2 } }
+	}
+	desc = {
+		text = mdr_disasters.8.d3
+		trigger = { check_variable = { mdr_disaster_tier = 3 } }
+	}
+	picture = GFX_event_JAP_fukushima_disaster
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters_opt_help
+		trigger = { check_variable = { mdr_disaster_tier = 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.8 help executed"
+		mdr_disaster_opt_help = yes
+	}
+
+	option = {
+		name = mdr_disasters_opt_own
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.8 own funds executed"
+		mdr_disaster_opt_own_funds = yes
+		ai_chance = {
+			base = 3
+			modifier = {
+				factor = 0
+				check_variable = { treasury < mdr_disaster_cost }
+			}
+		}
+	}
+
+	option = {
+		name = mdr_disasters_opt_aid
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.8 international aid executed"
+		mdr_disaster_opt_aid = yes
+		ai_chance = { base = 2 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_army
+		trigger = { check_variable = { mdr_disaster_tier > 1 } }
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.8 army executed"
+		mdr_disaster_opt_army = yes
+		ai_chance = { base = 1 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_fund
+		trigger = {
+			check_variable = { mdr_disaster_tier > 1 }
+			check_variable = { mdr_fund_balance > mdr_disaster_cost }
+		}
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.8 stabilization fund executed"
+		mdr_disaster_opt_fund = yes
+		ai_chance = { base = 6 }
+	}
+
+	option = {
+		name = mdr_disasters_opt_coverup
+		trigger = {
+			check_variable = { mdr_disaster_tier > 1 }
+			has_elections = no
+		}
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.8 cover-up executed"
+		mdr_disaster_opt_coverup = yes
+		ai_chance = { base = 1 }
+	}
+}
+
+# Earthquake: world news
+news_event = {
+	id = mdr_disasters.11
+	title = mdr_disasters.11.t
+	desc = mdr_disasters.11.d
+	picture = GFX_asian_earthquakes
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters_news_a
+	}
+}
+
+# Tsunami: world news
+news_event = {
+	id = mdr_disasters.12
+	title = mdr_disasters.12.t
+	desc = mdr_disasters.12.d
+	picture = GFX_asian_earthquakes
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters_news_a
+	}
+}
+
+# Tropical storm: world news
+news_event = {
+	id = mdr_disasters.13
+	title = mdr_disasters.13.t
+	desc = mdr_disasters.13.d
+	picture = GFX_BRA_event_cyclone_catarina
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters_news_a
+	}
+}
+
+# Tornado: world news
+news_event = {
+	id = mdr_disasters.19
+	title = mdr_disasters.19.t
+	desc = mdr_disasters.19.d
+	picture = GFX_amazon_rainforest_tropical_storm
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters_news_a
+	}
+}
+
+# Flood: world news
+news_event = {
+	id = mdr_disasters.14
+	title = mdr_disasters.14.t
+	desc = mdr_disasters.14.d
+	picture = GFX_czech_flooding
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters_news_a
+	}
+}
+
+# Wildfire: world news
+news_event = {
+	id = mdr_disasters.15
+	title = mdr_disasters.15.t
+	desc = mdr_disasters.15.d
+	picture = GFX_bushfire1
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters_news_a
+	}
+}
+
+# Heatwave: world news
+news_event = {
+	id = mdr_disasters.16
+	title = mdr_disasters.16.t
+	desc = mdr_disasters.16.d
+	picture = GFX_amazon_rainforest_drought
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters_news_a
+	}
+}
+
+# Industrial accident: world news
+news_event = {
+	id = mdr_disasters.17
+	title = mdr_disasters.17.t
+	desc = mdr_disasters.17.d
+	picture = GFX_UKR_warehouse_explosions_main
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters_news_a
+	}
+}
+
+# Nuclear accident: world news
+news_event = {
+	id = mdr_disasters.18
+	title = mdr_disasters.18.t
+	desc = mdr_disasters.18.d
+	picture = GFX_event_JAP_fukushima_disaster
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters_news_a
+	}
+}
+
+# A catastrophe abroad: do we send aid?
+country_event = {
+	id = mdr_disasters.20
+	title = mdr_disasters.20.t
+	desc = mdr_disasters.20.d
+	picture = GFX_asian_earthquakes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_disasters.20.a
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.20.a executed"
+		mdr_disaster_send_aid_large = yes
+		ai_chance = {
+			base = 2
+			modifier = {
+				factor = 3
+				has_opinion = { target = event_target:mdr_disaster_victim value > 50 }
+			}
+		}
+	}
+
+	option = {
+		name = mdr_disasters.20.b
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.20.b executed"
+		mdr_disaster_send_aid_small = yes
+		ai_chance = { base = 5 }
+	}
+
+	option = {
+		name = mdr_disasters.20.c
+		log = "[GetDateText]: [This.GetName]: mdr_disasters.20.c executed"
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 5
+				has_opinion = { target = event_target:mdr_disaster_victim value < 0 }
+			}
+		}
+	}
+}

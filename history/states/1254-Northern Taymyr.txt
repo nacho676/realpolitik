@@ -1,0 +1,26 @@
+state = {
+	id = 1254
+	name = "STATE_1254" # Northern Taymyr
+	manpower = 6000
+
+	state_category = state_00
+
+	history = {
+		owner = SOV
+		victory_points = {
+			17025 1
+		}
+		buildings = {
+			infrastructure = 1
+			17025 = {
+				naval_base = 1
+			}
+		}
+		add_core_of = SOV
+		set_state_flag = mdr_polar   # low disaster risk (common/scripted_effects/mdr_disasters.txt)
+		set_variable = { state_renewable_capacity_factor_modifier_var = 0.600 }
+		set_variable = { productivity_state_var = 500 }
+	}
+
+	provinces = { 16856 16859 16865 16870 16871 16875 16876 16877 16898 16905 16911 16920 16924 16941 16942 16957 16958 16963 16964 16970 16977 16978 16983 16992 17001 17002 17009 17013 17016 17019 17025 }
+}

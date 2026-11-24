@@ -1,0 +1,12 @@
+# Realpolitik alerts in Millennium Dawn's alert system (common/scripted_effects/00_MD_alert_scripted_effect.txt): one hidden
+# idea per alert, used as its token and to play its sound. Shown by mdr_alerts_update (common/scripted_effects/mdr_alerts.txt).
+ideas = {
+	hidden_ideas = {
+		mdr_alert_ammo = { on_add = { sound_effect = alert_not_enough_garrison_sound } }
+		mdr_alert_food = { on_add = { sound_effect = alert_not_enough_garrison_sound } }
+		mdr_alert_unrest = { on_add = { sound_effect = alert_not_enough_garrison_sound } }
+		mdr_alert_strait = { on_add = { sound_effect = alert_lack_of_power_sound } }
+		mdr_alert_uranium = { on_add = { sound_effect = alert_lack_of_power_sound } }
+		mdr_alert_rare_earths = { on_add = { sound_effect = alert_no_research_sound } }
+	}
+}

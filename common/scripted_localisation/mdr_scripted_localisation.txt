@@ -1,0 +1,179 @@
+# Top bar ammunition, like the game's fuel: "Full", days until full, or days until empty in red; the amount when balanced.
+defined_text = {
+	name = mdr_ammo_topbar_text
+	text = {
+		trigger = { NOT = { check_variable = { mdr_ammo_k < mdr_ammo_capacity_k } } NOT = { check_variable = { mdr_ammo_net_k < 0 } } }
+		localization_key = MDR_AMMO_TOPBAR_FULL
+	}
+	text = {
+		trigger = { check_variable = { mdr_ammo_net_k < 0 } }
+		localization_key = MDR_AMMO_TOPBAR_EMPTYING
+	}
+	text = {
+		trigger = { check_variable = { mdr_ammo_net_k > 0 } }
+		localization_key = MDR_AMMO_TOPBAR_FILLING
+	}
+	text = {
+		trigger = { check_variable = { mdr_ammo_k > 999.9 } }
+		localization_key = MDR_AMMO_TOPBAR_M
+	}
+	text = {
+		localization_key = MDR_AMMO_TOPBAR_K
+	}
+}
+
+# Top bar food: days of consumption in storage, red while part of the need goes unmet.
+defined_text = {
+	name = mdr_food_topbar_text
+	text = {
+		trigger = {
+			OR = {
+				check_variable = { mdr_food_unmet > 0 }
+				check_variable = { mdr_food_unfed > 0 }
+			}
+		}
+		localization_key = MDR_FOOD_TOPBAR_LOW
+	}
+	text = {
+		localization_key = MDR_FOOD_TOPBAR_DAYS
+	}
+}
+
+
+# Food tooltip: daily change of the stores, green when growing and red when falling.
+defined_text = {
+	name = mdr_food_gain_text
+	text = {
+		trigger = { check_variable = { mdr_food_gain_k < 0 } }
+		localization_key = MDR_FOOD_GAIN_NEG
+	}
+	text = {
+		localization_key = MDR_FOOD_GAIN_POS
+	}
+}
+
+# Food tooltip: the last line, like the game's "Reserve full" under fuel.
+defined_text = {
+	name = mdr_food_status_text
+	text = {
+		trigger = { check_variable = { mdr_food_unmet > 0 } }
+		localization_key = MDR_FOOD_STATUS_SHORT
+	}
+	text = {
+		trigger = { check_variable = { mdr_food_stock > mdr_food_capacity } }
+		localization_key = MDR_FOOD_STATUS_FULL
+	}
+	text = {
+		trigger = { check_variable = { mdr_food_stock = mdr_food_capacity } }
+		localization_key = MDR_FOOD_STATUS_FULL
+	}
+	text = {
+		trigger = { check_variable = { mdr_food_stock < mdr_food_stock_last } }
+		localization_key = MDR_FOOD_STATUS_FALLING
+	}
+	text = {
+		localization_key = MDR_FOOD_STATUS_RISING
+	}
+}
+
+# Food tooltip: share of the population that eats enough, with how serious the hunger is.
+defined_text = {
+	name = mdr_food_fed_text
+	text = {
+		trigger = { check_variable = { mdr_food_unfed = 0 } }
+		localization_key = MDR_FOOD_FED_ALL
+	}
+	text = {
+		trigger = { check_variable = { mdr_food_fed_pct > 89.99 } }
+		localization_key = MDR_FOOD_FED_MILD
+	}
+	text = {
+		trigger = { check_variable = { mdr_food_fed_pct > 69.99 } }
+		localization_key = MDR_FOOD_FED_CRISIS
+	}
+	text = {
+		trigger = { check_variable = { mdr_food_fed_pct > 39.99 } }
+		localization_key = MDR_FOOD_FED_FAMINE
+	}
+	text = {
+		localization_key = MDR_FOOD_FED_EXTREME
+	}
+}
+
+# Food tooltip: optional lines of the daily balance, shown only when they are not zero.
+defined_text = {
+	name = mdr_food_line_import
+	text = { trigger = { check_variable = { mdr_food_trade_in_k > 0.04 } } localization_key = MDR_FOOD_LINE_IMPORT }
+	text = { localization_key = MDR_EMPTY }
+}
+defined_text = {
+	name = mdr_food_line_export
+	text = { trigger = { check_variable = { mdr_food_trade_out_k > 0.04 } } localization_key = MDR_FOOD_LINE_EXPORT }
+	text = { localization_key = MDR_EMPTY }
+}
+defined_text = {
+	name = mdr_food_line_loss
+	text = { trigger = { check_variable = { mdr_food_loss_k > 0.04 } } localization_key = MDR_FOOD_LINE_LOSS }
+	text = { localization_key = MDR_EMPTY }
+}
+defined_text = {
+	name = mdr_food_line_buy
+	text = { trigger = { check_variable = { mdr_food_buy_k > 0.04 } } localization_key = MDR_FOOD_LINE_BUY }
+	text = { localization_key = MDR_EMPTY }
+}
+defined_text = {
+	name = mdr_food_line_sell
+	text = { trigger = { check_variable = { mdr_food_sell_k > 0.04 } } localization_key = MDR_FOOD_LINE_SELL }
+	text = { localization_key = MDR_EMPTY }
+}
+defined_text = {
+	name = mdr_food_line_unmet
+	text = { trigger = { check_variable = { mdr_food_unmet_k > 0.04 } } localization_key = MDR_FOOD_LINE_UNMET }
+	text = { localization_key = MDR_EMPTY }
+}
+
+# Market shock news: the cause of the latest shock (global.mdr_shock_cause, set by mdr_shock_start).
+defined_text = {
+	name = mdr_shock_cause_text
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 1 } } localization_key = MDR_SHOCK_CAUSE_1 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 2 } } localization_key = MDR_SHOCK_CAUSE_2 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 3 } } localization_key = MDR_SHOCK_CAUSE_3 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 4 } } localization_key = MDR_SHOCK_CAUSE_4 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 5 } } localization_key = MDR_SHOCK_CAUSE_5 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 6 } } localization_key = MDR_SHOCK_CAUSE_6 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 7 } } localization_key = MDR_SHOCK_CAUSE_7 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 8 } } localization_key = MDR_SHOCK_CAUSE_8 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 9 } } localization_key = MDR_SHOCK_CAUSE_9 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 10 } } localization_key = MDR_SHOCK_CAUSE_10 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 11 } } localization_key = MDR_SHOCK_CAUSE_11 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 12 } } localization_key = MDR_SHOCK_CAUSE_12 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 13 } } localization_key = MDR_SHOCK_CAUSE_13 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 14 } } localization_key = MDR_SHOCK_CAUSE_14 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 15 } } localization_key = MDR_SHOCK_CAUSE_15 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 16 } } localization_key = MDR_SHOCK_CAUSE_16 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 17 } } localization_key = MDR_SHOCK_CAUSE_17 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 18 } } localization_key = MDR_SHOCK_CAUSE_18 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 19 } } localization_key = MDR_SHOCK_CAUSE_19 }
+	text = { trigger = { check_variable = { global.mdr_shock_cause = 20 } } localization_key = MDR_SHOCK_CAUSE_20 }
+	text = { localization_key = MDR_SHOCK_CAUSE_21 }
+}
+
+# Ammunition tooltip: when the stores fill up or run dry at today's pace.
+defined_text = {
+	name = mdr_ammo_eta_text
+	text = {
+		trigger = { NOT = { check_variable = { mdr_ammo_k < mdr_ammo_capacity_k } } NOT = { check_variable = { mdr_ammo_net_k < 0 } } }
+		localization_key = MDR_AMMO_ETA_FULL
+	}
+	text = {
+		trigger = { check_variable = { mdr_ammo_net_k < 0 } }
+		localization_key = MDR_AMMO_ETA_EMPTY
+	}
+	text = {
+		trigger = { check_variable = { mdr_ammo_net_k > 0 } }
+		localization_key = MDR_AMMO_ETA_FILL
+	}
+	text = {
+		localization_key = MDR_AMMO_ETA_STEADY
+	}
+}

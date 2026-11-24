@@ -1,0 +1,749 @@
+mdr_straits_category = {
+	mdr_strait_close_1 = {
+		icon = generic_naval
+		cost = 50
+		fire_only_once = no
+
+		visible = {
+			OR = {
+				controls_state = 197
+				controls_state = 198
+				controls_state = 230
+			}
+			NOT = { has_global_flag = mdr_strait_1_closed }
+		}
+
+		available = {
+			has_war = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_close_1"
+			set_temp_variable = { mdr_strait_id = 1 }
+			mdr_strait_close = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 5
+				any_enemy_country = { is_major = yes }
+			}
+		}
+	}
+
+	mdr_strait_reopen_1 = {
+		icon = generic_naval
+		cost = 0
+		fire_only_once = no
+
+		visible = {
+			OR = {
+				controls_state = 197
+				controls_state = 198
+				controls_state = 230
+			}
+			has_global_flag = mdr_strait_1_closed
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_reopen_1"
+			set_temp_variable = { mdr_strait_id = 1 }
+			mdr_strait_reopen = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 10
+				has_war = no
+			}
+		}
+	}
+
+	mdr_strait_escort_1 = {
+		icon = generic_naval
+		cost = 50
+		fire_only_once = no
+		days_remove = 30
+
+		visible = {
+			has_global_flag = mdr_strait_1_closed
+			NOT = {
+				OR = {
+					controls_state = 197
+					controls_state = 198
+					controls_state = 230
+				}
+			}
+		}
+
+		available = {
+			has_navy_size = { size > 20 }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_escort_1"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_escort_1 finished"
+			if = { limit = { has_global_flag = mdr_strait_1_closed }
+				set_temp_variable = { mdr_strait_id = 1 }
+				mdr_strait_reopen = yes
+				every_other_country = {
+					limit = { NOT = { has_war_with = PREV } }
+					add_opinion_modifier = { target = PREV modifier = mdr_reopened_strait }
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 3
+				is_major = yes
+				has_navy_size = { size > 50 }
+			}
+		}
+	}
+
+	mdr_strait_close_2 = {
+		icon = generic_naval
+		cost = 50
+		fire_only_once = no
+
+		visible = {
+			OR = {
+				controls_state = 214
+			}
+			NOT = { has_global_flag = mdr_strait_2_closed }
+			NOT = { has_global_flag = SUEZ_CANAL_BLOCKED }
+		}
+
+		available = {
+			has_war = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_close_2"
+			set_temp_variable = { mdr_strait_id = 2 }
+			mdr_strait_close = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 5
+				any_enemy_country = { is_major = yes }
+			}
+		}
+	}
+
+	mdr_strait_reopen_2 = {
+		icon = generic_naval
+		cost = 0
+		fire_only_once = no
+
+		visible = {
+			OR = {
+				controls_state = 214
+			}
+			has_global_flag = mdr_strait_2_closed
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_reopen_2"
+			set_temp_variable = { mdr_strait_id = 2 }
+			mdr_strait_reopen = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 10
+				has_war = no
+			}
+		}
+	}
+
+	mdr_strait_escort_2 = {
+		icon = generic_naval
+		cost = 50
+		fire_only_once = no
+		days_remove = 30
+
+		visible = {
+			has_global_flag = mdr_strait_2_closed
+			NOT = {
+				OR = {
+					controls_state = 214
+				}
+			}
+		}
+
+		available = {
+			has_navy_size = { size > 20 }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_escort_2"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_escort_2 finished"
+			if = { limit = { has_global_flag = mdr_strait_2_closed }
+				set_temp_variable = { mdr_strait_id = 2 }
+				mdr_strait_reopen = yes
+				every_other_country = {
+					limit = { NOT = { has_war_with = PREV } }
+					add_opinion_modifier = { target = PREV modifier = mdr_reopened_strait }
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 3
+				is_major = yes
+				has_navy_size = { size > 50 }
+			}
+		}
+	}
+
+	mdr_strait_close_3 = {
+		icon = generic_naval
+		cost = 50
+		fire_only_once = no
+
+		visible = {
+			OR = {
+				controls_state = 1244
+			}
+			NOT = { has_global_flag = mdr_strait_3_closed }
+		}
+
+		available = {
+			has_war = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_close_3"
+			set_temp_variable = { mdr_strait_id = 3 }
+			mdr_strait_close = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 5
+				any_enemy_country = { is_major = yes }
+			}
+		}
+	}
+
+	mdr_strait_reopen_3 = {
+		icon = generic_naval
+		cost = 0
+		fire_only_once = no
+
+		visible = {
+			OR = {
+				controls_state = 1244
+			}
+			has_global_flag = mdr_strait_3_closed
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_reopen_3"
+			set_temp_variable = { mdr_strait_id = 3 }
+			mdr_strait_reopen = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 10
+				has_war = no
+			}
+		}
+	}
+
+	mdr_strait_escort_3 = {
+		icon = generic_naval
+		cost = 50
+		fire_only_once = no
+		days_remove = 30
+
+		visible = {
+			has_global_flag = mdr_strait_3_closed
+			NOT = {
+				OR = {
+					controls_state = 1244
+				}
+			}
+		}
+
+		available = {
+			has_navy_size = { size > 20 }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_escort_3"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_escort_3 finished"
+			if = { limit = { has_global_flag = mdr_strait_3_closed }
+				set_temp_variable = { mdr_strait_id = 3 }
+				mdr_strait_reopen = yes
+				every_other_country = {
+					limit = { NOT = { has_war_with = PREV } }
+					add_opinion_modifier = { target = PREV modifier = mdr_reopened_strait }
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 3
+				is_major = yes
+				has_navy_size = { size > 50 }
+			}
+		}
+	}
+
+	mdr_strait_close_4 = {
+		icon = generic_naval
+		cost = 50
+		fire_only_once = no
+
+		visible = {
+			OR = {
+				controls_state = 527
+				controls_state = 530
+				controls_state = 627
+			}
+			NOT = { has_global_flag = mdr_strait_4_closed }
+		}
+
+		available = {
+			has_war = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_close_4"
+			set_temp_variable = { mdr_strait_id = 4 }
+			mdr_strait_close = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 5
+				any_enemy_country = { is_major = yes }
+			}
+		}
+	}
+
+	mdr_strait_reopen_4 = {
+		icon = generic_naval
+		cost = 0
+		fire_only_once = no
+
+		visible = {
+			OR = {
+				controls_state = 527
+				controls_state = 530
+				controls_state = 627
+			}
+			has_global_flag = mdr_strait_4_closed
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_reopen_4"
+			set_temp_variable = { mdr_strait_id = 4 }
+			mdr_strait_reopen = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 10
+				has_war = no
+			}
+		}
+	}
+
+	mdr_strait_escort_4 = {
+		icon = generic_naval
+		cost = 50
+		fire_only_once = no
+		days_remove = 30
+
+		visible = {
+			has_global_flag = mdr_strait_4_closed
+			NOT = {
+				OR = {
+					controls_state = 527
+					controls_state = 530
+					controls_state = 627
+				}
+			}
+		}
+
+		available = {
+			has_navy_size = { size > 20 }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_escort_4"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_escort_4 finished"
+			if = { limit = { has_global_flag = mdr_strait_4_closed }
+				set_temp_variable = { mdr_strait_id = 4 }
+				mdr_strait_reopen = yes
+				every_other_country = {
+					limit = { NOT = { has_war_with = PREV } }
+					add_opinion_modifier = { target = PREV modifier = mdr_reopened_strait }
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 3
+				is_major = yes
+				has_navy_size = { size > 50 }
+			}
+		}
+	}
+
+	mdr_strait_close_5 = {
+		icon = generic_naval
+		cost = 50
+		fire_only_once = no
+
+		visible = {
+			OR = {
+				controls_state = 853
+			}
+			NOT = { has_global_flag = mdr_strait_5_closed }
+		}
+
+		available = {
+			has_war = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_close_5"
+			set_temp_variable = { mdr_strait_id = 5 }
+			mdr_strait_close = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 5
+				any_enemy_country = { is_major = yes }
+			}
+		}
+	}
+
+	mdr_strait_reopen_5 = {
+		icon = generic_naval
+		cost = 0
+		fire_only_once = no
+
+		visible = {
+			OR = {
+				controls_state = 853
+			}
+			has_global_flag = mdr_strait_5_closed
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_reopen_5"
+			set_temp_variable = { mdr_strait_id = 5 }
+			mdr_strait_reopen = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 10
+				has_war = no
+			}
+		}
+	}
+
+	mdr_strait_escort_5 = {
+		icon = generic_naval
+		cost = 50
+		fire_only_once = no
+		days_remove = 30
+
+		visible = {
+			has_global_flag = mdr_strait_5_closed
+			NOT = {
+				OR = {
+					controls_state = 853
+				}
+			}
+		}
+
+		available = {
+			has_navy_size = { size > 20 }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_escort_5"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_escort_5 finished"
+			if = { limit = { has_global_flag = mdr_strait_5_closed }
+				set_temp_variable = { mdr_strait_id = 5 }
+				mdr_strait_reopen = yes
+				every_other_country = {
+					limit = { NOT = { has_war_with = PREV } }
+					add_opinion_modifier = { target = PREV modifier = mdr_reopened_strait }
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 3
+				is_major = yes
+				has_navy_size = { size > 50 }
+			}
+		}
+	}
+
+	mdr_strait_close_6 = {
+		icon = generic_naval
+		cost = 50
+		fire_only_once = no
+
+		visible = {
+			OR = {
+				controls_state = 19
+				controls_state = 93
+				controls_state = 495
+				controls_state = 374
+			}
+			NOT = { has_global_flag = mdr_strait_6_closed }
+		}
+
+		available = {
+			has_war = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_close_6"
+			set_temp_variable = { mdr_strait_id = 6 }
+			mdr_strait_close = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 5
+				any_enemy_country = { is_major = yes }
+			}
+		}
+	}
+
+	mdr_strait_reopen_6 = {
+		icon = generic_naval
+		cost = 0
+		fire_only_once = no
+
+		visible = {
+			OR = {
+				controls_state = 19
+				controls_state = 93
+				controls_state = 495
+				controls_state = 374
+			}
+			has_global_flag = mdr_strait_6_closed
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_reopen_6"
+			set_temp_variable = { mdr_strait_id = 6 }
+			mdr_strait_reopen = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 10
+				has_war = no
+			}
+		}
+	}
+
+	mdr_strait_escort_6 = {
+		icon = generic_naval
+		cost = 50
+		fire_only_once = no
+		days_remove = 30
+
+		visible = {
+			has_global_flag = mdr_strait_6_closed
+			NOT = {
+				OR = {
+					controls_state = 19
+					controls_state = 93
+					controls_state = 495
+					controls_state = 374
+				}
+			}
+		}
+
+		available = {
+			has_navy_size = { size > 20 }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_escort_6"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_escort_6 finished"
+			if = { limit = { has_global_flag = mdr_strait_6_closed }
+				set_temp_variable = { mdr_strait_id = 6 }
+				mdr_strait_reopen = yes
+				every_other_country = {
+					limit = { NOT = { has_war_with = PREV } }
+					add_opinion_modifier = { target = PREV modifier = mdr_reopened_strait }
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 3
+				is_major = yes
+				has_navy_size = { size > 50 }
+			}
+		}
+	}
+
+	mdr_strait_close_7 = {
+		icon = generic_naval
+		cost = 50
+		fire_only_once = no
+
+		visible = {
+			OR = {
+				controls_state = 978
+				controls_state = 425
+			}
+			NOT = { has_global_flag = mdr_strait_7_closed }
+			NOT = { has_global_flag = HORMUZ_BLOCKED }
+		}
+
+		available = {
+			has_war = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_close_7"
+			set_temp_variable = { mdr_strait_id = 7 }
+			mdr_strait_close = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 5
+				any_enemy_country = { is_major = yes }
+			}
+		}
+	}
+
+	mdr_strait_reopen_7 = {
+		icon = generic_naval
+		cost = 0
+		fire_only_once = no
+
+		visible = {
+			OR = {
+				controls_state = 978
+				controls_state = 425
+			}
+			has_global_flag = mdr_strait_7_closed
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_reopen_7"
+			set_temp_variable = { mdr_strait_id = 7 }
+			mdr_strait_reopen = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 10
+				has_war = no
+			}
+		}
+	}
+
+	mdr_strait_escort_7 = {
+		icon = generic_naval
+		cost = 50
+		fire_only_once = no
+		days_remove = 30
+
+		visible = {
+			has_global_flag = mdr_strait_7_closed
+			NOT = {
+				OR = {
+					controls_state = 978
+					controls_state = 425
+				}
+			}
+		}
+
+		available = {
+			has_navy_size = { size > 20 }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_escort_7"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_strait_escort_7 finished"
+			if = { limit = { has_global_flag = mdr_strait_7_closed }
+				set_temp_variable = { mdr_strait_id = 7 }
+				mdr_strait_reopen = yes
+				every_other_country = {
+					limit = { NOT = { has_war_with = PREV } }
+					add_opinion_modifier = { target = PREV modifier = mdr_reopened_strait }
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 3
+				is_major = yes
+				has_navy_size = { size > 50 }
+			}
+		}
+	}
+
+}

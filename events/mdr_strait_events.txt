@@ -1,0 +1,140 @@
+add_namespace = mdr_straits
+
+# A strait is closed
+news_event = {
+	id = mdr_straits.1
+	title = mdr_straits.1.t
+	desc = {
+		text = mdr_straits.1.d1
+		trigger = { check_variable = { global.mdr_strait_news_id = 1 } }
+	}
+	desc = {
+		text = mdr_straits.1.d2
+		trigger = { check_variable = { global.mdr_strait_news_id = 2 } }
+	}
+	desc = {
+		text = mdr_straits.1.d3
+		trigger = { check_variable = { global.mdr_strait_news_id = 3 } }
+	}
+	desc = {
+		text = mdr_straits.1.d4
+		trigger = { check_variable = { global.mdr_strait_news_id = 4 } }
+	}
+	desc = {
+		text = mdr_straits.1.d5
+		trigger = { check_variable = { global.mdr_strait_news_id = 5 } }
+	}
+	desc = {
+		text = mdr_straits.1.d6
+		trigger = { check_variable = { global.mdr_strait_news_id = 6 } }
+	}
+	desc = {
+		text = mdr_straits.1.d7
+		trigger = { check_variable = { global.mdr_strait_news_id = 7 } }
+	}
+	picture = GFX_iran_closes_strait
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_straits.1.a
+	}
+}
+
+# A strait reopens
+news_event = {
+	id = mdr_straits.2
+	title = mdr_straits.2.t
+	desc = {
+		text = mdr_straits.2.d1
+		trigger = { check_variable = { global.mdr_strait_news_id = 1 } }
+	}
+	desc = {
+		text = mdr_straits.2.d2
+		trigger = { check_variable = { global.mdr_strait_news_id = 2 } }
+	}
+	desc = {
+		text = mdr_straits.2.d3
+		trigger = { check_variable = { global.mdr_strait_news_id = 3 } }
+	}
+	desc = {
+		text = mdr_straits.2.d4
+		trigger = { check_variable = { global.mdr_strait_news_id = 4 } }
+	}
+	desc = {
+		text = mdr_straits.2.d5
+		trigger = { check_variable = { global.mdr_strait_news_id = 5 } }
+	}
+	desc = {
+		text = mdr_straits.2.d6
+		trigger = { check_variable = { global.mdr_strait_news_id = 6 } }
+	}
+	desc = {
+		text = mdr_straits.2.d7
+		trigger = { check_variable = { global.mdr_strait_news_id = 7 } }
+	}
+	picture = GFX_cargo_ship
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_straits.2.a
+	}
+}
+
+# The Ever Given blocks Suez
+news_event = {
+	id = mdr_straits.3
+	title = mdr_straits.3.t
+	desc = mdr_straits.3.d
+	picture = GFX_cargo_ship
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_straits.3.a
+	}
+}
+
+# Drought at the Panama Canal
+news_event = {
+	id = mdr_straits.4
+	title = mdr_straits.4.t
+	desc = mdr_straits.4.d
+	picture = GFX_amazon_rainforest_drought
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_straits.4.a
+	}
+}
+
+# Houthi attacks in the Red Sea
+news_event = {
+	id = mdr_straits.5
+	title = mdr_straits.5.t
+	desc = mdr_straits.5.d
+	picture = GFX_gas_tanker
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_straits.5.a
+	}
+}
+
+# A ship runs aground in Suez
+news_event = {
+	id = mdr_straits.6
+	title = mdr_straits.6.t
+	desc = mdr_straits.6.d
+	picture = GFX_cargo_ship
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_straits.6.a
+	}
+}
+

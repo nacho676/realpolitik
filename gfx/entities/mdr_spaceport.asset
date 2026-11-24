@@ -1,0 +1,25 @@
+# Launch base on the map, shown like the rocket site: the game's launch pad model (building_rocket_site), a little larger
+# so it stands apart. The landmark shuttle used before was a tiny monument mesh, barely visible on the map.
+entity = {
+	name = "building_mdr_spaceport"
+	pdxmesh = "building_rocket_site"
+	scale = 1.37
+
+	locator = { name = "damage_locator_01"	position = { 0.0 0.0 0.0 } }
+	locator = { name = "damage_locator_02"	position = { -1.0 0.2 0.4 } }
+
+	default_state = "idle"
+	state = { name = "idle" }
+	state = { name = "damaged"
+		event = { time = 0.1 node="damage_locator_01" particle = "building_damaged_particle" }
+		event = { time = 0.1 node="damage_locator_02" particle = "building_damaged_particle" }
+	}
+}
+
+entity = {
+	name = "building_mdr_spaceport_spawn"
+	pdxmesh = "building_rocket_site"
+	scale = 1.37
+	default_state = "idle"
+	state = { name = "idle" }
+}

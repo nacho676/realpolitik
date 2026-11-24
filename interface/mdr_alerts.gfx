@@ -1,0 +1,27 @@
+spriteTypes = {
+	# Realpolitik alerts (common/ideas/mdr_alerts.txt). Millennium Dawn's alert window shows GFX_<token>.
+	spriteType = {
+		name = "GFX_mdr_alert_ammo"
+		texturefile = "gfx/interface/alerts/mdr/alert_ammo.dds"
+	}
+	spriteType = {
+		name = "GFX_mdr_alert_food"
+		texturefile = "gfx/interface/alerts/mdr/alert_food.dds"
+	}
+	spriteType = {
+		name = "GFX_mdr_alert_unrest"
+		texturefile = "gfx/interface/alerts/mdr/alert_unrest.dds"
+	}
+	spriteType = {
+		name = "GFX_mdr_alert_strait"
+		texturefile = "gfx/interface/alerts/mdr/alert_strait.dds"
+	}
+	spriteType = {
+		name = "GFX_mdr_alert_uranium"
+		texturefile = "gfx/interface/alerts/mdr/alert_uranium.dds"
+	}
+	spriteType = {
+		name = "GFX_mdr_alert_rare_earths"
+		texturefile = "gfx/interface/alerts/mdr/alert_rare_earths.dds"
+	}
+}

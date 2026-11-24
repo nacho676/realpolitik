@@ -1,0 +1,9 @@
+# States with a spaceport, for the map icon (mdr_space_site_mapicon_gui): a state map icon needs a target list.
+# Rebuilt in the weekly world pass and at startup.
+mdr_space_sites_refresh = {
+	clear_array = global.mdr_space_sites
+	every_state = {
+		limit = { check_variable = { building_level@mdr_spaceport > 0 } }
+		add_to_array = { global.mdr_space_sites = THIS }
+	}
+}

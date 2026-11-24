@@ -1,0 +1,156 @@
+technologies = {
+	# Uranium mining branch, in the reactors section of Millennium Dawn's civilian folder, column 44 beside the reactors (42 = @row18 in
+	# industry.txt). Each level adds 1 uranium to every mine level, up to 10 with all five, and builds mines 5% faster.
+	# Its 15% more energy per mine level: mdr_buildings_weekly in mdr_buildings.txt.
+
+	mdr_uranium_tech_1 = {
+		research_cost = 3.5
+		start_year = 1985
+
+		production_speed_mdr_uranium_mine_factor = 0.05
+
+		on_research_complete = {
+			mdr_uranium_tech_bonus = yes
+		}
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_uranium_tech_2
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 44 y = 2 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { mdr_uranium_mine_total > 0 } }
+			modifier = { add = 10 check_variable = { resource@uranium < 0 } }
+		}
+	}
+
+	mdr_uranium_tech_2 = {
+		research_cost = 4
+		start_year = 2005
+
+		production_speed_mdr_uranium_mine_factor = 0.05
+
+		on_research_complete = {
+			mdr_uranium_tech_bonus = yes
+		}
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_uranium_tech_3
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 44 y = 10 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { mdr_uranium_mine_total > 0 } }
+			modifier = { add = 10 check_variable = { resource@uranium < 0 } }
+		}
+	}
+
+	mdr_uranium_tech_3 = {
+		research_cost = 4.5
+		start_year = 2030
+
+		production_speed_mdr_uranium_mine_factor = 0.05
+
+		on_research_complete = {
+			mdr_uranium_tech_bonus = yes
+		}
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_uranium_tech_4
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 44 y = 20 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { mdr_uranium_mine_total > 0 } }
+			modifier = { add = 10 check_variable = { resource@uranium < 0 } }
+		}
+	}
+
+	mdr_uranium_tech_4 = {
+		research_cost = 5
+		start_year = 2050
+
+		production_speed_mdr_uranium_mine_factor = 0.05
+
+		on_research_complete = {
+			mdr_uranium_tech_bonus = yes
+		}
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_uranium_tech_5
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 44 y = 28 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { mdr_uranium_mine_total > 0 } }
+			modifier = { add = 10 check_variable = { resource@uranium < 0 } }
+		}
+	}
+
+	mdr_uranium_tech_5 = {
+		research_cost = 5.5
+		start_year = 2075
+
+		production_speed_mdr_uranium_mine_factor = 0.05
+
+		on_research_complete = {
+			mdr_uranium_tech_bonus = yes
+		}
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		folder = {
+			name = civilian_folder
+			position = { x = 44 y = 38 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { mdr_uranium_mine_total > 0 } }
+			modifier = { add = 10 check_variable = { resource@uranium < 0 } }
+		}
+	}
+}

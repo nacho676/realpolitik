@@ -1,0 +1,4 @@
+spriteTypes = {
+	spriteType = { name = "GFX_idea_mdr_ico_trade_isolated" textureFile = "gfx/interface/ideas/mdr/mdr_ico_trade_isolated.dds" }
+	spriteType = { name = "GFX_idea_mdr_ico_trade_bloc" textureFile = "gfx/interface/ideas/mdr/mdr_ico_trade_bloc.dds" }
+}

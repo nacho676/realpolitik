@@ -1,0 +1,29 @@
+# The AI builds rare earth complexes when its microchip plants lack them or the world price is high, and only if it can spare the
+# factories, so a small economy imports instead of tying up its few factories.
+mdr_ai_build_rare_earth_complex = {
+	enable = {
+		has_war = no
+		OR = {
+			check_variable = { mdr_ree_shortfall < 0 }
+			check_variable = { global.mdr_ree_price > 1.5 }
+		}
+		OR = {
+			AND = {
+				num_of_civilian_factories > 19
+				num_of_available_civilian_factories > 7
+			}
+			AND = {
+				check_variable = { mdr_ree_complex_total > 0 }
+				num_of_civilian_factories > 9
+				num_of_available_civilian_factories > 3
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = mdr_rare_earth_complex
+		value = 4
+	}
+}

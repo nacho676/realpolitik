@@ -1,0 +1,398 @@
+# Arms control treaties. Membership is a country flag mdr_treaty_<id>:
+# 1 NPT, 2 CTBT, 3 START, 4 INF, 5 ABM, 6 CFE, 7 Open Skies, 8 Ottawa (landmines), 9 CCM (cluster munitions), 10 JCPOA,
+# 11 Kyoto Protocol, 12 Paris Agreement (climate: mdr_climate.txt).
+# START, INF and ABM bind only the United States and Russia; JCPOA binds Iran.
+
+mdr_treaties_start = {
+	if = { limit = { NOT = { OR = { original_tag = RAJ original_tag = PAK original_tag = ISR original_tag = CUB } } }
+		set_country_flag = mdr_treaty_1
+	}
+	if = { limit = { NOT = { OR = { original_tag = RAJ original_tag = PAK original_tag = NKO original_tag = SAU original_tag = SYR } } }
+		set_country_flag = mdr_treaty_2
+	}
+	if = { limit = { OR = { original_tag = USA original_tag = SOV } }
+		set_country_flag = mdr_treaty_3
+		set_country_flag = mdr_treaty_4
+		set_country_flag = mdr_treaty_5
+	}
+	if = { limit = { mdr_is_cfe_party = yes }
+		set_country_flag = mdr_treaty_6
+		set_country_flag = mdr_treaty_7
+	}
+	if = { limit = { NOT = { OR = { original_tag = USA original_tag = SOV original_tag = CHI original_tag = RAJ original_tag = PAK original_tag = ISR original_tag = KOR original_tag = NKO original_tag = PER original_tag = EGY original_tag = SYR original_tag = CUB original_tag = VIE original_tag = LBA original_tag = FIN original_tag = POL original_tag = SAU original_tag = UAE original_tag = MOR original_tag = LIT original_tag = LAT original_tag = EST } } }
+		set_country_flag = mdr_treaty_8
+	}
+	add_dynamic_modifier = { modifier = mdr_treaties_modifier }
+	mdr_treaties_recalc = yes
+}
+
+mdr_treaties_recalc = {
+	set_variable = { mdr_tr_reactor = 0 }
+	set_variable = { mdr_tr_nukes = 0 }
+	set_variable = { mdr_tr_pp = 0 }
+	set_variable = { mdr_tr_defence = 0 }
+	set_variable = { mdr_tr_attack = 0 }
+	set_variable = { mdr_tr_productivity = 0 }
+	set_variable = { mdr_tr_investment = 0 }
+	# NPT members get civil nuclear cooperation.
+	if = { limit = { has_country_flag = mdr_treaty_1 } add_to_variable = { mdr_tr_reactor = 0.10 } }
+	# START caps warheads.
+	if = { limit = { has_country_flag = mdr_treaty_3 } add_to_variable = { mdr_tr_nukes = -0.25 } }
+	# Each superpower arms-control treaty keeps detente alive.
+	if = { limit = { has_country_flag = mdr_treaty_3 } add_to_variable = { mdr_tr_pp = 0.02 } }
+	if = { limit = { has_country_flag = mdr_treaty_4 } add_to_variable = { mdr_tr_pp = 0.02 } }
+	if = { limit = { has_country_flag = mdr_treaty_5 } add_to_variable = { mdr_tr_pp = 0.02 } }
+	# Outside Ottawa an army can mine its borders; outside the CCM it can use cluster munitions.
+	if = { limit = { NOT = { has_country_flag = mdr_treaty_8 } } add_to_variable = { mdr_tr_defence = 0.01 } }
+	if = { limit = { NOT = { has_country_flag = mdr_treaty_9 } } add_to_variable = { mdr_tr_attack = 0.01 } }
+	# JCPOA: sanctions relief in exchange for limits on enrichment.
+	if = { limit = { has_country_flag = mdr_treaty_10 }
+		add_to_variable = { mdr_tr_reactor = -0.30 }
+		add_to_variable = { mdr_tr_productivity = 0.01 }
+		add_to_variable = { mdr_tr_investment = -0.10 }
+	}
+	if = { limit = { NOT = { has_dynamic_modifier = { modifier = mdr_treaties_modifier } } }
+		add_dynamic_modifier = { modifier = mdr_treaties_modifier }
+	}
+}
+
+# Input: temp variable mdr_treaty_id.
+mdr_treaty_join = {
+	if = { limit = { check_variable = { mdr_treaty_id = 1 } } set_country_flag = mdr_treaty_1 }
+	else_if = { limit = { check_variable = { mdr_treaty_id = 2 } } set_country_flag = mdr_treaty_2 }
+	else_if = { limit = { check_variable = { mdr_treaty_id = 3 } } set_country_flag = mdr_treaty_3 }
+	else_if = { limit = { check_variable = { mdr_treaty_id = 4 } } set_country_flag = mdr_treaty_4 }
+	else_if = { limit = { check_variable = { mdr_treaty_id = 5 } } set_country_flag = mdr_treaty_5 }
+	else_if = { limit = { check_variable = { mdr_treaty_id = 6 } } set_country_flag = mdr_treaty_6 }
+	else_if = { limit = { check_variable = { mdr_treaty_id = 7 } } set_country_flag = mdr_treaty_7 }
+	else_if = { limit = { check_variable = { mdr_treaty_id = 8 } } set_country_flag = mdr_treaty_8 }
+	else_if = { limit = { check_variable = { mdr_treaty_id = 9 } } set_country_flag = mdr_treaty_9 }
+	# Climate treaties: members pay for their targets for a while (mdr_climate_weekly).
+	else_if = { limit = { check_variable = { mdr_treaty_id = 11 } }
+		set_country_flag = mdr_treaty_11
+		set_country_flag = { flag = mdr_kyoto_cost days = 2555 value = 1 }
+	}
+	else_if = { limit = { check_variable = { mdr_treaty_id = 12 } }
+		set_country_flag = mdr_treaty_12
+		set_country_flag = { flag = mdr_paris_cost days = 3650 value = 1 }
+	}
+	else = {
+		set_country_flag = mdr_treaty_10
+		set_global_flag = mdr_jcpoa_active
+	}
+	mdr_treaties_recalc = yes
+}
+
+# Input: temp variable mdr_treaty_id. Members resent the withdrawal and world tension rises.
+mdr_treaty_leave = {
+	if = { limit = { check_variable = { mdr_treaty_id = 1 } }
+		clr_country_flag = mdr_treaty_1
+		every_other_country = { limit = { has_country_flag = mdr_treaty_1 } add_opinion_modifier = { target = PREV modifier = mdr_left_arms_treaty } }
+		add_threat = 5
+	}
+	else_if = { limit = { check_variable = { mdr_treaty_id = 2 } }
+		clr_country_flag = mdr_treaty_2
+		every_other_country = { limit = { has_country_flag = mdr_treaty_2 } add_opinion_modifier = { target = PREV modifier = mdr_left_arms_treaty } }
+		add_threat = 3
+	}
+	else_if = { limit = { check_variable = { mdr_treaty_id = 6 } }
+		clr_country_flag = mdr_treaty_6
+		every_other_country = { limit = { has_country_flag = mdr_treaty_6 } add_opinion_modifier = { target = PREV modifier = mdr_left_arms_treaty } }
+		add_threat = 2
+	}
+	else_if = { limit = { check_variable = { mdr_treaty_id = 7 } }
+		clr_country_flag = mdr_treaty_7
+		every_other_country = { limit = { has_country_flag = mdr_treaty_7 } add_opinion_modifier = { target = PREV modifier = mdr_left_arms_treaty } }
+		add_threat = 1
+	}
+	else_if = { limit = { check_variable = { mdr_treaty_id = 8 } }
+		clr_country_flag = mdr_treaty_8
+		every_other_country = { limit = { has_country_flag = mdr_treaty_8 } add_opinion_modifier = { target = PREV modifier = mdr_left_arms_treaty } }
+		add_threat = 1
+	}
+	else_if = { limit = { check_variable = { mdr_treaty_id = 9 } }
+		clr_country_flag = mdr_treaty_9
+		every_other_country = { limit = { has_country_flag = mdr_treaty_9 } add_opinion_modifier = { target = PREV modifier = mdr_left_arms_treaty } }
+		add_threat = 1
+	}
+	# Leaving a climate treaty angers its members but does not raise world tension.
+	else_if = { limit = { check_variable = { mdr_treaty_id = 11 } }
+		clr_country_flag = mdr_treaty_11
+		clr_country_flag = mdr_kyoto_cost
+		every_other_country = { limit = { has_country_flag = mdr_treaty_11 } add_opinion_modifier = { target = PREV modifier = mdr_left_climate_treaty } }
+	}
+	else_if = { limit = { check_variable = { mdr_treaty_id = 12 } }
+		clr_country_flag = mdr_treaty_12
+		clr_country_flag = mdr_paris_cost
+		every_other_country = { limit = { has_country_flag = mdr_treaty_12 } add_opinion_modifier = { target = PREV modifier = mdr_left_climate_treaty } }
+	}
+	# Bilateral treaties die for both parties.
+	else_if = { limit = { check_variable = { mdr_treaty_id = 3 } }
+		every_country = {
+			limit = { has_country_flag = mdr_treaty_3 }
+			clr_country_flag = mdr_treaty_3
+			mdr_treaties_recalc = yes
+			if = { limit = { NOT = { tag = PREV } } add_opinion_modifier = { target = PREV modifier = mdr_left_arms_treaty } }
+		}
+		add_threat = 5
+	}
+	else_if = { limit = { check_variable = { mdr_treaty_id = 4 } }
+		every_country = {
+			limit = { has_country_flag = mdr_treaty_4 }
+			clr_country_flag = mdr_treaty_4
+			mdr_treaties_recalc = yes
+			if = { limit = { NOT = { tag = PREV } } add_opinion_modifier = { target = PREV modifier = mdr_left_arms_treaty } }
+		}
+		add_threat = 4
+	}
+	else_if = { limit = { check_variable = { mdr_treaty_id = 5 } }
+		every_country = {
+			limit = { has_country_flag = mdr_treaty_5 }
+			clr_country_flag = mdr_treaty_5
+			mdr_treaties_recalc = yes
+			if = { limit = { NOT = { tag = PREV } } add_opinion_modifier = { target = PREV modifier = mdr_left_arms_treaty } }
+		}
+		add_threat = 3
+	}
+	else = {
+		clr_global_flag = mdr_jcpoa_active
+		every_country = {
+			limit = { has_country_flag = mdr_treaty_10 }
+			clr_country_flag = mdr_treaty_10
+			mdr_treaties_recalc = yes
+			if = { limit = { NOT = { tag = PREV } } add_opinion_modifier = { target = PREV modifier = mdr_left_arms_treaty } }
+		}
+		add_threat = 3
+	}
+	set_country_flag = { flag = mdr_treaty_cooldown days = 365 value = 1 }
+	mdr_treaties_recalc = yes
+	save_global_event_target_as = mdr_treaty_news_country
+	set_variable = { global.mdr_treaty_news_id = mdr_treaty_id }
+	news_event = { id = mdr_treaties.4 }
+}
+
+# Countries in the CFE and Open Skies regimes in 2000.
+mdr_treaties_monthly = {
+	# Now and then the international community presses holdouts to sign.
+	if = {
+		limit = {
+			NOT = { has_country_flag = mdr_treaty_invite_cooldown }
+			OR = {
+				NOT = { has_country_flag = mdr_treaty_1 }
+				NOT = { has_country_flag = mdr_treaty_2 }
+				NOT = { has_country_flag = mdr_treaty_8 }
+			}
+		}
+		random_list = {
+			97 = { }
+			3 = {
+				set_country_flag = { flag = mdr_treaty_invite_cooldown days = 730 value = 1 }
+				if = { limit = { NOT = { has_country_flag = mdr_treaty_1 } } set_variable = { mdr_treaty_offer = 1 } }
+				else_if = { limit = { NOT = { has_country_flag = mdr_treaty_2 } } set_variable = { mdr_treaty_offer = 2 } }
+				else = { set_variable = { mdr_treaty_offer = 8 } }
+				country_event = { id = mdr_treaties.1 }
+			}
+		}
+	}
+}
+
+# Historical treaty milestones. Actor countries run by a human get the choice in an event.
+# Input: temp variable mdr_hist_id, actor country scope.
+mdr_treaty_hist_action = {
+	if = { limit = { NOT = { check_variable = { mdr_dis_mute = 1 } } }
+		set_variable = { mdr_hist_action = mdr_hist_id }
+		if = { limit = { is_ai = yes }
+			mdr_treaty_hist_apply = yes
+		}
+		else = {
+			country_event = { id = mdr_treaties.3 }
+		}
+	}
+}
+
+# Reads country variable mdr_hist_action.
+mdr_treaty_hist_apply = {
+	if = { limit = { check_variable = { mdr_hist_action = 1 } } set_temp_variable = { mdr_treaty_id = 5 } mdr_treaty_leave = yes }
+	else_if = { limit = { check_variable = { mdr_hist_action = 2 } } set_temp_variable = { mdr_treaty_id = 1 } mdr_treaty_leave = yes }
+	else_if = { limit = { check_variable = { mdr_hist_action = 3 } } set_temp_variable = { mdr_treaty_id = 1 } mdr_treaty_join = yes }
+	else_if = { limit = { check_variable = { mdr_hist_action = 4 } } set_temp_variable = { mdr_treaty_id = 6 } mdr_treaty_leave = yes }
+	else_if = { limit = { check_variable = { mdr_hist_action = 6 } } set_temp_variable = { mdr_treaty_id = 10 } mdr_treaty_join = yes }
+	else_if = { limit = { check_variable = { mdr_hist_action = 7 } } set_temp_variable = { mdr_treaty_id = 10 } mdr_treaty_leave = yes }
+	else_if = { limit = { check_variable = { mdr_hist_action = 8 } } set_temp_variable = { mdr_treaty_id = 4 } mdr_treaty_leave = yes }
+	else_if = { limit = { check_variable = { mdr_hist_action = 9 } } set_temp_variable = { mdr_treaty_id = 7 } mdr_treaty_leave = yes }
+	else_if = { limit = { check_variable = { mdr_hist_action = 10 } } set_temp_variable = { mdr_treaty_id = 7 } mdr_treaty_leave = yes }
+	else_if = { limit = { check_variable = { mdr_hist_action = 11 } } set_temp_variable = { mdr_treaty_id = 3 } mdr_treaty_leave = yes }
+	else_if = { limit = { check_variable = { mdr_hist_action = 12 } } set_temp_variable = { mdr_treaty_id = 2 } mdr_treaty_leave = yes }
+	else_if = { limit = { check_variable = { mdr_hist_action = 13 } } set_temp_variable = { mdr_treaty_id = 9 } mdr_treaty_leave = yes }
+	else_if = { limit = { check_variable = { mdr_hist_action = 14 } } set_temp_variable = { mdr_treaty_id = 8 } mdr_treaty_leave = yes }
+	else_if = { limit = { check_variable = { mdr_hist_action = 15 } } set_temp_variable = { mdr_treaty_id = 8 } mdr_treaty_join = yes }
+	else_if = { limit = { check_variable = { mdr_hist_action = 16 } } set_temp_variable = { mdr_treaty_id = 11 } mdr_treaty_leave = yes }
+	else_if = { limit = { check_variable = { mdr_hist_action = 17 } } set_temp_variable = { mdr_treaty_id = 11 } mdr_treaty_join = yes }
+	else_if = { limit = { check_variable = { mdr_hist_action = 18 } } set_temp_variable = { mdr_treaty_id = 12 } mdr_treaty_leave = yes }
+	else_if = { limit = { check_variable = { mdr_hist_action = 19 } } set_temp_variable = { mdr_treaty_id = 12 } mdr_treaty_join = yes }
+}
+
+mdr_treaties_historical = {
+	if = { limit = { date > 2002.06.12 NOT = { has_global_flag = mdr_ht_2002_abm } }
+		set_global_flag = mdr_ht_2002_abm
+		if = { limit = { country_exists = USA } USA = { set_temp_variable = { mdr_hist_id = 1 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2002.11.03 NOT = { has_global_flag = mdr_ht_2002_cuba_npt } }
+		set_global_flag = mdr_ht_2002_cuba_npt
+		if = { limit = { country_exists = CUB } CUB = { set_temp_variable = { mdr_hist_id = 3 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2003.01.09 NOT = { has_global_flag = mdr_ht_2003_nko_npt } }
+		set_global_flag = mdr_ht_2003_nko_npt
+		if = { limit = { country_exists = NKO } NKO = { set_temp_variable = { mdr_hist_id = 2 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2003.05.11 NOT = { has_global_flag = mdr_ht_2003_lit_ottawa } }
+		set_global_flag = mdr_ht_2003_lit_ottawa
+		if = { limit = { country_exists = LIT } LIT = { set_temp_variable = { mdr_hist_id = 15 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2004.05.11 NOT = { has_global_flag = mdr_ht_2004_est_ottawa } }
+		set_global_flag = mdr_ht_2004_est_ottawa
+		if = { limit = { country_exists = EST } EST = { set_temp_variable = { mdr_hist_id = 15 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2005.06.30 NOT = { has_global_flag = mdr_ht_2005_lat_ottawa } }
+		set_global_flag = mdr_ht_2005_lat_ottawa
+		if = { limit = { country_exists = LAT } LAT = { set_temp_variable = { mdr_hist_id = 15 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2007.12.11 NOT = { has_global_flag = mdr_ht_2007_cfe } }
+		set_global_flag = mdr_ht_2007_cfe
+		if = { limit = { country_exists = SOV } SOV = { set_temp_variable = { mdr_hist_id = 4 } mdr_treaty_hist_action = yes } }
+	}
+	# The Convention on Cluster Munitions enters into force for the landmine-ban states that signed it.
+	if = { limit = { date > 2010.07.31 NOT = { has_global_flag = mdr_ht_2010_ccm } }
+		set_global_flag = mdr_ht_2010_ccm
+		if = { limit = { NOT = { check_variable = { mdr_dis_mute = 1 } } }
+			every_country = {
+				limit = {
+					has_country_flag = mdr_treaty_8
+					NOT = { OR = { original_tag = LIT original_tag = LAT original_tag = EST original_tag = GRE original_tag = TUR original_tag = ROM original_tag = UKR original_tag = BLR } }
+				}
+				set_country_flag = mdr_treaty_9
+				mdr_treaties_recalc = yes
+			}
+		}
+	}
+	if = { limit = { date > 2011.12.31 NOT = { has_global_flag = mdr_ht_2012_fin_ottawa } }
+		set_global_flag = mdr_ht_2012_fin_ottawa
+		if = { limit = { country_exists = FIN } FIN = { set_temp_variable = { mdr_hist_id = 15 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2012.12.26 NOT = { has_global_flag = mdr_ht_2012_pol_ottawa } }
+		set_global_flag = mdr_ht_2012_pol_ottawa
+		if = { limit = { country_exists = POL } POL = { set_temp_variable = { mdr_hist_id = 15 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2015.07.13 NOT = { has_global_flag = mdr_ht_2015_jcpoa } }
+		set_global_flag = mdr_ht_2015_jcpoa
+		if = { limit = { country_exists = PER } PER = { set_temp_variable = { mdr_hist_id = 6 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2018.05.07 NOT = { has_global_flag = mdr_ht_2018_jcpoa_exit } }
+		set_global_flag = mdr_ht_2018_jcpoa_exit
+		if = { limit = { country_exists = USA PER = { has_country_flag = mdr_treaty_10 } } USA = { set_temp_variable = { mdr_hist_id = 7 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2019.08.01 NOT = { has_global_flag = mdr_ht_2019_inf } }
+		set_global_flag = mdr_ht_2019_inf
+		if = { limit = { country_exists = USA USA = { has_country_flag = mdr_treaty_4 } } USA = { set_temp_variable = { mdr_hist_id = 8 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2020.11.21 NOT = { has_global_flag = mdr_ht_2020_open_skies_usa } }
+		set_global_flag = mdr_ht_2020_open_skies_usa
+		if = { limit = { country_exists = USA USA = { has_country_flag = mdr_treaty_7 } } USA = { set_temp_variable = { mdr_hist_id = 9 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2021.12.17 NOT = { has_global_flag = mdr_ht_2021_open_skies_sov } }
+		set_global_flag = mdr_ht_2021_open_skies_sov
+		if = { limit = { country_exists = SOV SOV = { has_country_flag = mdr_treaty_7 } } SOV = { set_temp_variable = { mdr_hist_id = 10 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2023.02.20 NOT = { has_global_flag = mdr_ht_2023_start } }
+		set_global_flag = mdr_ht_2023_start
+		if = { limit = { country_exists = SOV SOV = { has_country_flag = mdr_treaty_3 } } SOV = { set_temp_variable = { mdr_hist_id = 11 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2023.11.01 NOT = { has_global_flag = mdr_ht_2023_ctbt } }
+		set_global_flag = mdr_ht_2023_ctbt
+		if = { limit = { country_exists = SOV SOV = { has_country_flag = mdr_treaty_2 } } SOV = { set_temp_variable = { mdr_hist_id = 12 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2025.03.06 NOT = { has_global_flag = mdr_ht_2025_lit_ccm } }
+		set_global_flag = mdr_ht_2025_lit_ccm
+		if = { limit = { country_exists = LIT LIT = { has_country_flag = mdr_treaty_9 } } LIT = { set_temp_variable = { mdr_hist_id = 13 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2025.12.26 NOT = { has_global_flag = mdr_ht_2025_baltic_ottawa } }
+		set_global_flag = mdr_ht_2025_baltic_ottawa
+		if = { limit = { country_exists = LIT LIT = { has_country_flag = mdr_treaty_8 } } LIT = { set_temp_variable = { mdr_hist_id = 14 } mdr_treaty_hist_action = yes } }
+		if = { limit = { country_exists = LAT LAT = { has_country_flag = mdr_treaty_8 } } LAT = { set_temp_variable = { mdr_hist_id = 14 } mdr_treaty_hist_action = yes } }
+		if = { limit = { country_exists = EST EST = { has_country_flag = mdr_treaty_8 } } EST = { set_temp_variable = { mdr_hist_id = 14 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2026.01.09 NOT = { has_global_flag = mdr_ht_2026_fin_ottawa } }
+		set_global_flag = mdr_ht_2026_fin_ottawa
+		if = { limit = { country_exists = FIN FIN = { has_country_flag = mdr_treaty_8 } } FIN = { set_temp_variable = { mdr_hist_id = 14 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2026.02.19 NOT = { has_global_flag = mdr_ht_2026_pol_ottawa } }
+		set_global_flag = mdr_ht_2026_pol_ottawa
+		if = { limit = { country_exists = POL POL = { has_country_flag = mdr_treaty_8 } } POL = { set_temp_variable = { mdr_hist_id = 14 } mdr_treaty_hist_action = yes } }
+	}
+	# Climate treaties.
+	if = { limit = { date > 2007.12.02 NOT = { has_global_flag = mdr_ht_2007_ast_kyoto } }
+		set_global_flag = mdr_ht_2007_ast_kyoto
+		if = { limit = { country_exists = AST AST = { NOT = { has_country_flag = mdr_treaty_11 } } } AST = { set_temp_variable = { mdr_hist_id = 17 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2009.06.18 NOT = { has_global_flag = mdr_ht_2009_kaz_kyoto } }
+		set_global_flag = mdr_ht_2009_kaz_kyoto
+		if = { limit = { country_exists = KAZ KAZ = { NOT = { has_country_flag = mdr_treaty_11 } } } KAZ = { set_temp_variable = { mdr_hist_id = 17 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2009.08.27 NOT = { has_global_flag = mdr_ht_2009_tur_kyoto } }
+		set_global_flag = mdr_ht_2009_tur_kyoto
+		if = { limit = { country_exists = TUR TUR = { NOT = { has_country_flag = mdr_treaty_11 } } } TUR = { set_temp_variable = { mdr_hist_id = 17 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2011.12.14 NOT = { has_global_flag = mdr_ht_2011_can_kyoto } }
+		set_global_flag = mdr_ht_2011_can_kyoto
+		if = { limit = { country_exists = CAN CAN = { has_country_flag = mdr_treaty_11 } } CAN = { set_temp_variable = { mdr_hist_id = 16 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2020.11.03 NOT = { has_global_flag = mdr_ht_2020_usa_paris } }
+		set_global_flag = mdr_ht_2020_usa_paris
+		if = { limit = { country_exists = USA USA = { has_country_flag = mdr_treaty_12 } } USA = { set_temp_variable = { mdr_hist_id = 18 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2021.02.18 NOT = { has_global_flag = mdr_ht_2021_usa_paris } }
+		set_global_flag = mdr_ht_2021_usa_paris
+		if = { limit = { country_exists = USA USA = { NOT = { has_country_flag = mdr_treaty_12 } } } USA = { set_temp_variable = { mdr_hist_id = 19 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2021.10.05 NOT = { has_global_flag = mdr_ht_2021_tur_paris } }
+		set_global_flag = mdr_ht_2021_tur_paris
+		if = { limit = { country_exists = TUR TUR = { NOT = { has_country_flag = mdr_treaty_12 } } } TUR = { set_temp_variable = { mdr_hist_id = 19 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2021.10.31 NOT = { has_global_flag = mdr_ht_2021_irq_paris } }
+		set_global_flag = mdr_ht_2021_irq_paris
+		if = { limit = { country_exists = IRQ IRQ = { NOT = { has_country_flag = mdr_treaty_12 } } } IRQ = { set_temp_variable = { mdr_hist_id = 19 } mdr_treaty_hist_action = yes } }
+	}
+	if = { limit = { date > 2026.01.26 NOT = { has_global_flag = mdr_ht_2026_usa_paris } }
+		set_global_flag = mdr_ht_2026_usa_paris
+		if = { limit = { country_exists = USA USA = { has_country_flag = mdr_treaty_12 } } USA = { set_temp_variable = { mdr_hist_id = 18 } mdr_treaty_hist_action = yes } }
+	}
+}
+
+# Bilateral offer (START, INF, ABM to the other superpower; the Iran nuclear deal to the United States). Input: temp mdr_treaty_id.
+# Same as the mdr_treaty_propose_* decisions, for the treaties tab.
+mdr_treaty_propose = {
+	set_country_flag = { flag = mdr_treaty_cooldown days = 180 value = 1 }
+	if = { limit = { original_tag = USA }
+		SOV = {
+			set_variable = { mdr_treaty_proposal = mdr_treaty_id }
+			country_event = { id = mdr_treaties.2 }
+		}
+	}
+	else = {
+		USA = {
+			set_variable = { mdr_treaty_proposal = mdr_treaty_id }
+			country_event = { id = mdr_treaties.2 }
+		}
+	}
+}
+
+# Players only, daily: once a Millennium Dawn tab was opened, our tab no longer comes back by itself when the window reopens.
+mdr_treaties_gui_daily = {
+	if = {
+		limit = {
+			check_variable = { var_open_mdr_treaties_gui = 2 }
+			NOT = { mdr_treaties_tab_open = yes }
+		}
+		clear_variable = var_open_mdr_treaties_gui
+	}
+}

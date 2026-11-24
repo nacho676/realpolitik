@@ -1,0 +1,18 @@
+# Local settings and secrets
+.claude/settings.local.json
+.env
+
+# Generated output
+__pycache__/
+*.pyc
+*.log
+graphify-out/
+herramientas/informe_*.txt
+
+# Documentos internos (no se publican)
+/DISEÑO.md
+/ESPACIO.md
+/INVESTIGACIONES.md
+/MEJORAR IA.md
+/MULTINACIONALES.md
+/VENTA_BARCOS.md

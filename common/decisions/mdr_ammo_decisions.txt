@@ -1,0 +1,180 @@
+# Ammunition bought abroad arrives when the decision ends. Amounts are in thousands of boxes (mdr_ammo_k).
+mdr_ammo_category = {
+	mdr_ammo_buy_1 = {
+		icon = mdr_ammo
+		cost = 0
+		custom_cost_trigger = { check_variable = { treasury > 0.2 } }
+		custom_cost_text = mdr_cost_0_2
+		fire_only_once = no
+		days_remove = 7
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_ammo_buy_1"
+			set_temp_variable = { treasury_change = -0.2 }
+			modify_treasury_effect = yes
+		}
+
+		remove_effect = {
+			set_temp_variable = { mdr_ammo_add_k = 1 }
+			mdr_ammo_add = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				mdr_ammo_ai_should_buy = yes
+			}
+		}
+	}
+
+	mdr_ammo_buy_5 = {
+		icon = mdr_ammo
+		cost = 0
+		custom_cost_trigger = { check_variable = { treasury > 1 } }
+		custom_cost_text = mdr_cost_1_0
+		fire_only_once = no
+		days_remove = 14
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_ammo_buy_5"
+			set_temp_variable = { treasury_change = -1 }
+			modify_treasury_effect = yes
+		}
+
+		remove_effect = {
+			set_temp_variable = { mdr_ammo_add_k = 5 }
+			mdr_ammo_add = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 2
+				mdr_ammo_ai_should_buy = yes
+				check_variable = { treasury > 10 }
+			}
+		}
+	}
+
+	mdr_ammo_buy_10 = {
+		icon = mdr_ammo
+		cost = 0
+		custom_cost_trigger = { check_variable = { treasury > 2 } }
+		custom_cost_text = mdr_cost_2_0
+		fire_only_once = no
+		days_remove = 30
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_ammo_buy_10"
+			set_temp_variable = { treasury_change = -2 }
+			modify_treasury_effect = yes
+		}
+
+		remove_effect = {
+			set_temp_variable = { mdr_ammo_add_k = 10 }
+			mdr_ammo_add = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 3
+				mdr_ammo_ai_should_buy = yes
+				check_variable = { treasury > 20 }
+			}
+		}
+	}
+
+	mdr_ammo_buy_25 = {
+		icon = mdr_ammo
+		cost = 0
+		custom_cost_trigger = { check_variable = { treasury > 5 } }
+		custom_cost_text = mdr_cost_5_0
+		fire_only_once = no
+		days_remove = 45
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_ammo_buy_25"
+			set_temp_variable = { treasury_change = -5 }
+			modify_treasury_effect = yes
+		}
+
+		remove_effect = {
+			set_temp_variable = { mdr_ammo_add_k = 25 }
+			mdr_ammo_add = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 4
+				mdr_ammo_ai_should_buy = yes
+				check_variable = { treasury > 50 }
+			}
+		}
+	}
+
+	mdr_ammo_buy_50 = {
+		icon = mdr_ammo
+		cost = 0
+		custom_cost_trigger = { check_variable = { treasury > 10 } }
+		custom_cost_text = mdr_cost_10_0
+		fire_only_once = no
+		days_remove = 60
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_ammo_buy_50"
+			set_temp_variable = { treasury_change = -10 }
+			modify_treasury_effect = yes
+		}
+
+		remove_effect = {
+			set_temp_variable = { mdr_ammo_add_k = 50 }
+			mdr_ammo_add = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 5
+				mdr_ammo_ai_should_buy = yes
+				check_variable = { treasury > 100 }
+			}
+		}
+	}
+
+	# Trades part of the military industry's output for ammunition for 60 days.
+	mdr_ammo_production_focus = {
+		icon = mdr_ammo
+		cost = 0
+		custom_cost_trigger = { check_variable = { treasury > mdr_ammo_focus_cost } }
+		custom_cost_text = mdr_ammo_focus_cost_text
+		fire_only_once = no
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = mdr_ammo_focus_cooldown_tt
+				NOT = { has_country_flag = mdr_ammo_focus_cooldown }
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_ammo_production_focus"
+			set_temp_variable = { treasury_change = mdr_ammo_focus_cost }
+			multiply_temp_variable = { treasury_change = -1 }
+			modify_treasury_effect = yes
+			add_timed_idea = { idea = mdr_ammo_focus_idea days = 60 }
+			set_country_flag = { flag = mdr_ammo_focus_cooldown days = 90 value = 1 }
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 3
+				has_war = yes
+				check_variable = { mdr_ammo_days_left < 28 }
+			}
+		}
+	}
+}

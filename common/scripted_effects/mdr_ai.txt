@@ -1,0 +1,275 @@
+# AI improvements (MEJORAR IA.md). Stage 0: monthly war log for every country at war, only with the diagnostics rule.
+# Read by herramientas/revisar_logs.pl (section "IA en guerra").
+
+mdr_ai_log_monthly = {
+	# Casualties this month, from our own monthly snapshot (mdr_last_casualties_k is weekly and belongs to ammo).
+	set_temp_variable = { mdr_ai_cas_month = casualties_k }
+	if = { limit = { has_variable = mdr_ai_last_cas_k }
+		subtract_from_temp_variable = { mdr_ai_cas_month = mdr_ai_last_cas_k }
+	}
+	else = { set_temp_variable = { mdr_ai_cas_month = 0 } }
+	clamp_temp_variable = { var = mdr_ai_cas_month min = 0 }
+	set_variable = { mdr_ai_last_cas_k = casualties_k }
+
+	if = { limit = { has_war = yes }
+		set_temp_variable = { mdr_ai_cas_total = casualties_k }
+		set_temp_variable = { mdr_ai_div = num_divisions }
+		set_temp_variable = { mdr_ai_states = num_of_controlled_states }
+		set_temp_variable = { mdr_ai_occupied = num_occupied_states }
+		set_temp_variable = { mdr_ai_surr = surrender_progress }
+		multiply_temp_variable = { mdr_ai_surr = 100 }
+		set_temp_variable = { mdr_ai_enemy_ratio = enemies_strength_ratio }
+		set_temp_variable = { mdr_ai_terr = 100 }
+		if = { limit = { has_variable = mdr_cap_t }
+			set_temp_variable = { mdr_ai_terr = mdr_cap_t }
+			multiply_temp_variable = { mdr_ai_terr = 100 }
+		}
+		set_temp_variable = { mdr_ai_ammo_lvl = 0 }
+		if = { limit = { has_idea = mdr_ammo_shortage_3 } set_temp_variable = { mdr_ai_ammo_lvl = 3 } }
+		else_if = { limit = { has_idea = mdr_ammo_shortage_2 } set_temp_variable = { mdr_ai_ammo_lvl = 2 } }
+		else_if = { limit = { has_idea = mdr_ammo_shortage_1 } set_temp_variable = { mdr_ai_ammo_lvl = 1 } }
+		log = "[GetDateText]: [Root.GetName]: MDR AI guerra div [?mdr_ai_div|0] estados [?mdr_ai_states|0] ocupados [?mdr_ai_occupied|0] bajas_mes_k [?mdr_ai_cas_month|1] bajas_total_k [?mdr_ai_cas_total|0] municion_k [?mdr_ammo_k|0] dias [?mdr_ammo_days_left|0] escasez [?mdr_ai_ammo_lvl|0] territorio [?mdr_ai_terr|0] rendicion [?mdr_ai_surr|0] enemigos [?mdr_ai_enemy_ratio|2]"
+	}
+}
+
+# Monthly, AI countries only (on_monthly). Caches values that ai_strategy enable blocks read, then the stage 4 and 5 rules.
+mdr_ai_monthly = {
+	# Small arms present in armies vs needed, in % (read by mdr_ai_equip_first).
+	set_temp_variable = { mdr_ai_need = num_target_equipment_in_armies_k@infantry_weapons_type }
+	if = { limit = { check_variable = { mdr_ai_need > 0.5 } }
+		set_variable = { mdr_ai_equip_fill = num_equipment_in_armies_k@infantry_weapons_type }
+		multiply_variable = { mdr_ai_equip_fill = 100 }
+		divide_variable = { mdr_ai_equip_fill = mdr_ai_need }
+	}
+	else = { clear_variable = mdr_ai_equip_fill }
+
+	mdr_ai_embargo_monthly = yes
+	if = { limit = { mdr_ai_improved = yes } mdr_ai_peace_monthly = yes }
+}
+
+# Stage 4. A country short of a resource (deficit of 10 or more) lifts its embargo on a country that has that resource to spare.
+# Never during a war between them, never on a nuclear attacker, never on a country under Western sanctions.
+# The game may embargo again on its own; if the deficit lasts, this lifts it again next month.
+mdr_ai_embargo_monthly = {
+	if = { limit = { check_variable = { resource@oil < -10 } }
+		every_country = {
+			limit = {
+				is_embargoed_by = ROOT
+				NOT = { has_war_with = ROOT }
+				NOT = { has_country_flag = mdr_nuke_user }
+				mdr_is_under_western_sanctions = no
+				check_variable = { resource@oil > 10 }
+			}
+			mdr_ai_lift_embargo = yes
+		}
+	}
+	if = { limit = { check_variable = { resource@aluminium < -10 } }
+		every_country = {
+			limit = {
+				is_embargoed_by = ROOT
+				NOT = { has_war_with = ROOT }
+				NOT = { has_country_flag = mdr_nuke_user }
+				mdr_is_under_western_sanctions = no
+				check_variable = { resource@aluminium > 10 }
+			}
+			mdr_ai_lift_embargo = yes
+		}
+	}
+	if = { limit = { check_variable = { resource@rubber < -10 } }
+		every_country = {
+			limit = {
+				is_embargoed_by = ROOT
+				NOT = { has_war_with = ROOT }
+				NOT = { has_country_flag = mdr_nuke_user }
+				mdr_is_under_western_sanctions = no
+				check_variable = { resource@rubber > 10 }
+			}
+			mdr_ai_lift_embargo = yes
+		}
+	}
+	if = { limit = { check_variable = { resource@tungsten < -10 } }
+		every_country = {
+			limit = {
+				is_embargoed_by = ROOT
+				NOT = { has_war_with = ROOT }
+				NOT = { has_country_flag = mdr_nuke_user }
+				mdr_is_under_western_sanctions = no
+				check_variable = { resource@tungsten > 10 }
+			}
+			mdr_ai_lift_embargo = yes
+		}
+	}
+	if = { limit = { check_variable = { resource@steel < -10 } }
+		every_country = {
+			limit = {
+				is_embargoed_by = ROOT
+				NOT = { has_war_with = ROOT }
+				NOT = { has_country_flag = mdr_nuke_user }
+				mdr_is_under_western_sanctions = no
+				check_variable = { resource@steel > 10 }
+			}
+			mdr_ai_lift_embargo = yes
+		}
+	}
+	if = { limit = { check_variable = { resource@chromium < -10 } }
+		every_country = {
+			limit = {
+				is_embargoed_by = ROOT
+				NOT = { has_war_with = ROOT }
+				NOT = { has_country_flag = mdr_nuke_user }
+				mdr_is_under_western_sanctions = no
+				check_variable = { resource@chromium > 10 }
+			}
+			mdr_ai_lift_embargo = yes
+		}
+	}
+	if = { limit = { check_variable = { resource@microchips < -10 } }
+		every_country = {
+			limit = {
+				is_embargoed_by = ROOT
+				NOT = { has_war_with = ROOT }
+				NOT = { has_country_flag = mdr_nuke_user }
+				mdr_is_under_western_sanctions = no
+				check_variable = { resource@microchips > 10 }
+			}
+			mdr_ai_lift_embargo = yes
+		}
+	}
+	if = { limit = { check_variable = { resource@composites < -10 } }
+		every_country = {
+			limit = {
+				is_embargoed_by = ROOT
+				NOT = { has_war_with = ROOT }
+				NOT = { has_country_flag = mdr_nuke_user }
+				mdr_is_under_western_sanctions = no
+				check_variable = { resource@composites > 10 }
+			}
+			mdr_ai_lift_embargo = yes
+		}
+	}
+	if = { limit = { check_variable = { resource@uranium < -10 } }
+		every_country = {
+			limit = {
+				is_embargoed_by = ROOT
+				NOT = { has_war_with = ROOT }
+				NOT = { has_country_flag = mdr_nuke_user }
+				mdr_is_under_western_sanctions = no
+				check_variable = { resource@uranium > 10 }
+			}
+			mdr_ai_lift_embargo = yes
+		}
+	}
+	if = { limit = { check_variable = { resource@wheat < -10 } }
+		every_country = {
+			limit = {
+				is_embargoed_by = ROOT
+				NOT = { has_war_with = ROOT }
+				NOT = { has_country_flag = mdr_nuke_user }
+				mdr_is_under_western_sanctions = no
+				check_variable = { resource@wheat > 10 }
+			}
+			mdr_ai_lift_embargo = yes
+		}
+	}
+	if = { limit = { check_variable = { resource@rare_earths < -10 } }
+		every_country = {
+			limit = {
+				is_embargoed_by = ROOT
+				NOT = { has_war_with = ROOT }
+				NOT = { has_country_flag = mdr_nuke_user }
+				mdr_is_under_western_sanctions = no
+				check_variable = { resource@rare_earths > 10 }
+			}
+			mdr_ai_lift_embargo = yes
+		}
+	}
+}
+
+# THIS is the embargoed country, ROOT lifts the embargo.
+mdr_ai_lift_embargo = {
+	ROOT = { break_embargo = PREV }
+	log = "[GetDateText]: [Root.GetName]: MDR AI embargo levantado a [This.GetName] por deficit"
+	if = { limit = { is_ai = no }
+		ROOT = { save_event_target_as = mdr_ai_lifter }
+		country_event = { id = mdr_ai.1 }
+	}
+}
+
+# Stage 5. A losing AI asks its strongest enemy for a white peace, at most every 180 days.
+# A player decides in event mdr_ai.2; an AI only agrees if it is tired of the war too.
+mdr_ai_peace_monthly = {
+	if = {
+		limit = {
+			has_war = yes
+			surrender_progress > 0.57
+			enemies_strength_ratio > 1.7
+			NOT = { has_country_flag = mdr_ai_peace_cd }
+		}
+		set_country_flag = { flag = mdr_ai_peace_cd days = 180 value = 1 }
+		set_temp_variable = { mdr_ai_best = -1 }
+		every_enemy_country = {
+			if = { limit = { check_variable = { num_divisions > mdr_ai_best } }
+				set_temp_variable = { mdr_ai_best = num_divisions }
+				save_event_target_as = mdr_ai_peace_target
+			}
+		}
+		if = { limit = { has_event_target = mdr_ai_peace_target }
+			save_event_target_as = mdr_ai_peace_asker
+			event_target:mdr_ai_peace_target = {
+				log = "[GetDateText]: [Root.GetName]: MDR AI pide la paz a [This.GetName]"
+				if = { limit = { is_ai = no }
+					country_event = { id = mdr_ai.2 }
+				}
+				else_if = {
+					limit = {
+						OR = {
+							has_war_support < 0.4
+							surrender_progress > 0.17
+						}
+					}
+					random = { chance = 23
+						white_peace = { tag = event_target:mdr_ai_peace_asker message = mdr_ai_peace_msg }
+						log = "[GetDateText]: [This.GetName]: MDR AI acepta la paz con [Root.GetName]"
+					}
+				}
+			}
+		}
+	}
+}
+
+# Every country remembers how many states it controlled the first month (for the coalition rule).
+mdr_ai_track_states = {
+	if = { limit = { NOT = { has_variable = mdr_ai_start_states } }
+		set_variable = { mdr_ai_start_states = num_of_controlled_states }
+	}
+}
+
+# Stage 5, Expert. Once a month for the world: a country that controls 1.7 times its starting states (and at least 5 more)
+# makes its AI neighbours that are not its allies or subjects want to contain it.
+mdr_ai_world_monthly = {
+	every_country = {
+		limit = {
+			NOT = { has_country_flag = mdr_ai_coalition_cd }
+			has_variable = mdr_ai_start_states
+			check_variable = { mdr_ai_start_states > 0 }
+			set_temp_variable = { mdr_ai_lim = mdr_ai_start_states }
+			multiply_temp_variable = { mdr_ai_lim = 1.7 }
+			check_variable = { num_of_controlled_states > mdr_ai_lim }
+			set_temp_variable = { mdr_ai_lim2 = mdr_ai_start_states }
+			add_to_temp_variable = { mdr_ai_lim2 = 5 }
+			check_variable = { num_of_controlled_states > mdr_ai_lim2 }
+		}
+		log = "[GetDateText]: [This.GetName]: MDR AI conquista demasiado, coalicion de vecinos"
+		# Strategies added this way stack, so each conqueror triggers it at most once a year.
+		set_country_flag = { flag = mdr_ai_coalition_cd days = 365 value = 1 }
+		every_neighbor_country = {
+			limit = {
+				is_ai = yes
+				NOT = { is_in_faction_with = PREV }
+				NOT = { is_subject_of = PREV }
+			}
+			add_ai_strategy = { type = contain id = PREV value = 100 }
+			add_ai_strategy = { type = alliance id = PREV value = -100 }
+		}
+	}
+}

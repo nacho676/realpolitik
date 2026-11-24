@@ -1,0 +1,21 @@
+state = {
+	id = 1278
+	name = "STATE_1278" # Wilkes Land
+	manpower = 10
+
+	state_category = state_inhospitable
+
+	history = {
+		buildings = {
+			infrastructure = 1
+		}
+		add_claim_by = AST
+		set_state_flag = mdr_polar   # low disaster risk (common/scripted_effects/mdr_disasters.txt)
+		set_variable = { state_renewable_capacity_factor_modifier_var = 0.400 }
+		set_variable = { productivity_state_var = 300 }
+	}
+
+	impassable = yes
+
+	provinces = { 17152 17153 }
+}

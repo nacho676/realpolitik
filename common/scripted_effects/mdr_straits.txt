@@ -1,0 +1,174 @@
+# Maritime chokepoints. Strait ids (mdr_strait_id): 1 Bab el-Mandeb, 2 Suez, 3 Bosphorus, 4 Malacca, 5 Panama, 6 Gibraltar, 7 Hormuz.
+# Hormuz shares the Millennium Dawn flag HORMUZ_BLOCKED with its Iranian decision PER_block_hormuz.
+# A closure lasts at most 120 days; the global flag expiring reopens it.
+
+# Input: temp variable mdr_strait_id. Country scope: the closer.
+mdr_strait_close = {
+	if = { limit = { check_variable = { mdr_strait_id = 1 } }
+		set_global_flag = { flag = mdr_strait_1_closed days = 120 value = 1 }
+		set_variable = { global.mdr_strait_1_closer = THIS.id }
+		set_temp_variable = { mdr_oil_spike = 1.15 }
+	}
+	else_if = { limit = { check_variable = { mdr_strait_id = 2 } }
+		set_global_flag = { flag = mdr_strait_2_closed days = 120 value = 1 }
+		set_variable = { global.mdr_strait_2_closer = THIS.id }
+		set_temp_variable = { mdr_oil_spike = 1.15 }
+	}
+	else_if = { limit = { check_variable = { mdr_strait_id = 3 } }
+		set_global_flag = { flag = mdr_strait_3_closed days = 120 value = 1 }
+		set_variable = { global.mdr_strait_3_closer = THIS.id }
+		set_temp_variable = { mdr_oil_spike = 1.05 }
+	}
+	else_if = { limit = { check_variable = { mdr_strait_id = 4 } }
+		set_global_flag = { flag = mdr_strait_4_closed days = 120 value = 1 }
+		set_variable = { global.mdr_strait_4_closer = THIS.id }
+		set_temp_variable = { mdr_oil_spike = 1.15 }
+	}
+	else_if = { limit = { check_variable = { mdr_strait_id = 5 } }
+		set_global_flag = { flag = mdr_strait_5_closed days = 120 value = 1 }
+		set_variable = { global.mdr_strait_5_closer = THIS.id }
+		set_temp_variable = { mdr_oil_spike = 1.03 }
+	}
+	else_if = { limit = { check_variable = { mdr_strait_id = 6 } }
+		set_global_flag = { flag = mdr_strait_6_closed days = 120 value = 1 }
+		set_variable = { global.mdr_strait_6_closer = THIS.id }
+		set_temp_variable = { mdr_oil_spike = 1.05 }
+	}
+	# Hormuz also sets the Millennium Dawn flag, so its own Iranian decision and effects see the blockade.
+	else = {
+		set_global_flag = { flag = mdr_strait_7_closed days = 120 value = 1 }
+		set_variable = { global.mdr_strait_7_closer = THIS.id }
+		set_global_flag = HORMUZ_BLOCKED
+		set_global_flag = mdr_hormuz_blocked_by_mdr
+		set_temp_variable = { mdr_oil_spike = 1.15 }
+	}
+	add_threat = 5
+	every_other_country = {
+		limit = { NOT = { is_in_faction_with = PREV } }
+		add_opinion_modifier = { target = PREV modifier = mdr_closed_strait }
+	}
+	mdr_strait_world_effects = yes
+	set_variable = { global.mdr_strait_news_id = mdr_strait_id }
+	save_global_event_target_as = mdr_strait_news_country
+	news_event = { id = mdr_straits.1 }
+}
+
+# Input: temp variable mdr_strait_id (closure, an accident or an attack campaign).
+# Prices react at once. Millennium Dawn recalculates oil prices monthly from supply and demand,
+# so the lasting effect comes from the export penalty on the producers whose route is cut.
+mdr_strait_world_effects = {
+	set_temp_variable = { mdr_new_oil_price = global.oil_price }
+	multiply_temp_variable = { mdr_new_oil_price = mdr_oil_spike }
+	set_variable = { global.oil_price = mdr_new_oil_price }
+	if = { limit = { OR = { check_variable = { mdr_strait_id = 1 } check_variable = { mdr_strait_id = 2 } check_variable = { mdr_strait_id = 4 } check_variable = { mdr_strait_id = 7 } } }
+		every_country = {
+			limit = {
+				OR = { original_tag = SAU original_tag = KUW original_tag = IRQ original_tag = UAE original_tag = QAT original_tag = BHR original_tag = OMA }
+				NOT = { has_idea = mdr_strait_route_blocked }
+			}
+			add_ideas = mdr_strait_route_blocked
+		}
+	}
+	if = { limit = { check_variable = { mdr_strait_id = 3 } }
+		every_country = {
+			limit = {
+				OR = { original_tag = SOV original_tag = KAZ original_tag = AZE }
+				NOT = { has_idea = mdr_strait_route_blocked }
+			}
+			add_ideas = mdr_strait_route_blocked
+		}
+	}
+	if = { limit = { check_variable = { mdr_strait_id = 4 } }
+		every_country = {
+			limit = {
+				OR = { original_tag = JAP original_tag = KOR original_tag = CHI original_tag = TAI }
+				NOT = { has_idea = mdr_strait_supply_shock }
+			}
+			add_ideas = mdr_strait_supply_shock
+		}
+	}
+}
+
+# Input: temp variable mdr_strait_id. Country scope: whoever reopens it.
+mdr_strait_reopen = {
+	if = { limit = { check_variable = { mdr_strait_id = 1 } } clr_global_flag = mdr_strait_1_closed }
+	else_if = { limit = { check_variable = { mdr_strait_id = 2 } } clr_global_flag = mdr_strait_2_closed }
+	else_if = { limit = { check_variable = { mdr_strait_id = 3 } } clr_global_flag = mdr_strait_3_closed }
+	else_if = { limit = { check_variable = { mdr_strait_id = 4 } } clr_global_flag = mdr_strait_4_closed }
+	else_if = { limit = { check_variable = { mdr_strait_id = 5 } } clr_global_flag = mdr_strait_5_closed }
+	else_if = { limit = { check_variable = { mdr_strait_id = 6 } } clr_global_flag = mdr_strait_6_closed }
+	else = {
+		clr_global_flag = mdr_strait_7_closed
+		clr_global_flag = HORMUZ_BLOCKED
+		clr_global_flag = mdr_hormuz_blocked_by_mdr
+	}
+	set_variable = { global.mdr_strait_news_id = mdr_strait_id }
+	save_global_event_target_as = mdr_strait_news_country
+	news_event = { id = mdr_straits.2 }
+}
+
+# Weekly, for the whole world: historical shipping crises and rare accidents.
+mdr_straits_historical = {
+	# The Ever Given blocks the Suez Canal for six days.
+	if = { limit = { date > 2021.03.22 NOT = { has_global_flag = mdr_hs_2021_ever_given } }
+		set_global_flag = mdr_hs_2021_ever_given
+		if = { limit = { NOT = { check_variable = { mdr_dis_mute = 1 } } }
+			set_global_flag = { flag = mdr_strait_2_closed days = 6 value = 1 }
+			set_temp_variable = { mdr_strait_id = 2 }
+			set_temp_variable = { mdr_oil_spike = 1.05 }
+			mdr_strait_world_effects = yes
+			news_event = { id = mdr_straits.3 }
+		}
+	}
+	# Drought cuts traffic through the Panama Canal until early 2024.
+	if = { limit = { date > 2023.05.31 NOT = { has_global_flag = mdr_hs_2023_panama_drought } }
+		set_global_flag = mdr_hs_2023_panama_drought
+		if = { limit = { NOT = { check_variable = { mdr_dis_mute = 1 } } }
+			set_global_flag = { flag = mdr_panama_drought days = 245 value = 1 }
+			set_temp_variable = { mdr_strait_id = 5 }
+			set_temp_variable = { mdr_oil_spike = 1.02 }
+			mdr_strait_world_effects = yes
+			if = { limit = { country_exists = PAN } PAN = { add_timed_idea = { idea = mdr_panama_drought days = 245 } } }
+			news_event = { id = mdr_straits.4 }
+		}
+	}
+	# Houthi attacks on Red Sea shipping, until the January 2025 Gaza ceasefire.
+	if = { limit = { date > 2023.11.18 NOT = { has_global_flag = mdr_hs_2023_red_sea } }
+		set_global_flag = mdr_hs_2023_red_sea
+		if = { limit = { NOT = { check_variable = { mdr_dis_mute = 1 } } }
+			set_global_flag = { flag = mdr_strait_1_closed days = 427 value = 1 }
+			set_temp_variable = { mdr_strait_id = 1 }
+			set_temp_variable = { mdr_oil_spike = 1.08 }
+			mdr_strait_world_effects = yes
+			news_event = { id = mdr_straits.5 }
+		}
+	}
+}
+
+# Dynamic mode: a ship runs aground in Suez about once a decade.
+mdr_straits_dynamic = {
+	if = { limit = { NOT = { has_global_flag = mdr_strait_2_closed } }
+		random_list = {
+			519 = { }
+			1 = {
+				set_global_flag = { flag = mdr_strait_2_closed days = 6 value = 1 }
+				set_temp_variable = { mdr_strait_id = 2 }
+				set_temp_variable = { mdr_oil_spike = 1.05 }
+				mdr_strait_world_effects = yes
+				news_event = { id = mdr_straits.6 }
+			}
+		}
+	}
+}
+
+# When a Realpolitik closure of Hormuz expires on its own, lift the Millennium Dawn flag it set.
+mdr_straits_weekly_cleanup = {
+	if = {
+		limit = {
+			has_global_flag = mdr_hormuz_blocked_by_mdr
+			NOT = { has_global_flag = mdr_strait_7_closed }
+		}
+		clr_global_flag = HORMUZ_BLOCKED
+		clr_global_flag = mdr_hormuz_blocked_by_mdr
+	}
+}

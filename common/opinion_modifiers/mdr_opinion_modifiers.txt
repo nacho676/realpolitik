@@ -1,0 +1,96 @@
+opinion_modifiers = {
+	mdr_disaster_aid_large = {
+		value = 30
+		decay = 0.5
+	}
+	mdr_disaster_aid_small = {
+		value = 10
+		decay = 0.25
+	}
+	mdr_left_arms_treaty = {
+		value = -30
+		decay = 0.25
+	}
+	mdr_left_climate_treaty = {
+		value = -15
+		decay = 0.25
+	}
+	# We put one of their generals on public trial.
+	mdr_show_trial = {
+		value = -20
+		decay = 0.5
+	}
+	# Ship sales (mdr_ship_sale.txt).
+	mdr_sale_undelivered = {
+		value = -15
+		decay = 0.5
+	}
+	mdr_sale_gift = {
+		value = 12
+		decay = 0.5
+	}
+	mdr_sale_to_sanctioned = {
+		value = -10
+		decay = 0.5
+	}
+	mdr_closed_strait = {
+		value = -40
+		decay = 0.5
+	}
+	mdr_reopened_strait = {
+		value = 20
+		decay = 0.5
+	}
+	# Nuclear strike (mdr_nuclear_reactions in mdr_nuclear.txt). They fade in about a year and a half; "half" is a military target.
+	mdr_nuke_outrage = {
+		value = -80
+		decay = 0.15
+	}
+	mdr_nuke_outrage_half = {
+		value = -40
+		decay = 0.075
+	}
+	mdr_nuke_condemnation = {
+		value = -40
+		decay = 0.075
+	}
+	mdr_nuke_condemnation_half = {
+		value = -20
+		decay = 0.04
+	}
+	mdr_nuke_concern = {
+		value = -15
+		decay = 0.03
+	}
+	mdr_nuke_concern_half = {
+		value = -8
+		decay = 0.015
+	}
+
+	# They nationalized one of our companies (mdr_mnc_decisions.txt).
+	mdr_mnc_expropriated = {
+		value = -47
+		decay = 0.37
+	}
+	# Mongolia focus tree (mdr_mongolia.txt).
+	mdr_mon_rel_15 = {
+		value = 15
+		decay = 0.17
+	}
+	mdr_mon_rel_25 = {
+		value = 25
+		decay = 0.17
+	}
+	mdr_mon_rel_50 = {
+		value = 50
+		decay = 0.17
+	}
+	mdr_mon_rel_neg_15 = {
+		value = -15
+		decay = 0.17
+	}
+	mdr_mon_rel_neg_25 = {
+		value = -25
+		decay = 0.17
+	}
+}

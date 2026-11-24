@@ -1,0 +1,89 @@
+add_namespace = mdr_mon
+
+# Focus mdr_mon_P6: the riots of 1 July 2008.
+country_event = {
+	id = mdr_mon.1
+	title = mdr_mon.1.t
+	desc = mdr_mon.1.d
+	picture = GFX_ENG_riot
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_mon.1.a
+		log = "[GetDateText]: [This.GetName]: mdr_mon.1.a executed"
+		add_political_power = 29
+		add_stability = -0.05
+		add_timed_idea = { idea = mdr_mon_strongman_unrest days = 120 }
+		ai_chance = { base = 3 }
+	}
+	option = {
+		name = mdr_mon.1.b
+		log = "[GetDateText]: [This.GetName]: mdr_mon.1.b executed"
+		add_political_power = -23
+		add_stability = 0.03
+		ai_chance = { base = 7 }
+	}
+}
+
+# Focus mdr_mon_S7 or January 2010: the dzud hits the herds.
+country_event = {
+	id = mdr_mon.2
+	title = mdr_mon.2.t
+	desc = {
+		text = mdr_mon.2.d_prepared
+		trigger = { has_country_flag = mdr_mon_fodder_reserves }
+	}
+	desc = {
+		text = mdr_mon.2.d_unprepared
+		trigger = { NOT = { has_country_flag = mdr_mon_fodder_reserves } }
+	}
+	picture = GFX_eth_famine_strikes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_mon.2.a
+		log = "[GetDateText]: [This.GetName]: mdr_mon.2.a executed"
+	}
+}
+
+# Pan-Mongol path: the owner of a Mongol state (not Russia or China) is invited to join the khanate. FROM is Mongolia.
+country_event = {
+	id = mdr_mon.3
+	title = mdr_mon.3.t
+	desc = mdr_mon.3.d
+	picture = GFX_SOV_eurasian_union
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_mon.3.a
+		log = "[GetDateText]: [This.GetName]: mdr_mon.3.a executed"
+		FROM = { annex_country = { target = ROOT transfer_troops = yes } }
+		ai_chance = {
+			base = 1
+			modifier = { add = 5 has_opinion = { target = FROM value > 24 } }
+			modifier = { add = 3 FROM = { has_completed_focus = mdr_mon_I9 } }
+			modifier = { factor = 0.2 has_government = democratic NOT = { FROM = { has_idea = mdr_mon_democracy } } }
+		}
+	}
+	option = {
+		name = mdr_mon.3.b
+		log = "[GetDateText]: [This.GetName]: mdr_mon.3.b executed"
+		FROM = { add_opinion_modifier = { target = ROOT modifier = mdr_mon_rel_neg_25 } }
+		ai_chance = { base = 3 }
+	}
+}
+
+# Focus mdr_mon_G15: world news of the Great Khanate.
+news_event = {
+	id = mdr_mon.4
+	title = mdr_mon.4.t
+	desc = mdr_mon.4.d
+	picture = GFX_mali_celebration
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = mdr_mon.4.a
+		log = "[GetDateText]: [This.GetName]: mdr_mon.4.a executed"
+	}
+}

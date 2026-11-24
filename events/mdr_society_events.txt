@@ -1,0 +1,58 @@
+add_namespace = mdr_society
+
+# Social explosion: anger held back by banned protests, banned unions or total surveillance (mdr_civil_laws_weekly)
+country_event = {
+	id = mdr_society.5
+	title = mdr_society.5.t
+	desc = mdr_society.5.d
+	picture = GFX_politics_protest
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			set_variable = { mdr_society_cost = gdp_total }
+			multiply_variable = { mdr_society_cost = 0.003 }
+			if = { limit = { has_variable = protest_strength }
+				add_to_variable = { protest_strength = 20 }
+				clamp_variable = { var = protest_strength min = 0 max = 100 }
+			}
+		}
+		custom_effect_tooltip = mdr_society_explosion_tt
+	}
+
+	# Concessions: allow protests again and pay for reforms
+	option = {
+		name = mdr_society.5.a
+		log = "[GetDateText]: [This.GetName]: mdr_society.5.a executed"
+		custom_effect_tooltip = mdr_society_pay_tt
+		custom_effect_tooltip = mdr_society_explosion_concede_tt
+		hidden_effect = {
+			set_temp_variable = { mdr_society_cost_share = 0.003 }
+			mdr_society_pay = yes
+			if = { limit = { OR = { has_idea = mdr_assembly_restricted has_idea = mdr_assembly_banned } }
+				set_temp_variable = { mdr_civil_target = 2 }
+				mdr_assembly_set = yes
+			}
+			set_variable = { mdr_unrest_hidden = 15 }
+			set_temp_variable = { mdr_society_protest = -10 }
+			mdr_society_protest_change = yes
+		}
+		ai_chance = { base = 1 modifier = { factor = 2 has_elections = yes } }
+	}
+
+	# The iron fist
+	option = {
+		name = mdr_society.5.b
+		log = "[GetDateText]: [This.GetName]: mdr_society.5.b executed"
+		add_stability = -0.06
+		custom_effect_tooltip = mdr_society_explosion_crush_tt
+		hidden_effect = {
+			set_variable = { mdr_unrest_hidden = 35 }
+			set_temp_variable = { mdr_society_protest = -12 }
+			mdr_society_protest_change = yes
+			add_to_variable = { protest_radicalisation = 2 }
+			clamp_variable = { var = protest_radicalisation min = 0 max = 10 }
+		}
+		ai_chance = { base = 1 modifier = { factor = 2 has_elections = no } }
+	}
+}

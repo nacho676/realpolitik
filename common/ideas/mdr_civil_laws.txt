@@ -1,0 +1,672 @@
+# Four laws next to the media law in "Society and Information" (common/idea_tags/00_idea.txt): assembly, civil society,
+# unions and surveillance. Assembly, civil society and unions can jump to any level, as a decree can; surveillance and the
+# retirement age change one step at a time, like the media law. The requirements only gate the change.
+# Weekly effects on Millennium Dawn's protests, strikes and inequality: mdr_civil_laws_weekly (mdr_civil_laws.txt).
+ideas = {
+	mdr_assembly_law = {
+		law = yes
+		use_list_view = yes
+
+		mdr_assembly_free = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = ALG_Peaceful_Protest
+			available = {
+				has_elections = yes
+			}
+			on_add = { set_variable = { mdr_assembly_level = 1 } }
+			cost = 150
+			removal_cost = -1
+			level = 1
+			modifier = {
+				stability_factor = 0.02
+				political_power_factor = -0.05
+				drift_defence_factor = -0.05
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_assembly_free add = 2 }
+				modifier = {
+					has_elections = yes
+					has_war = no
+					has_stability > 0.57
+					check_variable = { mdr_unrest_hidden < 23 }
+					check_variable = { mdr_assembly_level = 2 }
+					add = 4
+				}
+			}
+		}
+
+		mdr_assembly_regulated = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = generic_protest
+			on_add = { set_variable = { mdr_assembly_level = 2 } }
+			default = yes
+			cost = 150
+			removal_cost = -1
+			level = 2
+			modifier = {
+				stability_factor = 0.01
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_assembly_regulated add = 2 }
+				modifier = {
+					has_elections = yes
+					has_war = no
+					has_stability > 0.57
+					check_variable = { mdr_assembly_level > 2 }
+					add = 4
+				}
+			}
+		}
+
+		mdr_assembly_restricted = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = hk_protests
+			on_add = { set_variable = { mdr_assembly_level = 3 } }
+			cost = 150
+			removal_cost = -1
+			level = 3
+			modifier = {
+				political_power_factor = 0.04
+				stability_factor = -0.01
+				police_cost_multiplier_modifier = 0.03
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_assembly_restricted add = 2 }
+				modifier = {
+					has_elections = no
+					OR = { check_variable = { mdr_unrest_hidden > 47 } check_variable = { protest_strength > 47 } }
+					check_variable = { mdr_assembly_level < 3 }
+					add = 4
+				}
+				modifier = {
+					has_elections = yes
+					has_war = yes
+					OR = { check_variable = { mdr_unrest_hidden > 61 } check_variable = { protest_strength > 61 } }
+					check_variable = { mdr_assembly_level < 3 }
+					add = 3
+				}
+			}
+		}
+
+		mdr_assembly_banned = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = nko_march
+			available = {
+				has_elections = no
+			}
+			on_add = { set_variable = { mdr_assembly_level = 4 } }
+			cost = 150
+			removal_cost = -1
+			level = 4
+			modifier = {
+				political_power_factor = 0.08
+				war_support_factor = 0.03
+				stability_factor = 0.02
+				police_cost_multiplier_modifier = 0.08
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_assembly_banned add = 2 }
+				modifier = {
+					has_elections = no
+					OR = { check_variable = { mdr_unrest_hidden > 61 } check_variable = { protest_strength > 61 } }
+					check_variable = { mdr_assembly_level = 3 }
+					add = 4
+				}
+			}
+		}
+	}
+
+	mdr_civil_society_law = {
+		law = yes
+		use_list_view = yes
+
+		mdr_ngo_free = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = fra_liberte_egalite_solidarite
+			available = {
+				has_elections = yes
+			}
+			on_add = { set_variable = { mdr_ngo_level = 1 } }
+			cost = 150
+			removal_cost = -1
+			level = 1
+			modifier = {
+				receiving_investment_cost_modifier = -0.05
+				research_speed_factor = 0.01
+				foreign_subversive_activites = 0.10
+				political_power_factor = -0.03
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_ngo_free add = 2 }
+				modifier = {
+					has_elections = yes
+					has_war = no
+					has_stability > 0.57
+					check_variable = { mdr_unrest_hidden < 23 }
+					check_variable = { mdr_ngo_level = 2 }
+					add = 4
+				}
+			}
+		}
+
+		mdr_ngo_registered = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = dutch_GL_international_solidarity_idea
+			on_add = { set_variable = { mdr_ngo_level = 2 } }
+			default = yes
+			cost = 150
+			removal_cost = -1
+			level = 2
+			modifier = {
+				receiving_investment_cost_modifier = -0.02
+				foreign_subversive_activites = 0.03
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_ngo_registered add = 2 }
+				modifier = {
+					has_elections = yes
+					has_war = no
+					has_stability > 0.57
+					check_variable = { mdr_ngo_level > 2 }
+					add = 4
+				}
+			}
+		}
+
+		mdr_ngo_foreign_agents = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = PER_fund_state_intelligence_idea
+			on_add = { set_variable = { mdr_ngo_level = 3 } }
+			cost = 150
+			removal_cost = -1
+			level = 3
+			modifier = {
+				foreign_subversive_activites = -0.10
+				receiving_investment_cost_modifier = 0.05
+				political_power_factor = 0.03
+				drift_defence_factor = 0.05
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_ngo_foreign_agents add = 2 }
+				modifier = {
+					has_elections = no
+					OR = { check_variable = { mdr_unrest_hidden > 47 } check_variable = { protest_strength > 47 } }
+					check_variable = { mdr_ngo_level < 3 }
+					add = 4
+				}
+				modifier = {
+					has_elections = yes
+					has_war = yes
+					OR = { check_variable = { mdr_unrest_hidden > 61 } check_variable = { protest_strength > 61 } }
+					check_variable = { mdr_ngo_level < 3 }
+					add = 3
+				}
+			}
+		}
+
+		mdr_ngo_banned = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = secret_police
+			available = {
+				has_elections = no
+			}
+			on_add = { set_variable = { mdr_ngo_level = 4 } }
+			cost = 150
+			removal_cost = -1
+			level = 4
+			modifier = {
+				foreign_subversive_activites = -0.25
+				receiving_investment_cost_modifier = 0.12
+				political_power_factor = 0.06
+				drift_defence_factor = 0.10
+				research_speed_factor = -0.02
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_ngo_banned add = 2 }
+				modifier = {
+					has_elections = no
+					OR = { check_variable = { mdr_unrest_hidden > 61 } check_variable = { protest_strength > 61 } }
+					check_variable = { mdr_ngo_level = 3 }
+					add = 4
+				}
+			}
+		}
+	}
+
+	mdr_union_law = {
+		law = yes
+		use_list_view = yes
+
+		mdr_unions_free = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = labour_unions
+			available = {
+				has_elections = yes
+			}
+			on_add = { set_variable = { mdr_union_level = 1 } }
+			cost = 150
+			removal_cost = -1
+			level = 1
+			modifier = {
+				stability_factor = 0.02
+				industrial_capacity_factory = -0.02
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_unions_free add = 2 }
+				modifier = {
+					has_elections = yes
+					has_war = no
+					has_stability > 0.57
+					check_variable = { mdr_unrest_hidden < 23 }
+					check_variable = { mdr_union_level = 2 }
+					add = 4
+				}
+			}
+		}
+
+		mdr_unions_regulated = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = worker_reforms
+			on_add = { set_variable = { mdr_union_level = 2 } }
+			default = yes
+			cost = 150
+			removal_cost = -1
+			level = 2
+			modifier = {
+				stability_factor = 0.01
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_unions_regulated add = 2 }
+				modifier = {
+					has_elections = yes
+					has_war = no
+					has_stability > 0.57
+					check_variable = { mdr_union_level > 2 }
+					add = 4
+				}
+			}
+		}
+
+		mdr_unions_state = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = ser_workers_idea
+			on_add = { set_variable = { mdr_union_level = 3 } }
+			cost = 150
+			removal_cost = -1
+			level = 3
+			modifier = {
+				political_power_factor = 0.03
+				industrial_capacity_factory = 0.02
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_unions_state add = 2 }
+				modifier = {
+					has_elections = no
+					OR = { check_variable = { mdr_unrest_hidden > 47 } check_variable = { protest_strength > 47 } }
+					check_variable = { mdr_union_level < 3 }
+					add = 4
+				}
+				modifier = {
+					has_elections = yes
+					has_war = yes
+					OR = { check_variable = { mdr_unrest_hidden > 61 } check_variable = { protest_strength > 61 } }
+					check_variable = { mdr_union_level < 3 }
+					add = 3
+				}
+			}
+		}
+
+		mdr_unions_banned = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = generic_fascist_workers
+			available = {
+				has_elections = no
+			}
+			on_add = { set_variable = { mdr_union_level = 4 } }
+			cost = 150
+			removal_cost = -1
+			level = 4
+			modifier = {
+				industrial_capacity_factory = 0.04
+				political_power_factor = 0.03
+				stability_factor = -0.02
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_unions_banned add = 2 }
+				modifier = {
+					has_elections = no
+					OR = { check_variable = { mdr_unrest_hidden > 61 } check_variable = { protest_strength > 61 } }
+					check_variable = { mdr_union_level = 3 }
+					add = 4
+				}
+			}
+		}
+	}
+
+	mdr_surveillance_law = {
+		law = yes
+		use_list_view = yes
+
+		mdr_privacy_protected = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = intelligence_community
+			available = {
+				custom_trigger_tooltip = { tooltip = mdr_privacy_protected_req_tt has_idea = mdr_surveillance_judicial }
+				has_elections = yes
+			}
+			on_add = { set_variable = { mdr_surveillance_level = 1 } }
+			cost = 150
+			removal_cost = -1
+			level = 1
+			modifier = {
+				research_speed_factor = 0.02
+				receiving_investment_cost_modifier = -0.03
+				enemy_operative_detection_chance_factor = -0.10
+				foreign_subversive_activites = 0.05
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_privacy_protected add = 2 }
+				modifier = {
+					has_elections = yes
+					has_war = no
+					has_stability > 0.57
+					check_variable = { mdr_unrest_hidden < 23 }
+					has_idea = mdr_surveillance_judicial
+					add = 3
+				}
+			}
+		}
+
+		mdr_surveillance_judicial = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = blr_national_intelligence_service_idea
+			available = {
+				custom_trigger_tooltip = { tooltip = mdr_surveillance_judicial_req_tt OR = { has_idea = mdr_privacy_protected has_idea = mdr_surveillance_mass } }
+			}
+			on_add = { set_variable = { mdr_surveillance_level = 2 } }
+			default = yes
+			cost = 150
+			removal_cost = -1
+			level = 2
+			modifier = {
+				enemy_operative_detection_chance_factor = 0.05
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_surveillance_judicial add = 2 }
+				modifier = {
+					has_elections = yes
+					has_war = no
+					has_stability > 0.57
+					has_idea = mdr_surveillance_mass
+					add = 4
+				}
+			}
+		}
+
+		mdr_surveillance_mass = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = SPYSAT_system
+			available = {
+				custom_trigger_tooltip = { tooltip = mdr_surveillance_mass_req_tt OR = { has_idea = mdr_surveillance_judicial has_idea = mdr_surveillance_total } }
+				OR = {
+					has_idea = police_03
+					has_idea = police_04
+					has_idea = police_05
+				}
+			}
+			on_add = { set_variable = { mdr_surveillance_level = 3 } }
+			cost = 150
+			removal_cost = -1
+			level = 3
+			modifier = {
+				enemy_operative_detection_chance_factor = 0.20
+				enemy_operative_capture_chance_factor = 0.10
+				foreign_subversive_activites = -0.10
+				cyber_defense_rating_modifier = 1
+				political_power_factor = 0.03
+				research_speed_factor = -0.02
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_surveillance_mass add = 2 }
+				modifier = {
+					has_elections = no
+					OR = { check_variable = { mdr_unrest_hidden > 47 } check_variable = { protest_strength > 47 } }
+					has_idea = mdr_surveillance_judicial
+					add = 4
+				}
+				modifier = {
+					has_war = yes
+					ai_is_threatened = yes
+					has_idea = mdr_surveillance_judicial
+					add = 3
+				}
+				modifier = {
+					has_elections = no
+					has_war = no
+					check_variable = { mdr_unrest_hidden < 23 }
+					has_idea = mdr_surveillance_total
+					add = 2
+				}
+			}
+		}
+
+		mdr_surveillance_total = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = spirit_JAP_police_state
+			available = {
+				custom_trigger_tooltip = { tooltip = mdr_surveillance_total_req_tt has_idea = mdr_surveillance_mass }
+				has_elections = no
+				OR = {
+					has_idea = police_04
+					has_idea = police_05
+				}
+			}
+			on_add = { set_variable = { mdr_surveillance_level = 4 } }
+			cost = 150
+			removal_cost = -1
+			level = 4
+			modifier = {
+				enemy_operative_detection_chance_factor = 0.40
+				enemy_operative_capture_chance_factor = 0.25
+				foreign_subversive_activites = -0.25
+				cyber_defense_rating_modifier = 2
+				political_power_factor = 0.06
+				research_speed_factor = -0.05
+				productivity_growth_modifier = -0.01
+				police_cost_multiplier_modifier = 0.10
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_surveillance_total add = 2 }
+				modifier = {
+					has_elections = no
+					OR = { check_variable = { mdr_unrest_hidden > 61 } check_variable = { protest_strength > 61 } }
+					has_idea = mdr_surveillance_mass
+					add = 4
+				}
+			}
+		}
+	}
+
+	# Retirement age. Raising it adds workers and saves pension money but brings protests (mdr_retirement_raised).
+	mdr_retirement_law = {
+		law = yes
+		use_list_view = yes
+
+		mdr_retire_60 = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = ARG_social_welfare_fund_ns
+			available = {
+				custom_trigger_tooltip = { tooltip = mdr_retire_60_req_tt has_idea = mdr_retire_62 }
+			}
+			on_add = { set_variable = { mdr_retire_level = 1 } }
+			cost = 150
+			removal_cost = -1
+			level = 1
+			modifier = {
+				total_workforce_modifier = -0.04
+				social_cost_multiplier_modifier = 0.15
+				stability_factor = 0.02
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_retire_60 add = 2 }
+			}
+		}
+
+		mdr_retire_62 = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = blr_pensions_reform_govern
+			available = {
+				custom_trigger_tooltip = { tooltip = mdr_retire_62_req_tt OR = { has_idea = mdr_retire_60 has_idea = mdr_retire_65 } }
+			}
+			on_add = {
+				if = { limit = { check_variable = { mdr_retire_level < 2 } } mdr_retirement_raised = yes }
+				set_variable = { mdr_retire_level = 2 }
+			}
+			cost = 150
+			removal_cost = -1
+			level = 2
+			modifier = {
+				total_workforce_modifier = -0.02
+				social_cost_multiplier_modifier = 0.07
+				stability_factor = 0.01
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_retire_62 add = 2 }
+				modifier = {
+					OR = { has_idea = mdr_aging_2 has_idea = mdr_aging_3 }
+					check_variable = { debt_ratio > 0.6 }
+					check_variable = { mdr_retire_level = 1 }
+					NOT = { AND = { has_elections = yes check_variable = { protest_strength > 47 } } }
+					add = 4
+				}
+			}
+		}
+
+		mdr_retire_65 = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = ITA_aged
+			available = {
+				custom_trigger_tooltip = { tooltip = mdr_retire_65_req_tt OR = { has_idea = mdr_retire_62 has_idea = mdr_retire_67 } }
+			}
+			on_add = {
+				if = { limit = { check_variable = { mdr_retire_level < 3 } } mdr_retirement_raised = yes }
+				set_variable = { mdr_retire_level = 3 }
+			}
+			default = yes
+			cost = 150
+			removal_cost = -1
+			level = 3
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_retire_65 add = 2 }
+				modifier = {
+					OR = { has_idea = mdr_aging_2 has_idea = mdr_aging_3 }
+					check_variable = { debt_ratio > 0.6 }
+					check_variable = { mdr_retire_level = 2 }
+					NOT = { AND = { has_elections = yes check_variable = { protest_strength > 47 } } }
+					add = 4
+				}
+			}
+		}
+
+		mdr_retire_67 = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = worker_reforms
+			available = {
+				custom_trigger_tooltip = { tooltip = mdr_retire_67_req_tt OR = { has_idea = mdr_retire_65 has_idea = mdr_retire_70 } }
+			}
+			on_add = {
+				if = { limit = { check_variable = { mdr_retire_level < 4 } } mdr_retirement_raised = yes }
+				set_variable = { mdr_retire_level = 4 }
+			}
+			cost = 150
+			removal_cost = -1
+			level = 4
+			modifier = {
+				total_workforce_modifier = 0.02
+				social_cost_multiplier_modifier = -0.06
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_retire_67 add = 2 }
+				modifier = {
+					OR = { has_idea = mdr_aging_2 has_idea = mdr_aging_3 }
+					check_variable = { debt_ratio > 0.6 }
+					check_variable = { mdr_retire_level = 3 }
+					NOT = { AND = { has_elections = yes check_variable = { protest_strength > 47 } } }
+					add = 4
+				}
+			}
+		}
+
+		mdr_retire_70 = {
+			cancel_if_invalid = no
+			allowed_civil_war = { always = yes }
+			picture = pmr_workers_idea
+			available = {
+				custom_trigger_tooltip = { tooltip = mdr_retire_70_req_tt has_idea = mdr_retire_67 }
+			}
+			on_add = {
+				if = { limit = { check_variable = { mdr_retire_level < 5 } } mdr_retirement_raised = yes }
+				set_variable = { mdr_retire_level = 5 }
+			}
+			cost = 150
+			removal_cost = -1
+			level = 5
+			modifier = {
+				total_workforce_modifier = 0.04
+				social_cost_multiplier_modifier = -0.12
+				stability_factor = -0.02
+			}
+			ai_will_do = {
+				base = 1
+				modifier = { has_idea = mdr_retire_70 add = 2 }
+				modifier = {
+					OR = { has_idea = mdr_aging_2 has_idea = mdr_aging_3 }
+					check_variable = { debt_ratio > 0.6 }
+					check_variable = { mdr_retire_level = 4 }
+					NOT = { AND = { has_elections = yes check_variable = { protest_strength > 47 } } }
+					add = 4
+				}
+			}
+		}
+	}
+}

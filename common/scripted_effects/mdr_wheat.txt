@@ -1,0 +1,72 @@
+# Wheat: each cropland level grows 10 (common/buildings/mdr_buildings.txt), +1 per fertilizer technology.
+
+# Country scope. Called when a fertilizer technology is researched: a fixed +1, which soil and infrastructure do not multiply.
+mdr_fertilizer_wheat = {
+	modify_building_resources = {
+		building = mdr_cropland
+		resource = wheat
+		amount = 1
+	}
+}
+
+# Country scope, once at game start: countries that already farm with 1985 or 1995 methods get those fertilizer levels and their wheat.
+mdr_fertilizers_start = {
+	if = {
+		limit = {
+			NOT = { has_tech = mdr_fertilizers_1 }
+			OR = {
+				has_tech = gps_agricultural_applications
+				has_tech = genetics_1
+			}
+		}
+		set_technology = { mdr_fertilizers_1 = 1 popup = no }
+		mdr_fertilizer_wheat = yes
+	}
+	if = {
+		limit = {
+			has_tech = mdr_fertilizers_1
+			NOT = { has_tech = mdr_fertilizers_2 }
+			has_tech = automated_irrigation_systems
+		}
+		set_technology = { mdr_fertilizers_2 = 1 popup = no }
+		mdr_fertilizer_wheat = yes
+	}
+}
+
+# Country scope, from mdr_food_calc: grain figures (the resource is called wheat in the files).
+mdr_wheat_read = {
+	# Grain per cropland level for the food tooltip: building descriptions cannot show country figures.
+	set_variable = { mdr_wheat_per_cropland = 10 }
+	if = { limit = { has_tech = mdr_fertilizers_1 } add_to_variable = { mdr_wheat_per_cropland = 1 } }
+	if = { limit = { has_tech = mdr_fertilizers_2 } add_to_variable = { mdr_wheat_per_cropland = 1 } }
+	if = { limit = { has_tech = mdr_fertilizers_3 } add_to_variable = { mdr_wheat_per_cropland = 1 } }
+	if = { limit = { has_tech = mdr_fertilizers_4 } add_to_variable = { mdr_wheat_per_cropland = 1 } }
+	if = { limit = { has_tech = mdr_fertilizers_5 } add_to_variable = { mdr_wheat_per_cropland = 1 } }
+	if = { limit = { has_tech = mdr_fertilizers_6 } add_to_variable = { mdr_wheat_per_cropland = 1 } }
+	if = { limit = { has_tech = mdr_fertilizers_7 } add_to_variable = { mdr_wheat_per_cropland = 1 } }
+	if = { limit = { has_tech = mdr_fertilizers_8 } add_to_variable = { mdr_wheat_per_cropland = 1 } }
+	if = { limit = { has_tech = mdr_fertilizers_9 } add_to_variable = { mdr_wheat_per_cropland = 1 } }
+	if = { limit = { has_tech = mdr_fertilizers_10 } add_to_variable = { mdr_wheat_per_cropland = 1 } }
+	set_variable = { mdr_wheat_produced = resource_produced@wheat }
+	set_variable = { mdr_wheat_imported = resource_imported@wheat }
+	# Only what importers actually bought (global.mdr_wheat_sold_share, mdr_food_world_market) leaves the country.
+	set_variable = { mdr_wheat_exported = resource_exported@wheat }
+	multiply_variable = { mdr_wheat_exported = global.mdr_wheat_sold_share }
+}
+
+# Country scope, weekly from mdr_food_weekly: export income with Millennium Dawn's formula for the other resources
+# (calculate_resource_sale_rate): exported x price x export multiplier x 0.00298 per week.
+mdr_wheat_pay_exports = {
+	set_variable = { mdr_wheat_income = 0 }
+	if = { limit = { check_variable = { mdr_wheat_exported > 0 } }
+		set_variable = { mdr_wheat_income = mdr_wheat_exported }
+		multiply_variable = { mdr_wheat_income = global.mdr_wheat_price }
+		set_temp_variable = { mdr_wheat_export_mult = modifier@resource_export_multiplier_modifier }
+		add_to_temp_variable = { mdr_wheat_export_mult = 1 }
+		multiply_variable = { mdr_wheat_income = mdr_wheat_export_mult }
+		multiply_variable = { mdr_wheat_income = 298 }
+		divide_variable = { mdr_wheat_income = 100000 }
+		set_temp_variable = { treasury_change = mdr_wheat_income }
+		modify_treasury_effect = yes
+	}
+}

@@ -1,0 +1,96 @@
+# Consequences of a nuclear strike, from on_nuke_drop (ROOT launches, FROM is the state hit). Millennium Dawn's nuclear
+# raids already add the fallout (nuclear_fallout, 1095 days) and the world tension (add_named_threat) in
+# common/raids/nuclear_raids.txt, so they are not repeated here.
+mdr_nuclear_strike = {
+	FROM = {
+		save_global_event_target_as = mdr_nuke_state
+		controller = { save_global_event_target_as = mdr_nuke_victim }
+		# Burned and contaminated farmland: half the harvest for a year and a half. Re-added so a new strike refreshes it.
+		if = { limit = { has_dynamic_modifier = { modifier = mdr_nuclear_harvest } }
+			remove_dynamic_modifier = { modifier = mdr_nuclear_harvest }
+		}
+		add_dynamic_modifier = { modifier = mdr_nuclear_harvest days = 540 }
+		mdr_radiation_strike = yes
+	}
+	event_target:mdr_nuke_victim = {
+		if = { limit = { has_dynamic_modifier = { modifier = mdr_nuked_resolve } }
+			remove_dynamic_modifier = { modifier = mdr_nuked_resolve }
+		}
+		add_dynamic_modifier = { modifier = mdr_nuked_resolve days = 365 }
+	}
+	# The victim is the controller: a defensive strike on our own occupied state hits the occupier. Millennium Dawn's
+	# country-wide strike makes the victim launch at its own states, so the attacker is then the enemy with a nuclear doctrine.
+	if = { limit = { FROM = { is_controlled_by = ROOT } }
+		random_enemy_country = {
+			limit = { OR = { has_idea = nuclear_power_off has_idea = nuclear_power_def } }
+			mdr_nuclear_reactions = yes
+		}
+	}
+	else = {
+		mdr_nuclear_reactions = yes
+	}
+}
+
+# Attacker scope. Diplomatic reactions at most once every 180 days, so ten bombs do not count ten times.
+# A strike on a big city or a capital is a strike on a city; a lightly populated state is taken as a military target:
+# half the anger and no embargoes from neutrals.
+mdr_nuclear_reactions = {
+	if = { limit = { NOT = { has_country_flag = mdr_nuke_cooldown } }
+		set_country_flag = { flag = mdr_nuke_cooldown days = 180 value = 1 }
+		# Long memory for the AI: embargoes on a nuclear attacker are not lifted over resource deficits (mdr_ai.txt).
+		set_country_flag = { flag = mdr_nuke_user days = 1825 value = 1 }
+		save_global_event_target_as = mdr_nuke_attacker
+		set_temp_variable = { mdr_nuke_city = 0 }
+		if = { limit = { event_target:mdr_nuke_state = { OR = { state_population_k > 2000 is_capital = yes } } }
+			set_temp_variable = { mdr_nuke_city = 1 }
+		}
+		event_target:mdr_nuke_victim = {
+			set_country_flag = { flag = mdr_nuke_is_victim days = 1 value = 1 }
+			every_other_country = {
+				limit = { has_government = PREV }
+				set_country_flag = { flag = mdr_nuke_victim_side days = 1 value = 1 }
+			}
+		}
+		every_other_country = {
+			limit = {
+				exists = yes
+				NOT = { is_in_faction_with = PREV }
+				NOT = { is_subject_of = PREV }
+				NOT = { has_country_flag = mdr_nuke_is_victim }
+			}
+			if = { limit = { is_in_faction_with = event_target:mdr_nuke_victim }
+				mdr_nuclear_outrage = yes
+				send_embargo = PREV
+			}
+			else_if = { limit = { has_country_flag = mdr_nuke_victim_side }
+				mdr_nuclear_outrage = yes
+				random = { chance = 70 send_embargo = PREV }
+			}
+			else_if = { limit = { has_government = PREV }
+				if = { limit = { check_variable = { mdr_nuke_city = 1 } } add_opinion_modifier = { target = PREV modifier = mdr_nuke_concern } }
+				else = { add_opinion_modifier = { target = PREV modifier = mdr_nuke_concern_half } }
+			}
+			else = {
+				if = { limit = { check_variable = { mdr_nuke_city = 1 } }
+					add_opinion_modifier = { target = PREV modifier = mdr_nuke_condemnation }
+					if = { limit = { has_opinion = { target = event_target:mdr_nuke_victim value > 30 } }
+						random = { chance = 30 send_embargo = PREV }
+					}
+				}
+				else = { add_opinion_modifier = { target = PREV modifier = mdr_nuke_condemnation_half } }
+			}
+		}
+		every_country = {
+			limit = { has_country_flag = mdr_nuke_victim_side }
+			clr_country_flag = mdr_nuke_victim_side
+		}
+		event_target:mdr_nuke_victim = { clr_country_flag = mdr_nuke_is_victim }
+		news_event = { id = mdr_nuclear.1 }
+	}
+}
+
+# Country scope, PREV is the attacker.
+mdr_nuclear_outrage = {
+	if = { limit = { check_variable = { mdr_nuke_city = 1 } } add_opinion_modifier = { target = PREV modifier = mdr_nuke_outrage } }
+	else = { add_opinion_modifier = { target = PREV modifier = mdr_nuke_outrage_half } }
+}

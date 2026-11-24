@@ -1,0 +1,192 @@
+# General war AI for every country (MEJORAR IA.md, stages 2 and 3). Only with the AI rule on Improved or Expert.
+# Low priorities on purpose: Millennium Dawn's per-country front_control (priority 5 to 100) always wins.
+# enemies_strength_ratio grows as our enemies get stronger than us.
+
+### Stage 2: stance by balance of forces
+
+# Clearly stronger: push, with a balanced (not rushed) plan. Expert attacks with a smaller edge.
+mdr_ai_war_offensive = {
+	allowed = { mdr_ai_improved = yes }
+	enable = {
+		has_war = yes
+		OR = {
+			enemies_strength_ratio < 0.63
+			AND = { mdr_ai_expert = yes enemies_strength_ratio < 0.77 }
+		}
+		NOT = { has_idea = mdr_ammo_shortage_2 }
+		NOT = { has_idea = mdr_ammo_shortage_3 }
+		surrender_progress < 0.33
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_control
+		country_trigger = { has_war_with = FROM }
+		priority = 1
+		ordertype = front
+		execution_type = balanced
+		execute_order = yes
+		manual_attack = yes
+	}
+	ai_strategy = { type = force_concentration_factor value = 23 }
+}
+
+# Even fight: attack only after preparing.
+mdr_ai_war_careful = {
+	allowed = { mdr_ai_improved = yes }
+	enable = {
+		has_war = yes
+		enemies_strength_ratio < 1.17
+		NOT = { enemies_strength_ratio < 0.63 }
+		NOT = { AND = { mdr_ai_expert = yes enemies_strength_ratio < 0.77 } }
+		NOT = { has_idea = mdr_ammo_shortage_2 }
+		NOT = { has_idea = mdr_ammo_shortage_3 }
+		surrender_progress < 0.33
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_control
+		country_trigger = { has_war_with = FROM }
+		priority = 1
+		ordertype = front
+		execution_type = careful
+		execute_order = yes
+		manual_attack = yes
+	}
+}
+
+# Losing, short of ammo or close to surrender: hold the line, local counterattacks only.
+mdr_ai_war_defensive = {
+	allowed = { mdr_ai_improved = yes }
+	enable = {
+		has_war = yes
+		NOT = { has_idea = mdr_ammo_shortage_3 }
+		OR = {
+			NOT = { enemies_strength_ratio < 1.17 }
+			has_idea = mdr_ammo_shortage_2
+			NOT = { surrender_progress < 0.33 }
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_control
+		country_trigger = { has_war_with = FROM }
+		priority = 1
+		ordertype = front
+		execute_order = no
+		manual_attack = yes
+	}
+}
+
+# Out of ammo: no attacks at all until supply comes back.
+mdr_ai_war_no_ammo = {
+	allowed = { mdr_ai_improved = yes }
+	enable = {
+		has_war = yes
+		has_idea = mdr_ammo_shortage_3
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_control
+		country_trigger = { has_war_with = FROM }
+		priority = 2
+		ordertype = front
+		execute_order = no
+		manual_attack = no
+	}
+}
+
+# Enemy next to the capital: more units on the fronts that touch it.
+mdr_ai_war_capital = {
+	allowed = { mdr_ai_improved = yes }
+	enable = {
+		has_war = yes
+		capital_scope = {
+			OR = {
+				NOT = { is_controlled_by = ROOT }
+				any_neighbor_state = { controller = { has_war_with = ROOT } }
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_unit_request
+		state_trigger = {
+			OR = {
+				AND = { is_capital = yes is_owned_by = FROM.FROM }
+				any_neighbor_state = { is_capital = yes is_owned_by = FROM.FROM }
+			}
+		}
+		value = 37
+	}
+}
+
+# Expert: bigger concentrated pushes in any war it is not losing.
+mdr_ai_war_expert_concentration = {
+	allowed = { mdr_ai_expert = yes }
+	enable = {
+		has_war = yes
+		enemies_strength_ratio < 1.17
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = { type = force_concentration_factor value = 14 }
+}
+
+### Stage 3: production
+
+# Divisions in the field lack small arms: equip them before raising new infantry (same ids as MD's division_limiter).
+# mdr_ai_equip_fill (% of needed small arms present in armies) is cached monthly by mdr_ai_monthly.
+mdr_ai_equip_first = {
+	allowed = { mdr_ai_improved = yes }
+	enable = {
+		has_variable = mdr_ai_equip_fill
+		check_variable = { mdr_ai_equip_fill < 83 }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = { type = build_army id = L_Inf value = -300 }
+	ai_strategy = { type = build_army id = infantry value = -300 }
+	ai_strategy = { type = build_army id = garrison value = -300 }
+}
+
+# Ammunition running out (our ammo system): shift new factories to military.
+mdr_ai_ammo_factories = {
+	allowed = { mdr_ai_improved = yes }
+	enable = {
+		mdr_ammo_on = yes
+		OR = {
+			AND = {
+				has_war = yes
+				check_variable = { mdr_ammo_days_left < 56 }
+			}
+			AND = {
+				has_war = no
+				threat > 0.5
+				check_variable = { mdr_ammo_capacity_k > 0 }
+				check_variable = { mdr_ammo_k < mdr_ammo_capacity_k }
+				check_variable = { mdr_ammo_net_k < 0 }
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = { type = added_military_to_civilian_factory_ratio value = 17 }
+}
+
+# Threatened and with factories to spare: a few bunkers, never a fortress program.
+mdr_ai_border_bunkers = {
+	allowed = { mdr_ai_improved = yes }
+	enable = {
+		ai_is_threatened = yes
+		num_of_civilian_factories > 19
+		num_of_available_civilian_factories > 7
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = { type = building_target id = bunker value = 7 }
+}

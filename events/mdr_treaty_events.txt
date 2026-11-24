@@ -1,0 +1,247 @@
+add_namespace = mdr_treaties
+
+# International pressure to sign a treaty
+country_event = {
+	id = mdr_treaties.1
+	title = mdr_treaties.1.t
+	desc = {
+		text = mdr_treaties.1.d1
+		trigger = { check_variable = { mdr_treaty_offer = 1 } }
+	}
+	desc = {
+		text = mdr_treaties.1.d2
+		trigger = { check_variable = { mdr_treaty_offer = 2 } }
+	}
+	desc = {
+		text = mdr_treaties.1.d8
+		trigger = { check_variable = { mdr_treaty_offer = 8 } }
+	}
+	picture = GFX_politics_negotiations
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_treaties.1.a
+		log = "[GetDateText]: [This.GetName]: mdr_treaties.1.a executed"
+		set_temp_variable = { mdr_treaty_id = mdr_treaty_offer }
+		mdr_treaty_join = yes
+		ai_chance = {
+			base = 2
+			modifier = {
+				factor = 0
+				check_variable = { mdr_treaty_offer = 1 }
+				OR = {
+					original_tag = RAJ
+					original_tag = PAK
+					original_tag = ISR
+					original_tag = NKO
+				}
+			}
+		}
+	}
+
+	option = {
+		name = mdr_treaties.1.b
+		log = "[GetDateText]: [This.GetName]: mdr_treaties.1.b executed"
+		ai_chance = { base = 3 }
+	}
+}
+
+# A superpower proposes an arms control treaty (FROM is the proposer)
+country_event = {
+	id = mdr_treaties.2
+	title = mdr_treaties.2.t
+	desc = {
+		text = mdr_treaties.2.d3
+		trigger = { check_variable = { mdr_treaty_proposal = 3 } }
+	}
+	desc = {
+		text = mdr_treaties.2.d4
+		trigger = { check_variable = { mdr_treaty_proposal = 4 } }
+	}
+	desc = {
+		text = mdr_treaties.2.d5
+		trigger = { check_variable = { mdr_treaty_proposal = 5 } }
+	}
+	desc = {
+		text = mdr_treaties.2.d10
+		trigger = { check_variable = { mdr_treaty_proposal = 10 } }
+	}
+	picture = GFX_message_signing
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_treaties.2.a
+		log = "[GetDateText]: [This.GetName]: mdr_treaties.2.a executed"
+		set_temp_variable = { mdr_treaty_id = mdr_treaty_proposal }
+		if = { limit = { NOT = { check_variable = { mdr_treaty_proposal = 10 } } }
+			mdr_treaty_join = yes
+		}
+		FROM = { mdr_treaty_join = yes }
+		ai_chance = { base = 1 }
+	}
+
+	option = {
+		name = mdr_treaties.2.b
+		log = "[GetDateText]: [This.GetName]: mdr_treaties.2.b executed"
+		FROM = { add_opinion_modifier = { target = ROOT modifier = mdr_left_arms_treaty } }
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 3
+				has_opinion = { target = FROM value < 0 }
+			}
+		}
+	}
+}
+
+# A historical treaty decision for a human-run country
+country_event = {
+	id = mdr_treaties.3
+	title = mdr_treaties.3.t
+	desc = {
+		text = mdr_treaties.3.d1
+		trigger = { check_variable = { mdr_hist_action = 1 } }
+	}
+	desc = {
+		text = mdr_treaties.3.d2
+		trigger = { check_variable = { mdr_hist_action = 2 } }
+	}
+	desc = {
+		text = mdr_treaties.3.d3
+		trigger = { check_variable = { mdr_hist_action = 3 } }
+	}
+	desc = {
+		text = mdr_treaties.3.d4
+		trigger = { check_variable = { mdr_hist_action = 4 } }
+	}
+	desc = {
+		text = mdr_treaties.3.d6
+		trigger = { check_variable = { mdr_hist_action = 6 } }
+	}
+	desc = {
+		text = mdr_treaties.3.d7
+		trigger = { check_variable = { mdr_hist_action = 7 } }
+	}
+	desc = {
+		text = mdr_treaties.3.d8
+		trigger = { check_variable = { mdr_hist_action = 8 } }
+	}
+	desc = {
+		text = mdr_treaties.3.d9
+		trigger = { check_variable = { mdr_hist_action = 9 } }
+	}
+	desc = {
+		text = mdr_treaties.3.d10
+		trigger = { check_variable = { mdr_hist_action = 10 } }
+	}
+	desc = {
+		text = mdr_treaties.3.d11
+		trigger = { check_variable = { mdr_hist_action = 11 } }
+	}
+	desc = {
+		text = mdr_treaties.3.d12
+		trigger = { check_variable = { mdr_hist_action = 12 } }
+	}
+	desc = {
+		text = mdr_treaties.3.d13
+		trigger = { check_variable = { mdr_hist_action = 13 } }
+	}
+	desc = {
+		text = mdr_treaties.3.d14
+		trigger = { check_variable = { mdr_hist_action = 14 } }
+	}
+	desc = {
+		text = mdr_treaties.3.d15
+		trigger = { check_variable = { mdr_hist_action = 15 } }
+	}
+	desc = {
+		text = mdr_treaties.3.d16
+		trigger = { check_variable = { mdr_hist_action = 16 } }
+	}
+	desc = {
+		text = mdr_treaties.3.d17
+		trigger = { check_variable = { mdr_hist_action = 17 } }
+	}
+	desc = {
+		text = mdr_treaties.3.d18
+		trigger = { check_variable = { mdr_hist_action = 18 } }
+	}
+	desc = {
+		text = mdr_treaties.3.d19
+		trigger = { check_variable = { mdr_hist_action = 19 } }
+	}
+	picture = GFX_treaty
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_treaties.3.a
+		log = "[GetDateText]: [This.GetName]: mdr_treaties.3.a executed"
+		mdr_treaty_hist_apply = yes
+	}
+
+	option = {
+		name = mdr_treaties.3.b
+		log = "[GetDateText]: [This.GetName]: mdr_treaties.3.b executed"
+	}
+}
+
+# World news: a country walks out of a treaty
+news_event = {
+	id = mdr_treaties.4
+	title = mdr_treaties.4.t
+	desc = {
+		text = mdr_treaties.4.d1
+		trigger = { check_variable = { global.mdr_treaty_news_id = 1 } }
+	}
+	desc = {
+		text = mdr_treaties.4.d2
+		trigger = { check_variable = { global.mdr_treaty_news_id = 2 } }
+	}
+	desc = {
+		text = mdr_treaties.4.d3
+		trigger = { check_variable = { global.mdr_treaty_news_id = 3 } }
+	}
+	desc = {
+		text = mdr_treaties.4.d4
+		trigger = { check_variable = { global.mdr_treaty_news_id = 4 } }
+	}
+	desc = {
+		text = mdr_treaties.4.d5
+		trigger = { check_variable = { global.mdr_treaty_news_id = 5 } }
+	}
+	desc = {
+		text = mdr_treaties.4.d6
+		trigger = { check_variable = { global.mdr_treaty_news_id = 6 } }
+	}
+	desc = {
+		text = mdr_treaties.4.d7
+		trigger = { check_variable = { global.mdr_treaty_news_id = 7 } }
+	}
+	desc = {
+		text = mdr_treaties.4.d8
+		trigger = { check_variable = { global.mdr_treaty_news_id = 8 } }
+	}
+	desc = {
+		text = mdr_treaties.4.d9
+		trigger = { check_variable = { global.mdr_treaty_news_id = 9 } }
+	}
+	desc = {
+		text = mdr_treaties.4.d10
+		trigger = { check_variable = { global.mdr_treaty_news_id = 10 } }
+	}
+	desc = {
+		text = mdr_treaties.4.d11
+		trigger = { check_variable = { global.mdr_treaty_news_id = 11 } }
+	}
+	desc = {
+		text = mdr_treaties.4.d12
+		trigger = { check_variable = { global.mdr_treaty_news_id = 12 } }
+	}
+	picture = GFX_treaty_rejected
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_treaties.4.a
+	}
+}

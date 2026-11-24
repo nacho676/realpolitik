@@ -1,0 +1,31 @@
+add_namespace = mdr_covid
+
+# Mass Vaccination Campaign
+country_event = {
+	id = mdr_covid.1
+	title = mdr_covid.1.t
+	desc = mdr_covid.1.d
+	picture = GFX_covid_lockdown
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			has_idea = COVID_pandemic_impact
+			has_idea = COVID_pandemic_origin
+		}
+	}
+
+	option = {
+		name = mdr_covid.1.a
+		log = "[GetDateText]: [This.GetName]: mdr_covid.1.a executed"
+		remove_ideas = {
+			COVID_pandemic_impact
+			COVID_pandemic_origin
+		}
+		add_stability = 0.03
+
+		ai_chance = {
+			base = 1
+		}
+	}
+}

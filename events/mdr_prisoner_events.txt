@@ -1,0 +1,57 @@
+add_namespace = mdr_prisoners
+
+# Hidden: FROM capitulated to us (on_capitulation); ROOT is the winner.
+country_event = {
+	id = mdr_prisoners.2
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		FROM = { mdr_pow_take_capitulation = yes }
+	}
+}
+
+# An enemy recruited one of our captured generals (mdr_pow_ai_weekly).
+country_event = {
+	id = mdr_prisoners.3
+	title = mdr_prisoners.3.t
+	desc = mdr_prisoners.3.d
+	picture = GFX_treaty_rejected
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_prisoners.3.a
+		log = "[GetDateText]: [This.GetName]: mdr_prisoners.3.a executed"
+		ai_chance = { base = 1 }
+	}
+}
+
+# We captured enemy generals (mdr_pow_take).
+country_event = {
+	id = mdr_prisoners.4
+	title = mdr_prisoners.4.t
+	desc = mdr_prisoners.4.d
+	picture = GFX_treaty_rejected
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_prisoners.4.a
+		log = "[GetDateText]: [This.GetName]: mdr_prisoners.4.a executed"
+		ai_chance = { base = 1 }
+	}
+}
+
+# A captured general joins our army (mdr_pow_use_<n>). The picture is his portrait.
+country_event = {
+	id = mdr_prisoners.5
+	title = mdr_prisoners.5.t
+	desc = mdr_prisoners.5.d
+	picture = "[mdr_pow_event_face]"
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_prisoners.5.a
+		log = "[GetDateText]: [This.GetName]: mdr_prisoners.5.a executed"
+		ai_chance = { base = 1 }
+	}
+}

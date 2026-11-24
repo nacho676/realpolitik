@@ -1,0 +1,256 @@
+# Global constants and system registry. Every tunable number of the submod lives here.
+mdr_init_constants = {
+	set_variable = { global.mdr_version = 1 }
+	set_variable = { global.mdr_media_init = 1 }
+	set_variable = { global.mdr_food_price = 0.119 }
+	set_variable = { global.mdr_food_import_ratio = 1 }
+	set_variable = { global.mdr_uranium_price = 2.35 }
+	set_variable = { global.mdr_wheat_price = 0.077 }
+	set_global_flag = mdr_core_init
+	log = "[GetDateText]: MDR core initialized, version [?global.mdr_version]"
+}
+
+# Adds half of each state's category base slots, once per game.
+# A global_building_slots_factor of 0.5 only took Moscow Oblast from 20 to 24 slots, so the bonus is flat.
+mdr_add_state_slots = {
+	every_state = {
+		if = { limit = { has_state_category = state_00 } add_extra_state_shared_building_slots = 1 }
+		else_if = { limit = { has_state_category = state_01 } add_extra_state_shared_building_slots = 2 }
+		else_if = { limit = { has_state_category = state_02 } add_extra_state_shared_building_slots = 4 }
+		else_if = { limit = { has_state_category = state_03 } add_extra_state_shared_building_slots = 5 }
+		else_if = { limit = { has_state_category = state_04 } add_extra_state_shared_building_slots = 7 }
+		else_if = { limit = { has_state_category = state_05 } add_extra_state_shared_building_slots = 9 }
+		else_if = { limit = { has_state_category = state_06 } add_extra_state_shared_building_slots = 11 }
+		else_if = { limit = { has_state_category = state_07 } add_extra_state_shared_building_slots = 13 }
+		else_if = { limit = { has_state_category = state_08 } add_extra_state_shared_building_slots = 15 }
+		else_if = { limit = { has_state_category = state_09 } add_extra_state_shared_building_slots = 17 }
+		else_if = { limit = { has_state_category = state_10 } add_extra_state_shared_building_slots = 18 }
+		else_if = { limit = { has_state_category = state_11 } add_extra_state_shared_building_slots = 20 }
+		else_if = { limit = { has_state_category = state_12 } add_extra_state_shared_building_slots = 22 }
+		else_if = { limit = { has_state_category = state_13 } add_extra_state_shared_building_slots = 24 }
+		else_if = { limit = { has_state_category = state_14 } add_extra_state_shared_building_slots = 26 }
+		else_if = { limit = { has_state_category = state_15 } add_extra_state_shared_building_slots = 28 }
+		else_if = { limit = { has_state_category = state_16 } add_extra_state_shared_building_slots = 29 }
+		else_if = { limit = { has_state_category = state_17 } add_extra_state_shared_building_slots = 31 }
+		else_if = { limit = { has_state_category = state_18 } add_extra_state_shared_building_slots = 33 }
+	}
+	set_global_flag = mdr_state_slots_added
+	log = "[GetDateText]: MDR added extra building slots to every state"
+}
+
+# Once per week for the whole world.
+mdr_weekly_global = {
+	mdr_real_economy_lock = yes
+	mdr_space_historical = yes
+	mdr_space_sites_refresh = yes
+	mdr_space_debris_weekly = yes
+	if = {
+		limit = {
+			date > 2019.12.01
+			date < 2020.06.01
+			NOT = { has_global_flag = mdr_covid_launched }
+			NOT = { has_global_flag = COVID_start_of_pandemic }
+			has_game_rule = { rule = mdr_rule_covid option = historical }
+		}
+		mdr_covid_launch = yes
+	}
+	# Dynamic mode: the outbreak can start any week after 2015, about once a decade on average.
+	if = {
+		limit = {
+			date > 2015.01.01
+			NOT = { has_global_flag = mdr_covid_launched }
+			NOT = { has_global_flag = COVID_start_of_pandemic }
+			has_game_rule = { rule = mdr_rule_covid option = dynamic }
+		}
+		random_list = {
+			399 = { }
+			1 = {
+				set_global_flag = { flag = mdr_covid_vaccine_timer days = 365 value = 1 }
+				mdr_covid_launch = yes
+			}
+		}
+	}
+	# Vaccines: from 14 December 2020 in the historical mode, a year after the outbreak in the dynamic one.
+	if = {
+		limit = {
+			has_global_flag = mdr_covid_launched
+			NOT = { has_global_flag = mdr_covid_vaccines_started }
+			OR = {
+				AND = {
+					has_game_rule = { rule = mdr_rule_covid option = historical }
+					date > 2020.12.14
+				}
+				AND = {
+					has_game_rule = { rule = mdr_rule_covid option = dynamic }
+					NOT = { has_global_flag = mdr_covid_vaccine_timer }
+				}
+			}
+		}
+		mdr_covid_vaccines = yes
+	}
+	mdr_shocks_weekly = yes
+	if = { limit = { mdr_food_on = yes } mdr_food_world_market = yes }
+	mdr_uranium_world_market = yes
+	mdr_rare_earths_world_market = yes
+	mdr_uranium_historical = yes
+	mdr_rare_earths_historical = yes
+	if = { limit = { has_game_rule = { rule = mdr_rule_disasters option = historical } }
+		mdr_disasters_historical = yes
+	}
+	mdr_demography_historical = yes
+	mdr_straits_weekly_cleanup = yes
+	if = { limit = { has_game_rule = { rule = mdr_rule_world_events option = historical } }
+		mdr_treaties_historical = yes
+		if = { limit = { mdr_straits_on = yes } mdr_straits_historical = yes }
+	}
+	else_if = { limit = { mdr_straits_on = yes }
+		mdr_straits_dynamic = yes
+	}
+}
+
+# Millennium Dawn panels with a dirty variable (economy, unemployment, research, energy, storage...) show raw text such as
+# "[?ROOT.total_unemployed" until that variable changes, for example after loading. Bumping these refresh counters redraws them.
+mdr_refresh_md_guis = {
+	add_to_variable = { global.update_monie_ui = 1 }
+	add_to_variable = { global.research_screen_ui = 1 }
+	add_to_variable = { global.international_systems_updated = 1 }
+	add_to_variable = { global.refresh_investment_gui = 1 }
+	add_to_variable = { global.missile_ui_updated = 1 }
+	add_to_variable = { global.energy_ui = 1 }
+	add_to_variable = { global.storage_scripted_gui_var = 1 }
+	add_to_variable = { global.market_contract_ui = 1 }
+	add_to_variable = { global.protest_ui_dirty = 1 }
+	add_to_variable = { global.update_influence_ui = 1 }
+}
+
+# Start-of-game pass with mdr_dis_mute set: marks historical events dated before the start as done.
+mdr_history_mark_past = {
+	mdr_treaties_historical = yes
+	if = { limit = { mdr_straits_on = yes } mdr_straits_historical = yes }
+}
+
+# Runs once per country at game start (or on its first weekly tick for later tags).
+mdr_country_init = {
+	mdr_media_start_level = yes
+	mdr_war_exhaustion_start = yes
+	mdr_civil_laws_start = yes
+	mdr_economy_start = yes
+	mdr_demography_start = yes
+	mdr_treaties_start = yes
+	if = { limit = { mdr_food_on = yes } mdr_food_start = yes }
+	if = { limit = { mdr_ammo_on = yes } mdr_ammo_start = yes }
+	mdr_fertilizers_start = yes
+	mdr_uranium_techs_start = yes
+	mdr_space_start = yes
+	# First calculation on day one, so the numbers exist from the start.
+	if = { limit = { mdr_food_on = yes } mdr_food_weekly = yes }
+	mdr_uranium_weekly = yes
+	set_country_flag = mdr_country_init
+	log = "[GetDateText]: [Root.GetName]: MDR country init, media level [?mdr_media_level]"
+}
+
+# Input: temp variable mdr_media_target (1 to 5).
+mdr_media_set_level = {
+	remove_ideas = {
+		mdr_media_free
+		mdr_media_regulated
+		mdr_media_pressured
+		mdr_media_censored
+		mdr_media_total_control
+	}
+	if = { limit = { check_variable = { mdr_media_target = 1 } } add_ideas = mdr_media_free }
+	else_if = { limit = { check_variable = { mdr_media_target = 2 } } add_ideas = mdr_media_regulated }
+	else_if = { limit = { check_variable = { mdr_media_target = 3 } } add_ideas = mdr_media_pressured }
+	else_if = { limit = { check_variable = { mdr_media_target = 4 } } add_ideas = mdr_media_censored }
+	else = { add_ideas = mdr_media_total_control }
+}
+
+mdr_media_start_level = {
+	# MD ideologies are party groups, not regime types (Norway starts as neutrality, Switzerland as nationalist),
+	# so holding elections is the democracy check.
+	if = { limit = { has_elections = yes } set_temp_variable = { mdr_media_target = 2 } }
+	else = { set_temp_variable = { mdr_media_target = 4 } }
+
+	if = {
+		limit = {
+			OR = {
+				original_tag = USA
+				original_tag = CAN
+				original_tag = NRY
+				original_tag = SWE
+				original_tag = FIN
+				original_tag = DEN
+				original_tag = ICE
+				original_tag = HOL
+				original_tag = SWI
+				original_tag = IRE
+				original_tag = NZL
+				original_tag = EST
+			}
+		}
+		set_temp_variable = { mdr_media_target = 1 }
+	}
+	else_if = {
+		limit = {
+			OR = {
+				original_tag = SOV
+				original_tag = TUR
+				original_tag = VEN
+			}
+		}
+		set_temp_variable = { mdr_media_target = 3 }
+	}
+	else_if = {
+		limit = {
+			OR = {
+				original_tag = CHI
+				original_tag = PER
+				original_tag = SAU
+				original_tag = CUB
+				original_tag = VIE
+				original_tag = LAO
+				original_tag = SYR
+				original_tag = BLR
+				original_tag = UZB
+			}
+		}
+		set_temp_variable = { mdr_media_target = 4 }
+	}
+	else_if = {
+		limit = {
+			OR = {
+				original_tag = NKO
+				original_tag = ERI
+				original_tag = TRK
+			}
+		}
+		set_temp_variable = { mdr_media_target = 5 }
+	}
+
+	# Matching the stored level first keeps the start-of-game swap from triggering the opening stability hit.
+	set_variable = { mdr_media_level = mdr_media_target }
+	mdr_media_set_level = yes
+}
+
+# Suspending or restoring elections drags the media law to a level the new regime allows.
+mdr_media_realign = {
+	if = {
+		limit = {
+			has_elections = no
+			OR = {
+				has_idea = mdr_media_free
+				has_idea = mdr_media_regulated
+			}
+		}
+		set_temp_variable = { mdr_media_target = 3 }
+		mdr_media_set_level = yes
+	}
+	else_if = {
+		limit = {
+			has_elections = yes
+			has_idea = mdr_media_total_control
+		}
+		set_temp_variable = { mdr_media_target = 4 }
+		mdr_media_set_level = yes
+	}
+}

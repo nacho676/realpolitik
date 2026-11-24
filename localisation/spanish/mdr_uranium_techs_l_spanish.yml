@@ -1,0 +1,13 @@
+﻿l_spanish:
+ mdr_uranium_tech_1: "Lixiviación in situ"
+ mdr_uranium_tech_1_desc: "Disolver el uranio bajo tierra y bombearlo a la superficie, sin abrir un pozo.\n\nCada nivel de §YMina de uranio§! produce §G+1§! de uranio (hasta 10 con las cinco tecnologías) y consume §R15%§! más de energía."
+ mdr_uranium_tech_2: "Molienda de alto rendimiento"
+ mdr_uranium_tech_2_desc: "Plantas que recuperan casi todo el uranio del mineral.\n\nCada nivel de §YMina de uranio§! produce §G+1§! de uranio (hasta 10 con las cinco tecnologías) y consume §R15%§! más de energía."
+ mdr_uranium_tech_3: "Minería automatizada"
+ mdr_uranium_tech_3_desc: "Equipos a control remoto que llegan a vetas demasiado peligrosas para los mineros.\n\nCada nivel de §YMina de uranio§! produce §G+1§! de uranio (hasta 10 con las cinco tecnologías) y consume §R15%§! más de energía."
+ mdr_uranium_tech_4: "Biolixiviación"
+ mdr_uranium_tech_4_desc: "Bacterias que liberan uranio de minerales muy pobres.\n\nCada nivel de §YMina de uranio§! produce §G+1§! de uranio (hasta 10 con las cinco tecnologías) y consume §R15%§! más de energía."
+ mdr_uranium_tech_5: "Extracción de agua de mar"
+ mdr_uranium_tech_5_desc: "Membranas que capturan el uranio disuelto en los océanos.\n\nCada nivel de §YMina de uranio§! produce §G+1§! de uranio (hasta 10 con las cinco tecnologías) y consume §R15%§! más de energía."
+ local_resources_rare_earths_factor: "£resources_texticon Producción de tierras raras"
+ modifier_production_speed_mdr_uranium_mine_factor: "Velocidad de construcción de minas de uranio"

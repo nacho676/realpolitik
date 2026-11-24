@@ -1,0 +1,225 @@
+# Ammunition: a national stockpile shown in the top bar, like fuel.
+# All amounts are in thousands of boxes (HOI4 variables stop near 2 million, so whole boxes would overflow).
+# Military factories produce it and store it; units at war spend it; running low weakens the army step by step.
+
+# Country scope, once at game start: a country that already fields the 1965, 1975 or 1985 infantry weapons of MD
+# also starts with the matching ammunition technology (the first three of the line).
+mdr_ammo_tech_start = {
+	if = { limit = { has_tech = infantry_weapons_1 NOT = { has_tech = mdr_ammo_tech_1 } }
+		set_technology = { mdr_ammo_tech_1 = 1 popup = no }
+	}
+	if = { limit = { has_tech = infantry_weapons_2 has_tech = mdr_ammo_tech_1 NOT = { has_tech = mdr_ammo_tech_2 } }
+		set_technology = { mdr_ammo_tech_2 = 1 popup = no }
+	}
+	if = { limit = { has_tech = infantry_weapons_3 has_tech = mdr_ammo_tech_2 NOT = { has_tech = mdr_ammo_tech_3 } }
+		set_technology = { mdr_ammo_tech_3 = 1 popup = no }
+	}
+}
+
+# Starting stockpile: 30 days of all-out fighting, within the storage capacity.
+mdr_ammo_start = {
+	mdr_ammo_tech_start = yes
+	mdr_ammo_update_capacity = yes
+	set_variable = { mdr_ammo_k = mdr_ammo_use_max_k }
+	multiply_variable = { mdr_ammo_k = 30 }
+	if = { limit = { check_variable = { mdr_ammo_k > mdr_ammo_capacity_k } }
+		set_variable = { mdr_ammo_k = mdr_ammo_capacity_k }
+	}
+	set_variable = { mdr_last_casualties_k = casualties_k }
+	set_variable = { mdr_last_army_experience = army_experience }
+	mdr_ammo_update_display = yes
+}
+
+# Daily figures from the factories and the army.
+mdr_ammo_update_capacity = {
+	# 150 boxes a day per military factory, raised by mdr_ammo_gain_factor.
+	set_variable = { mdr_ammo_gain_k = num_of_military_factories }
+	multiply_variable = { mdr_ammo_gain_k = 0.15 }
+	set_variable = { mdr_ammo_tech_gain = modifier@mdr_ammo_gain_factor }
+	set_temp_variable = { mdr_ammo_gain_mult = mdr_ammo_tech_gain }
+	add_to_temp_variable = { mdr_ammo_gain_mult = 1 }
+	multiply_variable = { mdr_ammo_gain_k = mdr_ammo_gain_mult }
+	# 20,000 boxes of depots plus 40,000 per military factory.
+	set_variable = { mdr_ammo_capacity_k = num_of_military_factories }
+	multiply_variable = { mdr_ammo_capacity_k = 40 }
+	add_to_variable = { mdr_ammo_capacity_k = 20 }
+	# Fortified ammunition depots (common/buildings/mdr_buildings.txt).
+	add_to_variable = { mdr_ammo_capacity_k = modifier@mdr_ammo_depot_capacity }
+	# Storage technologies (common/technologies/mdr_ammo_techs.txt).
+	set_variable = { mdr_ammo_tech_cap = modifier@mdr_ammo_storage_factor }
+	set_temp_variable = { mdr_ammo_cap_mult = mdr_ammo_tech_cap }
+	add_to_temp_variable = { mdr_ammo_cap_mult = 1 }
+	multiply_variable = { mdr_ammo_capacity_k = mdr_ammo_cap_mult }
+	# All-out fighting: 40 boxes a day per thousand soldiers deployed.
+	set_variable = { mdr_ammo_use_max_k = deployed_army_manpower_k }
+	multiply_variable = { mdr_ammo_use_max_k = 0.04 }
+	# Price of the production focus decision: 0.075% of GDP.
+	set_variable = { mdr_ammo_focus_cost = gdp_total }
+	multiply_variable = { mdr_ammo_focus_cost = 0.00075 }
+}
+
+mdr_ammo_weekly = {
+	mdr_ammo_update_capacity = yes
+
+	set_variable = { mdr_ammo_use_k = 0 }
+	if = { limit = { has_war = yes }
+		# A war that just started gives eight weeks to put the industry on a war footing.
+		if = { limit = { NOT = { has_country_flag = mdr_ammo_at_war } }
+			set_country_flag = mdr_ammo_at_war
+			set_country_flag = { flag = mdr_ammo_grace days = 56 value = 1 }
+		}
+		# Only units in battle fire: the week's own casualties measure it (troops in reserve or on a quiet front take none).
+		# 25 boxes per casualty: casualties of the week (thousands) x 1000 x 25 / 7 days.
+		set_temp_variable = { mdr_ammo_fighting = casualties_k }
+		subtract_from_temp_variable = { mdr_ammo_fighting = mdr_last_casualties_k }
+		clamp_temp_variable = { var = mdr_ammo_fighting min = 0 }
+		multiply_temp_variable = { mdr_ammo_fighting = 25 }
+		divide_temp_variable = { mdr_ammo_fighting = 7 }
+		add_to_variable = { mdr_ammo_use_k = mdr_ammo_fighting }
+		if = { limit = { check_variable = { mdr_ammo_use_k > mdr_ammo_use_max_k } }
+			set_variable = { mdr_ammo_use_k = mdr_ammo_use_max_k }
+		}
+	}
+	set_variable = { mdr_last_casualties_k = casualties_k }
+
+	# Drills and live-fire exercises, in peace or at war. A medium budget fires 0.57 boxes a day per thousand soldiers, about
+	# five days of all-out fighting a year; it scales with Millennium Dawn's military spending (military_law 1 to 10).
+	set_temp_variable = { mdr_ammo_budget = 4 }
+	if = { limit = { has_variable = military_law } set_temp_variable = { mdr_ammo_budget = military_law } }
+	multiply_temp_variable = { mdr_ammo_budget = 0.24 }
+	add_to_temp_variable = { mdr_ammo_budget = 0.1 }
+	set_variable = { mdr_ammo_drill_k = deployed_army_manpower_k }
+	multiply_variable = { mdr_ammo_drill_k = 0.57 }
+	multiply_variable = { mdr_ammo_drill_k = mdr_ammo_budget }
+	# Boxes to thousands of boxes last: the game keeps three decimals.
+	divide_variable = { mdr_ammo_drill_k = 1000 }
+	# Divisions on the training order fire more: 2,000 boxes per point of army experience gained this week. Only in peace: at
+	# war the experience comes from battles, whose ammunition the casualties already count.
+	if = { limit = { has_war = no }
+		set_temp_variable = { mdr_ammo_training = army_experience }
+		subtract_from_temp_variable = { mdr_ammo_training = mdr_last_army_experience }
+		clamp_temp_variable = { var = mdr_ammo_training min = 0 }
+		multiply_temp_variable = { mdr_ammo_training = 2 }
+		divide_temp_variable = { mdr_ammo_training = 7 }
+		add_to_variable = { mdr_ammo_drill_k = mdr_ammo_training }
+	}
+	add_to_variable = { mdr_ammo_use_k = mdr_ammo_drill_k }
+	set_variable = { mdr_last_army_experience = army_experience }
+
+	# A week of production minus a week of use, kept between 0 and the capacity. Players move a day at a time instead
+	# (mdr_ammo_daily_player), so new factories show at once.
+	if = { limit = { is_ai = yes }
+		set_temp_variable = { mdr_ammo_week = mdr_ammo_gain_k }
+		subtract_from_temp_variable = { mdr_ammo_week = mdr_ammo_use_k }
+		multiply_temp_variable = { mdr_ammo_week = 7 }
+		add_to_variable = { mdr_ammo_k = mdr_ammo_week }
+		clamp_variable = { var = mdr_ammo_k min = 0 max = mdr_ammo_capacity_k }
+	}
+
+	# Days of fighting left at the current pace.
+	set_variable = { mdr_ammo_days_left = 999 }
+	if = { limit = { check_variable = { mdr_ammo_use_k > mdr_ammo_gain_k } }
+		set_temp_variable = { mdr_ammo_net_use = mdr_ammo_use_k }
+		subtract_from_temp_variable = { mdr_ammo_net_use = mdr_ammo_gain_k }
+		set_variable = { mdr_ammo_days_left = mdr_ammo_k }
+		divide_variable = { mdr_ammo_days_left = mdr_ammo_net_use }
+	}
+
+	if = { limit = { OR = { has_war = no has_country_flag = mdr_ammo_grace } }
+		set_temp_variable = { mdr_ammo_level = 0 }
+	}
+	else_if = { limit = { check_variable = { mdr_ammo_days_left < 7 } } set_temp_variable = { mdr_ammo_level = 3 } }
+	else_if = { limit = { check_variable = { mdr_ammo_days_left < 14 } } set_temp_variable = { mdr_ammo_level = 2 } }
+	else_if = { limit = { check_variable = { mdr_ammo_days_left < 28 } } set_temp_variable = { mdr_ammo_level = 1 } }
+	else = { set_temp_variable = { mdr_ammo_level = 0 } }
+	mdr_ammo_set_level = yes
+
+	if = { limit = { has_war = no has_country_flag = mdr_ammo_at_war }
+		clr_country_flag = mdr_ammo_at_war
+	}
+	mdr_ammo_update_display = yes
+}
+
+# Players, daily: production from today's factories, a day of production minus use (rates from mdr_ammo_weekly).
+mdr_ammo_daily_player = {
+	if = { limit = { has_variable = mdr_ammo_k }
+		mdr_ammo_update_capacity = yes
+		set_temp_variable = { mdr_ammo_day = mdr_ammo_gain_k }
+		subtract_from_temp_variable = { mdr_ammo_day = mdr_ammo_use_k }
+		add_to_variable = { mdr_ammo_k = mdr_ammo_day }
+		clamp_variable = { var = mdr_ammo_k min = 0 max = mdr_ammo_capacity_k }
+		mdr_ammo_update_display = yes
+	}
+}
+
+# Input: temp variable mdr_ammo_add_k (thousands of boxes). Used by the purchase decisions.
+mdr_ammo_add = {
+	add_to_variable = { mdr_ammo_k = mdr_ammo_add_k }
+	clamp_variable = { var = mdr_ammo_k min = 0 max = mdr_ammo_capacity_k }
+	mdr_ammo_update_display = yes
+}
+
+# Top bar: millions once the stockpile passes a million boxes, the fill bar and the trend arrow.
+mdr_ammo_update_display = {
+	# Net daily change and days until the stores fill up or run dry, like the game's fuel.
+	set_variable = { mdr_ammo_net_k = mdr_ammo_gain_k }
+	subtract_from_variable = { mdr_ammo_net_k = mdr_ammo_use_k }
+	set_variable = { mdr_ammo_eta_days = 0 }
+	if = { limit = { check_variable = { mdr_ammo_net_k > 0 } }
+		set_variable = { mdr_ammo_eta_days = mdr_ammo_capacity_k }
+		subtract_from_variable = { mdr_ammo_eta_days = mdr_ammo_k }
+		divide_variable = { mdr_ammo_eta_days = mdr_ammo_net_k }
+	}
+	else_if = { limit = { check_variable = { mdr_ammo_net_k < 0 } }
+		set_variable = { mdr_ammo_eta_days = mdr_ammo_k }
+		divide_variable = { mdr_ammo_eta_days = mdr_ammo_net_k }
+		multiply_variable = { mdr_ammo_eta_days = -1 }
+	}
+	round_variable = mdr_ammo_eta_days
+	set_variable = { mdr_ammo_m = mdr_ammo_k }
+	divide_variable = { mdr_ammo_m = 1000 }
+
+	# The game's fuel bar (GFX_topbar_fuel_bar) takes the fill as a percentage.
+	set_variable = { mdr_ammo_bar_pct = 0 }
+	if = { limit = { check_variable = { mdr_ammo_capacity_k > 0 } }
+		set_variable = { mdr_ammo_bar_pct = mdr_ammo_k }
+		multiply_variable = { mdr_ammo_bar_pct = 100 }
+		divide_variable = { mdr_ammo_bar_pct = mdr_ammo_capacity_k }
+		round_variable = mdr_ammo_bar_pct
+		clamp_variable = { var = mdr_ammo_bar_pct min = 0 max = 100 }
+	}
+
+	# Arrow frames, in the order of the game's fuel icon: 1 steady (full or balanced), 2 rising, 3 falling.
+	set_variable = { mdr_ammo_trend_frame = 1 }
+	if = { limit = { check_variable = { mdr_ammo_use_k > mdr_ammo_gain_k } }
+		set_variable = { mdr_ammo_trend_frame = 3 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { mdr_ammo_gain_k > mdr_ammo_use_k }
+			check_variable = { mdr_ammo_k < mdr_ammo_capacity_k }
+		}
+		set_variable = { mdr_ammo_trend_frame = 2 }
+	}
+}
+
+# Input: temp variable mdr_ammo_level (0 to 3).
+mdr_ammo_set_level = {
+	if = { limit = { check_variable = { mdr_ammo_level = 0 } }
+		if = { limit = { OR = { has_idea = mdr_ammo_shortage_1 has_idea = mdr_ammo_shortage_2 has_idea = mdr_ammo_shortage_3 } }
+			remove_ideas = { mdr_ammo_shortage_1 mdr_ammo_shortage_2 mdr_ammo_shortage_3 }
+		}
+	}
+	else_if = { limit = { check_variable = { mdr_ammo_level = 1 } NOT = { has_idea = mdr_ammo_shortage_1 } }
+		remove_ideas = { mdr_ammo_shortage_2 mdr_ammo_shortage_3 }
+		add_ideas = mdr_ammo_shortage_1
+	}
+	else_if = { limit = { check_variable = { mdr_ammo_level = 2 } NOT = { has_idea = mdr_ammo_shortage_2 } }
+		remove_ideas = { mdr_ammo_shortage_1 mdr_ammo_shortage_3 }
+		add_ideas = mdr_ammo_shortage_2
+	}
+	else_if = { limit = { check_variable = { mdr_ammo_level = 3 } NOT = { has_idea = mdr_ammo_shortage_3 } }
+		remove_ideas = { mdr_ammo_shortage_1 mdr_ammo_shortage_2 }
+		add_ideas = mdr_ammo_shortage_3
+	}
+}

@@ -1,0 +1,42 @@
+scripted_diplomatic_actions = {
+	# Opens the naval sales window on this country. ROOT is the player, THIS the buyer.
+	# Window and offers: common/scripted_guis/mdr_ship_sale_gui.txt and common/scripted_effects/mdr_ship_sale.txt.
+	mdr_sell_ship = {
+		allowed = {
+			has_game_rule = { rule = mdr_rule_ships option = enabled }
+		}
+
+		visible = {
+			NOT = { tag = ROOT }
+			ROOT = { is_ai = no }
+		}
+
+		selectable = {
+			NOT = { has_war_with = ROOT }
+			custom_trigger_tooltip = {
+				tooltip = mdr_sale_rival_tt
+				mdr_sale_is_rival = no
+			}
+			custom_trigger_tooltip = {
+				tooltip = mdr_sale_port_tt
+				mdr_sale_has_port = yes
+			}
+		}
+
+		requires_acceptance = no
+		show_acceptance_on_action_button = no
+		cost = 0
+		icon = 1
+
+		complete_effect = {
+			mdr_sale_open_for = yes
+		}
+
+		send_description = MDR_SELL_SHIP_ACTION_DESC
+		receive_description = MDR_SELL_SHIP_ACTION_DESC
+
+		ai_desire = {
+			base = -1
+		}
+	}
+}

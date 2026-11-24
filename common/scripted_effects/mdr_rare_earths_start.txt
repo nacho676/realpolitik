@@ -1,0 +1,34 @@
+# Starting rare earth complexes. Sized so the world makes about 30% more than it uses in the first week (about 340 a day: production lines
+# of the 2000 start plus microchip plants), with China the main producer and every other country buying from it, as in 2000.
+# Real shares (USGS 2000) would be China 80-87%; here China keeps about 57% so the other countries still have small mines.
+mdr_rare_earths_start = {
+	if = { limit = { NOT = { has_global_flag = mdr_rare_earths_added } }
+		set_global_flag = mdr_rare_earths_added
+		456 = { add_building_construction = { type = mdr_rare_earth_complex level = 2 instant_build = yes } } # South Odisha (RAJ)
+		465 = { add_building_construction = { type = mdr_rare_earth_complex level = 4 instant_build = yes } } # Kerala (RAJ)
+		528 = { add_building_construction = { type = mdr_rare_earth_complex level = 1 instant_build = yes } } # Western Malaya (MAY)
+		534 = { add_building_construction = { type = mdr_rare_earth_complex level = 3 instant_build = yes } } # Guangdong (CHI)
+		537 = { add_building_construction = { type = mdr_rare_earth_complex level = 2 instant_build = yes } } # Fujian (CHI)
+		544 = { add_building_construction = { type = mdr_rare_earth_complex level = 1 instant_build = yes } } # Shandong (CHI)
+		556 = { add_building_construction = { type = mdr_rare_earth_complex level = 15 instant_build = yes } } # Inner Mongolia (CHI)
+		562 = { add_building_construction = { type = mdr_rare_earth_complex level = 8 instant_build = yes } } # Jiangxi (CHI)
+		572 = { add_building_construction = { type = mdr_rare_earth_complex level = 2 instant_build = yes } } # Hunan (CHI)
+		574 = { add_building_construction = { type = mdr_rare_earth_complex level = 3 instant_build = yes } } # Guangxi (CHI)
+		585 = { add_building_construction = { type = mdr_rare_earth_complex level = 2 instant_build = yes } } # Western Sichuan (CHI)
+		586 = { add_building_construction = { type = mdr_rare_earth_complex level = 6 instant_build = yes } } # Sichuan (CHI)
+		643 = { add_building_construction = { type = mdr_rare_earth_complex level = 4 instant_build = yes } } # Murmansk (SOV)
+		811 = { add_building_construction = { type = mdr_rare_earth_complex level = 7 instant_build = yes } } # California (USA)
+		884 = { add_building_construction = { type = mdr_rare_earth_complex level = 3 instant_build = yes } } # Minas Gerais (BRA)
+		# Realpolitik balance: small mines and by-product (USGS deposits).
+		462 = { add_building_construction = { type = mdr_rare_earth_complex level = 1 instant_build = yes } } # Tamil Nadu (RAJ), monazite sands
+		482 = { add_building_construction = { type = mdr_rare_earth_complex level = 1 instant_build = yes } } # Central Sri Lanka (SRL), monazite
+		509 = { add_building_construction = { type = mdr_rare_earth_complex level = 1 instant_build = yes } } # Southern Thailand (SIA), tin tailings
+		523 = { add_building_construction = { type = mdr_rare_earth_complex level = 1 instant_build = yes } } # Northern Vietnam (VIE), Dong Pao
+		658 = { add_building_construction = { type = mdr_rare_earth_complex level = 2 instant_build = yes } } # Perm (SOV), Solikamsk loparite plant
+		715 = { add_building_construction = { type = mdr_rare_earth_complex level = 1 instant_build = yes } } # Eastern Kazakhstan (KAZ), Ulba by-product
+		746 = { add_building_construction = { type = mdr_rare_earth_complex level = 1 instant_build = yes } } # Western Australia (AST), Mount Weld and mineral sands
+		887 = { add_building_construction = { type = mdr_rare_earth_complex level = 1 instant_build = yes } } # Bahia (BRA), monazite sands
+		# Realpolitik balance: US and Brazilian prospects.
+		789 = { add_building_construction = { type = mdr_rare_earth_complex level = 1 instant_build = yes } } # Wyoming (USA), Bear Lodge
+	}
+}

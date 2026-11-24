@@ -1,0 +1,382 @@
+mdr_economic_policy_category = {
+	mdr_remove_fuel_subsidies = {
+		icon = oil
+		cost = 50
+		fire_only_once = no
+
+		visible = {
+			has_idea = mdr_fuel_subsidies
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = mdr_fuel_subsidies_cooldown_tt
+				NOT = { has_country_flag = mdr_fuel_subsidies_cooldown }
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_remove_fuel_subsidies"
+			remove_ideas = mdr_fuel_subsidies
+			add_timed_idea = {
+				idea = mdr_fuel_subsidy_protests
+				days = 180
+			}
+			set_country_flag = { flag = mdr_fuel_subsidies_cooldown days = 365 value = 1 }
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				check_variable = { debt_ratio > 0.77 }
+				has_war = no
+				has_stability > 0.47
+				add = 7
+			}
+		}
+	}
+
+	mdr_introduce_fuel_subsidies = {
+		icon = oil
+		cost = 75
+		fire_only_once = no
+
+		visible = {
+			NOT = { has_idea = mdr_fuel_subsidies }
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = mdr_fuel_subsidies_cooldown_tt
+				NOT = { has_country_flag = mdr_fuel_subsidies_cooldown }
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_introduce_fuel_subsidies"
+			add_ideas = mdr_fuel_subsidies
+			set_country_flag = { flag = mdr_fuel_subsidies_cooldown days = 365 value = 1 }
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_elections = no
+				check_variable = { debt_ratio < 0.37 }
+				OR = { check_variable = { mdr_oil_boom_strength > 0 } check_variable = { protest_strength > 53 } }
+				add = 5
+			}
+		}
+	}
+
+	mdr_impose_capital_controls = {
+		icon = economy
+		cost = 100
+		fire_only_once = no
+
+		visible = {
+			NOT = { has_country_flag = mdr_capital_controls_active }
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = mdr_capital_controls_cooldown_tt
+				NOT = { has_country_flag = mdr_capital_controls_cooldown }
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_impose_capital_controls"
+			set_country_flag = mdr_capital_controls_active
+			set_variable = { mdr_capital_controls_weeks = 0 }
+			add_ideas = mdr_capital_controls_1
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				OR = { has_idea = recession has_idea = depression }
+				check_variable = { debt_ratio > 0.77 }
+				add = 7
+			}
+		}
+	}
+
+	mdr_lift_capital_controls = {
+		icon = economy
+		cost = 50
+		fire_only_once = no
+
+		visible = {
+			has_country_flag = mdr_capital_controls_active
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_lift_capital_controls"
+			clr_country_flag = mdr_capital_controls_active
+			# The wider the parallel-rate gap, the harder the devaluation when it closes.
+			if = { limit = { has_idea = mdr_capital_controls_3 }
+				add_stability = -0.05
+			}
+			remove_ideas = {
+				mdr_capital_controls_1
+				mdr_capital_controls_2
+				mdr_capital_controls_3
+			}
+			add_timed_idea = {
+				idea = mdr_devaluation_shock
+				days = 120
+			}
+			set_country_flag = { flag = mdr_capital_controls_cooldown days = 365 value = 1 }
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				NOT = { has_idea = recession }
+				NOT = { has_idea = depression }
+				check_variable = { debt_ratio < 0.67 }
+				add = 7
+			}
+		}
+	}
+
+	mdr_freeze_prices = {
+		icon = economy
+		cost = 75
+		fire_only_once = no
+
+		visible = {
+			NOT = { has_country_flag = mdr_price_freeze_active }
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = mdr_price_freeze_cooldown_tt
+				NOT = { has_country_flag = mdr_price_freeze_cooldown }
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_freeze_prices"
+			set_country_flag = mdr_price_freeze_active
+			set_variable = { mdr_price_freeze_weeks = 0 }
+			add_ideas = mdr_price_freeze_1
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_elections = no
+				OR = { has_idea = recession has_idea = depression }
+				check_variable = { protest_strength > 61 }
+				add = 5
+			}
+		}
+	}
+
+	mdr_unfreeze_prices = {
+		icon = economy
+		cost = 25
+		fire_only_once = no
+
+		visible = {
+			has_country_flag = mdr_price_freeze_active
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = mdr_price_freeze_min_tt
+				check_variable = { mdr_price_freeze_weeks > 25 }
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_unfreeze_prices"
+			clr_country_flag = mdr_price_freeze_active
+			remove_ideas = {
+				mdr_price_freeze_1
+				mdr_price_freeze_2
+				mdr_price_freeze_3
+			}
+			add_timed_idea = {
+				idea = mdr_price_release
+				days = 90
+			}
+			set_country_flag = { flag = mdr_price_freeze_cooldown days = 365 value = 1 }
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				NOT = { has_idea = recession }
+				NOT = { has_idea = depression }
+				add = 7
+			}
+		}
+	}
+
+	mdr_enact_industrial_subsidies = {
+		icon = economy
+		cost = 75
+		fire_only_once = no
+
+		visible = {
+			NOT = { has_idea = mdr_industrial_subsidies }
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = mdr_industrial_subsidies_cooldown_tt
+				NOT = { has_country_flag = mdr_industrial_subsidies_cooldown }
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_enact_industrial_subsidies"
+			add_ideas = mdr_industrial_subsidies
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				check_variable = { total_unemployed_percentage_display > 0.11 }
+				check_variable = { debt_ratio < 0.57 }
+				add = 5
+			}
+		}
+	}
+
+	mdr_end_industrial_subsidies = {
+		icon = economy
+		cost = 25
+		fire_only_once = no
+
+		visible = {
+			has_idea = mdr_industrial_subsidies
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_end_industrial_subsidies"
+			remove_ideas = mdr_industrial_subsidies
+			set_country_flag = { flag = mdr_industrial_subsidies_cooldown days = 365 value = 1 }
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				OR = { check_variable = { total_unemployed_percentage_display < 0.05 } check_variable = { debt_ratio > 0.87 } }
+				add = 5
+			}
+		}
+	}
+}
+
+mdr_stabilization_fund_category = {
+	mdr_fund_contribute_low = {
+		icon = generic_fundraising
+		cost = 25
+		fire_only_once = no
+
+		visible = {
+			NOT = { check_variable = { mdr_fund_rate = 0.5 } }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_fund_contribute_low"
+			set_variable = { mdr_fund_rate = 0.5 }
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				check_variable = { mdr_fund_rate < 0.5 }
+				check_variable = { debt_ratio < 0.47 }
+				has_war = no
+				add = 3
+			}
+		}
+	}
+
+	mdr_fund_contribute_high = {
+		icon = generic_fundraising
+		cost = 25
+		fire_only_once = no
+
+		visible = {
+			NOT = { check_variable = { mdr_fund_rate = 1 } }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_fund_contribute_high"
+			set_variable = { mdr_fund_rate = 1 }
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				check_variable = { mdr_oil_boom_strength > 0 }
+				check_variable = { debt_ratio < 0.37 }
+				has_war = no
+				add = 5
+			}
+		}
+	}
+
+	mdr_fund_stop_contributions = {
+		icon = generic_fundraising
+		cost = 0
+		fire_only_once = no
+
+		visible = {
+			check_variable = { mdr_fund_rate > 0 }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_fund_stop_contributions"
+			set_variable = { mdr_fund_rate = 0 }
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				OR = { has_war = yes check_variable = { debt_ratio > 0.77 } OR = { has_idea = recession has_idea = depression } }
+				add = 7
+			}
+		}
+	}
+
+	mdr_fund_use = {
+		icon = money_dec
+		cost = 0
+		fire_only_once = no
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = mdr_fund_use_cooldown_tt
+				NOT = { has_country_flag = mdr_fund_use_cooldown }
+			}
+			custom_trigger_tooltip = {
+				tooltip = mdr_fund_crisis_tt
+				OR = {
+					has_idea = COVID_pandemic_impact
+					has_idea = COVID_pandemic_origin
+					has_idea = recession
+					has_idea = depression
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = mdr_fund_min_balance_tt
+				check_variable = { mdr_fund_balance > 1 }
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision mdr_fund_use"
+			mdr_fund_release = yes
+			set_country_flag = { flag = mdr_fund_use_cooldown days = 180 value = 1 }
+		}
+
+		ai_will_do = { base = 1 }
+	}
+}

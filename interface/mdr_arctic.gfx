@@ -1,0 +1,12 @@
+spriteTypes = {
+	# Arctic terrain (common/terrain/00_terrain.txt, mdr_arctic): the base game's winter plains picture.
+	spriteType = {
+		name = "GFX_terrain_mdr_arctic"
+		textureFile = "gfx/interface/terrains/terrain_plains_winter.dds"
+	}
+
+	spriteType = {
+		name = "GFX_terrain_mdr_arctic_winter"
+		textureFile = "gfx/interface/terrains/terrain_plains_winter.dds"
+	}
+}

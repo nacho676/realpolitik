@@ -1,0 +1,212 @@
+# When the AI builds the Realpolitik buildings (common/buildings/mdr_buildings.txt).
+
+# Desalination where poor coastal soil keeps the country short of food.
+mdr_ai_build_desalination = {
+	enable = {
+		check_variable = { mdr_food_self_sufficiency < 100 }
+		any_owned_state = {
+			is_controlled_by = ROOT
+			is_coastal = yes
+			OR = {
+				has_state_flag = mdr_soil_poor
+				NOT = { has_state_flag = mdr_arable_land }
+			}
+			NOT = { check_variable = { building_level@mdr_desalination_plant > 0 } }
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = mdr_desalination_plant
+		value = 4
+	}
+}
+
+mdr_ai_build_fishing_port = {
+	enable = {
+		check_variable = { mdr_food_self_sufficiency < 110 }
+		any_owned_state = { is_controlled_by = ROOT is_coastal = yes }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = mdr_fishing_port
+		value = 4
+	}
+}
+
+# Recycling when the country's industry pollutes.
+mdr_ai_build_recycling = {
+	enable = {
+		any_owned_state = {
+			is_controlled_by = ROOT
+			check_variable = { mdr_pollution > 25 }
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = mdr_recycling_plant
+		value = 4
+	}
+}
+
+mdr_ai_build_university = {
+	enable = {
+		check_variable = { mdr_university_total < 10 }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = mdr_regional_university
+		value = 3
+	}
+}
+
+# Arc furnaces when steel runs short and the grid can feed them.
+mdr_ai_build_arc_furnace = {
+	enable = {
+		check_variable = { resource@steel < 1 }
+		check_variable = { energy_balance > 0 }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = mdr_electric_arc_furnace
+		value = 5
+	}
+}
+
+mdr_ai_build_data_center = {
+	enable = {
+		check_variable = { gdp_per_capita > 15 }
+		check_variable = { energy_balance > 0 }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = mdr_data_center
+		value = 4
+	}
+}
+
+mdr_ai_build_smart_grid = {
+	enable = {
+		check_variable = { energy_balance < 0 }
+		check_variable = { gdp_per_capita > 8 }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = mdr_smart_grid_center
+		value = 4
+	}
+}
+
+mdr_ai_build_ammo_depot = {
+	enable = {
+		OR = {
+			has_war = yes
+			threat > 0.5
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = mdr_fortified_ammo_depot
+		value = 3
+	}
+}
+
+mdr_ai_build_science_campus = {
+	enable = {
+		any_owned_state = {
+			is_controlled_by = ROOT
+			OR = {
+				any_province_building_level = { province = { all_provinces = yes } building = land_facility level > 0 }
+				any_province_building_level = { province = { all_provinces = yes } building = naval_facility level > 0 }
+				any_province_building_level = { province = { all_provinces = yes } building = air_facility level > 0 }
+				any_province_building_level = { province = { all_provinces = yes } building = nuclear_facility level > 0 }
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = mdr_science_campus
+		value = 3
+	}
+}
+
+# An agency with its own launcher and a budget wants a second launch base.
+mdr_ai_build_spaceport = {
+	enable = {
+		check_variable = { mdr_space_tier > 1 }
+		check_variable = { mdr_space_budget > 0 }
+		check_variable = { mdr_space_sites < 2 }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = mdr_spaceport
+		value = 3
+	}
+}
+
+# Disaster protection where the risk is real (state hazard profile from mdr_disaster_state_profile, 0 to 45), only with
+# factories to spare. building_target is a total for the country, so these stay small.
+mdr_ai_build_early_warning = {
+	enable = {
+		NOT = { has_game_rule = { rule = mdr_rule_disasters option = disabled } }
+		num_of_civilian_factories > 9
+		num_of_available_civilian_factories > 3
+		any_owned_state = {
+			is_controlled_by = ROOT
+			OR = {
+				check_variable = { mdr_hz_q > 29 }
+				check_variable = { mdr_hz_s > 34 }
+				check_variable = { mdr_hz_t > 24 }
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = mdr_early_warning_center
+		value = 2
+	}
+}
+
+mdr_ai_build_coastal_dikes = {
+	enable = {
+		NOT = { has_game_rule = { rule = mdr_rule_disasters option = disabled } }
+		num_of_civilian_factories > 9
+		num_of_available_civilian_factories > 3
+		any_owned_state = {
+			is_controlled_by = ROOT
+			is_coastal = yes
+			OR = {
+				check_variable = { mdr_hz_t > 24 }
+				check_variable = { mdr_hz_s > 34 }
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = mdr_coastal_dikes
+		value = 3
+	}
+}

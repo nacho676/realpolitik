@@ -1,0 +1,468 @@
+# Realpolitik treaties tab inside Millennium Dawn's International Systems window (MD_countrymissilesview).
+# Our tab button sits in the title row, left of the close button; the panel shows only while no Millennium Dawn tab is open
+# (mdr_treaties_gui_daily clears our tab when one is). Same conditions and effects as common/decisions/mdr_treaties_decisions.txt.
+scripted_gui = {
+	mdr_treaties_tab_gui = {
+		window_name = mdr_treaties_tab_window
+		context_type = player_context
+		parent_window_name = MD_countrymissilesview
+
+		dirty = global.international_systems_updated
+
+		visible = {
+			has_country_flag = open_MD_countrymissilesview
+		}
+
+		effects = {
+			mdr_treaties_tab_off_click = {
+				set_variable = { var_open_mdr_treaties_gui = 2 }
+				clear_variable = var_open_MD_space_gui
+				clear_variable = var_open_MD_CT_gui
+				clear_variable = var_open_MD_PMC_gui
+				clear_variable = var_open_MD_UN_gui
+				clear_variable = var_open_MD_cyber_gui
+				clear_variable = var_open_MD_antarctica_gui
+				international_systems_update = yes
+			}
+		}
+
+		triggers = {
+			mdr_treaties_tab_on_visible = {
+				mdr_treaties_tab_open = yes
+			}
+			mdr_treaties_tab_off_visible = {
+				NOT = { mdr_treaties_tab_open = yes }
+			}
+		}
+	}
+
+	mdr_treaties_panel_gui = {
+		window_name = mdr_treaties_window
+		context_type = player_context
+		parent_window_name = MD_countrymissilesview
+
+		dirty = global.international_systems_updated
+
+		visible = {
+			has_country_flag = open_MD_countrymissilesview
+			mdr_treaties_tab_open = yes
+		}
+
+		effects = {
+			mdr_tr_join_1_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab join 1"
+				add_political_power = -25
+				set_temp_variable = { mdr_treaty_id = 1 }
+				mdr_treaty_join = yes
+				international_systems_update = yes
+			}
+			mdr_tr_leave_1_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab leave 1"
+				add_political_power = -50
+				set_temp_variable = { mdr_treaty_id = 1 }
+				mdr_treaty_leave = yes
+				international_systems_update = yes
+			}
+			mdr_tr_join_2_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab join 2"
+				add_political_power = -25
+				set_temp_variable = { mdr_treaty_id = 2 }
+				mdr_treaty_join = yes
+				international_systems_update = yes
+			}
+			mdr_tr_leave_2_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab leave 2"
+				add_political_power = -50
+				set_temp_variable = { mdr_treaty_id = 2 }
+				mdr_treaty_leave = yes
+				international_systems_update = yes
+			}
+			mdr_tr_propose_3_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab propose 3"
+				add_political_power = -50
+				set_temp_variable = { mdr_treaty_id = 3 }
+				mdr_treaty_propose = yes
+				international_systems_update = yes
+			}
+			mdr_tr_leave_3_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab leave 3"
+				add_political_power = -50
+				set_temp_variable = { mdr_treaty_id = 3 }
+				mdr_treaty_leave = yes
+				international_systems_update = yes
+			}
+			mdr_tr_propose_4_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab propose 4"
+				add_political_power = -50
+				set_temp_variable = { mdr_treaty_id = 4 }
+				mdr_treaty_propose = yes
+				international_systems_update = yes
+			}
+			mdr_tr_leave_4_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab leave 4"
+				add_political_power = -50
+				set_temp_variable = { mdr_treaty_id = 4 }
+				mdr_treaty_leave = yes
+				international_systems_update = yes
+			}
+			mdr_tr_propose_5_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab propose 5"
+				add_political_power = -50
+				set_temp_variable = { mdr_treaty_id = 5 }
+				mdr_treaty_propose = yes
+				international_systems_update = yes
+			}
+			mdr_tr_leave_5_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab leave 5"
+				add_political_power = -50
+				set_temp_variable = { mdr_treaty_id = 5 }
+				mdr_treaty_leave = yes
+				international_systems_update = yes
+			}
+			mdr_tr_join_6_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab join 6"
+				add_political_power = -25
+				set_temp_variable = { mdr_treaty_id = 6 }
+				mdr_treaty_join = yes
+				international_systems_update = yes
+			}
+			mdr_tr_leave_6_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab leave 6"
+				add_political_power = -50
+				set_temp_variable = { mdr_treaty_id = 6 }
+				mdr_treaty_leave = yes
+				international_systems_update = yes
+			}
+			mdr_tr_join_7_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab join 7"
+				add_political_power = -25
+				set_temp_variable = { mdr_treaty_id = 7 }
+				mdr_treaty_join = yes
+				international_systems_update = yes
+			}
+			mdr_tr_leave_7_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab leave 7"
+				add_political_power = -50
+				set_temp_variable = { mdr_treaty_id = 7 }
+				mdr_treaty_leave = yes
+				international_systems_update = yes
+			}
+			mdr_tr_join_8_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab join 8"
+				add_political_power = -25
+				set_temp_variable = { mdr_treaty_id = 8 }
+				mdr_treaty_join = yes
+				international_systems_update = yes
+			}
+			mdr_tr_leave_8_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab leave 8"
+				add_political_power = -50
+				set_temp_variable = { mdr_treaty_id = 8 }
+				mdr_treaty_leave = yes
+				international_systems_update = yes
+			}
+			mdr_tr_join_9_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab join 9"
+				add_political_power = -25
+				set_temp_variable = { mdr_treaty_id = 9 }
+				mdr_treaty_join = yes
+				international_systems_update = yes
+			}
+			mdr_tr_leave_9_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab leave 9"
+				add_political_power = -50
+				set_temp_variable = { mdr_treaty_id = 9 }
+				mdr_treaty_leave = yes
+				international_systems_update = yes
+			}
+			mdr_tr_propose_10_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab propose 10"
+				add_political_power = -75
+				set_temp_variable = { mdr_treaty_id = 10 }
+				mdr_treaty_propose = yes
+				international_systems_update = yes
+			}
+			mdr_tr_leave_10_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab leave 10"
+				add_political_power = -50
+				set_temp_variable = { mdr_treaty_id = 10 }
+				mdr_treaty_leave = yes
+				international_systems_update = yes
+			}
+			mdr_tr_join_11_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab join 11"
+				add_political_power = -25
+				set_temp_variable = { mdr_treaty_id = 11 }
+				mdr_treaty_join = yes
+				international_systems_update = yes
+			}
+			mdr_tr_leave_11_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab leave 11"
+				add_political_power = -50
+				set_temp_variable = { mdr_treaty_id = 11 }
+				mdr_treaty_leave = yes
+				international_systems_update = yes
+			}
+			mdr_tr_join_12_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab join 12"
+				add_political_power = -25
+				set_temp_variable = { mdr_treaty_id = 12 }
+				mdr_treaty_join = yes
+				international_systems_update = yes
+			}
+			mdr_tr_leave_12_click = {
+				log = "[GetDateText]: [Root.GetName]: Treaties tab leave 12"
+				add_political_power = -50
+				set_temp_variable = { mdr_treaty_id = 12 }
+				mdr_treaty_leave = yes
+				international_systems_update = yes
+			}
+		}
+
+		triggers = {
+			mdr_tr_member_1_visible = { has_country_flag = mdr_treaty_1 }
+			mdr_tr_out_1_visible = { NOT = { has_country_flag = mdr_treaty_1 } }
+			mdr_tr_na_1_visible = {
+				NOT = { has_country_flag = mdr_treaty_1 }
+				NOT = { AND = { NOT = { has_country_flag = mdr_treaty_1 } } }
+			}
+			mdr_tr_join_1_visible = { NOT = { has_country_flag = mdr_treaty_1 } }
+			mdr_tr_join_1_click_enabled = {
+				has_political_power > 24
+				custom_trigger_tooltip = {
+					tooltip = mdr_treaty_cooldown_tt
+					NOT = { has_country_flag = mdr_treaty_cooldown }
+				}
+			}
+			mdr_tr_leave_1_visible = { has_country_flag = mdr_treaty_1 }
+			mdr_tr_leave_1_click_enabled = {
+				has_political_power > 49
+			}
+			mdr_tr_member_2_visible = { has_country_flag = mdr_treaty_2 }
+			mdr_tr_out_2_visible = { NOT = { has_country_flag = mdr_treaty_2 } }
+			mdr_tr_na_2_visible = {
+				NOT = { has_country_flag = mdr_treaty_2 }
+				NOT = { AND = { NOT = { has_country_flag = mdr_treaty_2 } } }
+			}
+			mdr_tr_join_2_visible = { NOT = { has_country_flag = mdr_treaty_2 } }
+			mdr_tr_join_2_click_enabled = {
+				has_political_power > 24
+				custom_trigger_tooltip = {
+					tooltip = mdr_treaty_cooldown_tt
+					NOT = { has_country_flag = mdr_treaty_cooldown }
+				}
+			}
+			mdr_tr_leave_2_visible = { has_country_flag = mdr_treaty_2 }
+			mdr_tr_leave_2_click_enabled = {
+				has_political_power > 49
+			}
+			mdr_tr_member_3_visible = { has_country_flag = mdr_treaty_3 }
+			mdr_tr_out_3_visible = { NOT = { has_country_flag = mdr_treaty_3 } OR = { original_tag = USA original_tag = SOV } }
+			mdr_tr_na_3_visible = {
+				NOT = { has_country_flag = mdr_treaty_3 }
+				NOT = { AND = { NOT = { has_country_flag = mdr_treaty_3 } OR = { original_tag = USA original_tag = SOV } } }
+			}
+			mdr_tr_propose_3_visible = { NOT = { has_country_flag = mdr_treaty_3 } OR = { original_tag = USA original_tag = SOV } }
+			mdr_tr_propose_3_click_enabled = {
+				has_political_power > 49
+				custom_trigger_tooltip = {
+					tooltip = mdr_treaty_cooldown_tt
+					NOT = { has_country_flag = mdr_treaty_cooldown }
+				}
+				custom_trigger_tooltip = {
+					tooltip = mdr_treaty_partner_tt
+					OR = {
+						AND = { original_tag = USA country_exists = SOV NOT = { has_war_with = SOV } }
+						AND = { original_tag = SOV country_exists = USA NOT = { has_war_with = USA } }
+					}
+				}
+			}
+			mdr_tr_leave_3_visible = { has_country_flag = mdr_treaty_3 }
+			mdr_tr_leave_3_click_enabled = {
+				has_political_power > 49
+			}
+			mdr_tr_member_4_visible = { has_country_flag = mdr_treaty_4 }
+			mdr_tr_out_4_visible = { NOT = { has_country_flag = mdr_treaty_4 } OR = { original_tag = USA original_tag = SOV } }
+			mdr_tr_na_4_visible = {
+				NOT = { has_country_flag = mdr_treaty_4 }
+				NOT = { AND = { NOT = { has_country_flag = mdr_treaty_4 } OR = { original_tag = USA original_tag = SOV } } }
+			}
+			mdr_tr_propose_4_visible = { NOT = { has_country_flag = mdr_treaty_4 } OR = { original_tag = USA original_tag = SOV } }
+			mdr_tr_propose_4_click_enabled = {
+				has_political_power > 49
+				custom_trigger_tooltip = {
+					tooltip = mdr_treaty_cooldown_tt
+					NOT = { has_country_flag = mdr_treaty_cooldown }
+				}
+				custom_trigger_tooltip = {
+					tooltip = mdr_treaty_partner_tt
+					OR = {
+						AND = { original_tag = USA country_exists = SOV NOT = { has_war_with = SOV } }
+						AND = { original_tag = SOV country_exists = USA NOT = { has_war_with = USA } }
+					}
+				}
+			}
+			mdr_tr_leave_4_visible = { has_country_flag = mdr_treaty_4 }
+			mdr_tr_leave_4_click_enabled = {
+				has_political_power > 49
+			}
+			mdr_tr_member_5_visible = { has_country_flag = mdr_treaty_5 }
+			mdr_tr_out_5_visible = { NOT = { has_country_flag = mdr_treaty_5 } OR = { original_tag = USA original_tag = SOV } }
+			mdr_tr_na_5_visible = {
+				NOT = { has_country_flag = mdr_treaty_5 }
+				NOT = { AND = { NOT = { has_country_flag = mdr_treaty_5 } OR = { original_tag = USA original_tag = SOV } } }
+			}
+			mdr_tr_propose_5_visible = { NOT = { has_country_flag = mdr_treaty_5 } OR = { original_tag = USA original_tag = SOV } }
+			mdr_tr_propose_5_click_enabled = {
+				has_political_power > 49
+				custom_trigger_tooltip = {
+					tooltip = mdr_treaty_cooldown_tt
+					NOT = { has_country_flag = mdr_treaty_cooldown }
+				}
+				custom_trigger_tooltip = {
+					tooltip = mdr_treaty_partner_tt
+					OR = {
+						AND = { original_tag = USA country_exists = SOV NOT = { has_war_with = SOV } }
+						AND = { original_tag = SOV country_exists = USA NOT = { has_war_with = USA } }
+					}
+				}
+			}
+			mdr_tr_leave_5_visible = { has_country_flag = mdr_treaty_5 }
+			mdr_tr_leave_5_click_enabled = {
+				has_political_power > 49
+			}
+			mdr_tr_member_6_visible = { has_country_flag = mdr_treaty_6 }
+			mdr_tr_out_6_visible = { NOT = { has_country_flag = mdr_treaty_6 } OR = { is_in_europe = yes original_tag = USA original_tag = CAN } }
+			mdr_tr_na_6_visible = {
+				NOT = { has_country_flag = mdr_treaty_6 }
+				NOT = { AND = { NOT = { has_country_flag = mdr_treaty_6 } OR = { is_in_europe = yes original_tag = USA original_tag = CAN } } }
+			}
+			mdr_tr_join_6_visible = { NOT = { has_country_flag = mdr_treaty_6 } OR = { is_in_europe = yes original_tag = USA original_tag = CAN } }
+			mdr_tr_join_6_click_enabled = {
+				has_political_power > 24
+				custom_trigger_tooltip = {
+					tooltip = mdr_treaty_cooldown_tt
+					NOT = { has_country_flag = mdr_treaty_cooldown }
+				}
+			}
+			mdr_tr_leave_6_visible = { has_country_flag = mdr_treaty_6 }
+			mdr_tr_leave_6_click_enabled = {
+				has_political_power > 49
+			}
+			mdr_tr_member_7_visible = { has_country_flag = mdr_treaty_7 }
+			mdr_tr_out_7_visible = { NOT = { has_country_flag = mdr_treaty_7 } OR = { is_in_europe = yes original_tag = USA original_tag = CAN } }
+			mdr_tr_na_7_visible = {
+				NOT = { has_country_flag = mdr_treaty_7 }
+				NOT = { AND = { NOT = { has_country_flag = mdr_treaty_7 } OR = { is_in_europe = yes original_tag = USA original_tag = CAN } } }
+			}
+			mdr_tr_join_7_visible = { NOT = { has_country_flag = mdr_treaty_7 } OR = { is_in_europe = yes original_tag = USA original_tag = CAN } }
+			mdr_tr_join_7_click_enabled = {
+				has_political_power > 24
+				custom_trigger_tooltip = {
+					tooltip = mdr_treaty_cooldown_tt
+					NOT = { has_country_flag = mdr_treaty_cooldown }
+				}
+			}
+			mdr_tr_leave_7_visible = { has_country_flag = mdr_treaty_7 }
+			mdr_tr_leave_7_click_enabled = {
+				has_political_power > 49
+			}
+			mdr_tr_member_8_visible = { has_country_flag = mdr_treaty_8 }
+			mdr_tr_out_8_visible = { NOT = { has_country_flag = mdr_treaty_8 } }
+			mdr_tr_na_8_visible = {
+				NOT = { has_country_flag = mdr_treaty_8 }
+				NOT = { AND = { NOT = { has_country_flag = mdr_treaty_8 } } }
+			}
+			mdr_tr_join_8_visible = { NOT = { has_country_flag = mdr_treaty_8 } }
+			mdr_tr_join_8_click_enabled = {
+				has_political_power > 24
+				custom_trigger_tooltip = {
+					tooltip = mdr_treaty_cooldown_tt
+					NOT = { has_country_flag = mdr_treaty_cooldown }
+				}
+			}
+			mdr_tr_leave_8_visible = { has_country_flag = mdr_treaty_8 }
+			mdr_tr_leave_8_click_enabled = {
+				has_political_power > 49
+			}
+			mdr_tr_member_9_visible = { has_country_flag = mdr_treaty_9 }
+			mdr_tr_out_9_visible = { NOT = { has_country_flag = mdr_treaty_9 } }
+			mdr_tr_na_9_visible = {
+				NOT = { has_country_flag = mdr_treaty_9 }
+				NOT = { AND = { NOT = { has_country_flag = mdr_treaty_9 } } }
+			}
+			mdr_tr_join_9_visible = { NOT = { has_country_flag = mdr_treaty_9 } }
+			mdr_tr_join_9_click_enabled = {
+				has_political_power > 24
+				custom_trigger_tooltip = {
+					tooltip = mdr_treaty_cooldown_tt
+					NOT = { has_country_flag = mdr_treaty_cooldown }
+				}
+			}
+			mdr_tr_leave_9_visible = { has_country_flag = mdr_treaty_9 }
+			mdr_tr_leave_9_click_enabled = {
+				has_political_power > 49
+			}
+			mdr_tr_member_10_visible = { OR = { has_country_flag = mdr_treaty_10 AND = { original_tag = USA has_global_flag = mdr_jcpoa_active } } }
+			mdr_tr_out_10_visible = { NOT = { has_country_flag = mdr_treaty_10 } original_tag = PER NOT = { OR = { has_country_flag = mdr_treaty_10 AND = { original_tag = USA has_global_flag = mdr_jcpoa_active } } } }
+			mdr_tr_na_10_visible = {
+				NOT = { OR = { has_country_flag = mdr_treaty_10 AND = { original_tag = USA has_global_flag = mdr_jcpoa_active } } }
+				NOT = { AND = { NOT = { has_country_flag = mdr_treaty_10 } original_tag = PER NOT = { OR = { has_country_flag = mdr_treaty_10 AND = { original_tag = USA has_global_flag = mdr_jcpoa_active } } } } }
+			}
+			mdr_tr_propose_10_visible = { NOT = { has_country_flag = mdr_treaty_10 } original_tag = PER NOT = { OR = { has_country_flag = mdr_treaty_10 AND = { original_tag = USA has_global_flag = mdr_jcpoa_active } } } }
+			mdr_tr_propose_10_click_enabled = {
+				has_political_power > 74
+				custom_trigger_tooltip = {
+					tooltip = mdr_treaty_cooldown_tt
+					NOT = { has_country_flag = mdr_treaty_cooldown }
+				}
+				has_country_flag = mdr_treaty_1
+				custom_trigger_tooltip = {
+					tooltip = mdr_treaty_partner_usa_tt
+					country_exists = USA
+					NOT = { has_war_with = USA }
+				}
+			}
+			mdr_tr_leave_10_visible = { OR = { has_country_flag = mdr_treaty_10 AND = { original_tag = USA has_global_flag = mdr_jcpoa_active } } }
+			mdr_tr_leave_10_click_enabled = {
+				has_political_power > 49
+			}
+			mdr_tr_member_11_visible = { has_country_flag = mdr_treaty_11 }
+			mdr_tr_out_11_visible = { NOT = { has_country_flag = mdr_treaty_11 } has_global_flag = mdr_kyoto_open }
+			mdr_tr_na_11_visible = {
+				NOT = { has_country_flag = mdr_treaty_11 }
+				NOT = { AND = { NOT = { has_country_flag = mdr_treaty_11 } has_global_flag = mdr_kyoto_open } }
+			}
+			mdr_tr_join_11_visible = { NOT = { has_country_flag = mdr_treaty_11 } has_global_flag = mdr_kyoto_open }
+			mdr_tr_join_11_click_enabled = {
+				has_political_power > 24
+				custom_trigger_tooltip = {
+					tooltip = mdr_treaty_cooldown_tt
+					NOT = { has_country_flag = mdr_treaty_cooldown }
+				}
+			}
+			mdr_tr_leave_11_visible = { has_country_flag = mdr_treaty_11 }
+			mdr_tr_leave_11_click_enabled = {
+				has_political_power > 49
+			}
+			mdr_tr_member_12_visible = { has_country_flag = mdr_treaty_12 }
+			mdr_tr_out_12_visible = { NOT = { has_country_flag = mdr_treaty_12 } has_global_flag = mdr_paris_open }
+			mdr_tr_na_12_visible = {
+				NOT = { has_country_flag = mdr_treaty_12 }
+				NOT = { AND = { NOT = { has_country_flag = mdr_treaty_12 } has_global_flag = mdr_paris_open } }
+			}
+			mdr_tr_join_12_visible = { NOT = { has_country_flag = mdr_treaty_12 } has_global_flag = mdr_paris_open }
+			mdr_tr_join_12_click_enabled = {
+				has_political_power > 24
+				custom_trigger_tooltip = {
+					tooltip = mdr_treaty_cooldown_tt
+					NOT = { has_country_flag = mdr_treaty_cooldown }
+				}
+			}
+			mdr_tr_leave_12_visible = { has_country_flag = mdr_treaty_12 }
+			mdr_tr_leave_12_click_enabled = {
+				has_political_power > 49
+			}
+		}
+	}
+}

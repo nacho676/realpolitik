@@ -1,0 +1,110 @@
+scripted_map_modes = {
+	# Climate risk: each state colored by its strongest natural hazard (state variables mdr_hz_*, mdr_disaster_state_profile
+	# in common/scripted_effects/mdr_disasters.txt), brighter the higher its total risk.
+	mdr_climate_map_mode = {
+		top = { type = none }
+		bottom = {
+			type = state
+			color = {
+				set_temp_variable = { r_clc = 0.25 }
+				set_temp_variable = { g_clc = 0.25 }
+				set_temp_variable = { b_clc = 0.25 }
+				if = { limit = { FROM = { has_variable = mdr_hz_f } }
+					set_temp_variable = { hz_flood = FROM.mdr_hz_f }
+					add_to_temp_variable = { hz_flood = FROM.mdr_hz_m }
+					set_temp_variable = { hz_total = hz_flood }
+					add_to_temp_variable = { hz_total = FROM.mdr_hz_q }
+					add_to_temp_variable = { hz_total = FROM.mdr_hz_t }
+					add_to_temp_variable = { hz_total = FROM.mdr_hz_s }
+					add_to_temp_variable = { hz_total = FROM.mdr_hz_w }
+					add_to_temp_variable = { hz_total = FROM.mdr_hz_h }
+					add_to_temp_variable = { hz_total = FROM.mdr_hz_o }
+
+					# Strongest hazard: earthquake, tsunami, storm, flood, wildfire, heat, tornado.
+					set_temp_variable = { hz_max = FROM.mdr_hz_q }
+					set_temp_variable = { r_clc = 0.60 } set_temp_variable = { g_clc = 0.30 } set_temp_variable = { b_clc = 0.80 }
+					if = { limit = { check_variable = { FROM.mdr_hz_t > hz_max } }
+						set_temp_variable = { hz_max = FROM.mdr_hz_t }
+						set_temp_variable = { r_clc = 0.10 } set_temp_variable = { g_clc = 0.25 } set_temp_variable = { b_clc = 0.70 }
+					}
+					if = { limit = { check_variable = { FROM.mdr_hz_s > hz_max } }
+						set_temp_variable = { hz_max = FROM.mdr_hz_s }
+						set_temp_variable = { r_clc = 0.15 } set_temp_variable = { g_clc = 0.75 } set_temp_variable = { b_clc = 0.90 }
+					}
+					if = { limit = { check_variable = { hz_flood > hz_max } }
+						set_temp_variable = { hz_max = hz_flood }
+						set_temp_variable = { r_clc = 0.20 } set_temp_variable = { g_clc = 0.45 } set_temp_variable = { b_clc = 1.00 }
+					}
+					if = { limit = { check_variable = { FROM.mdr_hz_w > hz_max } }
+						set_temp_variable = { hz_max = FROM.mdr_hz_w }
+						set_temp_variable = { r_clc = 0.90 } set_temp_variable = { g_clc = 0.20 } set_temp_variable = { b_clc = 0.10 }
+					}
+					if = { limit = { check_variable = { FROM.mdr_hz_h > hz_max } }
+						set_temp_variable = { hz_max = FROM.mdr_hz_h }
+						set_temp_variable = { r_clc = 1.00 } set_temp_variable = { g_clc = 0.60 } set_temp_variable = { b_clc = 0.10 }
+					}
+					if = { limit = { check_variable = { FROM.mdr_hz_o > hz_max } }
+						set_temp_variable = { hz_max = FROM.mdr_hz_o }
+						set_temp_variable = { r_clc = 0.20 } set_temp_variable = { g_clc = 0.80 } set_temp_variable = { b_clc = 0.55 }
+					}
+					# Low total risk: a calm green regardless of the strongest hazard.
+					if = { limit = { check_variable = { hz_total < 15 } }
+						set_temp_variable = { r_clc = 0.30 } set_temp_variable = { g_clc = 0.55 } set_temp_variable = { b_clc = 0.30 }
+					}
+					# Brightness: from 55% at low risk to 100% at a total of 60 or more.
+					set_temp_variable = { hz_light = hz_total }
+					divide_temp_variable = { hz_light = 133 }
+					add_to_temp_variable = { hz_light = 0.55 }
+					clamp_temp_variable = { var = hz_light min = 0.55 max = 1 }
+					multiply_temp_variable = { r_clc = hz_light }
+					multiply_temp_variable = { g_clc = hz_light }
+					multiply_temp_variable = { b_clc = hz_light }
+				}
+				set_temp_variable = { red = r_clc }
+				set_temp_variable = { green = g_clc }
+				set_temp_variable = { blue = b_clc }
+				set_temp_variable = { alpha = 1.00 }
+			}
+		}
+		far_text = state
+		near_text = state
+		update_daily = no
+	}
+
+	# Arable soil: where cropland can be built and how well it grows (common/scripted_effects/mdr_cropland.txt).
+	mdr_soil_map_mode = {
+		top = { type = none }
+		bottom = {
+			type = state
+			color = {
+				if = { limit = { FROM = { has_state_flag = mdr_soil_rich } } set_temp_variable = { red = 0.08 } set_temp_variable = { green = 0.45 } set_temp_variable = { blue = 0.10 } }
+				else_if = { limit = { FROM = { has_state_flag = mdr_soil_poor } } set_temp_variable = { red = 0.85 } set_temp_variable = { green = 0.75 } set_temp_variable = { blue = 0.25 } }
+				else_if = { limit = { FROM = { has_state_flag = mdr_arable_land } } set_temp_variable = { red = 0.40 } set_temp_variable = { green = 0.70 } set_temp_variable = { blue = 0.25 } }
+				else = { set_temp_variable = { red = 0.42 } set_temp_variable = { green = 0.36 } set_temp_variable = { blue = 0.30 } }
+				set_temp_variable = { alpha = 1.00 }
+			}
+		}
+		far_text = state
+		near_text = state
+		update_daily = no
+	}
+
+	# Pollution: clean states green, then yellow, brown and smog grey (state variable mdr_pollution, mdr_climate.txt).
+	mdr_pollution_map_mode = {
+		top = { type = none }
+		bottom = {
+			type = state
+			color = {
+				if = { limit = { FROM = { check_variable = { mdr_pollution > 69.99 } } } set_temp_variable = { red = 0.30 } set_temp_variable = { green = 0.26 } set_temp_variable = { blue = 0.24 } }
+				else_if = { limit = { FROM = { check_variable = { mdr_pollution > 44.99 } } } set_temp_variable = { red = 0.55 } set_temp_variable = { green = 0.36 } set_temp_variable = { blue = 0.18 } }
+				else_if = { limit = { FROM = { check_variable = { mdr_pollution > 24.99 } } } set_temp_variable = { red = 0.85 } set_temp_variable = { green = 0.70 } set_temp_variable = { blue = 0.20 } }
+				else_if = { limit = { FROM = { check_variable = { mdr_pollution > 9.99 } } } set_temp_variable = { red = 0.60 } set_temp_variable = { green = 0.75 } set_temp_variable = { blue = 0.30 } }
+				else = { set_temp_variable = { red = 0.20 } set_temp_variable = { green = 0.60 } set_temp_variable = { blue = 0.30 } }
+				set_temp_variable = { alpha = 1.00 }
+			}
+		}
+		far_text = state
+		near_text = state
+		update_daily = no
+	}
+}

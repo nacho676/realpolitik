@@ -1,0 +1,139 @@
+ideas = {
+	country = {
+		# Fuel subsidies: cheap fuel buys calm streets at a heavy fiscal cost, booked as social spending.
+		mdr_fuel_subsidies = {
+			allowed_civil_war = { always = yes }
+			picture = petrol_state
+
+			modifier = {
+				stability_factor = 0.05
+				social_cost_multiplier_modifier = 0.15
+			}
+		}
+
+		mdr_fuel_subsidy_protests = {
+			allowed_civil_war = { always = yes }
+			picture = arm_opposition_protest_idea
+
+			modifier = {
+				stability_factor = -0.10
+				political_power_factor = -0.15
+			}
+		}
+
+		# Capital controls: the parallel exchange-rate gap widens the longer they stay.
+		mdr_capital_controls_1 = {
+			allowed_civil_war = { always = yes }
+			picture = eco_currency_icon
+
+			modifier = {
+				currency_strength_modifier = 0.05
+				stability_factor = 0.02
+				receiving_investment_cost_modifier = 0.15
+				return_on_investment_modifier = -0.10
+			}
+		}
+
+		mdr_capital_controls_2 = {
+			allowed_civil_war = { always = yes }
+			picture = CUB_dual_currency
+
+			modifier = {
+				currency_strength_modifier = 0.02
+				receiving_investment_cost_modifier = 0.25
+				return_on_investment_modifier = -0.15
+				bureaucracy_cost_multiplier_modifier = 0.05
+				political_power_factor = -0.05
+			}
+		}
+
+		mdr_capital_controls_3 = {
+			allowed_civil_war = { always = yes }
+			picture = no_currency_backing
+
+			modifier = {
+				receiving_investment_cost_modifier = 0.35
+				return_on_investment_modifier = -0.20
+				bureaucracy_cost_multiplier_modifier = 0.10
+				productivity_growth_modifier = -0.02
+				stability_factor = -0.05
+			}
+		}
+
+		mdr_devaluation_shock = {
+			allowed_civil_war = { always = yes }
+			picture = inflation4
+
+			modifier = {
+				stability_factor = -0.05
+				inflation_cost_multiplier_modifier = 0.10
+			}
+		}
+
+		# Price freeze: relief first, shortages later.
+		mdr_price_freeze_1 = {
+			allowed_civil_war = { always = yes }
+			picture = inflation
+
+			modifier = {
+				inflation_cost_multiplier_modifier = -0.20
+				stability_factor = 0.05
+			}
+		}
+
+		mdr_price_freeze_2 = {
+			allowed_civil_war = { always = yes }
+			picture = inflation2
+
+			modifier = {
+				inflation_cost_multiplier_modifier = -0.20
+				productivity_growth_modifier = -0.02
+				consumer_goods_factor = 0.03
+			}
+		}
+
+		mdr_price_freeze_3 = {
+			allowed_civil_war = { always = yes }
+			picture = inflation3
+
+			modifier = {
+				inflation_cost_multiplier_modifier = -0.10
+				productivity_growth_modifier = -0.04
+				consumer_goods_factor = 0.05
+				stability_factor = -0.08
+				political_power_factor = -0.10
+			}
+		}
+
+		mdr_price_release = {
+			allowed_civil_war = { always = yes }
+			picture = hyper_inflation4
+
+			modifier = {
+				inflation_cost_multiplier_modifier = 0.15
+				stability_factor = -0.03
+			}
+		}
+
+		# Stabilization and Emergency Fund.
+		mdr_fund_relief = {
+			allowed_civil_war = { always = yes }
+			picture = sov_stab_fund_idea
+
+			modifier = {
+				stability_factor = 0.05
+				industrial_capacity_factory = 0.05
+				production_speed_buildings_factor = 0.05
+			}
+		}
+
+		mdr_fund_trust = {
+			allowed_civil_war = { always = yes }
+			picture = positive_gold
+
+			modifier = {
+				interest_rate_multiplier_modifier = -0.10
+			}
+		}
+	}
+}

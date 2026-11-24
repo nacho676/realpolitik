@@ -1,0 +1,26 @@
+add_namespace = mdr_diag
+
+# Result of the self check (mdr_diag_run).
+country_event = {
+	id = mdr_diag.1
+	title = mdr_diag.1.t
+	desc = mdr_diag.1.d
+	picture = GFX_treaty_rejected
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_diag.1.a
+		ai_chance = { base = 1 }
+	}
+}
+
+# The target of mdr_diag_ship_offer sends the offer, so it arrives as the AI's own would.
+country_event = {
+	id = mdr_diag.2
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		FROM = { country_event = { id = mdr_ship_sale.1 } }
+	}
+}

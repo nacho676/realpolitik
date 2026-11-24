@@ -1,0 +1,199 @@
+# War exhaustion (mdr_wex, 0 to 30 percent): public weariness of a long or bloody war. Grows weekly at war with the
+# week's casualties per million people, occupied home states, shortages and the length of the war; fades in peace.
+# Its penalties go through the dynamic modifier mdr_war_exhaustion. Separate from Millennium Dawn's anti-bully weariness.
+
+mdr_war_exhaustion_weekly = {
+	if = { limit = { NOT = { has_variable = mdr_wex } }
+		set_variable = { mdr_wex = 0 }
+		set_variable = { mdr_wex_last_casualties_k = casualties_k }
+	}
+	set_variable = { mdr_wex_from_losses = 0 }
+	set_variable = { mdr_wex_from_land = 0 }
+	set_variable = { mdr_wex_from_shortage = 0 }
+	set_variable = { mdr_wex_from_length = 0 }
+	set_variable = { mdr_wex_from_peace = 0 }
+	set_variable = { mdr_wex_from_regime = 0 }
+
+	if = { limit = { has_war = yes }
+		# Casualties of the week per million people: 0.0047 points each, at most 3.7 a week.
+		set_temp_variable = { mdr_wex_cas = casualties_k }
+		subtract_from_temp_variable = { mdr_wex_cas = mdr_wex_last_casualties_k }
+		clamp_temp_variable = { var = mdr_wex_cas min = 0 }
+		set_temp_variable = { mdr_wex_pop = 1 }
+		if = { limit = { check_variable = { population_total_m > 1 } } set_temp_variable = { mdr_wex_pop = population_total_m } }
+		multiply_temp_variable = { mdr_wex_cas = 4.7 }
+		divide_temp_variable = { mdr_wex_cas = mdr_wex_pop }
+		clamp_temp_variable = { var = mdr_wex_cas max = 3.7 }
+		set_variable = { mdr_wex_from_losses = mdr_wex_cas }
+
+		# Each owned state held by someone else: 0.23 a week, at most 2.3.
+		set_temp_variable = { mdr_wex_lost = 0 }
+		every_owned_state = {
+			limit = { NOT = { is_controlled_by = ROOT } }
+			add_to_temp_variable = { mdr_wex_lost = 0.23 }
+		}
+		clamp_temp_variable = { var = mdr_wex_lost max = 2.3 }
+		set_variable = { mdr_wex_from_land = mdr_wex_lost }
+
+		# Running short of ammunition or food at war.
+		if = { limit = { mdr_ammo_on = yes check_variable = { mdr_ammo_level > 1 } } add_to_variable = { mdr_wex_from_shortage = 0.37 } }
+		if = { limit = { mdr_food_on = yes check_variable = { mdr_food_unmet > 0 } } add_to_variable = { mdr_wex_from_shortage = 0.41 } }
+
+		# The war drags on: 0.13 a week, about 6.8 a year.
+		set_variable = { mdr_wex_from_length = 0.13 }
+
+		# Democracies with a free press feel it most; controlled media and high war support blunt it.
+		set_temp_variable = { mdr_wex_gain = mdr_wex_from_losses }
+		add_to_temp_variable = { mdr_wex_gain = mdr_wex_from_land }
+		add_to_temp_variable = { mdr_wex_gain = mdr_wex_from_shortage }
+		add_to_temp_variable = { mdr_wex_gain = mdr_wex_from_length }
+		set_temp_variable = { mdr_wex_mult = 1 }
+		if = { limit = { has_elections = yes } add_to_temp_variable = { mdr_wex_mult = 0.27 } }
+		else = { add_to_temp_variable = { mdr_wex_mult = -0.17 } }
+		if = { limit = { check_variable = { mdr_media_level > 3 } } add_to_temp_variable = { mdr_wex_mult = -0.21 } }
+		if = { limit = { has_war_support > 0.7 } add_to_temp_variable = { mdr_wex_mult = -0.23 } }
+		else_if = { limit = { has_war_support < 0.3 } add_to_temp_variable = { mdr_wex_mult = 0.19 } }
+		set_temp_variable = { mdr_wex_regime = mdr_wex_gain }
+		multiply_temp_variable = { mdr_wex_regime = mdr_wex_mult }
+		subtract_from_temp_variable = { mdr_wex_regime = mdr_wex_gain }
+		set_variable = { mdr_wex_from_regime = mdr_wex_regime }
+	}
+	else = {
+		# Peace heals it: 0.71 a week, about ten months from the top.
+		set_variable = { mdr_wex_from_peace = -0.71 }
+		# A country scarred by a recent war (mdr_war_exhaustion_start) heals slowly: 0.07 a week, about 3.6 a year.
+		if = { limit = { has_country_flag = mdr_wex_postwar } set_variable = { mdr_wex_from_peace = -0.07 } }
+	}
+	set_variable = { mdr_wex_last_casualties_k = casualties_k }
+
+	set_variable = { mdr_wex_change = mdr_wex_from_losses }
+	add_to_variable = { mdr_wex_change = mdr_wex_from_land }
+	add_to_variable = { mdr_wex_change = mdr_wex_from_shortage }
+	add_to_variable = { mdr_wex_change = mdr_wex_from_length }
+	add_to_variable = { mdr_wex_change = mdr_wex_from_regime }
+	add_to_variable = { mdr_wex_change = mdr_wex_from_peace }
+	add_to_variable = { mdr_wex = mdr_wex_change }
+	clamp_variable = { var = mdr_wex min = 0 max = 30 }
+
+	# Penalties, per point of exhaustion (at 30: stability -16%, war support -21%, morale -17%, organisation regain -13%,
+	# conscription -9%, repairs -14%). Multiply first, divide last: variables keep three decimals.
+	set_variable = { mdr_wex_stability = mdr_wex }
+	multiply_variable = { mdr_wex_stability = -0.53 }
+	divide_variable = { mdr_wex_stability = 100 }
+	set_variable = { mdr_wex_war_support = mdr_wex }
+	multiply_variable = { mdr_wex_war_support = -0.71 }
+	divide_variable = { mdr_wex_war_support = 100 }
+	set_variable = { mdr_wex_morale = mdr_wex }
+	multiply_variable = { mdr_wex_morale = -0.57 }
+	divide_variable = { mdr_wex_morale = 100 }
+	set_variable = { mdr_wex_org = mdr_wex }
+	multiply_variable = { mdr_wex_org = -0.43 }
+	divide_variable = { mdr_wex_org = 100 }
+	set_variable = { mdr_wex_conscription = mdr_wex }
+	multiply_variable = { mdr_wex_conscription = -0.31 }
+	divide_variable = { mdr_wex_conscription = 100 }
+	set_variable = { mdr_wex_repair = mdr_wex }
+	multiply_variable = { mdr_wex_repair = -0.47 }
+	divide_variable = { mdr_wex_repair = 100 }
+
+	if = { limit = { check_variable = { mdr_wex > 0 } }
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = mdr_war_exhaustion } } }
+			add_dynamic_modifier = { modifier = mdr_war_exhaustion }
+		}
+		# Above 15 the anger reaches the streets: hidden unrest of the civil laws.
+		if = { limit = { check_variable = { mdr_wex > 15 } has_variable = mdr_unrest_hidden }
+			add_to_variable = { mdr_unrest_hidden = 0.7 }
+			clamp_variable = { var = mdr_unrest_hidden min = 0 max = 100 }
+		}
+	}
+	else_if = { limit = { has_dynamic_modifier = { modifier = mdr_war_exhaustion } }
+		remove_dynamic_modifier = { modifier = mdr_war_exhaustion }
+	}
+
+	# Top bar: the game's fuel bar, frame = percentage of the maximum.
+	set_variable = { mdr_wex_bar_pct = mdr_wex }
+	multiply_variable = { mdr_wex_bar_pct = 100 }
+	divide_variable = { mdr_wex_bar_pct = 30 }
+	round_variable = mdr_wex_bar_pct
+	clamp_variable = { var = mdr_wex_bar_pct min = 0 max = 100 }
+}
+
+# Country init: the wars already running in 2000 start with their weariness (more the longer and bloodier; rebel movements,
+# more committed, a little less). Any other country at war at the start gets 3.3; countries with a war in the 1990s
+# start with its lasting weariness. Only at the 2000 start.
+mdr_war_exhaustion_start = {
+	if = { limit = { date < 2000.02.01 NOT = { has_variable = mdr_wex } }
+		set_variable = { mdr_wex = 0 }
+		if = { limit = { original_tag = SOV } set_variable = { mdr_wex = 7.1 } } # Second Chechen War, since 1999
+		else_if = { limit = { original_tag = CHE } set_variable = { mdr_wex = 10.3 } } # Chechnya
+		else_if = { limit = { original_tag = ERI } set_variable = { mdr_wex = 17.8 } } # Eritrean-Ethiopian War, 1998-2000, some 100,000 dead
+		else_if = { limit = { original_tag = ETH } set_variable = { mdr_wex = 13.1 } } # Eritrean-Ethiopian War
+		else_if = { limit = { original_tag = SRI } set_variable = { mdr_wex = 16.1 } } # civil war since 1983
+		else_if = { limit = { original_tag = TML } set_variable = { mdr_wex = 8.5 } } # Tamil Tigers
+		else_if = { limit = { original_tag = SUD } set_variable = { mdr_wex = 14.5 } } # second civil war since 1983
+		else_if = { limit = { original_tag = SSU } set_variable = { mdr_wex = 10.7 } } # southern rebels
+		else_if = { limit = { original_tag = AFG } set_variable = { mdr_wex = 17.1 } } # Northern Alliance, twenty years of war
+		else_if = { limit = { original_tag = TAL } set_variable = { mdr_wex = 10.3 } } # Taliban
+		else_if = { limit = { original_tag = AGL } set_variable = { mdr_wex = 17.1 } } # civil war since 1975
+		else_if = { limit = { original_tag = UNI } set_variable = { mdr_wex = 13.3 } } # UNITA
+		else_if = { limit = { original_tag = DRC } set_variable = { mdr_wex = 18.2 } } # Second Congo War
+		else_if = { limit = { original_tag = MLC } set_variable = { mdr_wex = 9.2 } } # MLC rebels
+		else_if = { limit = { original_tag = RCD } set_variable = { mdr_wex = 10.1 } } # RCD rebels
+		else_if = { limit = { original_tag = SIE } set_variable = { mdr_wex = 19.3 } } # civil war since 1991
+		else_if = { limit = { original_tag = AFR } set_variable = { mdr_wex = 11.5 } } # AFRC junta
+		else_if = { limit = { original_tag = LIB } set_variable = { mdr_wex = 11.8 } } # second civil war
+		else_if = { limit = { original_tag = LUR } set_variable = { mdr_wex = 7.1 } } # LURD rebels
+		else_if = { limit = { original_tag = NEP } set_variable = { mdr_wex = 4.1 } } # Maoist insurgency since 1996
+		else_if = { limit = { original_tag = NPM } set_variable = { mdr_wex = 3.2 } } # Maoists
+		else_if = { limit = { original_tag = IND } set_variable = { mdr_wex = 5.1 } } # Aceh, after East Timor
+		else_if = { limit = { original_tag = ACE } set_variable = { mdr_wex = 7.3 } } # Free Aceh Movement
+		else_if = { limit = { original_tag = SOM } set_variable = { mdr_wex = 14.1 } } # no state since 1991
+		else_if = { limit = { original_tag = SNA } set_variable = { mdr_wex = 11.1 } } # Somali National Alliance
+		else_if = { limit = { original_tag = AIA } set_variable = { mdr_wex = 5.5 } } # al-Itihaad
+		else_if = { limit = { original_tag = JUB } set_variable = { mdr_wex = 9.2 } } # Jubaland
+		else_if = { limit = { original_tag = SWS } set_variable = { mdr_wex = 8.5 } } # South West State
+		else_if = { limit = { original_tag = PUN } set_variable = { mdr_wex = 7.3 } } # Puntland
+		# Recent wars of the 1990s, now at peace (or fought out of the war system): the weariness lasts years, so it
+		# fades slowly for 5 years (mdr_wex_postwar).
+		else_if = { limit = { original_tag = BUR } set_variable = { mdr_wex = 8.2 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # civil war since 1993, not a war in Millennium Dawn
+		else_if = { limit = { original_tag = RWA } set_variable = { mdr_wex = 7.2 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # 1994 genocide and the Congo wars
+		else_if = { limit = { original_tag = ALG } set_variable = { mdr_wex = 6.7 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # civil war since 1991, winding down
+		else_if = { limit = { original_tag = COL } set_variable = { mdr_wex = 3.7 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # FARC and ELN conflict, not a war in Millennium Dawn
+		else_if = { limit = { original_tag = SER } set_variable = { mdr_wex = 6.8 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # Yugoslav wars and the 1999 Kosovo war
+		else_if = { limit = { original_tag = IRQ } set_variable = { mdr_wex = 5.8 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # Iran-Iraq War, Gulf War and sanctions
+		else_if = { limit = { original_tag = CNG } set_variable = { mdr_wex = 5.2 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # Republic of the Congo civil war, 1997-1999
+		else_if = { limit = { original_tag = BOS } set_variable = { mdr_wex = 4.8 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # Bosnian War, 1992-1995
+		else_if = { limit = { original_tag = TAJ } set_variable = { mdr_wex = 4.7 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # civil war, 1992-1997
+		else_if = { limit = { original_tag = AZE } set_variable = { mdr_wex = 4.3 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # Nagorno-Karabakh War, lost in 1994
+		else_if = { limit = { original_tag = GUB } set_variable = { mdr_wex = 4.2 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # civil war, 1998-1999
+		else_if = { limit = { original_tag = UGA } set_variable = { mdr_wex = 4.2 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # LRA insurgency and the Congo wars
+		else_if = { limit = { original_tag = ZIM } set_variable = { mdr_wex = 3.9 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # unpopular Congo intervention
+		else_if = { limit = { original_tag = CBD } set_variable = { mdr_wex = 3.9 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # Khmer Rouge war, ended 1998
+		else_if = { limit = { original_tag = LEB } set_variable = { mdr_wex = 3.6 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # civil war to 1990, Israeli occupation of the south to May 2000
+		else_if = { limit = { original_tag = BRM } set_variable = { mdr_wex = 3.6 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # ethnic insurgencies
+		else_if = { limit = { original_tag = GEO } set_variable = { mdr_wex = 3.4 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # Abkhazia and South Ossetia, 1991-1993
+		else_if = { limit = { original_tag = ARM } set_variable = { mdr_wex = 3.1 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # Nagorno-Karabakh War, 1988-1994
+		else_if = { limit = { original_tag = TUR } set_variable = { mdr_wex = 3.1 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # PKK war, 1984-1999
+		else_if = { limit = { original_tag = PHI } set_variable = { mdr_wex = 3.1 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # MILF and NPA insurgencies
+		else_if = { limit = { original_tag = GUA } set_variable = { mdr_wex = 1.7 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # civil war, 1960-1996
+		else_if = { limit = { original_tag = CHA } set_variable = { mdr_wex = 2.9 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # northern rebellion
+		else_if = { limit = { original_tag = CRO } set_variable = { mdr_wex = 2.6 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # Croatian War of Independence, 1991-1995
+		else_if = { limit = { original_tag = PAK } set_variable = { mdr_wex = 2.6 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # Kargil War, 1999
+		else_if = { limit = { original_tag = PRU } set_variable = { mdr_wex = 1.3 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # Shining Path and the 1995 Cenepa War
+		else_if = { limit = { original_tag = ISR } set_variable = { mdr_wex = 2.1 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # South Lebanon, withdrawn May 2000
+		else_if = { limit = { original_tag = MOZ } set_variable = { mdr_wex = 2.1 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # civil war, 1977-1992
+		else_if = { limit = { original_tag = NAM } set_variable = { mdr_wex = 2.1 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # Congo intervention
+		else_if = { limit = { original_tag = YEM } set_variable = { mdr_wex = 2.1 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # 1994 civil war
+		else_if = { limit = { original_tag = ELS } set_variable = { mdr_wex = 1.1 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # civil war, 1979-1992
+		else_if = { limit = { original_tag = RAJ } set_variable = { mdr_wex = 1.9 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # Kargil War, 1999, and Kashmir insurgency
+		else_if = { limit = { original_tag = MLV } set_variable = { mdr_wex = 1.9 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # Transnistria War, 1992
+		else_if = { limit = { original_tag = PER } set_variable = { mdr_wex = 1.6 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # Iran-Iraq War, 1980-1988
+		else_if = { limit = { original_tag = ECU } set_variable = { mdr_wex = 0.9 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # Cenepa War, 1995
+		else_if = { limit = { original_tag = NIC } set_variable = { mdr_wex = 0.9 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # Contra War, to 1990
+		else_if = { limit = { original_tag = SEN } set_variable = { mdr_wex = 1.6 } set_country_flag = { flag = mdr_wex_postwar days = 1825 value = 1 } } # Casamance conflict
+		else_if = { limit = { has_war = yes } set_variable = { mdr_wex = 3.3 } }
+		set_variable = { mdr_wex_last_casualties_k = casualties_k }
+		# Penalties at once, not a week later.
+		if = { limit = { check_variable = { mdr_wex > 0 } } mdr_war_exhaustion_weekly = yes }
+	}
+}

@@ -1,0 +1,360 @@
+buildings = {
+	# Each level adds 5 uranium (+1 per mining technology) to the state's own resources (state_resource_uranium, not the building's flat
+	# local_resources), so infrastructure can multiply it. Mines of 2000: mdr_uranium_start in common/scripted_effects/mdr_uranium.txt.
+	mdr_uranium_mine = {
+		base_cost = 20000
+		per_level_extra_cost = 1500
+		icon_frame = 39
+		show_on_map = 0
+		damage_factor = 1
+		value = 1
+		infrastructure_construction_effect = yes
+		state_modifiers = {
+			state_resource_uranium = 5
+		}
+		country_modifiers = {
+			modifiers = {
+				energy_use = 0.03
+			}
+		}
+		# Mines do not use shared slots, so a full state can still work its deposit.
+		level_cap = {
+			state_max = 10
+			shares_slots = no
+		}
+	}
+
+	# Reduces the damage of any disaster in its state. Icon frame 41 (siren) is added to the building strip by Realpolitik.
+	mdr_early_warning_center = {
+		base_cost = 8000
+		icon_frame = 41
+		show_on_map = 0
+		damage_factor = 1
+		value = 1
+		country_modifiers = {
+			modifiers = {
+				energy_use = 0.002
+			}
+		}
+		level_cap = {
+			state_max = 1
+			shares_slots = no
+		}
+	}
+
+	# Coastal provinces only. Reduces the damage of tsunamis, storms and floods in its state. Provisional icon: dam.
+	mdr_coastal_dikes = {
+		base_cost = 6000
+		icon_frame = 25
+		show_on_map = 0
+		only_costal = yes
+		damage_factor = 0
+		value = 1
+		level_cap = {
+			province_max = 1
+		}
+	}
+
+	# Marks a state where crops can grow (not desert, tundra, swamp, closed rainforest or high mountain). Placed at game start
+	# by mdr_cropland_start (common/scripted_effects/mdr_cropland_start.txt), with the soil modifier. Icon frame 43.
+	mdr_arable_land = {
+		base_cost = 1000
+		icon_frame = 43
+		show_on_map = 0
+		is_buildable = no
+		only_display_if_exists = yes
+		damage_factor = 0
+		value = 1
+		level_cap = {
+			state_max = 1
+			shares_slots = no
+		}
+	}
+
+	# Farmland: each level grows 10 grain (a million tonnes a year) as the state's own resource (state_resource_wheat), so
+	# infrastructure, soil and climate multiply it. Fertilizer technologies add a fixed +1 each (mdr_fertilizer_wheat).
+	# Workers, GDP and taxes in common/scripted_effects/00_money_system.txt (mdr_cropland). Icon frame 42.
+	mdr_cropland = {
+		base_cost = 6000
+		icon_frame = 42
+		show_on_map = 0
+		damage_factor = 1
+		value = 1
+		infrastructure_construction_effect = yes
+		state_modifiers = {
+			state_resource_wheat = 10
+		}
+		building_prerequisite = {
+			building_dependency = {
+				building = mdr_arable_land
+				level = 1
+			}
+		}
+		# Land does not compete with factories for building slots.
+		level_cap = {
+			state_max = 10
+			shares_slots = no
+		}
+	}
+
+	# Mines the ore and separates it into the elements industry uses. Each level adds 6 rare earths to the state's own resources
+	# (state_resource_rare_earths), so infrastructure can multiply them.
+	# Workers, GDP and taxes in common/scripted_effects/mdr_buildings.txt. Icon frame 44.
+	mdr_rare_earth_complex = {
+		base_cost = 25000
+		per_level_extra_cost = 2000
+		icon_frame = 44
+		show_on_map = 0
+		damage_factor = 1
+		value = 1
+		infrastructure_construction_effect = yes
+		state_modifiers = {
+			state_resource_rare_earths = 6
+		}
+		country_modifiers = {
+			modifiers = {
+				energy_use = 0.11
+			}
+		}
+		level_cap = {
+			state_max = 20
+			shares_slots = no
+		}
+	}
+
+	# Workers, GDP and taxes of the buildings below: mdr_buildings_* in common/scripted_effects/mdr_buildings.txt,
+	# called from common/scripted_effects/00_money_system.txt. Icon frames 46 to 56.
+
+	# Coastal. Lifts poor or dry soil of its state to normal and turns a dry coastal state arable (mdr_buildings_monthly).
+	mdr_desalination_plant = {
+		base_cost = 9750
+		icon_frame = 46
+		show_on_map = 0
+		only_costal = yes
+		damage_factor = 1
+		value = 1
+		infrastructure_construction_effect = yes
+		country_modifiers = {
+			modifiers = {
+				energy_use = 0.17
+			}
+		}
+		level_cap = {
+			state_max = 1
+			shares_slots = no
+		}
+	}
+
+	# Recovers steel and light metals from scrap and lowers the state's pollution (mdr_pollution in mdr_climate.txt).
+	mdr_recycling_plant = {
+		base_cost = 32800
+		per_level_extra_cost = 1500
+		icon_frame = 47
+		show_on_map = 0
+		damage_factor = 1
+		value = 1
+		local_resources_steel = 1
+		local_resources_aluminium = 1
+		infrastructure_construction_effect = yes
+		country_modifiers = {
+			modifiers = {
+				energy_use = 0.09
+			}
+		}
+		level_cap = {
+			state_max = 3
+			shares_slots = no
+		}
+	}
+
+	# Research bonus with a national cap in mdr_buildings_weekly.
+	mdr_regional_university = {
+		base_cost = 21600
+		icon_frame = 49
+		show_on_map = 0
+		damage_factor = 1
+		value = 1
+		infrastructure_construction_effect = yes
+		state_modifiers = {
+			state_productivity_growth_modifier = 0.025
+		}
+		country_modifiers = {
+			modifiers = {
+				energy_use = 0.05
+			}
+		}
+		level_cap = {
+			state_max = 2
+			shares_slots = no
+		}
+	}
+
+	# Melts scrap with electricity: steel without iron mines, at a very high energy cost.
+	mdr_electric_arc_furnace = {
+		base_cost = 61500
+		per_level_extra_cost = 5000
+		icon_frame = 50
+		show_on_map = 0
+		damage_factor = 1
+		value = 1
+		local_resources_steel = 4
+		infrastructure_construction_effect = yes
+		country_modifiers = {
+			modifiers = {
+				energy_use = 1.35
+			}
+		}
+		level_cap = {
+			state_max = 2
+			shares_slots = yes
+		}
+	}
+
+	# Servers for cloud services: a lot of GDP, very high energy use. Needs fibre (Network Infrastructure level 2).
+	mdr_data_center = {
+		base_cost = 52700
+		per_level_extra_cost = 3800
+		icon_frame = 51
+		show_on_map = 0
+		damage_factor = 1
+		value = 1
+		infrastructure_construction_effect = yes
+		building_prerequisite = {
+			building_dependency = {
+				building = internet_station
+				level = 2
+			}
+		}
+		country_modifiers = {
+			modifiers = {
+				energy_use = 1.6
+			}
+		}
+		level_cap = {
+			state_max = 5
+			shares_slots = yes
+		}
+	}
+
+	# Cuts the energy use of its state's buildings, with a cap (mdr_buildings_weekly).
+	mdr_smart_grid_center = {
+		base_cost = 27800
+		icon_frame = 52
+		show_on_map = 0
+		damage_factor = 1
+		value = 1
+		infrastructure_construction_effect = yes
+		country_modifiers = {
+			modifiers = {
+				energy_use = 0.02
+			}
+		}
+		level_cap = {
+			state_max = 1
+			shares_slots = yes
+		}
+	}
+
+	# Coastal provinces. Fish for the national food balance (mdr_food_calc reads mdr_fishing_food).
+	mdr_fishing_port = {
+		base_cost = 4300
+		icon_frame = 54
+		show_on_map = 0
+		only_costal = yes
+		damage_factor = 1
+		value = 1
+		infrastructure_construction_effect = yes
+		country_modifiers = {
+			modifiers = {
+				mdr_fishing_food = 140
+			}
+		}
+		level_cap = {
+			province_max = 1
+		}
+	}
+
+	# Hardened bunkers that store ammunition (mdr_ammo_update_capacity reads mdr_ammo_depot_capacity). Hard to bomb.
+	mdr_fortified_ammo_depot = {
+		base_cost = 7100
+		icon_frame = 55
+		show_on_map = 0
+		disabled_in_dmz = yes
+		damage_factor = 0.3
+		value = 1
+		infrastructure_construction_effect = yes
+		country_modifiers = {
+			modifiers = {
+				mdr_ammo_depot_capacity = 60
+			}
+		}
+		level_cap = {
+			province_max = 1
+		}
+	}
+
+	# One per state, apart from the special project facilities (not grouped with them, so a state can have both). Its own
+	# specialization has no projects; it only puts the campus in the facilities list. Speeds up the facility of its state
+	# (mdr_buildings_weekly).
+	mdr_science_campus = {
+		specialization = { specialization_mdr_campus }
+		base_cost = 26400
+		icon_frame = 56
+		show_on_map = 0
+		disabled_in_dmz = yes
+		damage_factor = 1
+		value = 1
+		infrastructure_construction_effect = yes
+		country_modifiers = {
+			modifiers = {
+				energy_use = 0.08
+				mdr_province_workers_k = 0.8
+			}
+		}
+		need_supply = yes
+		need_detection = yes
+		level_cap = {
+			province_max = 1
+			state_max = 1
+			group_by = mdr_science_campus
+		}
+	}
+
+	# Launch base of the space programme; Millennium Dawn's rocket_site is for weapons. Unlocked by mdr_sp_foundations.
+	# Each level gives its bonus again. Icon frame 48. Real bases of 2000: mdr_space_start_sites in common/scripted_effects/mdr_space.txt.
+	# Model on the map: gfx/entities/mdr_spaceport.asset. The positions are in map/buildings.txt, beside the missile site of each state.
+	mdr_spaceport = {
+		show_on_map = 1
+		base_cost = 38400
+		icon_frame = 48
+		value = 1
+		damage_factor = 1
+		spawn_point = mdr_spaceport_spawn
+		disabled_in_dmz = yes
+		infrastructure_construction_effect = yes
+		country_modifiers = {
+			modifiers = {
+				energy_use = 0.06
+				olv_production_speed_modifier = 0.043
+				olv_launch_reliability_modifier = 0.017
+				olv_production_cost_modifier = -0.012
+				gnss_production_speed_modifier = 0.016
+				comsat_production_speed_modifier = 0.016
+				spysat_production_speed_modifier = 0.016
+				killsat_production_speed_modifier = 0.016
+				research_speed_factor = 0.0007
+			}
+		}
+		level_cap = {
+			state_max = 3
+			shares_slots = no
+		}
+	}
+}
+
+spawn_points = {
+	mdr_spaceport_spawn = {
+		type = state
+		max = 1
+	}
+}

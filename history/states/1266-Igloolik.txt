@@ -1,0 +1,26 @@
+state = {
+	id = 1266
+	name = "STATE_1266" # Igloolik
+	manpower = 3000
+
+	state_category = state_00
+
+	history = {
+		owner = CAN
+		victory_points = {
+			16858 1
+		}
+		buildings = {
+			infrastructure = 1
+			16858 = {
+				naval_base = 1
+			}
+		}
+		add_core_of = CAN
+		set_state_flag = mdr_polar   # low disaster risk (common/scripted_effects/mdr_disasters.txt)
+		set_variable = { state_renewable_capacity_factor_modifier_var = 0.600 }
+		set_variable = { productivity_state_var = 500 }
+	}
+
+	provinces = { 16854 16858 16885 16903 16948 16969 16984 }
+}

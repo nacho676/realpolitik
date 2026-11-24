@@ -1,0 +1,103 @@
+# Raises the ammunition produced each day by military factories (common/scripted_effects/mdr_ammo.txt).
+mdr_ammo_gain_factor = {
+	color_type = good
+	value_type = percentage
+	precision = 0
+	category = country
+}
+
+# Fish from the fishing ports, in thousand tonnes of grain equivalent a year (mdr_food_calc).
+mdr_fishing_food = {
+	color_type = good
+	value_type = number
+	precision = 0
+	category = country
+}
+
+# Ammunition stored in the fortified depots, in thousand boxes (mdr_ammo_update_capacity).
+mdr_ammo_depot_capacity = {
+	color_type = good
+	value_type = number
+	precision = 0
+	category = country
+}
+
+# Workers of the provincial buildings, in thousands. The game has no count of them per state, so each level adds this (mdr_buildings_employment).
+mdr_province_workers_k = {
+	color_type = bad
+	value_type = number
+	precision = 2
+	category = country
+}
+
+# Science of the space programme per week (mdr_space_refresh).
+mdr_space_science_factor = {
+	color_type = good
+	value_type = percentage
+	precision = 1
+	category = country
+}
+
+# Cost of the space programme's budget (mdr_space_refresh).
+mdr_space_budget_cost_factor = {
+	color_type = bad
+	value_type = percentage
+	precision = 1
+	category = country
+}
+
+# Science per week of each level of launch base, on top of its base 0.8 (mdr_space_refresh).
+mdr_space_site_science = {
+	color_type = good
+	value_type = number
+	precision = 2
+	category = country
+}
+
+# Raises the ammunition the country can store (mdr_ammo_update_capacity).
+mdr_ammo_storage_factor = {
+	color_type = good
+	value_type = percentage
+	precision = 0
+	category = country
+}
+
+# Changes what each building of the country emits (mdr_pollution_emissions).
+mdr_pollution_factor = {
+	color_type = bad
+	value_type = percentage
+	precision = 0
+	category = country
+}
+
+# Lowers the cost of storms, floods, fires and heatwaves, and can lighten their damage (mdr_disaster_strike, mdr_disaster_damage).
+mdr_disaster_resilience = {
+	color_type = good
+	value_type = percentage
+	precision = 0
+	category = country
+}
+
+# Changes the grain lost in storage (mdr_food_weekly).
+mdr_food_spoilage_factor = {
+	color_type = bad
+	value_type = percentage
+	precision = 0
+	category = country
+}
+
+# Raises the food the country can store (mdr_food_calc).
+mdr_food_storage_factor = {
+	color_type = good
+	value_type = percentage
+	precision = 0
+	category = country
+}
+
+# Share of a pandemic's penalties that the country offsets (mdr_pandemic_relief_weekly).
+mdr_pandemic_resilience = {
+	color_type = good
+	value_type = percentage
+	precision = 0
+	category = country
+}

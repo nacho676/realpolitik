@@ -1,0 +1,163 @@
+# Starting situation in 2000, applied from day one by mdr_country_init.
+mdr_economy_start = {
+	# Countries that subsidized fuel heavily in 2000.
+	if = {
+		limit = {
+			NOT = { has_idea = mdr_fuel_subsidies }
+			OR = {
+				original_tag = VEN
+				original_tag = PER
+				original_tag = SAU
+				original_tag = UAE
+				original_tag = KUW
+				original_tag = IRQ
+				original_tag = LBA
+				original_tag = ALG
+				original_tag = EGY
+				original_tag = NIG
+				original_tag = IND
+				original_tag = MAY
+				original_tag = ECU
+				original_tag = BOL
+				original_tag = KAZ
+			}
+		}
+		add_ideas = mdr_fuel_subsidies
+	}
+
+	# Sovereign wealth funds that already existed in 2000, in billions of dollars.
+	if = { limit = { original_tag = NRY }
+		set_variable = { mdr_fund_balance = 44 }
+		set_variable = { mdr_fund_rate = 1 }
+	}
+	else_if = { limit = { original_tag = UAE }
+		set_variable = { mdr_fund_balance = 150 }
+		set_variable = { mdr_fund_rate = 1 }
+	}
+	else_if = { limit = { original_tag = KUW }
+		set_variable = { mdr_fund_balance = 80 }
+		set_variable = { mdr_fund_rate = 1 }
+	}
+	else_if = { limit = { original_tag = SIN }
+		set_variable = { mdr_fund_balance = 100 }
+		set_variable = { mdr_fund_rate = 1 }
+	}
+}
+
+mdr_economy_weekly = {
+	# Industrial subsidies cost 0.5% of GDP per year while active.
+	if = { limit = { has_idea = mdr_industrial_subsidies }
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = -5 }
+		divide_temp_variable = { treasury_change = 52000 }
+		modify_treasury_effect = yes
+	}
+
+	if = { limit = { has_country_flag = mdr_capital_controls_active }
+		add_to_variable = { mdr_capital_controls_weeks = 1 }
+		if = {
+			limit = {
+				has_idea = mdr_capital_controls_1
+				check_variable = { mdr_capital_controls_weeks > 25 }
+			}
+			swap_ideas = {
+				remove_idea = mdr_capital_controls_1
+				add_idea = mdr_capital_controls_2
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = mdr_capital_controls_2
+				check_variable = { mdr_capital_controls_weeks > 77 }
+			}
+			swap_ideas = {
+				remove_idea = mdr_capital_controls_2
+				add_idea = mdr_capital_controls_3
+			}
+		}
+	}
+
+	if = { limit = { has_country_flag = mdr_price_freeze_active }
+		add_to_variable = { mdr_price_freeze_weeks = 1 }
+		if = {
+			limit = {
+				has_idea = mdr_price_freeze_1
+				check_variable = { mdr_price_freeze_weeks > 11 }
+			}
+			swap_ideas = {
+				remove_idea = mdr_price_freeze_1
+				add_idea = mdr_price_freeze_2
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = mdr_price_freeze_2
+				check_variable = { mdr_price_freeze_weeks > 25 }
+			}
+			swap_ideas = {
+				remove_idea = mdr_price_freeze_2
+				add_idea = mdr_price_freeze_3
+			}
+		}
+	}
+
+	if = {
+		limit = {
+			OR = {
+				check_variable = { mdr_fund_balance > 0 }
+				check_variable = { mdr_fund_rate > 0 }
+				has_idea = mdr_fund_trust
+			}
+		}
+		mdr_fund_weekly = yes
+	}
+}
+
+# The fund earns 3% a year and receives mdr_fund_rate percent of GDP a year from the treasury.
+mdr_fund_weekly = {
+	set_temp_variable = { mdr_fund_yield = mdr_fund_balance }
+	multiply_temp_variable = { mdr_fund_yield = 3 }
+	divide_temp_variable = { mdr_fund_yield = 5200 }
+	add_to_variable = { mdr_fund_balance = mdr_fund_yield }
+
+	if = { limit = { check_variable = { mdr_fund_rate > 0 } }
+		set_temp_variable = { mdr_fund_contribution = gdp_total }
+		multiply_temp_variable = { mdr_fund_contribution = mdr_fund_rate }
+		divide_temp_variable = { mdr_fund_contribution = 5200 }
+		add_to_variable = { mdr_fund_balance = mdr_fund_contribution }
+		set_temp_variable = { treasury_change = mdr_fund_contribution }
+		multiply_temp_variable = { treasury_change = -1 }
+		modify_treasury_effect = yes
+	}
+
+	# Markets lend cheaper to a country whose fund holds at least 5% of GDP.
+	set_temp_variable = { mdr_fund_trust_threshold = gdp_total }
+	multiply_temp_variable = { mdr_fund_trust_threshold = 0.05 }
+	if = {
+		limit = {
+			check_variable = { mdr_fund_balance > mdr_fund_trust_threshold }
+			NOT = { has_idea = mdr_fund_trust }
+		}
+		add_ideas = mdr_fund_trust
+	}
+	else_if = {
+		limit = {
+			check_variable = { mdr_fund_balance < mdr_fund_trust_threshold }
+			has_idea = mdr_fund_trust
+		}
+		remove_ideas = mdr_fund_trust
+	}
+}
+
+# Spends up to 2% of GDP from the fund on the current crisis.
+mdr_fund_release = {
+	set_temp_variable = { treasury_change = gdp_total }
+	multiply_temp_variable = { treasury_change = 0.02 }
+	clamp_temp_variable = { var = treasury_change max = mdr_fund_balance }
+	subtract_from_variable = { mdr_fund_balance = treasury_change }
+	modify_treasury_effect = yes
+	add_timed_idea = {
+		idea = mdr_fund_relief
+		days = 180
+	}
+}

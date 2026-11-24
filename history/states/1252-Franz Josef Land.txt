@@ -1,0 +1,26 @@
+state = {
+	id = 1252
+	name = "STATE_1252" # Franz Josef Land
+	manpower = 50
+
+	state_category = state_00
+
+	history = {
+		owner = SOV
+		victory_points = {
+			16675 1
+		}
+		buildings = {
+			infrastructure = 1
+			16675 = {
+				naval_base = 1
+			}
+		}
+		add_core_of = SOV
+		set_state_flag = mdr_polar   # low disaster risk (common/scripted_effects/mdr_disasters.txt)
+		set_variable = { state_renewable_capacity_factor_modifier_var = 0.600 }
+		set_variable = { productivity_state_var = 500 }
+	}
+
+	provinces = { 16657 16662 16675 16682 16683 16694 16710 16711 16716 16731 }
+}

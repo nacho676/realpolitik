@@ -1,0 +1,894 @@
+# Generated from FAOSTAT 2000 cereal production (see COMPATIBILIDAD.md). State scope effects per state:
+# mdr_cropland_arable_<class> places the hidden arable land building and the soil modifier; then the starting cropland levels.
+mdr_cropland_start = {
+	if = { limit = { NOT = { has_global_flag = mdr_cropland_added } }
+		set_global_flag = mdr_cropland_added
+		2 = { mdr_cropland_arable_normal = yes }
+		3 = { mdr_cropland_arable_normal = yes }
+		4 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		5 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		6 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 5 instant_build = yes } }
+		7 = { mdr_cropland_arable_normal = yes }
+		8 = { mdr_cropland_arable_normal = yes }
+		9 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		10 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		11 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		12 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		14 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		15 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		16 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		17 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		18 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		23 = { mdr_cropland_arable_normal = yes }
+		24 = { mdr_cropland_arable_normal = yes }
+		25 = { mdr_cropland_arable_normal = yes }
+		27 = { mdr_cropland_arable_normal = yes }
+		28 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		29 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		32 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		33 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		34 = { mdr_cropland_arable_normal = yes }
+		35 = { mdr_cropland_arable_normal = yes }
+		36 = { mdr_cropland_arable_normal = yes }
+		37 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		38 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 5 instant_build = yes } }
+		39 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		40 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		41 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		42 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		43 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		44 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		46 = { mdr_cropland_arable_rich = yes }
+		47 = { mdr_cropland_arable_rich = yes }
+		48 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		49 = { mdr_cropland_arable_normal = yes }
+		50 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		52 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		53 = { mdr_cropland_arable_rich = yes }
+		54 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		55 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		56 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		57 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		58 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		59 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		60 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		61 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		62 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		63 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		64 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		68 = { mdr_cropland_arable_normal = yes }
+		69 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		70 = { mdr_cropland_arable_normal = yes }
+		71 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		72 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		75 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		76 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		77 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		78 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		79 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		80 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		81 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		83 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		84 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		85 = { mdr_cropland_arable_normal = yes }
+		86 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		87 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		88 = { mdr_cropland_arable_normal = yes }
+		90 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		91 = { mdr_cropland_arable_normal = yes }
+		92 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		93 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		94 = { mdr_cropland_arable_normal = yes }
+		96 = { mdr_cropland_arable_normal = yes }
+		97 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		99 = { mdr_cropland_arable_normal = yes }
+		101 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		102 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		103 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		104 = { mdr_cropland_arable_normal = yes }
+		105 = { mdr_cropland_arable_normal = yes }
+		106 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		108 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		109 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		110 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		111 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		112 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		113 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		114 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		115 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		116 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		117 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		118 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		119 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		120 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		121 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		122 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		123 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		124 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		125 = { mdr_cropland_arable_normal = yes }
+		126 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		127 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		128 = { mdr_cropland_arable_normal = yes }
+		129 = { mdr_cropland_arable_normal = yes }
+		130 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		131 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		132 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		133 = { mdr_cropland_arable_normal = yes }
+		136 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		137 = { mdr_cropland_arable_normal = yes }
+		138 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		139 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		140 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		141 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		142 = { mdr_cropland_arable_normal = yes }
+		143 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		146 = { mdr_cropland_arable_normal = yes }
+		147 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		148 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		149 = { mdr_cropland_arable_normal = yes }
+		150 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		151 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		152 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		153 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		154 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		155 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		156 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		157 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		159 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 5 instant_build = yes } }
+		161 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		162 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		163 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		165 = { mdr_cropland_arable_poor = yes }
+		166 = { mdr_cropland_arable_poor = yes }
+		167 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		168 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		169 = { mdr_cropland_arable_poor = yes }
+		170 = { mdr_cropland_arable_poor = yes }
+		171 = { mdr_cropland_arable_poor = yes }
+		176 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		178 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		181 = { mdr_cropland_arable_poor = yes }
+		182 = { mdr_cropland_arable_poor = yes }
+		184 = { mdr_cropland_arable_poor = yes }
+		185 = { mdr_cropland_arable_poor = yes }
+		188 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		190 = { mdr_cropland_arable_poor = yes }
+		191 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		192 = { mdr_cropland_arable_poor = yes }
+		193 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		195 = { mdr_cropland_arable_poor = yes }
+		197 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		198 = { mdr_cropland_arable_poor = yes }
+		200 = { mdr_cropland_arable_normal = yes }
+		203 = { mdr_cropland_arable_poor = yes }
+		204 = { mdr_cropland_arable_poor = yes }
+		205 = { mdr_cropland_arable_poor = yes }
+		206 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		210 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		214 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		215 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		216 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		217 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 5 instant_build = yes } }
+		220 = { mdr_cropland_arable_normal = yes }
+		222 = { mdr_cropland_arable_normal = yes }
+		223 = { mdr_cropland_arable_normal = yes }
+		224 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		225 = { mdr_cropland_arable_normal = yes }
+		226 = { mdr_cropland_arable_normal = yes }
+		227 = { mdr_cropland_arable_normal = yes }
+		229 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		232 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		233 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		234 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		235 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		236 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		239 = { mdr_cropland_arable_poor = yes }
+		240 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		241 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		242 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		243 = { mdr_cropland_arable_normal = yes }
+		244 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		245 = { mdr_cropland_arable_normal = yes }
+		246 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		247 = { mdr_cropland_arable_normal = yes }
+		248 = { mdr_cropland_arable_normal = yes }
+		249 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		250 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		251 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		252 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		254 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		255 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		256 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		257 = { mdr_cropland_arable_normal = yes }
+		258 = { mdr_cropland_arable_normal = yes }
+		260 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		261 = { mdr_cropland_arable_normal = yes }
+		262 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		263 = { mdr_cropland_arable_normal = yes }
+		264 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		265 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		268 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		271 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		272 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		273 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		274 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		275 = { mdr_cropland_arable_normal = yes }
+		276 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		277 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		279 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		282 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		284 = { mdr_cropland_arable_normal = yes }
+		287 = { mdr_cropland_arable_normal = yes }
+		288 = { mdr_cropland_arable_normal = yes }
+		289 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		290 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		291 = { mdr_cropland_arable_normal = yes }
+		292 = { mdr_cropland_arable_normal = yes }
+		293 = { mdr_cropland_arable_normal = yes }
+		294 = { mdr_cropland_arable_normal = yes }
+		295 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		296 = { mdr_cropland_arable_normal = yes }
+		297 = { mdr_cropland_arable_normal = yes }
+		298 = { mdr_cropland_arable_normal = yes }
+		299 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		300 = { mdr_cropland_arable_normal = yes }
+		301 = { mdr_cropland_arable_normal = yes }
+		302 = { mdr_cropland_arable_normal = yes }
+		303 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		304 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		305 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		306 = { mdr_cropland_arable_normal = yes }
+		307 = { mdr_cropland_arable_normal = yes }
+		308 = { mdr_cropland_arable_normal = yes }
+		315 = { mdr_cropland_arable_normal = yes }
+		323 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		324 = { mdr_cropland_arable_normal = yes }
+		325 = { mdr_cropland_arable_normal = yes }
+		326 = { mdr_cropland_arable_normal = yes }
+		328 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		330 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		331 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		333 = { mdr_cropland_arable_rich = yes }
+		335 = { mdr_cropland_arable_rich = yes }
+		336 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		337 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		338 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		339 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 7 instant_build = yes } }
+		340 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 5 instant_build = yes } }
+		341 = { mdr_cropland_arable_poor = yes }
+		342 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		343 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		344 = { mdr_cropland_arable_normal = yes }
+		345 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		348 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		349 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		350 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		351 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		353 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		355 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		358 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		359 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		360 = { mdr_cropland_arable_normal = yes }
+		362 = { mdr_cropland_arable_normal = yes }
+		364 = { mdr_cropland_arable_poor = yes }
+		365 = { mdr_cropland_arable_normal = yes }
+		367 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		368 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		370 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		374 = { mdr_cropland_arable_poor = yes }
+		375 = { mdr_cropland_arable_poor = yes }
+		377 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		378 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		383 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		384 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		386 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		388 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		389 = { mdr_cropland_arable_poor = yes }
+		391 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		398 = { mdr_cropland_arable_normal = yes }
+		399 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		401 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		402 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		403 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		404 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		405 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		407 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		410 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		411 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		418 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		420 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		422 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 5 instant_build = yes } }
+		424 = { mdr_cropland_arable_normal = yes }
+		426 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 6 instant_build = yes } }
+		429 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 8 instant_build = yes } }
+		430 = { mdr_cropland_arable_normal = yes }
+		431 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 6 instant_build = yes } }
+		432 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 9 instant_build = yes } }
+		433 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		434 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		435 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		436 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 8 instant_build = yes } }
+		438 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		439 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		440 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		441 = { mdr_cropland_arable_normal = yes }
+		444 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		445 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		447 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		448 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 5 instant_build = yes } }
+		449 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		450 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 8 instant_build = yes } }
+		451 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		452 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		453 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		456 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		457 = { mdr_cropland_arable_normal = yes }
+		458 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 6 instant_build = yes } }
+		459 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		460 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		461 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		462 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		464 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		465 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		467 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		468 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		469 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 6 instant_build = yes } }
+		470 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 5 instant_build = yes } }
+		473 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		474 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		477 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		478 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		479 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		480 = { mdr_cropland_arable_normal = yes }
+		481 = { mdr_cropland_arable_normal = yes }
+		483 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		485 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		487 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		488 = { mdr_cropland_arable_poor = yes }
+		490 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 7 instant_build = yes } }
+		492 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		493 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		494 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		497 = { mdr_cropland_arable_normal = yes }
+		504 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		505 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		506 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 8 instant_build = yes } }
+		507 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 8 instant_build = yes } }
+		508 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 6 instant_build = yes } }
+		509 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 5 instant_build = yes } }
+		510 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		512 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		513 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		514 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		517 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		518 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 6 instant_build = yes } }
+		519 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		520 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 6 instant_build = yes } }
+		521 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 8 instant_build = yes } }
+		522 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 5 instant_build = yes } }
+		523 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		527 = { mdr_cropland_arable_normal = yes }
+		528 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		529 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		531 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 6 instant_build = yes } }
+		532 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		533 = { mdr_cropland_arable_normal = yes }
+		534 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		535 = { mdr_cropland_arable_normal = yes }
+		536 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 7 instant_build = yes } }
+		537 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 7 instant_build = yes } }
+		538 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		539 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		540 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		541 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		542 = { mdr_cropland_arable_normal = yes }
+		543 = { mdr_cropland_arable_normal = yes }
+		544 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		545 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		546 = { mdr_cropland_arable_normal = yes }
+		547 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 5 instant_build = yes } }
+		548 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		549 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		550 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		551 = { mdr_cropland_arable_normal = yes }
+		552 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		553 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		554 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		555 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		556 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		557 = { mdr_cropland_arable_poor = yes }
+		558 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		559 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		560 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		562 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		563 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 5 instant_build = yes } }
+		564 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		566 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		567 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		568 = { mdr_cropland_arable_normal = yes }
+		569 = { mdr_cropland_arable_normal = yes }
+		570 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		571 = { mdr_cropland_arable_poor = yes }
+		572 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		573 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 6 instant_build = yes } }
+		574 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		575 = { mdr_cropland_arable_poor = yes }
+		578 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		581 = { mdr_cropland_arable_poor = yes }
+		582 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		583 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		584 = { mdr_cropland_arable_poor = yes }
+		586 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		587 = { mdr_cropland_arable_poor = yes }
+		590 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		596 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		599 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		602 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		603 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		605 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		606 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		607 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		609 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		610 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		611 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		612 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		613 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		615 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		616 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		617 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		618 = { mdr_cropland_arable_normal = yes }
+		619 = { mdr_cropland_arable_normal = yes }
+		620 = { mdr_cropland_arable_normal = yes }
+		621 = { mdr_cropland_arable_normal = yes }
+		623 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 6 instant_build = yes } }
+		625 = { mdr_cropland_arable_normal = yes }
+		626 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		627 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		628 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		629 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		630 = { mdr_cropland_arable_poor = yes }
+		631 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		633 = { mdr_cropland_arable_poor = yes }
+		634 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		635 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 7 instant_build = yes } }
+		636 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 5 instant_build = yes } }
+		637 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		638 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 7 instant_build = yes } }
+		641 = { mdr_cropland_arable_poor = yes }
+		642 = { mdr_cropland_arable_normal = yes }
+		643 = { mdr_cropland_arable_normal = yes }
+		644 = { mdr_cropland_arable_normal = yes }
+		645 = { mdr_cropland_arable_normal = yes }
+		646 = { mdr_cropland_arable_normal = yes }
+		647 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		648 = { mdr_cropland_arable_normal = yes }
+		649 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		650 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		651 = { mdr_cropland_arable_normal = yes }
+		652 = { mdr_cropland_arable_normal = yes }
+		653 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		654 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		655 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		656 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		657 = { mdr_cropland_arable_normal = yes }
+		658 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		659 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		660 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		661 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		662 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		663 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		664 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		665 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		666 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		667 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		668 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		669 = { mdr_cropland_arable_normal = yes }
+		670 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		671 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		672 = { mdr_cropland_arable_rich = yes }
+		673 = { mdr_cropland_arable_rich = yes }
+		674 = { mdr_cropland_arable_rich = yes }
+		675 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		676 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		677 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		680 = { mdr_cropland_arable_poor = yes }
+		683 = { mdr_cropland_arable_normal = yes }
+		684 = { mdr_cropland_arable_poor = yes }
+		685 = { mdr_cropland_arable_poor = yes }
+		686 = { mdr_cropland_arable_normal = yes }
+		687 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		690 = { mdr_cropland_arable_normal = yes }
+		691 = { mdr_cropland_arable_normal = yes }
+		692 = { mdr_cropland_arable_normal = yes }
+		693 = { mdr_cropland_arable_rich = yes }
+		694 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		695 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		696 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		697 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		698 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		699 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		700 = { mdr_cropland_arable_rich = yes }
+		701 = { mdr_cropland_arable_rich = yes }
+		702 = { mdr_cropland_arable_normal = yes }
+		703 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		704 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		707 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		708 = { mdr_cropland_arable_normal = yes }
+		709 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		711 = { mdr_cropland_arable_normal = yes }
+		712 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		713 = { mdr_cropland_arable_normal = yes }
+		714 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 6 instant_build = yes } }
+		715 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		716 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		721 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		723 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		725 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		727 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		729 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		735 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		736 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		737 = { mdr_cropland_arable_normal = yes }
+		738 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		739 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		740 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		741 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		743 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		744 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		745 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		746 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 8 instant_build = yes } }
+		747 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 7 instant_build = yes } }
+		750 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		751 = { mdr_cropland_arable_normal = yes }
+		754 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 7 instant_build = yes } }
+		755 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 9 instant_build = yes } }
+		756 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		757 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 7 instant_build = yes } }
+		759 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		760 = { mdr_cropland_arable_normal = yes }
+		761 = { mdr_cropland_arable_normal = yes }
+		762 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		763 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		764 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		765 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		766 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		767 = { mdr_cropland_arable_normal = yes }
+		768 = { mdr_cropland_arable_normal = yes }
+		769 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		770 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		771 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		772 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		773 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		774 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		775 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		776 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		777 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		778 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		779 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		780 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		781 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		782 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		783 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		784 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		785 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		786 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		787 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		788 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 9 instant_build = yes } }
+		789 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		790 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 7 instant_build = yes } }
+		791 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 6 instant_build = yes } }
+		792 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 8 instant_build = yes } }
+		793 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 7 instant_build = yes } }
+		794 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 8 instant_build = yes } }
+		795 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		796 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 7 instant_build = yes } }
+		797 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		798 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		799 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 6 instant_build = yes } }
+		800 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		804 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 5 instant_build = yes } }
+		808 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 7 instant_build = yes } }
+		809 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		811 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 6 instant_build = yes } }
+		812 = { mdr_cropland_arable_normal = yes }
+		815 = { mdr_cropland_arable_normal = yes }
+		817 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		818 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		819 = { mdr_cropland_arable_normal = yes }
+		820 = { mdr_cropland_arable_normal = yes }
+		821 = { mdr_cropland_arable_normal = yes }
+		822 = { mdr_cropland_arable_normal = yes }
+		823 = { mdr_cropland_arable_normal = yes }
+		824 = { mdr_cropland_arable_normal = yes }
+		825 = { mdr_cropland_arable_normal = yes }
+		826 = { mdr_cropland_arable_normal = yes }
+		829 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		831 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		832 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		833 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		835 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 5 instant_build = yes } }
+		836 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 5 instant_build = yes } }
+		837 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		841 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		844 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		847 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		848 = { mdr_cropland_arable_normal = yes }
+		849 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		850 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		852 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		854 = { mdr_cropland_arable_normal = yes }
+		855 = { mdr_cropland_arable_normal = yes }
+		856 = { mdr_cropland_arable_normal = yes }
+		858 = { mdr_cropland_arable_normal = yes }
+		859 = { mdr_cropland_arable_normal = yes }
+		860 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		861 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		862 = { mdr_cropland_arable_normal = yes }
+		863 = { mdr_cropland_arable_normal = yes }
+		864 = { mdr_cropland_arable_normal = yes }
+		865 = { mdr_cropland_arable_normal = yes }
+		866 = { mdr_cropland_arable_normal = yes }
+		867 = { mdr_cropland_arable_normal = yes }
+		868 = { mdr_cropland_arable_normal = yes }
+		869 = { mdr_cropland_arable_normal = yes }
+		871 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		874 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		879 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		880 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		881 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		882 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		883 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		884 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 7 instant_build = yes } }
+		885 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		887 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 6 instant_build = yes } }
+		888 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		889 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		890 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		893 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		894 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		895 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		896 = { mdr_cropland_arable_rich = yes }
+		899 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		900 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		905 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		909 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		910 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		913 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		915 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		916 = { mdr_cropland_arable_normal = yes }
+		921 = { mdr_cropland_arable_normal = yes }
+		922 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		924 = { mdr_cropland_arable_normal = yes }
+		925 = { mdr_cropland_arable_normal = yes }
+		926 = { mdr_cropland_arable_normal = yes }
+		927 = { mdr_cropland_arable_normal = yes }
+		930 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 7 instant_build = yes } }
+		931 = { mdr_cropland_arable_normal = yes }
+		934 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		935 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		936 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		939 = { mdr_cropland_arable_normal = yes }
+		942 = { mdr_cropland_arable_normal = yes }
+		944 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		951 = { mdr_cropland_arable_poor = yes }
+		952 = { mdr_cropland_arable_poor = yes }
+		953 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		954 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		955 = { mdr_cropland_arable_normal = yes }
+		956 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		957 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		958 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		959 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		960 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		961 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		962 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		963 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		964 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		966 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		968 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		969 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		970 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		971 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		972 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		973 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		974 = { mdr_cropland_arable_normal = yes }
+		975 = { mdr_cropland_arable_poor = yes }
+		977 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		978 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		979 = { mdr_cropland_arable_poor = yes }
+		980 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		981 = { mdr_cropland_arable_normal = yes }
+		983 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		985 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 7 instant_build = yes } }
+		986 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		987 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		988 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 6 instant_build = yes } }
+		989 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		990 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		991 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		992 = { mdr_cropland_arable_normal = yes }
+		995 = { mdr_cropland_arable_poor = yes }
+		996 = { mdr_cropland_arable_normal = yes }
+		997 = { mdr_cropland_arable_normal = yes }
+		998 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		999 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		1001 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1002 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1003 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1005 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1006 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1008 = { mdr_cropland_arable_normal = yes }
+		1009 = { mdr_cropland_arable_normal = yes }
+		1011 = { mdr_cropland_arable_poor = yes }
+		1012 = { mdr_cropland_arable_normal = yes }
+		1013 = { mdr_cropland_arable_normal = yes }
+		1014 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1017 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		1018 = { mdr_cropland_arable_normal = yes }
+		1019 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1025 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		1026 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1027 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1028 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1029 = { mdr_cropland_arable_normal = yes }
+		1030 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1031 = { mdr_cropland_arable_normal = yes }
+		1032 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		1033 = { mdr_cropland_arable_normal = yes }
+		1034 = { mdr_cropland_arable_normal = yes }
+		1037 = { mdr_cropland_arable_normal = yes }
+		1038 = { mdr_cropland_arable_normal = yes }
+		1040 = { mdr_cropland_arable_normal = yes }
+		1041 = { mdr_cropland_arable_normal = yes }
+		1043 = { mdr_cropland_arable_normal = yes }
+		1044 = { mdr_cropland_arable_normal = yes }
+		1045 = { mdr_cropland_arable_normal = yes }
+		1046 = { mdr_cropland_arable_normal = yes }
+		1047 = { mdr_cropland_arable_normal = yes }
+		1048 = { mdr_cropland_arable_normal = yes }
+		1050 = { mdr_cropland_arable_normal = yes }
+		1051 = { mdr_cropland_arable_normal = yes }
+		1052 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1053 = { mdr_cropland_arable_normal = yes }
+		1054 = { mdr_cropland_arable_normal = yes }
+		1055 = { mdr_cropland_arable_normal = yes }
+		1056 = { mdr_cropland_arable_normal = yes }
+		1057 = { mdr_cropland_arable_normal = yes }
+		1058 = { mdr_cropland_arable_normal = yes }
+		1061 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1062 = { mdr_cropland_arable_normal = yes }
+		1064 = { mdr_cropland_arable_poor = yes }
+		1065 = { mdr_cropland_arable_poor = yes }
+		1066 = { mdr_cropland_arable_poor = yes }
+		1067 = { mdr_cropland_arable_poor = yes }
+		1068 = { mdr_cropland_arable_normal = yes }
+		1069 = { mdr_cropland_arable_normal = yes }
+		1070 = { mdr_cropland_arable_normal = yes }
+		1071 = { mdr_cropland_arable_normal = yes }
+		1072 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 8 instant_build = yes } }
+		1073 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1074 = { mdr_cropland_arable_normal = yes }
+		1075 = { mdr_cropland_arable_rich = yes }
+		1076 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1079 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		1080 = { mdr_cropland_arable_normal = yes }
+		1083 = { mdr_cropland_arable_normal = yes }
+		1084 = { mdr_cropland_arable_normal = yes }
+		1085 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1086 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1087 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1088 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1089 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1090 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1091 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1092 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1093 = { mdr_cropland_arable_normal = yes }
+		1094 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1095 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		1096 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		1097 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 10 instant_build = yes } }
+		1098 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1099 = { mdr_cropland_arable_normal = yes }
+		1103 = { mdr_cropland_arable_poor = yes }
+		1104 = { mdr_cropland_arable_poor = yes }
+		1107 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		1109 = { mdr_cropland_arable_normal = yes }
+		1110 = { mdr_cropland_arable_rich = yes }
+		1111 = { mdr_cropland_arable_rich = yes }
+		1114 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 3 instant_build = yes } }
+		1115 = { mdr_cropland_arable_normal = yes }
+		1116 = { mdr_cropland_arable_normal = yes }
+		1117 = { mdr_cropland_arable_normal = yes }
+		1118 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		1121 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1122 = { mdr_cropland_arable_poor = yes }
+		1123 = { mdr_cropland_arable_poor = yes }
+		1124 = { mdr_cropland_arable_poor = yes }
+		1125 = { mdr_cropland_arable_rich = yes }
+		1126 = { mdr_cropland_arable_rich = yes }
+		1127 = { mdr_cropland_arable_rich = yes }
+		1128 = { mdr_cropland_arable_normal = yes }
+		1129 = { mdr_cropland_arable_normal = yes }
+		1130 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		1131 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1132 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1133 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1134 = { mdr_cropland_arable_normal = yes }
+		1135 = { mdr_cropland_arable_normal = yes }
+		1138 = { mdr_cropland_arable_poor = yes }
+		1139 = { mdr_cropland_arable_poor = yes }
+		1140 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1141 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1142 = { mdr_cropland_arable_poor = yes }
+		1145 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1146 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1148 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1155 = { mdr_cropland_arable_normal = yes }
+		1157 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1158 = { mdr_cropland_arable_normal = yes }
+		1159 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1160 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1166 = { mdr_cropland_arable_poor = yes }
+		1168 = { mdr_cropland_arable_normal = yes }
+		1169 = { mdr_cropland_arable_rich = yes }
+		1170 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1172 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1173 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1174 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1175 = { mdr_cropland_arable_poor = yes }
+		1176 = { mdr_cropland_arable_poor = yes }
+		1177 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1178 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1180 = { mdr_cropland_arable_normal = yes }
+		1181 = { mdr_cropland_arable_normal = yes }
+		1182 = { mdr_cropland_arable_normal = yes }
+		1183 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1184 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1185 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1186 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1187 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1188 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1189 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1190 = { mdr_cropland_arable_normal = yes }
+		1191 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1192 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1193 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1194 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1195 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1197 = { mdr_cropland_arable_rich = yes }
+		1198 = { mdr_cropland_arable_normal = yes }
+		1200 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1205 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1206 = { mdr_cropland_arable_normal = yes }
+		1209 = { mdr_cropland_arable_normal = yes }
+		1210 = { mdr_cropland_arable_normal = yes }
+		1211 = { mdr_cropland_arable_normal = yes }
+		1212 = { mdr_cropland_arable_normal = yes }
+		1215 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1217 = { mdr_cropland_arable_normal = yes }
+		1218 = { mdr_cropland_arable_normal = yes }
+		1219 = { mdr_cropland_arable_normal = yes }
+		1220 = { mdr_cropland_arable_normal = yes }
+		1221 = { mdr_cropland_arable_poor = yes add_building_construction = { type = mdr_cropland level = 7 instant_build = yes } }
+		1222 = { mdr_cropland_arable_poor = yes }
+		1223 = { mdr_cropland_arable_poor = yes }
+		1224 = { mdr_cropland_arable_poor = yes }
+		1225 = { mdr_cropland_arable_normal = yes }
+		1229 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		1231 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1232 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1233 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1234 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1235 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1236 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1238 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1239 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1242 = { mdr_cropland_arable_normal = yes }
+		1245 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 2 instant_build = yes } }
+		1246 = { mdr_cropland_arable_normal = yes add_building_construction = { type = mdr_cropland level = 4 instant_build = yes } }
+		1247 = { mdr_cropland_arable_rich = yes }
+		1248 = { mdr_cropland_arable_rich = yes }
+		1249 = { mdr_cropland_arable_rich = yes add_building_construction = { type = mdr_cropland level = 1 instant_build = yes } }
+		1250 = { mdr_cropland_arable_rich = yes }
+	}
+}

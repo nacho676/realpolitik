@@ -1,0 +1,26 @@
+# Cropland: the farmland that grows the world's grain (common/buildings/mdr_buildings.txt).
+# Starting levels and arable states: mdr_cropland_start (generated, common/scripted_effects/mdr_cropland_start.txt).
+
+# State scope. Arable land and its soil class.
+mdr_cropland_arable_rich = {
+	mdr_cropland_arable_normal = yes
+	add_dynamic_modifier = { modifier = mdr_soil_rich }
+	set_state_flag = mdr_soil_rich
+}
+
+mdr_cropland_arable_normal = {
+	set_state_flag = mdr_arable_land
+	if = { limit = { check_variable = { building_level@mdr_arable_land < 1 } }
+		add_building_construction = {
+			type = mdr_arable_land
+			level = 1
+			instant_build = yes
+		}
+	}
+}
+
+mdr_cropland_arable_poor = {
+	mdr_cropland_arable_normal = yes
+	add_dynamic_modifier = { modifier = mdr_soil_poor }
+	set_state_flag = mdr_soil_poor
+}

@@ -1,0 +1,87 @@
+mdr_economic_policy_category = {
+	icon = GFX_decision_category_generic_industry
+	priority = 150
+}
+
+mdr_stabilization_fund_category = {
+	icon = GFX_decision_category_investment
+	priority = 149
+}
+
+# Treaties moved to a tab of Millennium Dawn's International Systems window (interface/mdr_treaties.gui).
+# These decisions stay as a fallback, shown only in diagnostics mode, until the tab is validated.
+mdr_treaties_category = {
+	icon = GFX_decision_category_generic_foreign_policy
+	priority = 147
+
+	visible = {
+		has_game_rule = {
+			rule = mdr_rule_diagnostics
+			option = yes
+		}
+	}
+}
+
+mdr_straits_category = {
+	icon = GFX_decision_category_generic_foreign_policy
+	priority = 146
+
+	visible = {
+		mdr_straits_on = yes
+		OR = {
+			controls_state = 197
+			controls_state = 198
+			controls_state = 230
+			controls_state = 214
+			controls_state = 1244
+			controls_state = 527
+			controls_state = 530
+			controls_state = 627
+			controls_state = 853
+			controls_state = 19
+			controls_state = 93
+			controls_state = 495
+			controls_state = 374
+			controls_state = 978
+			controls_state = 425
+			has_global_flag = mdr_strait_1_closed
+			has_global_flag = mdr_strait_2_closed
+			has_global_flag = mdr_strait_3_closed
+			has_global_flag = mdr_strait_4_closed
+			has_global_flag = mdr_strait_5_closed
+			has_global_flag = mdr_strait_6_closed
+			has_global_flag = mdr_strait_7_closed
+		}
+	}
+}
+
+mdr_military_category = {
+	icon = GFX_decision_category_generic_arms_trade
+	priority = 145
+}
+
+mdr_ammo_category = {
+	icon = GFX_decision_category_generic_arms_trade
+	priority = 146
+
+	visible = { mdr_ammo_on = yes }
+}
+
+mdr_diagnostics_category = {
+	allowed = {
+		is_ai = no
+		has_game_rule = {
+			rule = mdr_rule_diagnostics
+			option = yes
+		}
+	}
+
+	icon = GFX_decision_category_generic_political_actions
+	priority = 1
+}
+
+# Multinationals (mdr_mnc_decisions.txt): nationalize the ones here, invite new ones.
+mdr_mnc_category = {
+	icon = GFX_decision_category_investment
+	priority = 144
+}

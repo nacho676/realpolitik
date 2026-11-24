@@ -1,0 +1,35 @@
+ideas = {
+	country = {
+		mdr_reserves_frozen = {
+			allowed_civil_war = { always = yes }
+			picture = sov_western_sanctions_idea
+
+			modifier = {
+				currency_strength_modifier = -0.10
+				interest_rate_multiplier_modifier = 0.25
+				stability_factor = -0.05
+			}
+		}
+
+		mdr_recruitment_crisis = {
+			allowed_civil_war = { always = yes }
+			picture = forced_conscription
+
+			modifier = {
+				conscription_factor = -0.15
+			}
+		}
+
+		mdr_mobilization = {
+			allowed_civil_war = { always = yes }
+			picture = national_mobilization
+
+			modifier = {
+				industrial_capacity_factory = -0.05
+				stability_factor = -0.05
+				research_speed_factor = -0.02
+				war_support_factor = 0.05
+			}
+		}
+	}
+}

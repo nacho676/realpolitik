@@ -1,0 +1,13 @@
+﻿l_english:
+ mdr_uranium_tech_1: "In-Situ Leaching"
+ mdr_uranium_tech_1_desc: "Dissolving uranium underground and pumping it to the surface, with no pit.\n\nEach §YUranium Mine§! level yields §G+1§! uranium (up to 10 with all five technologies) and uses §R15%§! more energy."
+ mdr_uranium_tech_2: "High-Yield Milling"
+ mdr_uranium_tech_2_desc: "Plants that recover almost all the uranium in the ore.\n\nEach §YUranium Mine§! level yields §G+1§! uranium (up to 10 with all five technologies) and uses §R15%§! more energy."
+ mdr_uranium_tech_3: "Automated Mining"
+ mdr_uranium_tech_3_desc: "Remote-controlled equipment reaches veins too dangerous for miners.\n\nEach §YUranium Mine§! level yields §G+1§! uranium (up to 10 with all five technologies) and uses §R15%§! more energy."
+ mdr_uranium_tech_4: "Bioleaching"
+ mdr_uranium_tech_4_desc: "Bacteria free uranium from very poor ores.\n\nEach §YUranium Mine§! level yields §G+1§! uranium (up to 10 with all five technologies) and uses §R15%§! more energy."
+ mdr_uranium_tech_5: "Seawater Extraction"
+ mdr_uranium_tech_5_desc: "Membranes capture the uranium dissolved in the oceans.\n\nEach §YUranium Mine§! level yields §G+1§! uranium (up to 10 with all five technologies) and uses §R15%§! more energy."
+ local_resources_rare_earths_factor: "£resources_texticon Rare Earth Output"
+ modifier_production_speed_mdr_uranium_mine_factor: "Uranium Mine Construction Speed"

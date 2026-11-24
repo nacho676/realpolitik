@@ -1,0 +1,55 @@
+add_namespace = mdr_military
+
+# Our foreign reserves are frozen
+country_event = {
+	id = mdr_military.1
+	title = mdr_military.1.t
+	desc = mdr_military.1.d
+	picture = GFX_treaty_rejected
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_military.1.a
+		log = "[GetDateText]: [This.GetName]: mdr_military.1.a executed"
+		if = { limit = { has_idea = us_dollar } swap_ideas = { remove_idea = us_dollar add_idea = no_foreign_reserve } }
+		else_if = { limit = { has_idea = euro } swap_ideas = { remove_idea = euro add_idea = no_foreign_reserve } }
+		else_if = { limit = { has_idea = british_pound } swap_ideas = { remove_idea = british_pound add_idea = no_foreign_reserve } }
+		else_if = { limit = { has_idea = japanese_yen } swap_ideas = { remove_idea = japanese_yen add_idea = no_foreign_reserve } }
+		else_if = { limit = { has_idea = swiss_frank } swap_ideas = { remove_idea = swiss_frank add_idea = no_foreign_reserve } }
+		else_if = { limit = { has_idea = gulden } swap_ideas = { remove_idea = gulden add_idea = no_foreign_reserve } }
+		else_if = { limit = { has_idea = chinese_yuan } swap_ideas = { remove_idea = chinese_yuan add_idea = no_foreign_reserve } }
+		else_if = { limit = { has_idea = russia_rouble } swap_ideas = { remove_idea = russia_rouble add_idea = no_foreign_reserve } }
+		ai_chance = { base = 3 }
+	}
+
+	option = {
+		name = mdr_military.1.b
+		log = "[GetDateText]: [This.GetName]: mdr_military.1.b executed"
+		add_political_power = 25
+		ai_chance = { base = 1 }
+	}
+}
+
+# Our soldiers are deserting (first time, from mdr_desertion_weekly)
+country_event = {
+	id = mdr_military.2
+	title = mdr_military.2.t
+	desc = mdr_military.2.d
+	picture = GFX_generic_soldiers
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_military.2.a
+		log = "[GetDateText]: [This.GetName]: mdr_military.2.a executed"
+		add_stability = -0.05
+		set_country_flag = { flag = mdr_military_tribunals days = 90 value = 1 }
+		ai_chance = { base = 1 }
+	}
+
+	option = {
+		name = mdr_military.2.b
+		log = "[GetDateText]: [This.GetName]: mdr_military.2.b executed"
+		add_war_support = 0.02
+		ai_chance = { base = 1 }
+	}
+}

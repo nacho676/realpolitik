@@ -1,0 +1,21 @@
+add_namespace = mdr_nuclear
+
+# A nuclear weapon was used (mdr_nuclear_reactions in common/scripted_effects/mdr_nuclear.txt).
+news_event = {
+	id = mdr_nuclear.1
+	title = mdr_nuclear.1.t
+	desc = mdr_nuclear.1.d
+	picture = GFX_news_nuclear_test
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mdr_nuclear.1.a
+		trigger = { NOT = { tag = FROM } }
+	}
+
+	option = {
+		name = mdr_nuclear.1.b
+		trigger = { tag = FROM }
+	}
+}

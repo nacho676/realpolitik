@@ -1,0 +1,13 @@
+focus_tree = {
+	shared_focus = mdr_demo_root # Realpolitik: hidden demography branch (common/national_focus/mdr_demography.txt)
+	id = zombie_focus
+	country = {
+		base = 0
+		modifier = {
+			add = 10
+			tag = ZOM
+		}
+	}
+	default = no
+	reset_on_civilwar = no
+}

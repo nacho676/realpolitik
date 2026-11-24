@@ -1,0 +1,26 @@
+state = {
+	id = 1260
+	name = "STATE_1260" # Peary Land
+	manpower = 10
+
+	state_category = state_00
+
+	history = {
+		owner = GRN
+		victory_points = {
+			16608 1
+		}
+		buildings = {
+			infrastructure = 1
+			16608 = {
+				naval_base = 1
+			}
+		}
+		add_core_of = GRN
+		set_state_flag = mdr_polar   # low disaster risk (common/scripted_effects/mdr_disasters.txt)
+		set_variable = { state_renewable_capacity_factor_modifier_var = 0.600 }
+		set_variable = { productivity_state_var = 500 }
+	}
+
+	provinces = { 16608 16638 }
+}

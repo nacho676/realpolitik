@@ -1,0 +1,26 @@
+state = {
+	id = 1267
+	name = "STATE_1267" # Kitikmeot
+	manpower = 3500
+
+	state_category = state_00
+
+	history = {
+		owner = CAN
+		victory_points = {
+			16795 1
+		}
+		buildings = {
+			infrastructure = 1
+			16795 = {
+				naval_base = 1
+			}
+		}
+		add_core_of = CAN
+		set_state_flag = mdr_polar   # low disaster risk (common/scripted_effects/mdr_disasters.txt)
+		set_variable = { state_renewable_capacity_factor_modifier_var = 0.600 }
+		set_variable = { productivity_state_var = 500 }
+	}
+
+	provinces = { 16741 16742 16761 16772 16795 16814 16863 16892 16943 16950 16968 16973 16976 16981 16988 16995 17003 17004 17006 17008 17018 }
+}

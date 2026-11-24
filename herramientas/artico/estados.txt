@@ -1,0 +1,147 @@
+# Datos del Ártico y de la Antártida de Realpolitik. Los lee herramientas/construir_mapa.py.
+#
+# Zonas: rectángulos de longitud y latitud "lon1 lat1 lon2 lat2", varios separados por "|". Las longitudes van de
+# -169 a 191: lo que está al oeste del estrecho de Bering (-169) se escribe sumando 360 (179 W = 181).
+# Si dos zonas se pisan, gana la que está antes en el archivo. Una isla que cae casi entera en una zona va toda a
+# ese estado. Una zona con latitudes negativas va en la franja nueva del sur; si no, en la del norte.
+#
+# estado; nombre interno; dueño ("-" = sin dueño); categoría; población; nombre en inglés; nombre en español; zona[; opciones]
+#   categorías de MD: state_00 (pueblos chicos), state_military_base (bases), state_inhospitable (desierto
+#   helado, sin espacios de construcción, como el Sahara). Todo lo que tiene dueño es un estado normal (state_00 o
+#   más) donde se construye y las tropas pasan; state_inhospitable e "intransitable" quedan para la Antártida.
+#   opciones, separadas por espacios: "intransitable" (ningún ejército puede entrar) y
+#   "núcleos=ARG,ENG" (países con núcleo además del dueño), "reclamos=ARG,ENG" (países que lo reclaman) y "masa=lon,lat" (el estado solo toma la masa de
+#   tierra donde está ese punto, por ejemplo Groenlandia sin las islas de Canadá vecinas),
+#   "anexo" (su tierra nueva no forma estado: se suma a la provincia de MD más cercana del borde, para costas que
+#   quedaban en tiras sueltas o islas partidas entre un estado nuevo y uno de MD) y
+#   "costa=N:otro" (el estado solo toma la tierra a menos de N píxeles del mar; lo de adentro va al estado "otro",
+#   como los anillos costeros con los que MD dibuja Groenlandia).
+# vp; estado; nombre en inglés; nombre en español; lon lat; puntos
+# region; nombre interno; nombre en inglés; nombre en español; estados (separados por espacios)
+# mar; nombre interno; terreno naval; nombre en inglés; nombre en español; zona
+#
+# La tierra nueva que no cae en ningún estado queda como mar. Las filas nuevas pegadas al borde de MD se suman a la
+# provincia de MD de al lado y no necesitan estado.
+
+# ---------------------------------------------------------------- Norte
+
+# Noruega
+estado; svalbard; NRY; state_01; 2600; Svalbard; Svalbard; 5 74 35 81
+
+# Rusia
+estado; francisco_jose; SOV; state_00; 50; Franz Josef Land; Tierra de Francisco José; 40 79.3 66 82.5
+estado; nueva_zembla; SOV; state_00; 2400; Novaya Zemlya; Nueva Zembla; 50 70.5 70 77.5; anexo
+estado; yamal_gydan; SOV; state_00; 9000; Northern Yamal and Gydan; Yamal y Gydán Septentrional; 60 68 80.5 77.5
+estado; severnaya_zemlya; SOV; state_00; 10; Severnaya Zemlya; Severnaya Zemlya; 88 77.8 108 81.5
+estado; taimyr; SOV; state_00; 6000; Northern Taymyr; Taimyr Septentrional; 80.5 68 115 78
+estado; nueva_siberia; SOV; state_00; 10; New Siberian Islands; Islas de Nueva Siberia; 135 73 160 77.5
+estado; laptev; SOV; state_00; 5000; Laptev Coast; Costa del Láptev; 115 68 155 73.5; anexo
+estado; wrangel; SOV; state_00; 10; Wrangel Island; Isla de Wrangel; 177 70.3 184 71.8
+estado; chukotka_norte; SOV; state_00; 5000; Northern Chukotka; Chukotka Septentrional; 155 66 191 72 | -169 65 -168 70; anexo
+
+# Estados Unidos
+estado; alaska_norte; USA; state_00; 9800; North Slope; Vertiente Norte de Alaska; -168 66 -141 72.5
+
+# Groenlandia
+estado; groenlandia_noroeste; GRN; state_00; 750; Avannaata North; Avannaata Septentrional; -75 70 -50 80; masa=-40,75 costa=18:casquete_groenlandia
+estado; groenlandia_noreste; GRN; state_00; 350; Northeast Greenland; Groenlandia Nororiental; -32 69 -10 81; masa=-40,75 costa=18:casquete_groenlandia
+estado; tierra_peary; GRN; state_00; 10; Peary Land; Tierra de Peary; -45 81.5 -15 84.5; masa=-40,75
+estado; casquete_groenlandia; GRN; state_00; 10; Greenland Ice Sheet; Casquete de Groenlandia; -75 60 -10 84.5; masa=-40,75
+
+# Canadá
+estado; ellesmere; CAN; state_00; 150; Ellesmere Island; Isla de Ellesmere; -95 76.2 -60 83.5
+estado; reina_isabel; CAN; state_00; 10; Western Queen Elizabeth Islands; Islas de la Reina Isabel Occidentales; -125 74.4 -95 80
+estado; resolute; CAN; state_00; 400; Devon and Cornwallis; Devon y Cornwallis; -95 74.4 -79 76.2
+estado; banks_victoria; CAN; state_00; 2500; Banks and Victoria Islands; Islas Banks y Victoria; -126 68.9 -100.5 74.4
+estado; baffin_norte; CAN; state_00; 4000; Northern Baffin Island; Baffin Septentrional; -90 69.8 -60 74.4 | -80 64 -60 69.8
+estado; iglulik; CAN; state_00; 3000; Igloolik; Iglulik; -90 64 -80 69.8
+estado; kitikmeot; CAN; state_00; 3500; Kitikmeot; Kitikmeot; -112 64 -90 74.4
+estado; beaufort; CAN; state_00; 6500; Beaufort Coast; Costa del Beaufort; -141 64 -112 74.4
+
+vp; svalbard; Longyearbyen; Longyearbyen; 15.63 78.22; 1
+vp; francisco_jose; Nagurskoye; Nagúrskoye; 47.65 80.80; 1
+vp; nueva_zembla; Belushya Guba; Bélushya Gubá; 52.32 71.55; 1
+vp; yamal_gydan; Sabetta; Sabetta; 72.05 71.27; 1
+vp; severnaya_zemlya; Golomyanny; Golomiani; 90.62 79.55; 1
+vp; taimyr; Dikson; Díkson; 80.55 73.51; 1
+vp; nueva_siberia; Kotelny; Kotelni; 137.27 76.00; 1
+vp; laptev; Tiksi; Tiksi; 128.87 71.64; 1
+vp; wrangel; Ushakovskoye; Ushakóvskoye; -178.50 70.98; 1
+vp; chukotka_norte; Pevek; Pevek; 170.31 69.70; 1
+vp; alaska_norte; Utqiagvik; Utqiagvik; -156.79 71.29; 1
+vp; ellesmere; Alert; Alert; -62.35 82.50; 1
+vp; reina_isabel; Mould Bay; Mould Bay; -119.35 76.24; 1
+vp; resolute; Resolute; Resolute; -94.83 74.70; 1
+vp; banks_victoria; Cambridge Bay; Cambridge Bay; -105.06 69.12; 1
+vp; baffin_norte; Pond Inlet; Pond Inlet; -77.96 72.70; 1
+vp; iglulik; Igloolik; Iglulik; -81.80 69.38; 1
+vp; kitikmeot; Gjoa Haven; Gjoa Haven; -95.88 68.63; 1
+vp; beaufort; Inuvik; Inuvik; -133.72 68.36; 1
+vp; groenlandia_noroeste; Qaanaaq; Qaanaaq; -69.23 77.47; 1
+vp; groenlandia_noreste; Ittoqqortoormiit; Ittoqqortoormiit; -21.97 70.48; 1
+vp; tierra_peary; Kap Morris Jesup; Cabo Morris Jesup; -33.0 83.6; 1
+
+region; svalbard; Svalbard; Svalbard; svalbard
+region; artico_ruso_oeste; Western Russian Arctic; Ártico Ruso Occidental; francisco_jose nueva_zembla yamal_gydan
+region; taimyr; Taymyr; Taimyr; severnaya_zemlya taimyr
+region; artico_ruso_este; Eastern Russian Arctic; Ártico Ruso Oriental; nueva_siberia laptev wrangel chukotka_norte
+region; vertiente_norte; North Slope and Beaufort; Vertiente Norte y Beaufort; alaska_norte beaufort
+region; archipielago_oeste; Western Arctic Archipelago; Archipiélago Ártico Occidental; reina_isabel banks_victoria kitikmeot
+region; archipielago_este; Eastern Arctic Archipelago; Archipiélago Ártico Oriental; ellesmere resolute baffin_norte iglulik
+region; groenlandia_norte; Northern Greenland; Groenlandia Septentrional; groenlandia_noroeste groenlandia_noreste tierra_peary casquete_groenlandia
+
+mar; artico_central; water_deep_ocean; Central Arctic Ocean; Océano Ártico Central; -169 82 191 90
+mar; chukotka; water_littoral; Chukchi Sea; Mar de Chukotka; 175 60 191 82 | -169 60 -157 82
+mar; beaufort; water_littoral; Beaufort Sea; Mar de Beaufort; -157 60 -122 82
+mar; pasaje_noroeste; water_fjords; Northwest Passage; Paso del Noroeste; -122 60 -82 82
+mar; baffin_norte; water_littoral; Northern Baffin Bay; Bahía de Baffin Septentrional; -82 60 -55 82
+mar; lincoln; water_littoral; Lincoln Sea; Mar de Lincoln; -55 79 -20 82
+mar; groenlandia; ocean; Greenland Sea; Mar de Groenlandia; -55 60 5 79 | -20 79 5 82
+mar; barents_norte; water_littoral; Northern Barents Sea; Mar de Barents Septentrional; 5 60 60 82
+mar; kara; water_littoral; Kara Sea; Mar de Kara; 60 60 100 82
+mar; laptev; water_littoral; Laptev Sea; Mar de Láptev; 100 60 140 82
+mar; siberia_oriental; water_littoral; East Siberian Sea; Mar de Siberia Oriental; 140 60 175 82
+
+# ---------------------------------------------------------------- Sur
+# La Antártida no tiene dueño, como dice el Tratado Antártico: cada sector solo queda reclamado por quien lo reclama.
+# Intransitable y sin espacios de construcción. El sistema de estaciones de MD no usa el mapa y sigue igual.
+
+# Islas subantárticas, con su dueño real
+estado; georgias_sur; ENG; state_00; 30; South Georgia and the South Sandwich Islands; Georgias del Sur y Sandwich del Sur; -42 -60 -24 -52; núcleos=ARG
+estado; kerguelen; FRA; state_00; 100; Kerguelen and Crozet Islands; Islas Kerguelen y Crozet; 48 -51 72 -45
+estado; heard; AST; state_00; 10; Heard and McDonald Islands; Islas Heard y McDonald; 72 -54 75 -52.5
+estado; bouvet; NRY; state_00; 10; Bouvet Island; Isla Bouvet; 2 -55 5 -53.5
+estado; macquarie; AST; state_00; 20; Macquarie Island; Isla Macquarie; 157 -56 160 -54
+estado; islas_subantarticas_nz; NZL; state_00; 10; New Zealand Subantarctic Islands; Islas Subantárticas de Nueva Zelanda; 164 -53.5 170 -49.5
+estado; principe_eduardo; SAF; state_00; 50; Prince Edward Islands; Islas Príncipe Eduardo; 37 -47.5 39 -46.5
+
+# Antártida: sectores reclamados
+estado; tierra_coats; -; state_inhospitable; 10; Coats Land; Tierra de Coats; -53 -90 -20 -60; intransitable reclamos=ENG,ARG
+estado; peninsula_antartica; -; state_inhospitable; 10; Antarctic Peninsula; Península Antártica; -74 -90 -53 -60; intransitable reclamos=ARG,ENG,CHL
+estado; tierra_ohiggins; -; state_inhospitable; 10; O'Higgins Land; Tierra de O'Higgins; -90 -90 -74 -60; intransitable reclamos=CHL,ENG
+estado; tierra_marie_byrd; -; state_inhospitable; 10; Marie Byrd Land; Tierra de Marie Byrd; -150 -90 -90 -60; intransitable
+estado; dependencia_ross; -; state_inhospitable; 10; Ross Dependency; Dependencia Ross; 160 -90 191 -60 | -169 -90 -150 -60; intransitable reclamos=NZL
+estado; reina_maud; -; state_inhospitable; 10; Queen Maud Land; Tierra de la Reina Maud; -20 -90 45 -60; intransitable reclamos=NRY
+estado; enderby; -; state_inhospitable; 10; Enderby and Mac. Robertson Lands; Tierras de Enderby y Mac. Robertson; 45 -90 90 -60; intransitable reclamos=AST
+estado; tierra_wilkes; -; state_inhospitable; 10; Wilkes Land; Tierra de Wilkes; 90 -90 136 -60; intransitable reclamos=AST
+estado; tierra_adelia; -; state_inhospitable; 10; Adélie Land; Tierra Adelia; 136 -90 142 -60; intransitable reclamos=FRA
+estado; tierra_victoria; -; state_inhospitable; 10; George V and Oates Lands; Tierras de Jorge V y Oates; 142 -90 160 -60; intransitable reclamos=AST
+
+vp; georgias_sur; Grytviken; Grytviken; -36.51 -54.28; 1
+vp; kerguelen; Port-aux-Français; Port-aux-Français; 70.22 -49.35; 1
+vp; macquarie; Macquarie Station; Estación Macquarie; 158.94 -54.50; 1
+vp; principe_eduardo; Marion Base; Base Marion; 37.86 -46.88; 1
+
+region; islas_subantarticas; Subantarctic Islands; Islas Subantárticas; georgias_sur kerguelen heard bouvet macquarie islas_subantarticas_nz principe_eduardo
+region; antartida_occidental; West Antarctica; Antártida Occidental; tierra_coats peninsula_antartica tierra_ohiggins tierra_marie_byrd dependencia_ross
+region; antartida_oriental; East Antarctica; Antártida Oriental; reina_maud enderby tierra_wilkes tierra_adelia tierra_victoria
+
+mar; mar_escocia; water_littoral; Scotia Sea; Mar de Escocia; -70 -63 -20 -50
+mar; weddell; water_littoral; Weddell Sea; Mar de Weddell; -60 -90 -10 -63
+mar; bellingshausen; water_littoral; Bellingshausen Sea; Mar de Bellingshausen; -100 -90 -60 -60
+mar; amundsen; water_littoral; Amundsen Sea; Mar de Amundsen; -150 -90 -100 -60
+mar; ross; water_littoral; Ross Sea; Mar de Ross; 160 -90 191 -60 | -169 -90 -150 -60
+mar; antartico_indico; water_littoral; Cooperation and Davis Seas; Mares de la Cooperación y de Davis; 20 -90 160 -58
+mar; austral_atlantico; ocean; South Atlantic Southern Ocean; Océano Austral Atlántico; -20 -90 20 -40
+mar; austral_indico; ocean; Indian Southern Ocean; Océano Austral Índico; 20 -58 160 -35
+mar; austral_pacifico; water_deep_ocean; Pacific Southern Ocean; Océano Austral Pacífico; -169 -90 191 -35

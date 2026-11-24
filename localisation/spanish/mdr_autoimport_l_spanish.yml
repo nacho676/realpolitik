@@ -1,0 +1,6 @@
+﻿l_spanish:
+ MDR_AUTOIMPORT_TITLE: "IMPORTACIÓN AUTOMÁTICA"
+ MDR_AUTOIMPORT_ON: "Importación automática"
+ MDR_AUTOIMPORT_BUDGET: "Fábricas:"
+ MDR_AUTOIMPORT_PRIORITIES: "Prioridades"
+ MDR_AUTOIMPORT_HELP: "Importa solo lo que falta, dentro de las fábricas civiles fijadas acá. Prioridades: orden de los recursos, faltante aceptado de cada uno y reserva de combustible."

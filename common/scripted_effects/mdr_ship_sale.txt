@@ -1,0 +1,802 @@
+# Ship sales between countries. Window: interface/mdr_ship_sale.gui and common/scripted_guis/mdr_ship_sale_gui.txt,
+# opened by the diplomatic action mdr_sell_ship. Tables by type and hull: mdr_ship_sale_gen.txt (herramientas/make_ship_sale.py).
+# The menu's choices live on the seller (the player): mdr_sale_mode (0 fleet, 1 build, 2 batch, 3 refit, 4 contracts),
+# mdr_sale_target (buyer), mdr_sale_type/_gen/_qty (fleet), mdr_sale_lot_<t> (batch), mdr_sd_hull/_design/_qty (build and
+# refit) and mdr_sale_pct (0 is a gift).
+# Open orders are parallel arrays on the seller: mdr_sc_buyer, _type, _gen, _qty, _unit, _days, _wait, _kind (0 fleet,
+# 1 build, 3 refit), _hull, _design, _total (days per ship). Paid in full on acceptance.
+# Ships built for others use a ready-made design by role (mdr_sd_design 1 to 4, created in the seller on first delivery)
+# or the seller's own design named "Export N" (5 and up). Free choice per slot is not possible: create_equipment_variant
+# needs every module written in the script.
+
+# Seller scope. Price, cost, time and whether the offer can be sent, for the current page.
+# Output: mdr_sale_ref, _unit, _total, _cost, _days, _valid, _reason, _lot_count, mdr_sd_have.
+mdr_sale_price_calc = {
+	set_variable = { mdr_sale_valid = 1 }
+	set_variable = { mdr_sale_reason = 0 }
+	set_variable = { mdr_sale_cost = 0 }
+	set_variable = { mdr_sale_days = 0 }
+	set_variable = { mdr_sale_unit = 0 }
+	set_variable = { mdr_sale_total = 0 }
+	if = { limit = { check_variable = { mdr_sale_mode = 0 } }
+		mdr_sale_read_type = yes
+		mdr_sale_check_gen = yes
+		if = { limit = { check_variable = { mdr_sale_gen_ok = 0 } } set_variable = { mdr_sale_gen = 0 } }
+		mdr_sale_read_year = yes
+		set_variable = { mdr_sale_ref = mdr_sale_base }
+		if = { limit = { check_variable = { mdr_sale_gen > 0 } }
+			set_temp_variable = { mdr_sale_year_x = mdr_sale_year }
+			mdr_sale_age_factor = yes
+			multiply_variable = { mdr_sale_ref = mdr_sale_age }
+		}
+		set_variable = { mdr_sale_unit = mdr_sale_ref }
+		multiply_variable = { mdr_sale_unit = mdr_sale_pct }
+		divide_variable = { mdr_sale_unit = 100 }
+		set_variable = { mdr_sale_total = mdr_sale_unit }
+		multiply_variable = { mdr_sale_total = mdr_sale_qty }
+		if = { limit = { check_variable = { mdr_sale_have < 1 } } set_variable = { mdr_sale_valid = 0 } set_variable = { mdr_sale_reason = 2 } }
+	}
+	else_if = { limit = { check_variable = { mdr_sale_mode = 2 } }
+		mdr_sale_batch_calc = yes
+	}
+	else_if = { limit = { OR = { check_variable = { mdr_sale_mode = 1 } check_variable = { mdr_sale_mode = 3 } } }
+		mdr_sd_read_hull = yes
+		if = { limit = { check_variable = { mdr_sd_ok = 0 } }
+			set_temp_variable = { mdr_sale_dir = 1 }
+			mdr_sd_hull_step = yes
+		}
+		mdr_sd_read_design = yes
+		set_variable = { mdr_sale_type = mdr_sd_type }
+		mdr_sale_read_type = yes
+		set_variable = { mdr_sd_have = mdr_sale_have }
+		set_temp_variable = { mdr_sale_year_x = mdr_sd_year }
+		mdr_sale_age_factor = yes
+		set_variable = { mdr_sale_ref = mdr_sale_base }
+		multiply_variable = { mdr_sale_ref = mdr_sale_age }
+		# A refitted ship is a rebuilt old hull: worth less, cheaper and faster.
+		set_temp_variable = { mdr_sale_cost_share = 0.77 }
+		set_temp_variable = { mdr_sale_time_share = 1 }
+		if = { limit = { check_variable = { mdr_sale_mode = 3 } }
+			multiply_variable = { mdr_sale_ref = 0.71 }
+			set_temp_variable = { mdr_sale_cost_share = 0.41 }
+			set_temp_variable = { mdr_sale_time_share = 0.39 }
+		}
+		set_variable = { mdr_sale_unit = mdr_sale_ref }
+		multiply_variable = { mdr_sale_unit = mdr_sale_pct }
+		divide_variable = { mdr_sale_unit = 100 }
+		set_variable = { mdr_sale_total = mdr_sale_unit }
+		multiply_variable = { mdr_sale_total = mdr_sd_qty }
+		set_variable = { mdr_sale_cost = mdr_sale_ref }
+		multiply_variable = { mdr_sale_cost = mdr_sale_cost_share }
+		multiply_variable = { mdr_sale_cost = mdr_sd_qty }
+		# More dockyards build faster: from 143% of the base time with one to 57% with 32 or more.
+		set_temp_variable = { mdr_sale_docks = num_of_naval_factories }
+		clamp_temp_variable = { var = mdr_sale_docks min = 0 max = 32 }
+		set_temp_variable = { mdr_sale_speed = mdr_sale_docks }
+		multiply_temp_variable = { mdr_sale_speed = -0.027 }
+		add_to_temp_variable = { mdr_sale_speed = 1.43 }
+		set_variable = { mdr_sale_days = mdr_sale_days_base }
+		multiply_variable = { mdr_sale_days = mdr_sale_speed }
+		multiply_variable = { mdr_sale_days = mdr_sale_time_share }
+		round_variable = mdr_sale_days
+		if = { limit = { check_variable = { num_of_naval_factories < 1 } } set_variable = { mdr_sale_valid = 0 } set_variable = { mdr_sale_reason = 3 } }
+		else_if = { limit = { check_variable = { mdr_sd_ok = 0 } } set_variable = { mdr_sale_valid = 0 } set_variable = { mdr_sale_reason = 4 } }
+		else_if = { limit = { check_variable = { mdr_sale_mode = 3 } check_variable = { mdr_sd_have < mdr_sd_qty } } set_variable = { mdr_sale_valid = 0 } set_variable = { mdr_sale_reason = 6 } }
+		else_if = { limit = { check_variable = { mdr_sd_pok = 0 } } set_variable = { mdr_sale_valid = 0 } set_variable = { mdr_sale_reason = 10 } }
+		else_if = { limit = { check_variable = { treasury < mdr_sale_cost } } set_variable = { mdr_sale_valid = 0 } set_variable = { mdr_sale_reason = 7 } }
+	}
+	else = { set_variable = { mdr_sale_valid = 0 } }
+}
+
+# Input temp mdr_sale_year_x, a hull year. Output temp mdr_sale_age: about 3% less a year down to 20%; a hull from the future adds up to 50%.
+mdr_sale_age_factor = {
+	set_temp_variable = { mdr_sale_age = global.year }
+	subtract_from_temp_variable = { mdr_sale_age = mdr_sale_year_x }
+	multiply_temp_variable = { mdr_sale_age = -0.03 }
+	add_to_temp_variable = { mdr_sale_age = 1 }
+	clamp_temp_variable = { var = mdr_sale_age min = 0.2 max = 1.5 }
+}
+
+# Seller scope. Batch: used ships at 71% of the type's price, times mdr_sale_pct.
+mdr_sale_batch_calc = {
+	set_variable = { mdr_sale_lot_count = 0 }
+	set_variable = { mdr_sale_ref = 0 }
+	for_loop_effect = {
+		start = 1
+		end = 19
+		value = mdr_sale_t
+		set_temp_variable = { mdr_sale_cur_type = mdr_sale_t }
+		mdr_sale_count_type = yes
+		mdr_sale_lot_read = yes
+		mdr_sale_lot_have_write = yes
+		if = { limit = { check_variable = { mdr_sale_lot_n > 0 } }
+			add_to_variable = { mdr_sale_lot_count = mdr_sale_lot_n }
+			set_temp_variable = { mdr_sale_x = mdr_sale_cur_base }
+			multiply_temp_variable = { mdr_sale_x = 0.71 }
+			multiply_temp_variable = { mdr_sale_x = mdr_sale_lot_n }
+			add_to_variable = { mdr_sale_ref = mdr_sale_x }
+			if = { limit = { check_variable = { mdr_sale_lot_n > mdr_sale_count } } set_variable = { mdr_sale_valid = 0 } set_variable = { mdr_sale_reason = 2 } }
+		}
+	}
+	set_variable = { mdr_sale_total = mdr_sale_ref }
+	multiply_variable = { mdr_sale_total = mdr_sale_pct }
+	divide_variable = { mdr_sale_total = 100 }
+	set_variable = { mdr_sale_unit = mdr_sale_total }
+	if = { limit = { check_variable = { mdr_sale_lot_count > 0 } } divide_variable = { mdr_sale_unit = mdr_sale_lot_count } }
+	if = { limit = { check_variable = { mdr_sale_lot_count < 1 } } set_variable = { mdr_sale_valid = 0 } set_variable = { mdr_sale_reason = 5 } }
+}
+
+# Temp mdr_sale_t to temp mdr_sale_lot_n (the lot size of that type) and back.
+mdr_sale_lot_read = {
+	set_temp_variable = { mdr_sale_lot_n = 0 }
+	if = { limit = { check_variable = { mdr_sale_t = 1 } } set_temp_variable = { mdr_sale_lot_n = mdr_sale_lot_1 } }
+	if = { limit = { check_variable = { mdr_sale_t = 2 } } set_temp_variable = { mdr_sale_lot_n = mdr_sale_lot_2 } }
+	if = { limit = { check_variable = { mdr_sale_t = 3 } } set_temp_variable = { mdr_sale_lot_n = mdr_sale_lot_3 } }
+	if = { limit = { check_variable = { mdr_sale_t = 4 } } set_temp_variable = { mdr_sale_lot_n = mdr_sale_lot_4 } }
+	if = { limit = { check_variable = { mdr_sale_t = 5 } } set_temp_variable = { mdr_sale_lot_n = mdr_sale_lot_5 } }
+	if = { limit = { check_variable = { mdr_sale_t = 6 } } set_temp_variable = { mdr_sale_lot_n = mdr_sale_lot_6 } }
+	if = { limit = { check_variable = { mdr_sale_t = 7 } } set_temp_variable = { mdr_sale_lot_n = mdr_sale_lot_7 } }
+	if = { limit = { check_variable = { mdr_sale_t = 8 } } set_temp_variable = { mdr_sale_lot_n = mdr_sale_lot_8 } }
+	if = { limit = { check_variable = { mdr_sale_t = 9 } } set_temp_variable = { mdr_sale_lot_n = mdr_sale_lot_9 } }
+	if = { limit = { check_variable = { mdr_sale_t = 10 } } set_temp_variable = { mdr_sale_lot_n = mdr_sale_lot_10 } }
+	if = { limit = { check_variable = { mdr_sale_t = 11 } } set_temp_variable = { mdr_sale_lot_n = mdr_sale_lot_11 } }
+	if = { limit = { check_variable = { mdr_sale_t = 12 } } set_temp_variable = { mdr_sale_lot_n = mdr_sale_lot_12 } }
+	if = { limit = { check_variable = { mdr_sale_t = 13 } } set_temp_variable = { mdr_sale_lot_n = mdr_sale_lot_13 } }
+	if = { limit = { check_variable = { mdr_sale_t = 14 } } set_temp_variable = { mdr_sale_lot_n = mdr_sale_lot_14 } }
+	if = { limit = { check_variable = { mdr_sale_t = 15 } } set_temp_variable = { mdr_sale_lot_n = mdr_sale_lot_15 } }
+	if = { limit = { check_variable = { mdr_sale_t = 16 } } set_temp_variable = { mdr_sale_lot_n = mdr_sale_lot_16 } }
+	if = { limit = { check_variable = { mdr_sale_t = 17 } } set_temp_variable = { mdr_sale_lot_n = mdr_sale_lot_17 } }
+	if = { limit = { check_variable = { mdr_sale_t = 18 } } set_temp_variable = { mdr_sale_lot_n = mdr_sale_lot_18 } }
+}
+
+# Shows how many ships of each type the seller has, next to the batch rows.
+mdr_sale_lot_have_write = {
+	if = { limit = { check_variable = { mdr_sale_t = 1 } } set_variable = { mdr_sale_lothave_1 = mdr_sale_count } }
+	if = { limit = { check_variable = { mdr_sale_t = 2 } } set_variable = { mdr_sale_lothave_2 = mdr_sale_count } }
+	if = { limit = { check_variable = { mdr_sale_t = 3 } } set_variable = { mdr_sale_lothave_3 = mdr_sale_count } }
+	if = { limit = { check_variable = { mdr_sale_t = 4 } } set_variable = { mdr_sale_lothave_4 = mdr_sale_count } }
+	if = { limit = { check_variable = { mdr_sale_t = 5 } } set_variable = { mdr_sale_lothave_5 = mdr_sale_count } }
+	if = { limit = { check_variable = { mdr_sale_t = 6 } } set_variable = { mdr_sale_lothave_6 = mdr_sale_count } }
+	if = { limit = { check_variable = { mdr_sale_t = 7 } } set_variable = { mdr_sale_lothave_7 = mdr_sale_count } }
+	if = { limit = { check_variable = { mdr_sale_t = 8 } } set_variable = { mdr_sale_lothave_8 = mdr_sale_count } }
+	if = { limit = { check_variable = { mdr_sale_t = 9 } } set_variable = { mdr_sale_lothave_9 = mdr_sale_count } }
+	if = { limit = { check_variable = { mdr_sale_t = 10 } } set_variable = { mdr_sale_lothave_10 = mdr_sale_count } }
+	if = { limit = { check_variable = { mdr_sale_t = 11 } } set_variable = { mdr_sale_lothave_11 = mdr_sale_count } }
+	if = { limit = { check_variable = { mdr_sale_t = 12 } } set_variable = { mdr_sale_lothave_12 = mdr_sale_count } }
+	if = { limit = { check_variable = { mdr_sale_t = 13 } } set_variable = { mdr_sale_lothave_13 = mdr_sale_count } }
+	if = { limit = { check_variable = { mdr_sale_t = 14 } } set_variable = { mdr_sale_lothave_14 = mdr_sale_count } }
+	if = { limit = { check_variable = { mdr_sale_t = 15 } } set_variable = { mdr_sale_lothave_15 = mdr_sale_count } }
+	if = { limit = { check_variable = { mdr_sale_t = 16 } } set_variable = { mdr_sale_lothave_16 = mdr_sale_count } }
+	if = { limit = { check_variable = { mdr_sale_t = 17 } } set_variable = { mdr_sale_lothave_17 = mdr_sale_count } }
+	if = { limit = { check_variable = { mdr_sale_t = 18 } } set_variable = { mdr_sale_lothave_18 = mdr_sale_count } }
+}
+
+# THIS the buyer, ROOT the seller. Chance of acceptance and the buyer's side of the window.
+mdr_sale_refresh = {
+	ROOT = { mdr_sale_price_calc = yes }
+	set_temp_variable = { mdr_sale_p = 50 }
+	if = { limit = { check_variable = { ROOT.mdr_sale_pct = 0 } } set_temp_variable = { mdr_sale_p = 95 } }
+	else = {
+		# Price against the reference, straight lines between 50% (+30), 100% (+10), 150% (-25), 200% (-50) and 300% (-80).
+		set_temp_variable = { mdr_sale_x = ROOT.mdr_sale_pct }
+		if = { limit = { check_variable = { mdr_sale_x < 50.01 } } add_to_temp_variable = { mdr_sale_p = 30 } }
+		else_if = { limit = { check_variable = { mdr_sale_x < 100.01 } }
+			subtract_from_temp_variable = { mdr_sale_x = 50 }
+			multiply_temp_variable = { mdr_sale_x = -0.4 }
+			add_to_temp_variable = { mdr_sale_x = 30 }
+			add_to_temp_variable = { mdr_sale_p = mdr_sale_x }
+		}
+		else_if = { limit = { check_variable = { mdr_sale_x < 150.01 } }
+			subtract_from_temp_variable = { mdr_sale_x = 100 }
+			multiply_temp_variable = { mdr_sale_x = -0.7 }
+			add_to_temp_variable = { mdr_sale_x = 10 }
+			add_to_temp_variable = { mdr_sale_p = mdr_sale_x }
+		}
+		else_if = { limit = { check_variable = { mdr_sale_x < 200.01 } }
+			subtract_from_temp_variable = { mdr_sale_x = 150 }
+			multiply_temp_variable = { mdr_sale_x = -0.5 }
+			add_to_temp_variable = { mdr_sale_x = -25 }
+			add_to_temp_variable = { mdr_sale_p = mdr_sale_x }
+		}
+		else = {
+			subtract_from_temp_variable = { mdr_sale_x = 200 }
+			multiply_temp_variable = { mdr_sale_x = -0.3 }
+			add_to_temp_variable = { mdr_sale_x = -50 }
+			add_to_temp_variable = { mdr_sale_p = mdr_sale_x }
+		}
+		# Who is selling: ideology and what the buyer thinks of us.
+		if = { limit = { has_government = ROOT has_opinion = { target = ROOT value > 0 } } add_to_temp_variable = { mdr_sale_p = 25 } }
+		else_if = { limit = { has_opinion = { target = ROOT value > 0 } } add_to_temp_variable = { mdr_sale_p = 5 } }
+		else_if = { limit = { has_government = ROOT } add_to_temp_variable = { mdr_sale_p = -5 } }
+		else = { add_to_temp_variable = { mdr_sale_p = -30 } }
+		# A small navy or a war makes ships welcome; new ships built to order are wanted more than used ones.
+		if = { limit = { OR = { has_war = yes check_variable = { num_ships < 15 } } } add_to_temp_variable = { mdr_sale_p = 10 } }
+		if = { limit = { check_variable = { ROOT.mdr_sale_mode = 1 } } add_to_temp_variable = { mdr_sale_p = 7 } }
+		clamp_temp_variable = { var = mdr_sale_p min = 1 max = 99 }
+	}
+	if = { limit = { check_variable = { treasury < ROOT.mdr_sale_total } } set_temp_variable = { mdr_sale_p = 0 } ROOT = { set_variable = { mdr_sale_reason = 1 } } }
+	# Can it buy at all, and did it turn us down lately?
+	if = { limit = { OR = { NOT = { exists = yes } tag = ROOT has_war_with = ROOT mdr_sale_is_rival = yes NOT = { mdr_sale_has_port = yes } } }
+		set_temp_variable = { mdr_sale_p = 0 }
+		ROOT = { set_variable = { mdr_sale_reason = 9 } }
+	}
+	if = { limit = { ROOT = { has_country_flag = mdr_sale_cd@PREV } } set_temp_variable = { mdr_sale_p = 0 } ROOT = { set_variable = { mdr_sale_reason = 8 } } }
+	round_temp_variable = mdr_sale_p
+	# Buyer facts for the left column.
+	set_temp_variable = { mdr_sale_rel_t = 4 }
+	if = { limit = { has_opinion = { target = ROOT value > 49 } } set_temp_variable = { mdr_sale_rel_t = 1 } }
+	else_if = { limit = { has_opinion = { target = ROOT value > 0 } } set_temp_variable = { mdr_sale_rel_t = 2 } }
+	else_if = { limit = { has_opinion = { target = ROOT value > -50 } } set_temp_variable = { mdr_sale_rel_t = 3 } }
+	set_temp_variable = { mdr_sale_sanctioned_t = 0 }
+	if = { limit = { mdr_is_under_western_sanctions = yes } set_temp_variable = { mdr_sale_sanctioned_t = 1 } }
+	set_temp_variable = { mdr_sale_port_t = 0 }
+	if = { limit = { mdr_sale_has_port = yes } set_temp_variable = { mdr_sale_port_t = 1 } }
+	set_temp_variable = { mdr_sale_money = treasury }
+	ROOT = {
+		set_variable = { mdr_sale_prob = mdr_sale_p }
+		set_variable = { mdr_sale_prob_frame = mdr_sale_p }
+		divide_variable = { mdr_sale_prob_frame = 2 }
+		add_to_variable = { mdr_sale_prob_frame = 1 }
+		round_variable = mdr_sale_prob_frame
+		set_variable = { mdr_sale_rel = mdr_sale_rel_t }
+		set_variable = { mdr_sale_sanctioned = mdr_sale_sanctioned_t }
+		set_variable = { mdr_sale_port = mdr_sale_port_t }
+		set_variable = { mdr_sale_buyer_money = mdr_sale_money }
+		set_temp_variable = { mdr_sale_open = 0 }
+		for_each_loop = {
+			array = mdr_sc_buyer
+			value = mdr_sale_b
+			index = mdr_sale_i
+			if = { limit = { check_variable = { mdr_sale_b = mdr_sale_target } }
+				add_to_temp_variable = { mdr_sale_open = mdr_sc_qty^mdr_sale_i }
+			}
+		}
+		set_variable = { mdr_sale_pending = mdr_sale_open }
+	}
+}
+
+# Seller scope (the player). Recalculates everything the window shows.
+mdr_sale_ui_refresh = {
+	if = { limit = { NOT = { has_variable = mdr_sale_type } } set_variable = { mdr_sale_type = 12 } }
+	if = { limit = { NOT = { has_variable = mdr_sale_qty } } set_variable = { mdr_sale_qty = 1 } }
+	if = { limit = { NOT = { has_variable = mdr_sale_pct } } set_variable = { mdr_sale_pct = 100 } }
+	if = { limit = { NOT = { has_variable = mdr_sd_hull } } set_variable = { mdr_sd_hull = 1 } }
+	if = { limit = { NOT = { has_variable = mdr_sd_design } } set_variable = { mdr_sd_design = 1 } }
+	if = { limit = { NOT = { has_variable = mdr_sd_qty } } set_variable = { mdr_sd_qty = 1 } }
+	if = { limit = { NOT = { has_variable = mdr_sale_mode } } set_variable = { mdr_sale_mode = 0 } }
+	if = { limit = { has_variable = mdr_sale_target var:mdr_sale_target = { exists = yes } }
+		var:mdr_sale_target = { mdr_sale_refresh = yes }
+	}
+	else = {
+		mdr_sale_price_calc = yes
+		set_variable = { mdr_sale_prob = 0 }
+		set_variable = { mdr_sale_prob_frame = 1 }
+	}
+	mdr_sale_rows_refresh = yes
+	add_to_variable = { global.mdr_sale_dirty = 1 }
+}
+
+# Seller scope. Contract rows, the operations column and the dockyard load.
+mdr_sale_rows_refresh = {
+	set_variable = { mdr_sale_n_build = 0 }
+	set_variable = { mdr_sale_n_refit = 0 }
+	set_variable = { mdr_sale_n_queue = 0 }
+	set_variable = { mdr_sale_op1_on = 0 }
+	set_variable = { mdr_sale_op2_on = 0 }
+	set_variable = { mdr_sale_op3_on = 0 }
+	for_each_loop = {
+		array = mdr_sc_buyer
+		value = mdr_sale_b
+		index = mdr_sale_i
+		set_temp_variable = { mdr_sale_k = mdr_sc_kind^mdr_sale_i }
+		set_temp_variable = { mdr_sale_q = mdr_sc_qty^mdr_sale_i }
+		set_temp_variable = { mdr_sale_d = mdr_sc_days^mdr_sale_i }
+		set_temp_variable = { mdr_sale_tot = mdr_sc_total^mdr_sale_i }
+		# Progress of the ship being built now.
+		set_temp_variable = { mdr_sale_pc = 0 }
+		if = { limit = { check_variable = { mdr_sale_tot > 0 } }
+			set_temp_variable = { mdr_sale_pc = mdr_sale_tot }
+			subtract_from_temp_variable = { mdr_sale_pc = mdr_sale_d }
+			multiply_temp_variable = { mdr_sale_pc = 100 }
+			divide_temp_variable = { mdr_sale_pc = mdr_sale_tot }
+			clamp_temp_variable = { var = mdr_sale_pc min = 0 max = 100 }
+			round_temp_variable = mdr_sale_pc
+		}
+		set_temp_variable = { mdr_sale_fr = mdr_sale_pc }
+		divide_temp_variable = { mdr_sale_fr = 2 }
+		add_to_temp_variable = { mdr_sale_fr = 1 }
+		round_temp_variable = mdr_sale_fr
+		if = { limit = { check_variable = { mdr_sale_k = 1 } }
+			add_to_variable = { mdr_sale_n_build = mdr_sale_q }
+			if = { limit = { check_variable = { mdr_sale_op1_on = 0 } }
+				set_variable = { mdr_sale_op1_on = 1 }
+				set_variable = { mdr_sale_op1_who = mdr_sale_b }
+				set_variable = { mdr_sale_op1_type = mdr_sc_type^mdr_sale_i }
+				set_variable = { mdr_sale_op1_pct = mdr_sale_pc }
+				set_variable = { mdr_sale_op1_frame = mdr_sale_fr }
+				set_variable = { mdr_sale_op1_days = mdr_sale_d }
+			}
+			else_if = { limit = { check_variable = { mdr_sale_op2_on = 0 } }
+				set_variable = { mdr_sale_op2_on = 1 }
+				set_variable = { mdr_sale_op2_who = mdr_sale_b }
+				set_variable = { mdr_sale_op2_type = mdr_sc_type^mdr_sale_i }
+				set_variable = { mdr_sale_op2_pct = mdr_sale_pc }
+				set_variable = { mdr_sale_op2_frame = mdr_sale_fr }
+				set_variable = { mdr_sale_op2_days = mdr_sale_d }
+			}
+		}
+		else_if = { limit = { check_variable = { mdr_sale_k = 3 } }
+			add_to_variable = { mdr_sale_n_refit = mdr_sale_q }
+			if = { limit = { check_variable = { mdr_sale_op3_on = 0 } }
+				set_variable = { mdr_sale_op3_on = 1 }
+				set_variable = { mdr_sale_op3_who = mdr_sale_b }
+				set_variable = { mdr_sale_op3_type = mdr_sc_type^mdr_sale_i }
+				set_variable = { mdr_sale_op3_pct = mdr_sale_pc }
+				set_variable = { mdr_sale_op3_frame = mdr_sale_fr }
+				set_variable = { mdr_sale_op3_days = mdr_sale_d }
+			}
+		}
+		else = { add_to_variable = { mdr_sale_n_queue = mdr_sale_q } }
+		# Contract rows 1 to 8.
+		if = { limit = { check_variable = { mdr_sale_i = 0 } } set_variable = { mdr_sale_c1_who = mdr_sale_b } set_variable = { mdr_sale_c1_type = mdr_sc_type^mdr_sale_i } set_variable = { mdr_sale_c1_kind = mdr_sale_k } set_variable = { mdr_sale_c1_qty = mdr_sale_q } set_variable = { mdr_sale_c1_unit = mdr_sc_unit^mdr_sale_i } set_variable = { mdr_sale_c1_days = mdr_sale_d } set_variable = { mdr_sale_c1_frame = mdr_sale_fr } }
+		if = { limit = { check_variable = { mdr_sale_i = 1 } } set_variable = { mdr_sale_c2_who = mdr_sale_b } set_variable = { mdr_sale_c2_type = mdr_sc_type^mdr_sale_i } set_variable = { mdr_sale_c2_kind = mdr_sale_k } set_variable = { mdr_sale_c2_qty = mdr_sale_q } set_variable = { mdr_sale_c2_unit = mdr_sc_unit^mdr_sale_i } set_variable = { mdr_sale_c2_days = mdr_sale_d } set_variable = { mdr_sale_c2_frame = mdr_sale_fr } }
+		if = { limit = { check_variable = { mdr_sale_i = 2 } } set_variable = { mdr_sale_c3_who = mdr_sale_b } set_variable = { mdr_sale_c3_type = mdr_sc_type^mdr_sale_i } set_variable = { mdr_sale_c3_kind = mdr_sale_k } set_variable = { mdr_sale_c3_qty = mdr_sale_q } set_variable = { mdr_sale_c3_unit = mdr_sc_unit^mdr_sale_i } set_variable = { mdr_sale_c3_days = mdr_sale_d } set_variable = { mdr_sale_c3_frame = mdr_sale_fr } }
+		if = { limit = { check_variable = { mdr_sale_i = 3 } } set_variable = { mdr_sale_c4_who = mdr_sale_b } set_variable = { mdr_sale_c4_type = mdr_sc_type^mdr_sale_i } set_variable = { mdr_sale_c4_kind = mdr_sale_k } set_variable = { mdr_sale_c4_qty = mdr_sale_q } set_variable = { mdr_sale_c4_unit = mdr_sc_unit^mdr_sale_i } set_variable = { mdr_sale_c4_days = mdr_sale_d } set_variable = { mdr_sale_c4_frame = mdr_sale_fr } }
+		if = { limit = { check_variable = { mdr_sale_i = 4 } } set_variable = { mdr_sale_c5_who = mdr_sale_b } set_variable = { mdr_sale_c5_type = mdr_sc_type^mdr_sale_i } set_variable = { mdr_sale_c5_kind = mdr_sale_k } set_variable = { mdr_sale_c5_qty = mdr_sale_q } set_variable = { mdr_sale_c5_unit = mdr_sc_unit^mdr_sale_i } set_variable = { mdr_sale_c5_days = mdr_sale_d } set_variable = { mdr_sale_c5_frame = mdr_sale_fr } }
+		if = { limit = { check_variable = { mdr_sale_i = 5 } } set_variable = { mdr_sale_c6_who = mdr_sale_b } set_variable = { mdr_sale_c6_type = mdr_sc_type^mdr_sale_i } set_variable = { mdr_sale_c6_kind = mdr_sale_k } set_variable = { mdr_sale_c6_qty = mdr_sale_q } set_variable = { mdr_sale_c6_unit = mdr_sc_unit^mdr_sale_i } set_variable = { mdr_sale_c6_days = mdr_sale_d } set_variable = { mdr_sale_c6_frame = mdr_sale_fr } }
+		if = { limit = { check_variable = { mdr_sale_i = 6 } } set_variable = { mdr_sale_c7_who = mdr_sale_b } set_variable = { mdr_sale_c7_type = mdr_sc_type^mdr_sale_i } set_variable = { mdr_sale_c7_kind = mdr_sale_k } set_variable = { mdr_sale_c7_qty = mdr_sale_q } set_variable = { mdr_sale_c7_unit = mdr_sc_unit^mdr_sale_i } set_variable = { mdr_sale_c7_days = mdr_sale_d } set_variable = { mdr_sale_c7_frame = mdr_sale_fr } }
+	}
+	mdr_sale_dock_load = yes
+}
+
+# Seller scope. Building for others takes 3.1% of dockyard output per ship under way, at most 27.9%.
+mdr_sale_dock_load = {
+	set_temp_variable = { mdr_sale_busy = 0 }
+	for_each_loop = {
+		array = mdr_sc_kind
+		value = mdr_sale_k
+		index = mdr_sale_i
+		if = { limit = { check_variable = { mdr_sale_k > 0 } } add_to_temp_variable = { mdr_sale_busy = 1 } }
+	}
+	clamp_temp_variable = { var = mdr_sale_busy min = 0 max = 9 }
+	set_variable = { mdr_sale_dock_malus = mdr_sale_busy }
+	multiply_variable = { mdr_sale_dock_malus = -0.031 }
+	if = { limit = { check_variable = { mdr_sale_busy > 0 } NOT = { has_dynamic_modifier = { modifier = mdr_sale_dockyards } } }
+		add_dynamic_modifier = { modifier = mdr_sale_dockyards }
+	}
+	if = { limit = { check_variable = { mdr_sale_busy = 0 } has_dynamic_modifier = { modifier = mdr_sale_dockyards } }
+		remove_dynamic_modifier = { modifier = mdr_sale_dockyards }
+	}
+}
+
+# THIS the buyer, ROOT the seller: the window opens on this buyer.
+mdr_sale_open_for = {
+	ROOT = {
+		set_variable = { mdr_sale_target = PREV.id }
+		set_country_flag = mdr_sale_open
+		mdr_sale_ui_refresh = yes
+	}
+}
+
+# Seller scope: the player presses Send. The buyer answers at once, against the chance shown.
+mdr_sale_send_offer = {
+	mdr_sale_ui_refresh = yes
+	if = { limit = { check_variable = { mdr_sale_valid = 1 } check_variable = { mdr_sale_prob > 0 } has_variable = mdr_sale_target var:mdr_sale_target = { exists = yes } }
+		# The offer always reaches the buyer as an event: a player answers it (also after switching country while paused), and the
+		# AI answers with the chance shown in the window (mdr_sale_p_prob).
+		mdr_sale_pending_save = yes
+		set_country_flag = { flag = mdr_sale_pending days = 30 value = 1 }
+		var:mdr_sale_target = { country_event = { id = mdr_ship_sale.2 days = 1 } }
+	}
+}
+
+# Seller scope: the offer is frozen here, so the seller can keep using the window while it waits.
+mdr_sale_pending_save = {
+	set_variable = { mdr_sale_p_prob = mdr_sale_prob }
+	set_variable = { mdr_sale_p_mode = mdr_sale_mode }
+	set_variable = { mdr_sale_p_type = mdr_sale_type }
+	set_variable = { mdr_sale_p_gen = mdr_sale_gen }
+	set_variable = { mdr_sale_p_qty = mdr_sale_qty }
+	set_variable = { mdr_sale_p_unit = mdr_sale_unit }
+	set_variable = { mdr_sale_p_pct = mdr_sale_pct }
+	set_variable = { mdr_sale_p_sd_type = mdr_sd_type }
+	set_variable = { mdr_sale_p_sd_qty = mdr_sd_qty }
+	set_variable = { mdr_sale_p_sd_hull = mdr_sd_hull }
+	set_variable = { mdr_sale_p_sd_design = mdr_sd_design }
+	set_variable = { mdr_sale_p_days = mdr_sale_days }
+	set_variable = { mdr_sale_p_cost = mdr_sale_cost }
+	set_variable = { mdr_sale_p_total = mdr_sale_total }
+	set_variable = { mdr_sale_p_target = mdr_sale_target }
+	set_variable = { mdr_sale_pl_1 = mdr_sale_lot_1 }
+	set_variable = { mdr_sale_pl_2 = mdr_sale_lot_2 }
+	set_variable = { mdr_sale_pl_3 = mdr_sale_lot_3 }
+	set_variable = { mdr_sale_pl_4 = mdr_sale_lot_4 }
+	set_variable = { mdr_sale_pl_5 = mdr_sale_lot_5 }
+	set_variable = { mdr_sale_pl_6 = mdr_sale_lot_6 }
+	set_variable = { mdr_sale_pl_7 = mdr_sale_lot_7 }
+	set_variable = { mdr_sale_pl_8 = mdr_sale_lot_8 }
+	set_variable = { mdr_sale_pl_9 = mdr_sale_lot_9 }
+	set_variable = { mdr_sale_pl_10 = mdr_sale_lot_10 }
+	set_variable = { mdr_sale_pl_11 = mdr_sale_lot_11 }
+	set_variable = { mdr_sale_pl_12 = mdr_sale_lot_12 }
+	set_variable = { mdr_sale_pl_13 = mdr_sale_lot_13 }
+	set_variable = { mdr_sale_pl_14 = mdr_sale_lot_14 }
+	set_variable = { mdr_sale_pl_15 = mdr_sale_lot_15 }
+	set_variable = { mdr_sale_pl_16 = mdr_sale_lot_16 }
+	set_variable = { mdr_sale_pl_17 = mdr_sale_lot_17 }
+	set_variable = { mdr_sale_pl_18 = mdr_sale_lot_18 }
+}
+
+# Seller scope, when the player buyer accepts: the frozen offer goes back into the window's variables and is carried out.
+mdr_sale_pending_accept = {
+	set_variable = { mdr_sale_mode = mdr_sale_p_mode }
+	set_variable = { mdr_sale_type = mdr_sale_p_type }
+	set_variable = { mdr_sale_gen = mdr_sale_p_gen }
+	set_variable = { mdr_sale_qty = mdr_sale_p_qty }
+	set_variable = { mdr_sale_unit = mdr_sale_p_unit }
+	set_variable = { mdr_sale_pct = mdr_sale_p_pct }
+	set_variable = { mdr_sd_type = mdr_sale_p_sd_type }
+	set_variable = { mdr_sd_qty = mdr_sale_p_sd_qty }
+	set_variable = { mdr_sd_hull = mdr_sale_p_sd_hull }
+	set_variable = { mdr_sd_design = mdr_sale_p_sd_design }
+	set_variable = { mdr_sale_days = mdr_sale_p_days }
+	set_variable = { mdr_sale_cost = mdr_sale_p_cost }
+	set_variable = { mdr_sale_total = mdr_sale_p_total }
+	set_variable = { mdr_sale_target = mdr_sale_p_target }
+	set_variable = { mdr_sale_lot_1 = mdr_sale_pl_1 }
+	set_variable = { mdr_sale_lot_2 = mdr_sale_pl_2 }
+	set_variable = { mdr_sale_lot_3 = mdr_sale_pl_3 }
+	set_variable = { mdr_sale_lot_4 = mdr_sale_pl_4 }
+	set_variable = { mdr_sale_lot_5 = mdr_sale_pl_5 }
+	set_variable = { mdr_sale_lot_6 = mdr_sale_pl_6 }
+	set_variable = { mdr_sale_lot_7 = mdr_sale_pl_7 }
+	set_variable = { mdr_sale_lot_8 = mdr_sale_pl_8 }
+	set_variable = { mdr_sale_lot_9 = mdr_sale_pl_9 }
+	set_variable = { mdr_sale_lot_10 = mdr_sale_pl_10 }
+	set_variable = { mdr_sale_lot_11 = mdr_sale_pl_11 }
+	set_variable = { mdr_sale_lot_12 = mdr_sale_pl_12 }
+	set_variable = { mdr_sale_lot_13 = mdr_sale_pl_13 }
+	set_variable = { mdr_sale_lot_14 = mdr_sale_pl_14 }
+	set_variable = { mdr_sale_lot_15 = mdr_sale_pl_15 }
+	set_variable = { mdr_sale_lot_16 = mdr_sale_pl_16 }
+	set_variable = { mdr_sale_lot_17 = mdr_sale_pl_17 }
+	set_variable = { mdr_sale_lot_18 = mdr_sale_pl_18 }
+	clr_country_flag = mdr_sale_pending
+	mdr_sale_accept = yes
+	mdr_sale_ui_refresh = yes
+}
+
+# Seller scope, mdr_sale_target the buyer, who accepted. Opens the orders of the current page and charges both sides.
+mdr_sale_accept = {
+	set_variable = { global.mdr_sale_to = mdr_sale_target }
+	if = { limit = { check_variable = { mdr_sale_mode = 0 } }
+		set_temp_variable = { mdr_sale_n_kind = 0 }
+		set_temp_variable = { mdr_sale_n_type = mdr_sale_type }
+		set_temp_variable = { mdr_sale_n_gen = mdr_sale_gen }
+		set_temp_variable = { mdr_sale_n_qty = mdr_sale_qty }
+		set_temp_variable = { mdr_sale_n_unit = mdr_sale_unit }
+		set_temp_variable = { mdr_sale_n_wait = 0 }
+		mdr_sale_open_order = yes
+	}
+	else_if = { limit = { check_variable = { mdr_sale_mode = 2 } }
+		set_temp_variable = { mdr_sale_lot_unit = mdr_sale_pct }
+		multiply_temp_variable = { mdr_sale_lot_unit = 0.71 }
+		divide_temp_variable = { mdr_sale_lot_unit = 100 }
+		for_loop_effect = {
+			start = 1
+			end = 19
+			value = mdr_sale_t
+			mdr_sale_lot_read = yes
+			if = { limit = { check_variable = { mdr_sale_lot_n > 0 } }
+				set_temp_variable = { mdr_sale_cur_type = mdr_sale_t }
+				mdr_sale_count_type = yes
+				set_temp_variable = { mdr_sale_n_kind = 0 }
+				set_temp_variable = { mdr_sale_n_type = mdr_sale_t }
+				set_temp_variable = { mdr_sale_n_gen = 0 }
+				set_temp_variable = { mdr_sale_n_qty = mdr_sale_lot_n }
+				set_temp_variable = { mdr_sale_n_unit = mdr_sale_cur_base }
+				multiply_temp_variable = { mdr_sale_n_unit = mdr_sale_lot_unit }
+				set_temp_variable = { mdr_sale_n_wait = 0 }
+				mdr_sale_open_order = yes
+			}
+		}
+		for_loop_effect = {
+			start = 1
+			end = 19
+			value = mdr_sale_t
+			mdr_sale_lot_clear = yes
+		}
+	}
+	else = {
+		set_temp_variable = { mdr_sale_n_kind = mdr_sale_mode }
+		set_temp_variable = { mdr_sale_n_type = mdr_sd_type }
+		set_temp_variable = { mdr_sale_n_gen = 0 }
+		set_temp_variable = { mdr_sale_n_qty = mdr_sd_qty }
+		set_temp_variable = { mdr_sale_n_unit = mdr_sale_unit }
+		set_temp_variable = { mdr_sale_n_wait = 0 }
+		set_temp_variable = { mdr_sale_n_hull = mdr_sd_hull }
+		set_temp_variable = { mdr_sale_n_design = mdr_sd_design }
+		set_temp_variable = { mdr_sale_n_days = mdr_sale_days }
+		# The seller pays the dockyard work now.
+		set_temp_variable = { treasury_change = mdr_sale_cost }
+		multiply_temp_variable = { treasury_change = -1 }
+		modify_treasury_effect = yes
+		# Refit: the old ships leave the fleet for the dockyard.
+		if = { limit = { check_variable = { mdr_sale_mode = 3 } }
+			set_temp_variable = { mdr_sale_cur_type = mdr_sd_type }
+			for_loop_effect = {
+				start = 0
+				end = mdr_sd_qty
+				mdr_sale_take_one = yes
+			}
+		}
+		mdr_sale_open_order = yes
+	}
+	if = { limit = { check_variable = { mdr_sale_pct = 0 } }
+		var:mdr_sale_target = { add_opinion_modifier = { target = PREV modifier = mdr_sale_gift } }
+	}
+	# Selling to a sanctioned country angers those who sanction it.
+	if = { limit = { var:mdr_sale_target = { mdr_is_under_western_sanctions = yes } }
+		every_country = {
+			limit = {
+				OR = { original_tag = USA original_tag = ENG original_tag = FRA original_tag = GER }
+				exists = yes
+				NOT = { tag = ROOT }
+			}
+			add_opinion_modifier = { target = ROOT modifier = mdr_sale_to_sanctioned }
+		}
+	}
+}
+
+mdr_sale_lot_clear = {
+	if = { limit = { check_variable = { mdr_sale_t = 1 } } set_variable = { mdr_sale_lot_1 = 0 } }
+	if = { limit = { check_variable = { mdr_sale_t = 2 } } set_variable = { mdr_sale_lot_2 = 0 } }
+	if = { limit = { check_variable = { mdr_sale_t = 3 } } set_variable = { mdr_sale_lot_3 = 0 } }
+	if = { limit = { check_variable = { mdr_sale_t = 4 } } set_variable = { mdr_sale_lot_4 = 0 } }
+	if = { limit = { check_variable = { mdr_sale_t = 5 } } set_variable = { mdr_sale_lot_5 = 0 } }
+	if = { limit = { check_variable = { mdr_sale_t = 6 } } set_variable = { mdr_sale_lot_6 = 0 } }
+	if = { limit = { check_variable = { mdr_sale_t = 7 } } set_variable = { mdr_sale_lot_7 = 0 } }
+	if = { limit = { check_variable = { mdr_sale_t = 8 } } set_variable = { mdr_sale_lot_8 = 0 } }
+	if = { limit = { check_variable = { mdr_sale_t = 9 } } set_variable = { mdr_sale_lot_9 = 0 } }
+	if = { limit = { check_variable = { mdr_sale_t = 10 } } set_variable = { mdr_sale_lot_10 = 0 } }
+	if = { limit = { check_variable = { mdr_sale_t = 11 } } set_variable = { mdr_sale_lot_11 = 0 } }
+	if = { limit = { check_variable = { mdr_sale_t = 12 } } set_variable = { mdr_sale_lot_12 = 0 } }
+	if = { limit = { check_variable = { mdr_sale_t = 13 } } set_variable = { mdr_sale_lot_13 = 0 } }
+	if = { limit = { check_variable = { mdr_sale_t = 14 } } set_variable = { mdr_sale_lot_14 = 0 } }
+	if = { limit = { check_variable = { mdr_sale_t = 15 } } set_variable = { mdr_sale_lot_15 = 0 } }
+	if = { limit = { check_variable = { mdr_sale_t = 16 } } set_variable = { mdr_sale_lot_16 = 0 } }
+	if = { limit = { check_variable = { mdr_sale_t = 17 } } set_variable = { mdr_sale_lot_17 = 0 } }
+	if = { limit = { check_variable = { mdr_sale_t = 18 } } set_variable = { mdr_sale_lot_18 = 0 } }
+}
+
+# Country scope: the seller, global.mdr_sale_to the buyer. Input temps mdr_sale_n_kind, _type, _gen, _qty, _unit, _wait,
+# and for builds _hull, _design, _days. Adds the order and takes the buyer's money.
+mdr_sale_open_order = {
+	add_to_array = { array = mdr_sc_buyer value = global.mdr_sale_to }
+	add_to_array = { array = mdr_sc_type value = mdr_sale_n_type }
+	add_to_array = { array = mdr_sc_gen value = mdr_sale_n_gen }
+	add_to_array = { array = mdr_sc_qty value = mdr_sale_n_qty }
+	add_to_array = { array = mdr_sc_unit value = mdr_sale_n_unit }
+	add_to_array = { array = mdr_sc_kind value = mdr_sale_n_kind }
+	add_to_array = { array = mdr_sc_hull value = mdr_sale_n_hull }
+	add_to_array = { array = mdr_sc_design value = mdr_sale_n_design }
+	# Ships from the fleet have 180 days to leave; built ones count down one ship at a time.
+	if = { limit = { check_variable = { mdr_sale_n_kind = 0 } } add_to_array = { array = mdr_sc_days value = 180 } add_to_array = { array = mdr_sc_total value = 0 } }
+	else = { add_to_array = { array = mdr_sc_days value = mdr_sale_n_days } add_to_array = { array = mdr_sc_total value = mdr_sale_n_days } }
+	add_to_array = { array = mdr_sc_wait value = mdr_sale_n_wait }
+	set_temp_variable = { mdr_sale_pay = mdr_sale_n_unit }
+	multiply_temp_variable = { mdr_sale_pay = mdr_sale_n_qty }
+	set_temp_variable = { treasury_change = mdr_sale_pay }
+	modify_treasury_effect = yes
+	var:global.mdr_sale_to = {
+		set_temp_variable = { treasury_change = mdr_sale_pay }
+		multiply_temp_variable = { treasury_change = -1 }
+		modify_treasury_effect = yes
+	}
+	if = { limit = { check_variable = { mdr_sale_n_kind = 0 } }
+		set_temp_variable = { mdr_sale_step = 0 }
+		mdr_sale_process = yes
+	}
+}
+
+# Country scope: the seller, order mdr_sale_i. Gives back the money of what was not sent and removes the order.
+mdr_sale_close_order = {
+	set_temp_variable = { mdr_sale_pay = mdr_sc_unit^mdr_sale_i }
+	multiply_temp_variable = { mdr_sale_pay = mdr_sc_qty^mdr_sale_i }
+	if = { limit = { check_variable = { mdr_sale_pay > 0 } }
+		set_temp_variable = { treasury_change = mdr_sale_pay }
+		multiply_temp_variable = { treasury_change = -1 }
+		modify_treasury_effect = yes
+		set_variable = { global.mdr_sale_to = mdr_sc_buyer^mdr_sale_i }
+		if = { limit = { var:global.mdr_sale_to = { exists = yes } }
+			var:global.mdr_sale_to = {
+				set_temp_variable = { treasury_change = mdr_sale_pay }
+				modify_treasury_effect = yes
+			}
+		}
+	}
+	remove_from_array = { array = mdr_sc_buyer index = mdr_sale_i }
+	remove_from_array = { array = mdr_sc_type index = mdr_sale_i }
+	remove_from_array = { array = mdr_sc_gen index = mdr_sale_i }
+	remove_from_array = { array = mdr_sc_qty index = mdr_sale_i }
+	remove_from_array = { array = mdr_sc_unit index = mdr_sale_i }
+	remove_from_array = { array = mdr_sc_days index = mdr_sale_i }
+	remove_from_array = { array = mdr_sc_wait index = mdr_sale_i }
+	remove_from_array = { array = mdr_sc_kind index = mdr_sale_i }
+	remove_from_array = { array = mdr_sc_hull index = mdr_sale_i }
+	remove_from_array = { array = mdr_sc_design index = mdr_sale_i }
+	remove_from_array = { array = mdr_sc_total index = mdr_sale_i }
+}
+
+# Seller scope: one more ship delivered to global.mdr_sale_to, of type temp mdr_sale_cur_type. Keeps the last three.
+mdr_sale_count_delivery = {
+	add_to_variable = { mdr_sale_delivered = 1 }
+	set_variable = { mdr_sale_h3_who = mdr_sale_h2_who }
+	set_variable = { mdr_sale_h3_type = mdr_sale_h2_type }
+	set_variable = { mdr_sale_h2_who = mdr_sale_h1_who }
+	set_variable = { mdr_sale_h2_type = mdr_sale_h1_type }
+	set_variable = { mdr_sale_h1_who = global.mdr_sale_to }
+	set_variable = { mdr_sale_h1_type = mdr_sale_cur_type }
+}
+
+# Country scope: the seller. Input temp mdr_sale_step, the days gone by. Sends what it can, last order first so removing is safe.
+mdr_sale_process = {
+	# Old orders from before kinds existed count as fleet orders.
+	while_loop_effect = {
+		limit = { check_variable = { mdr_sc_kind^num < mdr_sc_buyer^num } }
+		add_to_array = { array = mdr_sc_kind value = 0 }
+		add_to_array = { array = mdr_sc_hull value = 0 }
+		add_to_array = { array = mdr_sc_design value = 0 }
+		add_to_array = { array = mdr_sc_total value = 0 }
+	}
+	set_temp_variable = { mdr_sale_end = mdr_sc_buyer^num }
+	subtract_from_temp_variable = { mdr_sale_end = 1 }
+	for_loop_effect = {
+		start = mdr_sale_end
+		end = -1
+		compare = greater_than
+		add = -1
+		value = mdr_sale_i
+		set_variable = { global.mdr_sale_to = mdr_sc_buyer^mdr_sale_i }
+		set_temp_variable = { mdr_sale_cur_type = mdr_sc_type^mdr_sale_i }
+		# The buyer is gone or at war with us: the order is off, with the money back.
+		if = { limit = { OR = { NOT = { var:global.mdr_sale_to = { exists = yes } } var:global.mdr_sale_to = { has_war_with = PREV } } }
+			mdr_sale_close_order = yes
+		}
+		else_if = { limit = { check_variable = { mdr_sc_kind^mdr_sale_i > 0 } }
+			# Built or refitted ships: one comes out of the dockyard each time the count reaches zero.
+			set_temp_variable = { mdr_sale_left = mdr_sc_days^mdr_sale_i }
+			subtract_from_temp_variable = { mdr_sale_left = mdr_sale_step }
+			if = { limit = { check_variable = { mdr_sale_left < 1 } }
+				set_temp_variable = { mdr_sale_cur_hull = mdr_sc_hull^mdr_sale_i }
+				set_temp_variable = { mdr_sale_cur_design = mdr_sc_design^mdr_sale_i }
+				mdr_sd_deliver = yes
+				mdr_sale_count_delivery = yes
+				set_temp_variable = { mdr_sale_q = mdr_sc_qty^mdr_sale_i }
+				subtract_from_temp_variable = { mdr_sale_q = 1 }
+				set_variable = { mdr_sc_qty^mdr_sale_i = mdr_sale_q }
+				set_temp_variable = { mdr_sale_left = mdr_sc_total^mdr_sale_i }
+			}
+			set_variable = { mdr_sc_days^mdr_sale_i = mdr_sale_left }
+			if = { limit = { check_variable = { mdr_sc_qty^mdr_sale_i < 1 } } mdr_sale_close_order = yes }
+		}
+		else = {
+			set_temp_variable = { mdr_sale_cur_gen = mdr_sc_gen^mdr_sale_i }
+			set_temp_variable = { mdr_sale_wait = mdr_sc_wait^mdr_sale_i }
+			set_temp_variable = { mdr_sale_go = 1 }
+			while_loop_effect = {
+				limit = { check_variable = { mdr_sale_go = 1 } check_variable = { mdr_sc_qty^mdr_sale_i > 0 } }
+				set_temp_variable = { mdr_sale_before = num_ships }
+				mdr_sale_count_type = yes
+				if = { limit = { NOT = { check_variable = { mdr_sale_count < mdr_sale_wait } } } mdr_sale_try_send = yes }
+				if = { limit = { check_variable = { num_ships < mdr_sale_before } }
+					set_temp_variable = { mdr_sale_q = mdr_sc_qty^mdr_sale_i }
+					add_to_temp_variable = { mdr_sale_q = -1 }
+					set_variable = { mdr_sc_qty^mdr_sale_i = mdr_sale_q }
+					mdr_sale_count_delivery = yes
+				}
+				else = { set_temp_variable = { mdr_sale_go = 0 } }
+			}
+			if = { limit = { check_variable = { mdr_sc_qty^mdr_sale_i < 1 } }
+				mdr_sale_close_order = yes
+			}
+			else = {
+				set_temp_variable = { mdr_sale_left = mdr_sc_days^mdr_sale_i }
+				subtract_from_temp_variable = { mdr_sale_left = mdr_sale_step }
+				set_variable = { mdr_sc_days^mdr_sale_i = mdr_sale_left }
+				# Not delivered in time: the money goes back and the buyer remembers.
+				if = { limit = { check_variable = { mdr_sale_left < 1 } }
+					var:global.mdr_sale_to = { add_opinion_modifier = { target = PREV modifier = mdr_sale_undelivered } }
+					mdr_sale_close_order = yes
+				}
+			}
+		}
+	}
+}
+
+# Country scope, players daily and AI weekly (mdr_on_actions.txt).
+mdr_sale_daily = {
+	if = { limit = { check_variable = { mdr_sc_buyer^num > 0 } }
+		set_temp_variable = { mdr_sale_step = 1 }
+		mdr_sale_process = yes
+		mdr_sale_dock_load = yes
+	}
+	if = { limit = { has_country_flag = mdr_sale_open } mdr_sale_ui_refresh = yes }
+}
+
+mdr_sale_weekly_ai = {
+	if = { limit = { is_ai = yes check_variable = { mdr_sc_buyer^num > 0 } }
+		set_temp_variable = { mdr_sale_step = 7 }
+		mdr_sale_process = yes
+		mdr_sale_dock_load = yes
+	}
+}
+
+# Country scope, monthly. Rare by design: AI countries sell old ships to friends and, at most twice a year, ask a player for one.
+mdr_sale_monthly = {
+	if = { limit = { is_ai = yes }
+		if = { limit = { check_variable = { num_ships > 14 } }
+			random = {
+				chance = 2
+				mdr_sale_ai_sell = yes
+			}
+		}
+		else_if = { limit = { check_variable = { treasury > 1 } has_war = no }
+			random = {
+				chance = 1
+				random_country = {
+					limit = {
+						is_ai = no
+						exists = yes
+						NOT = { has_country_flag = mdr_sale_offer_cd }
+						NOT = { has_war_with = ROOT }
+						ROOT = { has_opinion = { target = PREV value > -50 } }
+						check_variable = { num_ships > 3 }
+					}
+					set_country_flag = { flag = mdr_sale_offer_cd days = 180 value = 1 }
+					country_event = { id = mdr_ship_sale.1 }
+				}
+			}
+		}
+	}
+}
+
+# Country scope: an AI seller. Its cheapest spare ship goes to a friend with money and a small navy, with no notice.
+mdr_sale_ai_sell = {
+	random_country = {
+		limit = {
+			exists = yes
+			is_ai = yes
+			NOT = { tag = ROOT }
+			has_war = no
+			has_opinion = { target = ROOT value > 20 }
+			check_variable = { num_ships < 12 }
+			check_variable = { treasury > 2 }
+			mdr_sale_has_port = yes
+		}
+		set_temp_variable = { mdr_sale_before = ROOT.num_ships }
+		ROOT = {
+			if = { limit = { check_variable = { num_ships_with_type@patrol_boat > 3 } } transfer_ship = { type = patrol_boat target = PREV } set_temp_variable = { mdr_sale_pay = 0.06 } }
+			else_if = { limit = { check_variable = { num_ships_with_type@corvette > 3 } } transfer_ship = { type = corvette target = PREV } set_temp_variable = { mdr_sale_pay = 0.17 } }
+			else_if = { limit = { check_variable = { num_ships_with_type@frigate > 3 } } transfer_ship = { type = frigate target = PREV } set_temp_variable = { mdr_sale_pay = 0.43 } }
+			else = { set_temp_variable = { mdr_sale_pay = 0 } }
+		}
+		if = { limit = { check_variable = { ROOT.num_ships < mdr_sale_before } }
+			set_temp_variable = { treasury_change = mdr_sale_pay }
+			multiply_temp_variable = { treasury_change = -1 }
+			modify_treasury_effect = yes
+			ROOT = {
+				set_temp_variable = { treasury_change = mdr_sale_pay }
+				modify_treasury_effect = yes
+			}
+		}
+	}
+}
+
+# Event scope: the player, FROM the AI buyer. Chooses what to ask for: the type the player has most of, among the common ones.
+mdr_sale_offer_prepare = {
+	set_variable = { global.mdr_sale_offer_type = 0 }
+	if = { limit = { check_variable = { num_ships_with_type@corvette > 0 } } set_variable = { global.mdr_sale_offer_type = 12 } set_variable = { global.mdr_sale_offer_price = 0.19 } }
+	if = { limit = { check_variable = { num_ships_with_type@frigate > 0 } } set_variable = { global.mdr_sale_offer_type = 10 } set_variable = { global.mdr_sale_offer_price = 0.47 } }
+	if = { limit = { check_variable = { num_ships_with_type@destroyer > 2 } } set_variable = { global.mdr_sale_offer_type = 7 } set_variable = { global.mdr_sale_offer_price = 1.21 } }
+}

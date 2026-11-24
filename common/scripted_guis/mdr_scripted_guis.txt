@@ -1,0 +1,150 @@
+scripted_gui = {
+	# Prices of uranium, grain and rare earths. Hidden on the Economy tab, where Millennium Dawn's economy view covers the trade screen.
+	mdr_tradeview_market_prices = {
+		window_name = "mdr_tradeview_market_prices"
+		context_type = player_context
+		parent_window_token = trade_tab
+
+		visible = {
+			NOT = { check_variable = { MD_tradeview_tab_economy_state = 1 } }
+		}
+
+		ai_enabled = { always = no }
+	}
+
+	mdr_uranium_button = {
+		window_name = "mdr_uranium_button_window"
+		context_type = player_context
+		parent_window_token = trade_tab
+
+		effects = {
+			mdr_uranium_open_button_click = {
+				if = { limit = { has_country_flag = mdr_uranium_panel_open }
+					clr_country_flag = mdr_uranium_panel_open
+				}
+				else = {
+					set_country_flag = mdr_uranium_panel_open
+					# Both panels open in the same place: close Millennium Dawn's resource storage panel.
+					if = { limit = { has_country_flag = open_storage_screen }
+						clr_country_flag = open_storage_screen
+						update_dirty_resource_storage_var = yes
+					}
+				}
+			}
+		}
+
+		ai_enabled = { always = no }
+	}
+
+	mdr_uranium_panel = {
+		window_name = "mdr_uranium_panel"
+		context_type = player_context
+		parent_window_token = trade_tab
+
+		visible = {
+			has_country_flag = mdr_uranium_panel_open
+			NOT = { has_country_flag = open_storage_screen }
+		}
+
+		effects = {
+			mdr_uranium_close_button_click = {
+				clr_country_flag = mdr_uranium_panel_open
+			}
+		}
+
+		ai_enabled = { always = no }
+	}
+
+	mdr_construction_speeds = {
+		window_name = "mdr_construction_speeds"
+		context_type = player_context
+		parent_window_name = "countryconstructionsview"
+
+		triggers = {
+			mdr_enrichment_facility_speed_nuclear_visible = { has_tech = nuclear_technology }
+			mdr_uranium_mine_speed_visible = { NOT = { has_tech = nuclear_technology } }
+			mdr_uranium_mine_speed_nuclear_visible = { has_tech = nuclear_technology }
+			mdr_early_warning_center_speed_visible = { NOT = { has_tech = nuclear_technology } }
+			mdr_early_warning_center_speed_nuclear_visible = { has_tech = nuclear_technology }
+			mdr_cropland_speed_visible = { NOT = { has_tech = nuclear_technology } }
+			mdr_cropland_speed_nuclear_visible = { has_tech = nuclear_technology }
+			mdr_rare_earth_complex_speed_visible = { NOT = { has_tech = nuclear_technology } }
+			mdr_rare_earth_complex_speed_nuclear_visible = { has_tech = nuclear_technology }
+			mdr_desalination_plant_speed_visible = { NOT = { has_tech = nuclear_technology } }
+			mdr_desalination_plant_speed_nuclear_visible = { has_tech = nuclear_technology }
+			mdr_recycling_plant_speed_visible = { NOT = { has_tech = nuclear_technology } }
+			mdr_recycling_plant_speed_nuclear_visible = { has_tech = nuclear_technology }
+			mdr_regional_university_speed_visible = { NOT = { has_tech = nuclear_technology } }
+			mdr_regional_university_speed_nuclear_visible = { has_tech = nuclear_technology }
+			mdr_spaceport_speed_visible = { NOT = { has_tech = nuclear_technology } }
+			mdr_spaceport_speed_nuclear_visible = { has_tech = nuclear_technology }
+			mdr_stronghold_network_speed_stronghold_visible = { has_tech = stronghold_building_1 }
+			mdr_energy_infrastructure_speed_visible = { NOT = { has_tech = stronghold_building_1 } }
+			mdr_energy_infrastructure_speed_stronghold_visible = { has_tech = stronghold_building_1 }
+			mdr_industrial_infrastructure_speed_visible = { NOT = { has_tech = stronghold_building_1 } }
+			mdr_industrial_infrastructure_speed_stronghold_visible = { has_tech = stronghold_building_1 }
+			mdr_electric_arc_furnace_speed_visible = { NOT = { has_tech = stronghold_building_1 } }
+			mdr_electric_arc_furnace_speed_stronghold_visible = { has_tech = stronghold_building_1 }
+			mdr_data_center_speed_visible = { NOT = { has_tech = stronghold_building_1 } }
+			mdr_data_center_speed_stronghold_visible = { has_tech = stronghold_building_1 }
+			mdr_smart_grid_center_speed_visible = { NOT = { has_tech = stronghold_building_1 } }
+			mdr_smart_grid_center_speed_stronghold_visible = { has_tech = stronghold_building_1 }
+		}
+
+		ai_enabled = { always = no }
+	}
+
+	mdr_topbar_ammo = {
+		window_name = "mdr_topbar_ammo"
+		context_type = player_context
+		parent_window_token = top_bar
+
+		visible = { mdr_ammo_on = yes }
+
+		properties = {
+			mdr_topbar_ammo_icon = {
+				frame = mdr_ammo_trend_frame
+			}
+			mdr_topbar_ammo_bar = {
+				frame = mdr_ammo_bar_pct
+			}
+		}
+
+		ai_enabled = { always = no }
+	}
+
+	mdr_topbar_wex = {
+		window_name = "mdr_topbar_wex"
+		context_type = player_context
+		parent_window_token = top_bar
+
+		visible = { always = yes }
+
+		properties = {
+			mdr_topbar_wex_bar = {
+				frame = mdr_wex_bar_pct
+			}
+		}
+
+		ai_enabled = { always = no }
+	}
+
+	mdr_topbar_food = {
+		window_name = "mdr_topbar_food"
+		context_type = player_context
+		parent_window_token = top_bar
+
+		visible = { mdr_food_on = yes }
+
+		properties = {
+			mdr_topbar_food_icon = {
+				frame = mdr_food_trend_frame
+			}
+			mdr_topbar_food_bar = {
+				frame = mdr_food_bar_pct
+			}
+		}
+
+		ai_enabled = { always = no }
+	}
+}

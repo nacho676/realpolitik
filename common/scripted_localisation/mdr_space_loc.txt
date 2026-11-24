@@ -1,0 +1,108 @@
+# The agency's name, typed on the menu's keyboard (common/scripted_localisation/mdr_space_keyboard_loc.txt).
+defined_text = {
+	name = mdr_space_agency_name
+	text = {
+		trigger = { check_variable = { mdr_space_len > 0 } }
+		localization_key = MDR_SPACE_NAME_TYPED
+	}
+	text = {
+		localization_key = MDR_SPACE_NAME_GENERIC
+	}
+}
+
+defined_text = {
+	name = mdr_space_tier_text
+	text = {
+		trigger = { check_variable = { mdr_space_tier = 3 } }
+		localization_key = MDR_SPACE_TIER_3
+	}
+	text = {
+		trigger = { check_variable = { mdr_space_tier = 2 } }
+		localization_key = MDR_SPACE_TIER_2
+	}
+	text = {
+		trigger = { check_variable = { mdr_space_tier = 1 } }
+		localization_key = MDR_SPACE_TIER_1
+	}
+	text = {
+		localization_key = MDR_SPACE_TIER_0
+	}
+}
+
+defined_text = {
+	name = mdr_space_priority_sites
+	text = {
+		trigger = { check_variable = { mdr_space_sites > 0 } }
+		localization_key = MDR_SPACE_PRIORITY_SITES_OK
+	}
+	text = {
+		localization_key = MDR_SPACE_PRIORITY_SITES_NO
+	}
+}
+
+defined_text = {
+	name = mdr_space_priority_budget
+	text = {
+		trigger = { check_variable = { mdr_space_budget > 0 } }
+		localization_key = MDR_SPACE_PRIORITY_BUDGET_OK
+	}
+	text = {
+		localization_key = MDR_SPACE_PRIORITY_BUDGET_NO
+	}
+}
+
+defined_text = {
+	name = mdr_space_req_tech
+	text = {
+		trigger = { has_tech = mdr_sp_foundations }
+		localization_key = MDR_SPACE_REQ_TECH_OK
+	}
+	text = {
+		localization_key = MDR_SPACE_REQ_TECH_NO
+	}
+}
+
+defined_text = {
+	name = mdr_space_req_gdp
+	text = {
+		trigger = { check_variable = { gdp_total > 48 } }
+		localization_key = MDR_SPACE_REQ_GDP_OK
+	}
+	text = {
+		localization_key = MDR_SPACE_REQ_GDP_NO
+	}
+}
+
+defined_text = {
+	name = mdr_space_req_money
+	text = {
+		trigger = { check_variable = { treasury > 1.8 } has_political_power > 96 }
+		localization_key = MDR_SPACE_REQ_MONEY_OK
+	}
+	text = {
+		localization_key = MDR_SPACE_REQ_MONEY_NO
+	}
+}
+
+defined_text = {
+	name = mdr_space_req_name
+	text = {
+		trigger = { check_variable = { mdr_space_len > 0 } }
+		localization_key = MDR_SPACE_REQ_NAME_OK
+	}
+	text = {
+		localization_key = MDR_SPACE_REQ_NAME_NO
+	}
+}
+
+# Line of the space budget in Economy's additional expenses.
+defined_text = {
+	name = additional_expense_mdr_space
+	text = {
+		trigger = { check_variable = { additional_expense_mdr_space > 0 } }
+		localization_key = MDR_SPACE_EXPENSE_LOC
+	}
+	text = {
+		localization_key = MDR_SPACE_CH_EMPTY
+	}
+}

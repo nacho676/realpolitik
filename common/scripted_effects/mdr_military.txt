@@ -1,0 +1,154 @@
+# Frozen foreign reserves: a country under Western sanctions, or at war with the issuer of its reserve currency,
+# loses the reserves it keeps abroad (Afghanistan 2021, Russia 2022).
+mdr_reserves_monthly = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = mdr_reserves_frozen_recently }
+			OR = {
+				AND = {
+					OR = {
+						has_idea = us_dollar
+						has_idea = euro
+						has_idea = british_pound
+						has_idea = japanese_yen
+						has_idea = swiss_frank
+						has_idea = gulden
+					}
+					mdr_is_under_western_sanctions = yes
+				}
+				AND = { has_idea = us_dollar has_war_with = USA }
+				AND = { has_idea = euro OR = { has_war_with = GER has_war_with = FRA has_war_with = ITA } }
+				AND = { has_idea = british_pound has_war_with = ENG }
+				AND = { has_idea = japanese_yen has_war_with = JAP }
+				AND = { has_idea = swiss_frank has_war_with = SWI }
+				AND = { has_idea = gulden has_war_with = HOL }
+				AND = { has_idea = chinese_yuan has_war_with = CHI }
+				AND = { has_idea = russia_rouble has_war_with = SOV }
+			}
+		}
+		set_country_flag = { flag = mdr_reserves_frozen_recently days = 1825 value = 1 }
+		# Reserves held abroad are about 40% of the treasury.
+		if = { limit = { check_variable = { treasury > 0 } }
+			set_temp_variable = { treasury_change = treasury }
+			multiply_temp_variable = { treasury_change = -0.4 }
+			modify_treasury_effect = yes
+		}
+		add_timed_idea = { idea = mdr_reserves_frozen days = 730 }
+		country_event = { id = mdr_military.1 }
+	}
+}
+
+# Recruitment crisis: a volunteer army with low unemployment and a small defence budget cannot fill its ranks.
+mdr_military_weekly = {
+	if = {
+		limit = {
+			has_idea = volunteer_army
+			check_variable = { total_unemployed_percentage_display < 0.05 }
+			OR = {
+				has_idea = defence_00
+				has_idea = defence_01
+				has_idea = defence_02
+			}
+			NOT = { has_idea = mdr_recruitment_crisis }
+			NOT = { has_country_flag = mdr_recruitment_campaign }
+		}
+		add_ideas = mdr_recruitment_crisis
+	}
+	else_if = {
+		limit = {
+			has_idea = mdr_recruitment_crisis
+			OR = {
+				NOT = { has_idea = volunteer_army }
+				check_variable = { total_unemployed_percentage_display > 0.07 }
+				NOT = {
+					OR = {
+						has_idea = defence_00
+						has_idea = defence_01
+						has_idea = defence_02
+					}
+				}
+			}
+		}
+		remove_ideas = mdr_recruitment_crisis
+	}
+}
+
+# Calls up about 0.3% of the population.
+mdr_mobilize_reservists = {
+	set_temp_variable = { mdr_reservists = population_total_m }
+	multiply_temp_variable = { mdr_reservists = 3000 }
+	add_manpower = mdr_reservists
+	add_timed_idea = { idea = mdr_mobilization days = 180 }
+	set_country_flag = { flag = mdr_mobilization_cooldown days = 365 value = 1 }
+}
+
+# Desertion: at war with war support below 30%, or stability below 30% while losing territory (mdr_cap_t from
+# mdr_capitulation_update, run just before). Loses (0.30 - lowest value) x 5% of manpower a week, never below 10k.
+mdr_desertion_weekly = {
+	set_variable = { mdr_desertion_k = 0 }
+	if = {
+		limit = {
+			has_war = yes
+			NOT = { has_country_flag = mdr_military_tribunals }
+			check_variable = { manpower_k > 10 }
+			OR = {
+				has_war_support < 0.3
+				AND = {
+					has_stability < 0.3
+					check_variable = { mdr_cap_t < 0.9 }
+				}
+			}
+		}
+		set_temp_variable = { mdr_des_low = 0.3 }
+		if = { limit = { has_war_support < 0.3 } set_temp_variable = { mdr_des_low = has_war_support } }
+		if = { limit = { has_stability < 0.3 check_variable = { mdr_cap_t < 0.9 } check_variable = { has_stability < mdr_des_low } }
+			set_temp_variable = { mdr_des_low = has_stability }
+		}
+		set_variable = { mdr_desertion_k = 0.3 }
+		subtract_from_variable = { mdr_desertion_k = mdr_des_low }
+		multiply_variable = { mdr_desertion_k = 0.05 }
+		multiply_variable = { mdr_desertion_k = manpower_k }
+		set_temp_variable = { mdr_des_room = manpower_k }
+		subtract_from_temp_variable = { mdr_des_room = 10 }
+		if = { limit = { check_variable = { mdr_desertion_k > mdr_des_room } } set_variable = { mdr_desertion_k = mdr_des_room } }
+		set_temp_variable = { mdr_des_loss = mdr_desertion_k }
+		multiply_temp_variable = { mdr_des_loss = -1000 }
+		add_manpower = mdr_des_loss
+		set_country_flag = { flag = mdr_desertion_active days = 8 value = 1 }
+		if = { limit = { NOT = { has_country_flag = mdr_desertion_warned } }
+			set_country_flag = { flag = mdr_desertion_warned days = 730 value = 1 }
+			country_event = { id = mdr_military.2 }
+		}
+	}
+}
+
+# Wounded back to the front: each month's new casualties (casualties_k counts dead, wounded and captured) return two
+# months later, an estimated 15% to 40% depending on Millennium Dawn's health law.
+mdr_wounded_monthly = {
+	if = { limit = { NOT = { has_variable = mdr_wnd_last } }
+		# First run (new game or submod just enabled): old casualties are not returned.
+		set_variable = { mdr_wnd_last = casualties_k }
+	}
+	else = {
+		set_temp_variable = { mdr_wnd_new = casualties_k }
+		subtract_from_temp_variable = { mdr_wnd_new = mdr_wnd_last }
+		set_variable = { mdr_wnd_last = casualties_k }
+		if = { limit = { check_variable = { mdr_wnd_new < 0 } } set_temp_variable = { mdr_wnd_new = 0 } }
+		set_variable = { mdr_wnd_back_k = 0 }
+		if = { limit = { check_variable = { mdr_wnd_2 > 0 } }
+			if = { limit = { has_idea = health_06 } set_variable = { mdr_wnd_rate = 0.4 } }
+			else_if = { limit = { has_idea = health_05 } set_variable = { mdr_wnd_rate = 0.35 } }
+			else_if = { limit = { has_idea = health_04 } set_variable = { mdr_wnd_rate = 0.3 } }
+			else_if = { limit = { has_idea = health_03 } set_variable = { mdr_wnd_rate = 0.25 } }
+			else_if = { limit = { has_idea = health_02 } set_variable = { mdr_wnd_rate = 0.2 } }
+			else = { set_variable = { mdr_wnd_rate = 0.15 } }
+			set_variable = { mdr_wnd_back_k = mdr_wnd_2 }
+			multiply_variable = { mdr_wnd_back_k = mdr_wnd_rate }
+			set_temp_variable = { mdr_wnd_back = mdr_wnd_back_k }
+			multiply_temp_variable = { mdr_wnd_back = 1000 }
+			add_manpower = mdr_wnd_back
+		}
+		set_variable = { mdr_wnd_2 = mdr_wnd_1 }
+		set_variable = { mdr_wnd_1 = mdr_wnd_new }
+	}
+}

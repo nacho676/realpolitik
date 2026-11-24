@@ -1,0 +1,29 @@
+# Genetics technologies offset part of a pandemic's penalties, without touching Millennium Dawn's pandemic ideas (common/ideas/Economic.txt):
+# the sum of their stability, factory output and productivity penalties, times mdr_pandemic_resilience. Country scope, weekly.
+mdr_pandemic_relief_weekly = {
+	set_temp_variable = { mdr_pr_share = modifier@mdr_pandemic_resilience }
+	set_temp_variable = { mdr_pr_s = 0 }
+	set_temp_variable = { mdr_pr_i = 0 }
+	set_temp_variable = { mdr_pr_p = 0 }
+	if = { limit = { has_idea = COVID_pandemic_origin } add_to_temp_variable = { mdr_pr_s = 0.10 } add_to_temp_variable = { mdr_pr_i = 0.10 } add_to_temp_variable = { mdr_pr_p = 0.05 } }
+	if = { limit = { has_idea = COVID_pandemic_impact } add_to_temp_variable = { mdr_pr_s = 0.05 } add_to_temp_variable = { mdr_pr_i = 0.05 } add_to_temp_variable = { mdr_pr_p = 0.03 } }
+	if = { limit = { has_idea = pandemic_swine_flu_origin } add_to_temp_variable = { mdr_pr_s = 0.05 } add_to_temp_variable = { mdr_pr_p = 0.02 } }
+	if = { limit = { has_idea = pandemic_swine_flu_impact } add_to_temp_variable = { mdr_pr_s = 0.02 } }
+	if = { limit = { has_idea = pandemic_MERS_outbreak } add_to_temp_variable = { mdr_pr_s = 0.03 } }
+	if = { limit = { has_idea = pandemic_ebola_outbreak } add_to_temp_variable = { mdr_pr_s = 0.10 } add_to_temp_variable = { mdr_pr_i = 0.05 } add_to_temp_variable = { mdr_pr_p = 0.03 } }
+	if = { limit = { has_idea = pandemic_ebola_DRC } add_to_temp_variable = { mdr_pr_s = 0.08 } add_to_temp_variable = { mdr_pr_p = 0.02 } }
+	if = { limit = { check_variable = { mdr_pr_share > 0 } check_variable = { mdr_pr_s > 0 } }
+		set_variable = { mdr_pr_stability = mdr_pr_s }
+		multiply_variable = { mdr_pr_stability = mdr_pr_share }
+		set_variable = { mdr_pr_output = mdr_pr_i }
+		multiply_variable = { mdr_pr_output = mdr_pr_share }
+		set_variable = { mdr_pr_productivity = mdr_pr_p }
+		multiply_variable = { mdr_pr_productivity = mdr_pr_share }
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = mdr_pandemic_relief } } }
+			add_dynamic_modifier = { modifier = mdr_pandemic_relief }
+		}
+	}
+	else_if = { limit = { has_dynamic_modifier = { modifier = mdr_pandemic_relief } }
+		remove_dynamic_modifier = { modifier = mdr_pandemic_relief }
+	}
+}

@@ -1,0 +1,22 @@
+resources = {
+	# Frames 9 to 11 are the icons Realpolitik adds to the resource strips (gfx/interface/resources_strip.dds).
+	uranium = {
+		icon_frame = 9
+		cic = 0.125
+		convoys = 0.1
+	}
+
+	# Grain ("Granos" in the texts), grown by cropland (common/buildings/mdr_buildings.txt) and eaten as food.
+	wheat = {
+		icon_frame = 10
+		cic = 0.125
+		convoys = 0.1
+	}
+
+	# Mined and separated by rare earth complexes; every microchip plant uses 1.
+	rare_earths = {
+		icon_frame = 11
+		cic = 0.125
+		convoys = 0.1
+	}
+}

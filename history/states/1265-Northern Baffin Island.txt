@@ -1,0 +1,26 @@
+state = {
+	id = 1265
+	name = "STATE_1265" # Northern Baffin Island
+	manpower = 4000
+
+	state_category = state_00
+
+	history = {
+		owner = CAN
+		victory_points = {
+			16750 1
+		}
+		buildings = {
+			infrastructure = 1
+			16750 = {
+				naval_base = 1
+			}
+		}
+		add_core_of = CAN
+		set_state_flag = mdr_polar   # low disaster risk (common/scripted_effects/mdr_disasters.txt)
+		set_variable = { state_renewable_capacity_factor_modifier_var = 0.600 }
+		set_variable = { productivity_state_var = 500 }
+	}
+
+	provinces = { 16714 16717 16740 16743 16750 16754 16758 16759 16765 16773 16790 16799 16804 16806 16845 16855 16861 16864 16868 16881 16899 16918 16927 16965 16966 16982 16989 17023 }
+}

@@ -1,0 +1,513 @@
+# Demography branch, shared by every focus tree (herramientas/actualizar_arboles.ps1 adds "shared_focus = mdr_demo_root"
+# to each copied Millennium Dawn tree). Hidden unless the country has an aging national spirit.
+# Three reform paths; finishing any of them lowers aging one level (mdr_demography_path_complete).
+# After any of these focuses, the next one waits 30 days (country flag mdr_demo_rest).
+
+shared_focus = {
+	id = mdr_demo_root
+	icon = focus_generic_population_growth
+	x = 0
+	y = 0
+	# Right of the last focus of each tree, written by herramientas/actualizar_arboles.ps1.
+		# BEGIN offsets
+		offset = { x = 50 y = 0 trigger = { has_focus_tree = abkhazia_focus } }
+		offset = { x = 106 y = 0 trigger = { has_focus_tree = afghanistan_focus } }
+		offset = { x = 209 y = 0 trigger = { has_focus_tree = algeria_focus } }
+		offset = { x = 113 y = 0 trigger = { has_focus_tree = armenia_focus } }
+		offset = { x = 10 y = 0 trigger = { has_focus_tree = artsakh_focus } }
+		offset = { x = 54 y = 0 trigger = { has_focus_tree = australia_abbottgov_focus } }
+		offset = { x = 76 y = 0 trigger = { has_focus_tree = azerbaijan_focus_historical_early } }
+		offset = { x = 14 y = 0 trigger = { has_focus_tree = bashkiriya_focus } }
+		offset = { x = 119 y = 0 trigger = { has_focus_tree = belorussia_focus } }
+		offset = { x = 78 y = 0 trigger = { has_focus_tree = bolivia_focus } }
+		offset = { x = 76 y = 0 trigger = { has_focus_tree = BOS_focus } }
+		offset = { x = 40 y = 0 trigger = { has_focus_tree = botswana_focus } }
+		offset = { x = 101 y = 0 trigger = { has_focus_tree = BRA_focus_tree } }
+		offset = { x = 88 y = 0 trigger = { has_focus_tree = bulgaria_focus } }
+		offset = { x = 43 y = 0 trigger = { has_focus_tree = burma_focus } }
+		offset = { x = 111 y = 0 trigger = { has_focus_tree = canada_focus } }
+		offset = { x = 72 y = 0 trigger = { has_focus_tree = Cascadia_focus } }
+		offset = { x = 64 y = 0 trigger = { has_focus_tree = centralasia } }
+		offset = { x = 21 y = 0 trigger = { has_focus_tree = chechnya_focus } }
+		offset = { x = 4 y = 0 trigger = { has_focus_tree = chimera_focus } }
+		offset = { x = 286 y = 0 trigger = { has_focus_tree = china_focus } }
+		offset = { x = 59 y = 0 trigger = { has_focus_tree = comoros_focus } }
+		offset = { x = 54 y = 0 trigger = { has_focus_tree = costellogov_focus } }
+		offset = { x = 17 y = 0 trigger = { has_focus_tree = crimea_focus } }
+		offset = { x = 111 y = 0 trigger = { has_focus_tree = cuba_focus } }
+		offset = { x = 125 y = 0 trigger = { has_focus_tree = czech_focus } }
+		offset = { x = 110 y = 0 trigger = { has_focus_tree = denmark_focus } }
+		offset = { x = 38 y = 0 trigger = { has_focus_tree = dpr_focus } }
+		offset = { x = 4 y = 0 trigger = { has_focus_tree = dummy_generic_focus } }
+		offset = { x = 70 y = 0 trigger = { has_focus_tree = egypt_focus } }
+		offset = { x = 16 y = 0 trigger = { has_focus_tree = ERI_eritrea_puppet_focus } }
+		offset = { x = 75 y = 0 trigger = { has_focus_tree = EST_focus_tree } }
+		offset = { x = 44 y = 0 trigger = { has_focus_tree = ethiopia_focus } }
+		offset = { x = 24 y = 0 trigger = { has_focus_tree = event_horizon_generic_focus } }
+		offset = { x = 67 y = 0 trigger = { has_focus_tree = fiji_focus } }
+		offset = { x = 75 y = 0 trigger = { has_focus_tree = finland_focus } }
+		offset = { x = 198 y = 0 trigger = { has_focus_tree = france_focus } }
+		offset = { x = 51 y = 0 trigger = { has_focus_tree = free_states_of_america_focus } }
+		offset = { x = 75 y = 0 trigger = { has_focus_tree = generic_focus } }
+		offset = { x = 75 y = 0 trigger = { has_focus_tree = georgia_focus } }
+		offset = { x = 213 y = 0 trigger = { has_focus_tree = germany_focus } }
+		offset = { x = 54 y = 0 trigger = { has_focus_tree = gillardgov_focus } }
+		offset = { x = 129 y = 0 trigger = { has_focus_tree = greece_focus } }
+		offset = { x = 50 y = 0 trigger = { has_focus_tree = greenland_focus } }
+		offset = { x = 70 y = 0 trigger = { has_focus_tree = gulf_focus } }
+		offset = { x = 39 y = 0 trigger = { has_focus_tree = hez_focus } }
+		offset = { x = 27 y = 0 trigger = { has_focus_tree = hong_kong } }
+		offset = { x = 54 y = 0 trigger = { has_focus_tree = howardgov_focus } }
+		offset = { x = 154 y = 0 trigger = { has_focus_tree = india_focus } }
+		offset = { x = 64 y = 0 trigger = { has_focus_tree = indonesia_focus } }
+		offset = { x = 40 y = 0 trigger = { has_focus_tree = iran_focus } }
+		offset = { x = 113 y = 0 trigger = { has_focus_tree = iraq_focus } }
+		offset = { x = 146 y = 0 trigger = { has_focus_tree = israel_focus } }
+		offset = { x = 192 y = 0 trigger = { has_focus_tree = italy_focus } }
+		offset = { x = 146 y = 0 trigger = { has_focus_tree = japan_focus } }
+		offset = { x = 22 y = 0 trigger = { has_focus_tree = kabyle_focus } }
+		offset = { x = 23 y = 0 trigger = { has_focus_tree = khanti_mansi_focus } }
+		offset = { x = 29 y = 0 trigger = { has_focus_tree = kharkiv_focus } }
+		offset = { x = 80 y = 0 trigger = { has_focus_tree = korea_south_focus } }
+		offset = { x = 75 y = 0 trigger = { has_focus_tree = kosovo_focus } }
+		offset = { x = 92 y = 0 trigger = { has_focus_tree = kuban_focus } }
+		offset = { x = 86 y = 0 trigger = { has_focus_tree = Libya_focus } }
+		offset = { x = 75 y = 0 trigger = { has_focus_tree = liechtenstein_focus } }
+		offset = { x = 30 y = 0 trigger = { has_focus_tree = LPR_focus } }
+		offset = { x = 22 y = 0 trigger = { has_focus_tree = malorossiya_focus } }
+		offset = { x = 54 y = 0 trigger = { has_focus_tree = miscle_tree_focus } }
+		offset = { x = 75 y = 0 trigger = { has_focus_tree = montenegro_focus } }
+		offset = { x = 179 y = 0 trigger = { has_focus_tree = netherlands_focus } }
+		offset = { x = 36 y = 0 trigger = { has_focus_tree = New_England_focus } }
+		offset = { x = 60 y = 0 trigger = { has_focus_tree = nigeria_focus } }
+		offset = { x = 103 y = 0 trigger = { has_focus_tree = north_korea_focus } }
+		offset = { x = 75 y = 0 trigger = { has_focus_tree = norway_focus } }
+		offset = { x = 29 y = 0 trigger = { has_focus_tree = odessa_focus } }
+		offset = { x = 64 y = 0 trigger = { has_focus_tree = PMR_focus } }
+		offset = { x = 137 y = 0 trigger = { has_focus_tree = polish_focus } }
+		offset = { x = 30 y = 0 trigger = { has_focus_tree = Republic_of_Lakota_focus } }
+		offset = { x = 139 y = 0 trigger = { has_focus_tree = romanian_focus } }
+		offset = { x = 54 y = 0 trigger = { has_focus_tree = ruddgov_focus } }
+		offset = { x = 54 y = 0 trigger = { has_focus_tree = ruddgov_return_focus } }
+		offset = { x = 239 y = 0 trigger = { has_focus_tree = russia_focus } }
+		offset = { x = 32 y = 0 trigger = { has_focus_tree = russian_subjects_focus_tree } }
+		offset = { x = 122 y = 0 trigger = { has_focus_tree = saudi_focus_tree } }
+		offset = { x = 75 y = 0 trigger = { has_focus_tree = serbian_focus } }
+		offset = { x = 68 y = 0 trigger = { has_focus_tree = singapore_focus } }
+		offset = { x = 75 y = 0 trigger = { has_focus_tree = SMA_focus } }
+		offset = { x = 25 y = 0 trigger = { has_focus_tree = south_ossetia_focus } }
+		offset = { x = 62 y = 0 trigger = { has_focus_tree = Southern_Republic_of_America_focus } }
+		offset = { x = 160 y = 0 trigger = { has_focus_tree = spanish_focus } }
+		offset = { x = 211 y = 0 trigger = { has_focus_tree = sweden } }
+		offset = { x = 113 y = 0 trigger = { has_focus_tree = switzerland_focus } }
+		offset = { x = 78 y = 0 trigger = { has_focus_tree = Syria_2000 } }
+		offset = { x = 88 y = 0 trigger = { has_focus_tree = tajikistan_focus } }
+		offset = { x = 4 y = 0 trigger = { has_focus_tree = tatarstan_focus } }
+		offset = { x = 161 y = 0 trigger = { has_focus_tree = thailand_focus } }
+		offset = { x = 20 y = 0 trigger = { has_focus_tree = tibesti_focus } }
+		offset = { x = 75 y = 0 trigger = { has_focus_tree = turkey_focus } }
+		offset = { x = 54 y = 0 trigger = { has_focus_tree = turnbullgov_focus } }
+		offset = { x = 10 y = 0 trigger = { has_focus_tree = ukr_provisional_republic_focus } }
+		offset = { x = 152 y = 0 trigger = { has_focus_tree = ukraine_focus } }
+		offset = { x = 150 y = 0 trigger = { has_focus_tree = united_kingdom_focus } }
+		offset = { x = 57 y = 0 trigger = { has_focus_tree = united_states_focus } }
+		offset = { x = 46 y = 0 trigger = { has_focus_tree = ural_focus } }
+		offset = { x = 71 y = 0 trigger = { has_focus_tree = venezuela_focus } }
+		offset = { x = 32 y = 0 trigger = { has_focus_tree = vitebsk_focus } }
+		offset = { x = 75 y = 0 trigger = { has_focus_tree = vojvodina_focus } }
+		offset = { x = 4 y = 0 trigger = { has_focus_tree = zombie_focus } }
+		# END offsets
+		# Realpolitik trees, outside the generated block (herramientas/make_mongolia.py prints the width).
+		offset = { x = 65 y = 0 trigger = { has_focus_tree = mdr_mongolia_focus } }
+	cost = 5
+	allow_branch = {
+		OR = {
+			has_idea = mdr_aging_1
+			has_idea = mdr_aging_2
+			has_idea = mdr_aging_3
+			has_completed_focus = mdr_demo_root
+		}
+	}
+	search_filters = { FOCUS_FILTER_STABILITY }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = mdr_demo_rest_tt
+			NOT = { has_country_flag = mdr_demo_rest }
+		}
+	}
+	completion_reward = {
+		set_country_flag = { flag = mdr_demo_rest days = 30 value = 1 }
+		log = "[GetDateText]: [Root.GetName]: Focus mdr_demo_root"
+		add_stability = 0.02
+	}
+	ai_will_do = { base = 3 }
+}
+
+shared_focus = {
+	id = mdr_demo_census
+	icon = generic_university
+	relative_position_id = mdr_demo_root
+	x = 0
+	y = 1
+	cost = 7
+	prerequisite = { focus = mdr_demo_root }
+	search_filters = { FOCUS_FILTER_STABILITY }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = mdr_demo_rest_tt
+			NOT = { has_country_flag = mdr_demo_rest }
+		}
+	}
+	completion_reward = {
+		set_country_flag = { flag = mdr_demo_rest days = 30 value = 1 }
+		log = "[GetDateText]: [Root.GetName]: Focus mdr_demo_census"
+		add_political_power = 25
+	}
+	ai_will_do = { base = 3 }
+}
+
+# Natalist path: slow and expensive, no side effects.
+shared_focus = {
+	id = mdr_demo_natal_1
+	icon = family
+	relative_position_id = mdr_demo_root
+	x = -2
+	y = 2
+	cost = 8
+	prerequisite = { focus = mdr_demo_census }
+	search_filters = { FOCUS_FILTER_STABILITY }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = mdr_demo_rest_tt
+			NOT = { has_country_flag = mdr_demo_rest }
+		}
+	}
+	completion_reward = {
+		set_country_flag = { flag = mdr_demo_rest days = 30 value = 1 }
+		log = "[GetDateText]: [Root.GetName]: Focus mdr_demo_natal_1"
+		set_temp_variable = { mdr_demo_cost_permille = 1 }
+		mdr_demography_pay = yes
+	}
+	ai_will_do = { base = 2 }
+}
+
+shared_focus = {
+	id = mdr_demo_natal_2
+	icon = SOV_kinder
+	relative_position_id = mdr_demo_root
+	x = -2
+	y = 3
+	cost = 10
+	prerequisite = { focus = mdr_demo_natal_1 }
+	search_filters = { FOCUS_FILTER_STABILITY }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = mdr_demo_rest_tt
+			NOT = { has_country_flag = mdr_demo_rest }
+		}
+	}
+	completion_reward = {
+		set_country_flag = { flag = mdr_demo_rest days = 30 value = 1 }
+		log = "[GetDateText]: [Root.GetName]: Focus mdr_demo_natal_2"
+		set_temp_variable = { mdr_demo_cost_permille = 1.5 }
+		mdr_demography_pay = yes
+	}
+	ai_will_do = { base = 2 }
+}
+
+shared_focus = {
+	id = mdr_demo_natal_housing
+	icon = generic_housing
+	relative_position_id = mdr_demo_root
+	x = -2
+	y = 4
+	cost = 10
+	prerequisite = { focus = mdr_demo_natal_2 }
+	search_filters = { FOCUS_FILTER_STABILITY }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = mdr_demo_rest_tt
+			NOT = { has_country_flag = mdr_demo_rest }
+		}
+		has_stability > 0.3
+	}
+	completion_reward = {
+		set_country_flag = { flag = mdr_demo_rest days = 30 value = 1 }
+		log = "[GetDateText]: [Root.GetName]: Focus mdr_demo_natal_housing"
+		set_temp_variable = { mdr_demo_cost_permille = 1 }
+		mdr_demography_pay = yes
+		add_stability = 0.01
+	}
+	ai_will_do = { base = 2 }
+}
+
+shared_focus = {
+	id = mdr_demo_natal_3
+	icon = goal_JAP_baby
+	relative_position_id = mdr_demo_root
+	x = -2
+	y = 5
+	cost = 12
+	prerequisite = { focus = mdr_demo_natal_housing }
+	search_filters = { FOCUS_FILTER_STABILITY }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = mdr_demo_rest_tt
+			NOT = { has_country_flag = mdr_demo_rest }
+		}
+		custom_trigger_tooltip = {
+			tooltip = mdr_demo_treasury_tt
+			check_variable = { treasury > 0 }
+		}
+	}
+	completion_reward = {
+		set_country_flag = { flag = mdr_demo_rest days = 30 value = 1 }
+		log = "[GetDateText]: [Root.GetName]: Focus mdr_demo_natal_3"
+		set_temp_variable = { mdr_demo_cost_permille = 2 }
+		mdr_demography_pay = yes
+		mdr_demography_path_complete = yes
+	}
+	ai_will_do = { base = 2 }
+}
+
+# Immigration path: fast and cheap, costs stability.
+shared_focus = {
+	id = mdr_demo_immigration_1
+	icon = pro_immigration1
+	relative_position_id = mdr_demo_root
+	x = 0
+	y = 2
+	cost = 7
+	prerequisite = { focus = mdr_demo_census }
+	search_filters = { FOCUS_FILTER_STABILITY }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = mdr_demo_rest_tt
+			NOT = { has_country_flag = mdr_demo_rest }
+		}
+	}
+	completion_reward = {
+		set_country_flag = { flag = mdr_demo_rest days = 30 value = 1 }
+		log = "[GetDateText]: [Root.GetName]: Focus mdr_demo_immigration_1"
+		set_temp_variable = { mdr_demo_cost_permille = 0.5 }
+		mdr_demography_pay = yes
+		add_stability = -0.02
+	}
+	ai_will_do = { base = 1 }
+}
+
+shared_focus = {
+	id = mdr_demo_immigration_2
+	icon = pro_immigration2
+	relative_position_id = mdr_demo_root
+	x = 0
+	y = 3
+	cost = 8
+	prerequisite = { focus = mdr_demo_immigration_1 }
+	search_filters = { FOCUS_FILTER_STABILITY }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = mdr_demo_rest_tt
+			NOT = { has_country_flag = mdr_demo_rest }
+		}
+		has_stability > 0.35
+	}
+	completion_reward = {
+		set_country_flag = { flag = mdr_demo_rest days = 30 value = 1 }
+		log = "[GetDateText]: [Root.GetName]: Focus mdr_demo_immigration_2"
+		set_temp_variable = { mdr_demo_cost_permille = 0.5 }
+		mdr_demography_pay = yes
+		add_stability = -0.01
+	}
+	ai_will_do = { base = 1 }
+}
+
+shared_focus = {
+	id = mdr_demo_immigration_family
+	icon = afg_family_icon
+	relative_position_id = mdr_demo_root
+	x = 0
+	y = 4
+	cost = 8
+	prerequisite = { focus = mdr_demo_immigration_2 }
+	search_filters = { FOCUS_FILTER_STABILITY }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = mdr_demo_rest_tt
+			NOT = { has_country_flag = mdr_demo_rest }
+		}
+		has_war = no
+	}
+	completion_reward = {
+		set_country_flag = { flag = mdr_demo_rest days = 30 value = 1 }
+		log = "[GetDateText]: [Root.GetName]: Focus mdr_demo_immigration_family"
+		set_temp_variable = { mdr_demo_cost_permille = 0.5 }
+		mdr_demography_pay = yes
+		add_stability = -0.02
+	}
+	ai_will_do = { base = 1 }
+}
+
+shared_focus = {
+	id = mdr_demo_immigration_3
+	icon = world_citizen_focus
+	relative_position_id = mdr_demo_root
+	x = 0
+	y = 5
+	cost = 10
+	prerequisite = { focus = mdr_demo_immigration_family }
+	search_filters = { FOCUS_FILTER_STABILITY }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = mdr_demo_rest_tt
+			NOT = { has_country_flag = mdr_demo_rest }
+		}
+		has_stability > 0.4
+	}
+	completion_reward = {
+		set_country_flag = { flag = mdr_demo_rest days = 30 value = 1 }
+		log = "[GetDateText]: [Root.GetName]: Focus mdr_demo_immigration_3"
+		set_temp_variable = { mdr_demo_cost_permille = 0.5 }
+		mdr_demography_pay = yes
+		add_stability = -0.03
+		mdr_demography_path_complete = yes
+	}
+	ai_will_do = { base = 1 }
+}
+
+# Productivity path: automation, training and a later retirement age, unpopular.
+shared_focus = {
+	id = mdr_demo_productivity_1
+	icon = economic_robots
+	relative_position_id = mdr_demo_root
+	x = 2
+	y = 2
+	cost = 10
+	prerequisite = { focus = mdr_demo_census }
+	search_filters = { FOCUS_FILTER_STABILITY }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = mdr_demo_rest_tt
+			NOT = { has_country_flag = mdr_demo_rest }
+		}
+	}
+	completion_reward = {
+		set_country_flag = { flag = mdr_demo_rest days = 30 value = 1 }
+		log = "[GetDateText]: [Root.GetName]: Focus mdr_demo_productivity_1"
+		set_temp_variable = { mdr_demo_cost_permille = 2 }
+		mdr_demography_pay = yes
+	}
+	ai_will_do = { base = 1 }
+}
+
+shared_focus = {
+	id = mdr_demo_productivity_training
+	icon = focus_generic_education
+	relative_position_id = mdr_demo_root
+	x = 2
+	y = 3
+	cost = 8
+	prerequisite = { focus = mdr_demo_productivity_1 }
+	search_filters = { FOCUS_FILTER_STABILITY }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = mdr_demo_rest_tt
+			NOT = { has_country_flag = mdr_demo_rest }
+		}
+	}
+	completion_reward = {
+		set_country_flag = { flag = mdr_demo_rest days = 30 value = 1 }
+		log = "[GetDateText]: [Root.GetName]: Focus mdr_demo_productivity_training"
+		set_temp_variable = { mdr_demo_cost_permille = 1 }
+		mdr_demography_pay = yes
+		add_stability = 0.01
+	}
+	ai_will_do = { base = 1 }
+}
+
+shared_focus = {
+	id = mdr_demo_productivity_2
+	icon = pensions_increase
+	relative_position_id = mdr_demo_root
+	x = 2
+	y = 4
+	cost = 8
+	prerequisite = { focus = mdr_demo_productivity_training }
+	search_filters = { FOCUS_FILTER_STABILITY }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = mdr_demo_rest_tt
+			NOT = { has_country_flag = mdr_demo_rest }
+		}
+		has_stability > 0.45
+	}
+	completion_reward = {
+		set_country_flag = { flag = mdr_demo_rest days = 30 value = 1 }
+		log = "[GetDateText]: [Root.GetName]: Focus mdr_demo_productivity_2"
+		set_temp_variable = { mdr_demo_cost_permille = 0.5 }
+		mdr_demography_pay = yes
+		add_stability = -0.05
+	}
+	ai_will_do = { base = 1 }
+}
+
+shared_focus = {
+	id = mdr_demo_productivity_3
+	icon = focus_generic_welfare
+	relative_position_id = mdr_demo_root
+	x = 2
+	y = 5
+	cost = 12
+	prerequisite = { focus = mdr_demo_productivity_2 }
+	search_filters = { FOCUS_FILTER_STABILITY }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = mdr_demo_rest_tt
+			NOT = { has_country_flag = mdr_demo_rest }
+		}
+		custom_trigger_tooltip = {
+			tooltip = mdr_demo_treasury_tt
+			check_variable = { treasury > 0 }
+		}
+	}
+	completion_reward = {
+		set_country_flag = { flag = mdr_demo_rest days = 30 value = 1 }
+		log = "[GetDateText]: [Root.GetName]: Focus mdr_demo_productivity_3"
+		set_temp_variable = { mdr_demo_cost_permille = 3 }
+		mdr_demography_pay = yes
+		mdr_demography_path_complete = yes
+	}
+	ai_will_do = { base = 1 }
+}
+
+# Closing focus: any two finished paths seal a lasting pact between generations.
+shared_focus = {
+	id = mdr_demo_pact
+	icon = Generic_Working_Class_Family
+	relative_position_id = mdr_demo_root
+	x = 0
+	y = 6
+	cost = 10
+	prerequisite = { focus = mdr_demo_natal_3 focus = mdr_demo_immigration_3 focus = mdr_demo_productivity_3 }
+	search_filters = { FOCUS_FILTER_STABILITY }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = mdr_demo_rest_tt
+			NOT = { has_country_flag = mdr_demo_rest }
+		}
+		custom_trigger_tooltip = {
+			tooltip = mdr_demo_two_paths_tt
+			OR = {
+				AND = { has_completed_focus = mdr_demo_natal_3 has_completed_focus = mdr_demo_immigration_3 }
+				AND = { has_completed_focus = mdr_demo_natal_3 has_completed_focus = mdr_demo_productivity_3 }
+				AND = { has_completed_focus = mdr_demo_immigration_3 has_completed_focus = mdr_demo_productivity_3 }
+			}
+		}
+	}
+	completion_reward = {
+		set_country_flag = { flag = mdr_demo_rest days = 30 value = 1 }
+		log = "[GetDateText]: [Root.GetName]: Focus mdr_demo_pact"
+		add_ideas = mdr_demo_pact_idea
+	}
+	ai_will_do = { base = 2 }
+}

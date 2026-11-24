@@ -1,0 +1,26 @@
+state = {
+	id = 1257
+	name = "STATE_1257" # North Slope
+	manpower = 9800
+
+	state_category = state_00
+
+	history = {
+		owner = USA
+		victory_points = {
+			16830 1
+		}
+		buildings = {
+			infrastructure = 1
+			16830 = {
+				naval_base = 1
+			}
+		}
+		add_core_of = USA
+		set_state_flag = mdr_polar   # low disaster risk (common/scripted_effects/mdr_disasters.txt)
+		set_variable = { state_renewable_capacity_factor_modifier_var = 0.600 }
+		set_variable = { productivity_state_var = 500 }
+	}
+
+	provinces = { 16830 16842 16843 16851 16853 16857 16866 16867 16879 16882 16883 16890 16916 16921 16925 16939 16940 16949 16959 16967 16979 16980 16987 16993 16996 16997 16998 }
+}

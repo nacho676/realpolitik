@@ -1,0 +1,90 @@
+# Realpolitik alerts, shown with Millennium Dawn's alert system (add_md_alert_unless_exists, remove_md_alert). Players only,
+# daily from common/on_actions/mdr_on_actions.txt. Tokens, sounds and pictures: common/ideas/mdr_alerts.txt, interface/mdr_alerts.gfx.
+
+# Input: temp variables alert_id, mdr_alert_want (0 hidden, 1 yellow, 2 red) and mdr_alert_shown (what is on screen now).
+# Redraws the alert only when its color changes; a right-click dismissal (MD's suppressed list) is respected.
+mdr_alert_apply = {
+	if = { limit = { NOT = { check_variable = { mdr_alert_want = mdr_alert_shown } } }
+		remove_md_alert = yes
+		if = { limit = { check_variable = { mdr_alert_want > 0 } }
+			set_temp_variable = { alert_color = mdr_alert_want }
+			set_temp_variable = { alert_data = 0 }
+			add_md_alert_unless_exists = yes
+		}
+	}
+}
+
+mdr_alerts_update = {
+	# Ammunition at war: less than four weeks of fighting left, red under two.
+	set_temp_variable = { alert_id = token:mdr_alert_ammo }
+	set_temp_variable = { mdr_alert_want = 0 }
+	if = { limit = { mdr_ammo_on = yes has_war = yes has_variable = mdr_ammo_days_left }
+		if = { limit = { check_variable = { mdr_ammo_days_left < 14 } } set_temp_variable = { mdr_alert_want = 2 } }
+		else_if = { limit = { check_variable = { mdr_ammo_days_left < 28 } } set_temp_variable = { mdr_alert_want = 1 } }
+	}
+	set_temp_variable = { mdr_alert_shown = mdr_alert_ammo_shown }
+	mdr_alert_apply = yes
+	set_variable = { mdr_alert_ammo_shown = mdr_alert_want }
+
+	# Food: imports cannot cover the gap, red once people go hungry.
+	set_temp_variable = { alert_id = token:mdr_alert_food }
+	set_temp_variable = { mdr_alert_want = 0 }
+	if = { limit = { mdr_food_on = yes }
+		if = { limit = { has_dynamic_modifier = { modifier = mdr_food_shortage } } set_temp_variable = { mdr_alert_want = 2 } }
+		else_if = { limit = { check_variable = { mdr_food_unmet > 0 } } set_temp_variable = { mdr_alert_want = 1 } }
+	}
+	set_temp_variable = { mdr_alert_shown = mdr_alert_food_shown }
+	mdr_alert_apply = yes
+	set_variable = { mdr_alert_food_shown = mdr_alert_want }
+
+	# Hidden unrest: building up, red once a social explosion can happen (above 60, mdr_civil_laws_weekly).
+	set_temp_variable = { alert_id = token:mdr_alert_unrest }
+	set_temp_variable = { mdr_alert_want = 0 }
+	if = { limit = { mdr_society_on = yes }
+		if = { limit = { check_variable = { mdr_unrest_hidden > 60 } } set_temp_variable = { mdr_alert_want = 2 } }
+		else_if = { limit = { check_variable = { mdr_unrest_hidden > 40 } } set_temp_variable = { mdr_alert_want = 1 } }
+	}
+	set_temp_variable = { mdr_alert_shown = mdr_alert_unrest_shown }
+	mdr_alert_apply = yes
+	set_variable = { mdr_alert_unrest_shown = mdr_alert_want }
+
+	# Straits: one is closed somewhere, red when the closure cuts our own routes.
+	set_temp_variable = { alert_id = token:mdr_alert_strait }
+	set_temp_variable = { mdr_alert_want = 0 }
+	if = { limit = { mdr_straits_on = yes }
+		if = { limit = { OR = { has_idea = mdr_strait_route_blocked has_idea = mdr_strait_supply_shock } } set_temp_variable = { mdr_alert_want = 2 } }
+		else_if = {
+			limit = {
+				OR = {
+					has_global_flag = mdr_strait_1_closed
+					has_global_flag = mdr_strait_2_closed
+					has_global_flag = mdr_strait_3_closed
+					has_global_flag = mdr_strait_4_closed
+					has_global_flag = mdr_strait_5_closed
+					has_global_flag = mdr_strait_6_closed
+					has_global_flag = mdr_strait_7_closed
+				}
+			}
+			set_temp_variable = { mdr_alert_want = 1 }
+		}
+	}
+	set_temp_variable = { mdr_alert_shown = mdr_alert_strait_shown }
+	mdr_alert_apply = yes
+	set_variable = { mdr_alert_strait_shown = mdr_alert_want }
+
+	# Uranium: reactors without enough fuel (mdr_uranium_shortfall, mdr_uranium_weekly).
+	set_temp_variable = { alert_id = token:mdr_alert_uranium }
+	set_temp_variable = { mdr_alert_want = 0 }
+	if = { limit = { check_variable = { mdr_uranium_shortfall < 0 } } set_temp_variable = { mdr_alert_want = 2 } }
+	set_temp_variable = { mdr_alert_shown = mdr_alert_uranium_shown }
+	mdr_alert_apply = yes
+	set_variable = { mdr_alert_uranium_shown = mdr_alert_want }
+
+	# Rare earths: microchip plants short of them (mdr_ree_shortfall, mdr_rare_earths_weekly).
+	set_temp_variable = { alert_id = token:mdr_alert_rare_earths }
+	set_temp_variable = { mdr_alert_want = 0 }
+	if = { limit = { check_variable = { mdr_ree_shortfall < 0 } } set_temp_variable = { mdr_alert_want = 1 } }
+	set_temp_variable = { mdr_alert_shown = mdr_alert_rare_earths_shown }
+	mdr_alert_apply = yes
+	set_variable = { mdr_alert_rare_earths_shown = mdr_alert_want }
+}

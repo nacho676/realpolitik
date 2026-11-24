@@ -1,0 +1,24 @@
+﻿l_english:
+ VERSION_MD: "Millennium Dawn v2.0.0 DEV\n§YRealpolitik v0.1.0 enabled§!"
+ VERSION_MD_LOADING: "Version: v2.0.0 DEV · Realpolitik v0.1.0"
+ PRODUCTION_MATERIALS_URANIUM: "Uranium"
+ FACILITY_BUILDINGS: "Special Projects"
+
+ md_closed_economy: "Protectionist Economy"
+ md_closed_economy_desc: "A protectionist economy almost shuts itself off from the world: high tariffs, quotas and export licences. The country relies on itself as much as it can, but still sells a small share of its resources (10%) on the world market."
+
+ # International Systems window: Realpolitik adds the treaties tab.
+ MISSILES_BUTTON_TT_DELAYED: "Manage your nation on the global stage. Interact with your §YSpace Program§! and §YSatellite Network§!, manage §YCounter-Terror Operations§!, conduct §YCyber Warfare§!, hire §YPrivate Military Contractors§!, interact with the §BUnited Nations§!, develop your own §CAntarctic Research Station§! and sign or leave §YInternational Treaties§!."
+ ADDITIONAL_EXPENSES_TOOLTIP: "Additional Expenses:\n[additional_expense_mdr_space][additional_expense_USA_war_cost][additional_expense_summary_iraq_war_compensation][additional_expenses_canada_subsidy][display_military_leasing_costs][display_civilian_leasing_costs][display_naval_leasing_costs][display_industrial_projects_costs][display_infrastructure_projects_costs][display_arms_factory_projects_costs][service_constructions_projects_costs][display_dockyard_projects_costs][display_agro_industrial_expansion_costs][display_advanced_manufacturing_costs][display_energy_grid_modernization_costs][display_strategic_defense_infrastructure_costs][display_strategic_rd_sites_costs][western_propaganda_campaign_costs][emerging_propaganda_campaign_costs][nonaligned_propaganda_campaign_costs][nationalists_propaganda_campaign_costs][salafist_propaganda_campaign_costs][additional_expense_summary_al_jazeera][additional_expense_summary_EU_contribution][additional_expense_summary_LIC_foreign_workers][additional_expense_large_company_subsidies][additional_expense_farmer_subsidies][ITA_additional_expense_display][additional_expense_pmc_salary][AdditionalExpenseMaritimeIndustryEventSubsidies][additional_expense_anti_cartel_propaganda_var][additional_expense_market_costs][additional_expense_egy_broken_economy][additional_expense_COM_zanzibar_agreement][additional_expense_SOV_blue_stream_idea][additional_expense_SOV_turkey_stream_idea][additional_expense_SOV_korean_stream_idea][additional_expense_CHI_china_economic_assistant][additional_expense_UKR_russian_gas][additional_expense_summary_FRA_nepad_monetary_cost][additional_expense_defence_industry_subsidies][additional_spend_mossad_money][additional_expense_overlord_total_subsidies][additional_expense_summary_CZE_increased_state_expenditure][additional_expense_CZE_monarchy_intromision][additional_expense_stolen_from_hungarian_trade][additional_expense_NKR_marz_arm][additional_expense_energy_load_sharing][additional_expense_war_reparations][BLR_additional_expenses][BOT_additional_expenses][GER_additional_expenses][SOV_additional_expenses][SYR_additional_expenses][ROM_additional_expenses][EH_additional_expense_intensive_research_effort][additional_expense_summary_JAP_focus_renewable_energy][additional_expense_summary_JAP_focus_thermal_power_idea][additional_expenditure_summary_good_friday][additional_expense_antarctica_base][additional_expense_GRE_creditor_debt][additional_expense_NKO_storm_corps][additional_expense_space_automation][additional_expense_summary_SAU_pipeline][additional_expense_inflation]"
+ CIVILIAN_TITLE_NUCLEAR: "REACTORS AND URANIUM"
+ CIVILIAN_TITLE_NUCLEAR_DESC: "Next generation nuclear reactors will improve the efficiency of all our reactors. Modern mining will get more uranium from every mine."
+
+ # Designers: shorter cost labels so they do not overlap (DISEÑO.md, stage 7).
+ DIVISION_REFIT_COST_LAND: "Refit: £production_cost $VALUE|2$"
+ DIVISION_REFIT_COST_NAVAL: "Refit: £navprod_cost£ $VALUE|0$"
+ DIVISION_PRODUCTION_COST_LAND: "Production: £production_cost $VALUE|2$"
+ DIVISION_PRODUCTION_COST_LAND_MAX: "Production: £production_cost $VALUE|2$/$MAX|0$"
+ DIVISION_PRODUCTION_COST_LAND_MAX_EXCEEDED: "Production: £production_cost $VALUE|2R$/$MAX|0$"
+ DIVISION_PRODUCTION_COST_NAVAL: "Production: £navprod_cost£ $VALUE|0$"
+ DIVISION_PRODUCTION_COST_NAVAL_MAX: "Production: £navprod_cost£ $VALUE|0$/$MAX|0$"
+ DIVISION_PRODUCTION_COST_NAVAL_MAX_EXCEEDED: "Production: £navprod_cost£ $VALUE|0R$/$MAX|0$"

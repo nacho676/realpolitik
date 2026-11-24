@@ -1,0 +1,159 @@
+spriteTypes = {
+	# Naval production line background: 10 frames, all with 3 rows of dockyard slots, since the lines now take 25 to 50
+	# dockyards (zz_mdr_defines.lua) and the engine picks the frame by the line maximum.
+	spriteType = {
+		name = "GFX_mdr_naval_production_item_bg_strip"
+		textureFile = "gfx/interface/mdr/mdr_naval_production_item_slots_strip.dds"
+		effectFile = "gfx/FX/buttonstate_nodowneffect.lua"
+		noOfFrames = 10
+	}
+	# Millennium Dawn's top bar with the button strip one button longer (herramientas/make_nuclear_art.py, interface/topbar.gui).
+	spriteType = {
+		name = "GFX_mdr_topbar_background"
+		textureFile = "gfx/interface/topbar/mdr_topbar_background.dds"
+		transparencecheck = yes
+	}
+	# Trade screen 219 px wider for 11 resource columns (interface/countrytradeview.gui): Millennium Dawn's images with a
+	# repeated middle band, 80 px filter tabs and wider sort buttons.
+	spriteType = {
+		name = "GFX_mdr_trade_header_bg_wide"
+		textureFile = "gfx/interface/mdr/mdr_trade_header_bg_wide.dds"
+	}
+	spriteType = {
+		name = "GFX_mdr_trade_header_wide"
+		textureFile = "gfx/interface/mdr/mdr_trade_header_wide.dds"
+	}
+	spriteType = {
+		name = "GFX_mdr_trade_resources_bg_wide"
+		textureFile = "gfx/interface/mdr/mdr_trade_resources_bg_wide.dds"
+	}
+	spriteType = {
+		name = "GFX_mdr_trade_divider_wide"
+		textureFile = "gfx/interface/mdr/mdr_trade_divider_wide.dds"
+	}
+	spriteType = {
+		name = "GFX_mdr_trade_sort_btn_big"
+		textureFile = "gfx/interface/mdr/mdr_trade_sort_btn_big.dds"
+	}
+	spriteType = {
+		name = "GFX_mdr_trade_sort_btn_small"
+		textureFile = "gfx/interface/mdr/mdr_trade_sort_btn_small.dds"
+	}
+
+	spriteType = {
+		name = "GFX_mdr_trade_country_entry_bg"
+		textureFile = "gfx/interface/mdr/mdr_trade_country_entry_bg.dds"
+		noOfFrames = 3
+	}
+
+	spriteType = {
+		name = "GFX_mdr_trade_filter_btn"
+		textureFile = "gfx/interface/mdr/mdr_trade_filter_btn.dds"
+		noOfFrames = 2
+	}
+
+	# State view 140 px wider (interface/countrystateview.gui).
+	spriteType = {
+		name = "GFX_mdr_state_header_bg"
+		textureFile = "gfx/interface/mdr/mdr_state_header_bg.dds"
+	}
+
+	# Uranium panel of the trade screen.
+	spriteType = {
+		name = "GFX_mdr_uranium_button"
+		textureFile = "gfx/interface/mdr/mdr_uranium_button.dds"
+	}
+
+	spriteType = {
+		name = "GFX_mdr_uranium_64"
+		textureFile = "gfx/interface/mdr/mdr_uranium_64.dds"
+	}
+
+	# Uranium mining technologies (common/technologies/mdr_uranium_techs.txt).
+	spriteType = { name = "GFX_mdr_uranium_tech_1_medium" texturefile = "gfx/interface/technologies/mdr/mdr_uranium_tech_1.dds" }
+	spriteType = { name = "GFX_mdr_uranium_tech_2_medium" texturefile = "gfx/interface/technologies/mdr/mdr_uranium_tech_2.dds" }
+	spriteType = { name = "GFX_mdr_uranium_tech_3_medium" texturefile = "gfx/interface/technologies/mdr/mdr_uranium_tech_3.dds" }
+	spriteType = { name = "GFX_mdr_uranium_tech_4_medium" texturefile = "gfx/interface/technologies/mdr/mdr_uranium_tech_4.dds" }
+	spriteType = { name = "GFX_mdr_uranium_tech_5_medium" texturefile = "gfx/interface/technologies/mdr/mdr_uranium_tech_5.dds" }
+	# Fertilizer technologies (common/technologies/mdr_fertilizers.txt).
+	spriteType = { name = "GFX_mdr_fertilizers_1_medium" texturefile = "gfx/interface/technologies/mdr/mdr_fertilizers_1.dds" }
+	spriteType = { name = "GFX_mdr_fertilizers_2_medium" texturefile = "gfx/interface/technologies/mdr/mdr_fertilizers_2.dds" }
+	spriteType = { name = "GFX_mdr_fertilizers_3_medium" texturefile = "gfx/interface/technologies/mdr/mdr_fertilizers_3.dds" }
+	spriteType = { name = "GFX_mdr_fertilizers_4_medium" texturefile = "gfx/interface/technologies/mdr/mdr_fertilizers_4.dds" }
+	spriteType = { name = "GFX_mdr_fertilizers_5_medium" texturefile = "gfx/interface/technologies/mdr/mdr_fertilizers_5.dds" }
+	spriteType = { name = "GFX_mdr_fertilizers_6_medium" texturefile = "gfx/interface/technologies/mdr/mdr_fertilizers_6.dds" }
+	spriteType = { name = "GFX_mdr_fertilizers_7_medium" texturefile = "gfx/interface/technologies/mdr/mdr_fertilizers_7.dds" }
+	spriteType = { name = "GFX_mdr_fertilizers_8_medium" texturefile = "gfx/interface/technologies/mdr/mdr_fertilizers_8.dds" }
+	spriteType = { name = "GFX_mdr_fertilizers_9_medium" texturefile = "gfx/interface/technologies/mdr/mdr_fertilizers_9.dds" }
+	spriteType = { name = "GFX_mdr_fertilizers_10_medium" texturefile = "gfx/interface/technologies/mdr/mdr_fertilizers_10.dds" }
+
+	# Ammunition.
+	# Frames as the game's fuel icon, with its arrows: 1 steady, 2 rising, 3 falling.
+	spriteType = {
+		name = "GFX_mdr_ammo_topbar"
+		textureFile = "gfx/interface/mdr/mdr_ammo_topbar.dds"
+		effectFile = "gfx/FX/buttonstate.lua"
+		noOfFrames = 3
+	}
+
+	spriteType = {
+		name = "GFX_mdr_food_topbar"
+		textureFile = "gfx/interface/mdr/mdr_food_topbar.dds"
+		effectFile = "gfx/FX/buttonstate.lua"
+		noOfFrames = 3
+	}
+
+	# Map modes (common/map_modes/mdr_map_modes.txt).
+	spriteType = {
+		name = "GFX_mapmode_buttons_deselected_small_mdr_climate_map_mode"
+		textureFile = "gfx/interface/mapmode/mdr_climate_map_mode_deselected.dds"
+	}
+	spriteType = {
+		name = "GFX_mapmode_buttons_selected_small_mdr_climate_map_mode"
+		textureFile = "gfx/interface/mapmode/mdr_climate_map_mode_selected.dds"
+	}
+	spriteType = {
+		name = "GFX_mapmode_buttons_deselected_small_mdr_soil_map_mode"
+		textureFile = "gfx/interface/mapmode/mdr_soil_map_mode_deselected.dds"
+	}
+	spriteType = {
+		name = "GFX_mapmode_buttons_selected_small_mdr_soil_map_mode"
+		textureFile = "gfx/interface/mapmode/mdr_soil_map_mode_selected.dds"
+	}
+	spriteType = {
+		name = "GFX_mapmode_buttons_deselected_small_mdr_pollution_map_mode"
+		textureFile = "gfx/interface/mapmode/mdr_pollution_map_mode_deselected.dds"
+	}
+	spriteType = {
+		name = "GFX_mapmode_buttons_selected_small_mdr_pollution_map_mode"
+		textureFile = "gfx/interface/mapmode/mdr_pollution_map_mode_selected.dds"
+	}
+
+	spriteType = {
+		name = "GFX_decision_mdr_ammo"
+		textureFile = "gfx/interface/mdr/mdr_decision_ammo.dds"
+	}
+
+	spriteType = {
+		name = "GFX_idea_mdr_ammo_focus"
+		textureFile = "gfx/interface/mdr/mdr_idea_ammo.dds"
+	}
+
+	# Politics view category icons: frames 1-6 from Millennium Dawn, 7 Politics, 8 Society and Information, 9 Defense Companies.
+	spriteType = {
+		name = "GFX_mdr_idea_categories"
+		textureFile = "gfx/interface/mdr/mdr_idea_categories.dds"
+		noOfFrames = 9
+	}
+
+	# Treaties tab of Millennium Dawn's International Systems window (interface/mdr_treaties.gui).
+	spriteType = {
+		name = "GFX_mdr_treaties_tab_off"
+		textureFile = "gfx/interface/mdr/mdr_treaties_tab_off.dds"
+	}
+
+	spriteType = {
+		name = "GFX_mdr_treaties_tab_on"
+		textureFile = "gfx/interface/mdr/mdr_treaties_tab_on.dds"
+	}
+}

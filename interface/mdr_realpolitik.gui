@@ -1,0 +1,320 @@
+guiTypes = {
+	# Prices of Realpolitik's resources (uranium, grain, rare earths), continuing Millennium Dawn's row of 8 prices
+	# (MD_tradeview_market_prices, 84 px each, widened to 929 px in interface/MD_countryeconomyview.gui).
+	containerWindowType = {
+		name = "mdr_tradeview_market_prices"
+		position = { x = 676 y = 455 }
+		size = { width = 252 height = 50 }
+		margin = { left = -3 top = 10 }
+
+		containerWindowType = {
+			name = "mdr_price_uranium"
+			position = { x = 0 y = 0 }
+			size = { width = 84 height = 50 }
+			iconType = { name = "background" spriteType = "GFX_generic_box_smallest" position = { x = 15 y = 2 } }
+			instantTextBoxType = { name = "value" position = { x = 25 y = 6 } font = "hoi_18mbs" text = "MDR_MARKET_PRICES_URANIUM" format = right maxWidth = 55 maxHeight = 24 fixedsize = yes pdx_tooltip = "MDR_MARKET_PRICES_URANIUM_TT" }
+			iconType = { name = "icon" spriteType = "GFX_resources_strip" frame = 9 position = { x = 15 y = 2 } alwaystransparent = yes }
+		}
+
+		containerWindowType = {
+			name = "mdr_price_wheat"
+			position = { x = 84 y = 0 }
+			size = { width = 84 height = 50 }
+			iconType = { name = "background" spriteType = "GFX_generic_box_smallest" position = { x = 15 y = 2 } }
+			instantTextBoxType = { name = "value" position = { x = 25 y = 6 } font = "hoi_18mbs" text = "MDR_MARKET_PRICES_WHEAT" format = right maxWidth = 55 maxHeight = 24 fixedsize = yes pdx_tooltip = "MDR_MARKET_PRICES_WHEAT_TT" }
+			iconType = { name = "icon" spriteType = "GFX_resources_strip" frame = 10 position = { x = 15 y = 2 } alwaystransparent = yes }
+		}
+
+		containerWindowType = {
+			name = "mdr_price_rare_earths"
+			position = { x = 168 y = 0 }
+			size = { width = 84 height = 50 }
+			iconType = { name = "background" spriteType = "GFX_generic_box_smallest" position = { x = 15 y = 2 } }
+			instantTextBoxType = { name = "value" position = { x = 25 y = 6 } font = "hoi_18mbs" text = "MDR_MARKET_PRICES_RARE_EARTHS" format = right maxWidth = 55 maxHeight = 24 fixedsize = yes pdx_tooltip = "MDR_MARKET_PRICES_RARE_EARTHS_TT" }
+			iconType = { name = "icon" spriteType = "GFX_resources_strip" frame = 11 position = { x = 15 y = 2 } alwaystransparent = yes }
+		}
+	}
+
+	# Uranium button, left of Millennium Dawn's resource storage button (moved to x = 844 in interface/resource_storage.gui).
+	containerWindowType = {
+		name = "mdr_uranium_button_window"
+		position = { x = 806 y = 10 }
+		size = { width = 36 height = 33 }
+
+		buttonType = {
+			name = "mdr_uranium_open_button"
+			spriteType = "GFX_mdr_uranium_button"
+			position = { x = 0 y = 0 }
+			pdx_tooltip = "MDR_URANIUM_BUTTON"
+			pdx_tooltip_delayed = "MDR_URANIUM_BUTTON_TT"
+			clicksound = click_default
+		}
+	}
+
+	# Uranium panel, beside the trade screen like Millennium Dawn's resource storage panel.
+	containerWindowType = {
+		name = "mdr_uranium_panel"
+		position = { x = 924 y = 0 }
+		size = { width = 557 height = 409 }
+
+		background = {
+			name = "Background"
+			spriteType = "GFX_energy_ui"
+		}
+
+		instantTextBoxType = {
+			name = "mdr_uranium_title"
+			position = { x = 178 y = 28 }
+			font = "hoi_36header"
+			text = "MDR_URANIUM_PANEL_TITLE"
+			maxWidth = 200
+			maxHeight = 20
+			format = center
+		}
+
+		iconType = {
+			name = "mdr_uranium_icon"
+			spriteType = "GFX_mdr_uranium_64"
+			position = { x = 30 y = 80 }
+		}
+
+		instantTextBoxType = {
+			name = "mdr_uranium_country_header"
+			position = { x = 110 y = 78 }
+			font = "hoi_24header"
+			text = "MDR_URANIUM_PANEL_COUNTRY"
+			maxWidth = 400
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextBoxType = {
+			name = "mdr_uranium_country_text"
+			position = { x = 110 y = 104 }
+			font = "hoi_18mbs"
+			text = "MDR_URANIUM_PANEL_COUNTRY_TEXT"
+			maxWidth = 410
+			maxHeight = 120
+			fixedsize = yes
+			format = left
+		}
+
+		instantTextBoxType = {
+			name = "mdr_uranium_world_header"
+			position = { x = 30 y = 228 }
+			font = "hoi_24header"
+			text = "MDR_URANIUM_PANEL_WORLD"
+			maxWidth = 480
+			maxHeight = 20
+			format = left
+		}
+
+		instantTextBoxType = {
+			name = "mdr_uranium_world_text"
+			position = { x = 30 y = 254 }
+			font = "hoi_18mbs"
+			text = "MDR_URANIUM_PANEL_WORLD_TEXT"
+			maxWidth = 490
+			maxHeight = 40
+			fixedsize = yes
+			format = left
+		}
+
+		instantTextBoxType = {
+			name = "mdr_uranium_info_text"
+			position = { x = 30 y = 300 }
+			font = "hoi_16mbs"
+			text = "MDR_URANIUM_PANEL_INFO"
+			maxWidth = 490
+			maxHeight = 80
+			fixedsize = yes
+			format = left
+		}
+
+		buttonType = {
+			name = "mdr_uranium_close_button"
+			position = { x = 507 y = 10 }
+			quadTextureSprite = "GFX_closebutton"
+			buttonFont = "Main_14_black"
+			shortcut = "ESCAPE"
+			clicksound = click_close
+			pdx_tooltip = "CLOSE"
+		}
+	}
+
+	# Construction speed labels of the uranium mine and the early warning center, laid out like Millennium Dawn's
+	# building_construction_speeds. They sit one slot further right when the enrichment facility shows (nuclear_technology).
+	containerWindowType = {
+		name = "mdr_construction_speeds"
+		position = { x = 465 y = 145 }
+		margin = { left = -5 }
+
+		instantTextBoxType = { name = "mdr_enrichment_facility_speed_nuclear" position = { x = 55 y = 130 } font = "cg_16b" text = "[?modifier@production_speed_enrichment_facility_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_uranium_mine_speed" position = { x = 55 y = 130 } font = "cg_16b" text = "[?modifier@production_speed_mdr_uranium_mine_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_uranium_mine_speed_nuclear" position = { x = 110 y = 130 } font = "cg_16b" text = "[?modifier@production_speed_mdr_uranium_mine_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_early_warning_center_speed" position = { x = 110 y = 130 } font = "cg_16b" text = "[?modifier@production_speed_mdr_early_warning_center_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_early_warning_center_speed_nuclear" position = { x = 165 y = 130 } font = "cg_16b" text = "[?modifier@production_speed_mdr_early_warning_center_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_cropland_speed" position = { x = 165 y = 130 } font = "cg_16b" text = "[?modifier@production_speed_mdr_cropland_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_cropland_speed_nuclear" position = { x = 220 y = 130 } font = "cg_16b" text = "[?modifier@production_speed_mdr_cropland_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_rare_earth_complex_speed" position = { x = 220 y = 130 } font = "cg_16b" text = "[?modifier@production_speed_mdr_rare_earth_complex_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_rare_earth_complex_speed_nuclear" position = { x = 0 y = 195 } font = "cg_16b" text = "[?modifier@production_speed_mdr_rare_earth_complex_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_desalination_plant_speed" position = { x = 0 y = 195 } font = "cg_16b" text = "[?modifier@production_speed_mdr_desalination_plant_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_desalination_plant_speed_nuclear" position = { x = 55 y = 195 } font = "cg_16b" text = "[?modifier@production_speed_mdr_desalination_plant_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_recycling_plant_speed" position = { x = 55 y = 195 } font = "cg_16b" text = "[?modifier@production_speed_mdr_recycling_plant_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_recycling_plant_speed_nuclear" position = { x = 110 y = 195 } font = "cg_16b" text = "[?modifier@production_speed_mdr_recycling_plant_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_regional_university_speed" position = { x = 110 y = 195 } font = "cg_16b" text = "[?modifier@production_speed_mdr_regional_university_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_regional_university_speed_nuclear" position = { x = 165 y = 195 } font = "cg_16b" text = "[?modifier@production_speed_mdr_regional_university_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_spaceport_speed" position = { x = 165 y = 195 } font = "cg_16b" text = "[?modifier@production_speed_mdr_spaceport_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_spaceport_speed_nuclear" position = { x = 220 y = 195 } font = "cg_16b" text = "[?modifier@production_speed_mdr_spaceport_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_stronghold_network_speed_stronghold" position = { x = 165 y = 380 } font = "cg_16b" text = "[?modifier@production_speed_stronghold_network_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_energy_infrastructure_speed" position = { x = 165 y = 380 } font = "cg_16b" text = "[?modifier@production_speed_energy_infrastructure_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_energy_infrastructure_speed_stronghold" position = { x = 220 y = 380 } font = "cg_16b" text = "[?modifier@production_speed_energy_infrastructure_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_industrial_infrastructure_speed" position = { x = 220 y = 380 } font = "cg_16b" text = "[?modifier@production_speed_industrial_infrastructure_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_industrial_infrastructure_speed_stronghold" position = { x = 0 y = 445 } font = "cg_16b" text = "[?modifier@production_speed_industrial_infrastructure_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_electric_arc_furnace_speed" position = { x = 0 y = 445 } font = "cg_16b" text = "[?modifier@production_speed_mdr_electric_arc_furnace_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_electric_arc_furnace_speed_stronghold" position = { x = 55 y = 445 } font = "cg_16b" text = "[?modifier@production_speed_mdr_electric_arc_furnace_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_data_center_speed" position = { x = 55 y = 445 } font = "cg_16b" text = "[?modifier@production_speed_mdr_data_center_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_data_center_speed_stronghold" position = { x = 110 y = 445 } font = "cg_16b" text = "[?modifier@production_speed_mdr_data_center_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_smart_grid_center_speed" position = { x = 110 y = 445 } font = "cg_16b" text = "[?modifier@production_speed_mdr_smart_grid_center_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_smart_grid_center_speed_stronghold" position = { x = 165 y = 445 } font = "cg_16b" text = "[?modifier@production_speed_mdr_smart_grid_center_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_naval_base_speed" position = { x = 0 y = 564 } font = "cg_16b" text = "[?modifier@production_speed_naval_base_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_bunker_speed" position = { x = 55 y = 564 } font = "cg_16b" text = "[?modifier@production_speed_bunker_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_coastal_bunker_speed" position = { x = 110 y = 564 } font = "cg_16b" text = "[?modifier@production_speed_coastal_bunker_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_supply_node_speed" position = { x = 165 y = 564 } font = "cg_16b" text = "[?modifier@production_speed_supply_node_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_rail_way_speed" position = { x = 220 y = 564 } font = "cg_16b" text = "[?modifier@production_speed_rail_way_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_naval_supply_hub_speed" position = { x = 0 y = 629 } font = "cg_16b" text = "[?modifier@production_speed_naval_supply_hub_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_naval_headquarters_speed" position = { x = 55 y = 629 } font = "cg_16b" text = "[?modifier@production_speed_naval_headquarters_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_coastal_dikes_speed" position = { x = 110 y = 629 } font = "cg_16b" text = "[?modifier@production_speed_mdr_coastal_dikes_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_fishing_port_speed" position = { x = 165 y = 629 } font = "cg_16b" text = "[?modifier@production_speed_mdr_fishing_port_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_fortified_ammo_depot_speed" position = { x = 220 y = 629 } font = "cg_16b" text = "[?modifier@production_speed_mdr_fortified_ammo_depot_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_naval_facility_speed" position = { x = 0 y = 748 } font = "cg_16b" text = "[?modifier@production_speed_naval_facility_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_nuclear_facility_speed" position = { x = 55 y = 748 } font = "cg_16b" text = "[?modifier@production_speed_nuclear_facility_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_air_facility_speed" position = { x = 110 y = 748 } font = "cg_16b" text = "[?modifier@production_speed_air_facility_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_land_facility_speed" position = { x = 165 y = 748 } font = "cg_16b" text = "[?modifier@production_speed_land_facility_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+		instantTextBoxType = { name = "mdr_science_campus_speed" position = { x = 220 y = 748 } font = "cg_16b" text = "[?modifier@production_speed_mdr_science_campus_factor|%0=+]" maxWidth = 50 maxHeight = 20 format = center alwaystransparent = yes }
+	}
+
+	# Ammunition in the top bar, between fuel and supplies (interface/topbar.gui moves supplies and the rest to the right).
+	containerWindowType = {
+		name = "mdr_topbar_ammo"
+		position = { x = 564 y = 5 }
+		size = { width = 72 height = 30 }
+
+		buttonType = {
+			name = "mdr_topbar_ammo_bg"
+			spriteType = "GFX_generic_box_smallest"
+			position = { x = 0 y = 0 }
+			pdx_tooltip = "MDR_AMMO_TOPBAR_TT"
+		}
+
+		iconType = {
+			name = "mdr_topbar_ammo_icon"
+			spriteType = "GFX_mdr_ammo_topbar"
+			position = { x = -1 y = 1 }
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "mdr_topbar_ammo_value"
+			position = { x = 22 y = -1 }
+			font = "hoi_18mbs"
+			text = "[mdr_ammo_topbar_text]"
+			format = center
+			maxWidth = 48
+			maxHeight = 24
+			fixedsize = yes
+			pdx_tooltip = "MDR_AMMO_TOPBAR_TT"
+		}
+
+		# Stockpile against capacity, with the game's fuel bar (frame = fill percentage).
+		iconType = {
+			name = "mdr_topbar_ammo_bar"
+			spriteType = "GFX_topbar_fuel_bar"
+			position = { x = 23 y = 15 }
+			frame = 50
+			alwaystransparent = yes
+		}
+	}
+
+	# War exhaustion, right of the air experience box (interface/topbar.gui, air at x = 1041); only at war or while it lasts.
+	containerWindowType = {
+		name = "mdr_topbar_wex"
+		position = { x = 1135 y = 6 }
+		size = { width = 72 height = 30 }
+
+		buttonType = {
+			name = "mdr_topbar_wex_bg"
+			spriteType = "GFX_generic_box_smallest"
+			position = { x = 0 y = 0 }
+			pdx_tooltip = "MDR_WEX_TOPBAR_TT"
+		}
+
+		iconType = {
+			name = "mdr_topbar_wex_icon"
+			spriteType = "GFX_topbar_war_support"
+			position = { x = 3 y = 5 }
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "mdr_topbar_wex_value"
+			position = { x = 22 y = -1 }
+			font = "hoi_18mbs"
+			text = "MDR_WEX_TOPBAR"
+			format = center
+			maxWidth = 48
+			maxHeight = 24
+			fixedsize = yes
+			pdx_tooltip = "MDR_WEX_TOPBAR_TT"
+		}
+
+		iconType = {
+			name = "mdr_topbar_wex_bar"
+			spriteType = "GFX_topbar_fuel_bar"
+			position = { x = 23 y = 15 }
+			frame = 0
+			alwaystransparent = yes
+		}
+	}
+
+	# Food in the top bar, between ammunition and supplies: days of consumption in storage.
+	containerWindowType = {
+		name = "mdr_topbar_food"
+		position = { x = 637 y = 5 }
+		size = { width = 72 height = 30 }
+
+		buttonType = {
+			name = "mdr_topbar_food_bg"
+			spriteType = "GFX_generic_box_smallest"
+			position = { x = 0 y = 0 }
+			pdx_tooltip = "MDR_FOOD_TOPBAR_TT"
+		}
+
+		iconType = {
+			name = "mdr_topbar_food_icon"
+			spriteType = "GFX_mdr_food_topbar"
+			position = { x = -1 y = 1 }
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "mdr_topbar_food_value"
+			position = { x = 22 y = -1 }
+			font = "hoi_18mbs"
+			text = "[mdr_food_topbar_text]"
+			format = center
+			maxWidth = 48
+			maxHeight = 24
+			fixedsize = yes
+			pdx_tooltip = "MDR_FOOD_TOPBAR_TT"
+		}
+
+		iconType = {
+			name = "mdr_topbar_food_bar"
+			spriteType = "GFX_topbar_fuel_bar"
+			position = { x = 23 y = 15 }
+			frame = 50
+			alwaystransparent = yes
+		}
+	}
+}

@@ -1,0 +1,472 @@
+technologies = {
+	# Environment branches in the civilian folder, right of uranium mining (column 44).
+	# Clean technology, column 46: less pollution per building.
+
+	mdr_clean_tech_1 = {
+		research_cost = 1.75
+		start_year = 1985
+
+		mdr_pollution_factor = -0.035
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_clean_tech_2
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 46 y = 2 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_civilian_factories > 20 }
+			modifier = { add = 10 any_owned_state = { OR = { has_dynamic_modifier = { modifier = mdr_pollution_high } has_dynamic_modifier = { modifier = mdr_pollution_severe } } } }
+		}
+	}
+
+	mdr_clean_tech_2 = {
+		research_cost = 1.75
+		start_year = 1995
+
+		mdr_pollution_factor = -0.03
+		production_speed_fossil_powerplant_factor = 0.05
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_clean_tech_3
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 46 y = 6 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_civilian_factories > 20 }
+			modifier = { add = 10 any_owned_state = { OR = { has_dynamic_modifier = { modifier = mdr_pollution_high } has_dynamic_modifier = { modifier = mdr_pollution_severe } } } }
+		}
+	}
+
+	mdr_clean_tech_3 = {
+		research_cost = 1.75
+		start_year = 2005
+
+		mdr_pollution_factor = -0.02
+		production_speed_mdr_desalination_plant_factor = 0.1
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_clean_tech_4
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 46 y = 10 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_civilian_factories > 20 }
+			modifier = { add = 10 any_owned_state = { OR = { has_dynamic_modifier = { modifier = mdr_pollution_high } has_dynamic_modifier = { modifier = mdr_pollution_severe } } } }
+		}
+	}
+
+	mdr_clean_tech_4 = {
+		research_cost = 1.75
+		start_year = 2015
+
+		mdr_pollution_factor = -0.03
+		energy_use_modifier_civs = -0.01
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_clean_tech_5
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 46 y = 14 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_civilian_factories > 20 }
+			modifier = { add = 10 any_owned_state = { OR = { has_dynamic_modifier = { modifier = mdr_pollution_high } has_dynamic_modifier = { modifier = mdr_pollution_severe } } } }
+		}
+	}
+
+	mdr_clean_tech_5 = {
+		research_cost = 1.75
+		start_year = 2025
+
+		mdr_pollution_factor = -0.025
+		production_speed_mdr_recycling_plant_factor = 0.15
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_clean_tech_6
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 46 y = 18 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_civilian_factories > 20 }
+			modifier = { add = 10 any_owned_state = { OR = { has_dynamic_modifier = { modifier = mdr_pollution_high } has_dynamic_modifier = { modifier = mdr_pollution_severe } } } }
+		}
+	}
+
+	mdr_clean_tech_6 = {
+		research_cost = 1.75
+		start_year = 2035
+
+		mdr_pollution_factor = -0.04
+		energy_use_multiplier = 0.01
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_clean_tech_7
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 46 y = 22 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_civilian_factories > 20 }
+			modifier = { add = 10 any_owned_state = { OR = { has_dynamic_modifier = { modifier = mdr_pollution_high } has_dynamic_modifier = { modifier = mdr_pollution_severe } } } }
+		}
+	}
+
+	mdr_clean_tech_7 = {
+		research_cost = 1.75
+		start_year = 2045
+
+		mdr_pollution_factor = -0.02
+		production_speed_synthetic_refinery_factor = 0.1
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_clean_tech_8
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 46 y = 26 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_civilian_factories > 20 }
+			modifier = { add = 10 any_owned_state = { OR = { has_dynamic_modifier = { modifier = mdr_pollution_high } has_dynamic_modifier = { modifier = mdr_pollution_severe } } } }
+		}
+	}
+
+	mdr_clean_tech_8 = {
+		research_cost = 1.75
+		start_year = 2055
+
+		mdr_pollution_factor = -0.035
+		production_speed_mdr_electric_arc_furnace_factor = 0.15
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_clean_tech_9
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 46 y = 30 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_civilian_factories > 20 }
+			modifier = { add = 10 any_owned_state = { OR = { has_dynamic_modifier = { modifier = mdr_pollution_high } has_dynamic_modifier = { modifier = mdr_pollution_severe } } } }
+		}
+	}
+
+	mdr_clean_tech_9 = {
+		research_cost = 1.75
+		start_year = 2065
+
+		mdr_pollution_factor = -0.04
+		energy_use_multiplier = 0.015
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_clean_tech_10
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 46 y = 34 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_civilian_factories > 20 }
+			modifier = { add = 10 any_owned_state = { OR = { has_dynamic_modifier = { modifier = mdr_pollution_high } has_dynamic_modifier = { modifier = mdr_pollution_severe } } } }
+		}
+	}
+
+	mdr_clean_tech_10 = {
+		research_cost = 1.75
+		start_year = 2075
+
+		mdr_pollution_factor = -0.045
+		renewable_energy_gain_multiplier = 0.02
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		folder = {
+			name = civilian_folder
+			position = { x = 46 y = 38 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_civilian_factories > 20 }
+			modifier = { add = 10 any_owned_state = { OR = { has_dynamic_modifier = { modifier = mdr_pollution_high } has_dynamic_modifier = { modifier = mdr_pollution_severe } } } }
+		}
+	}
+
+	# Climate adaptation, column 48: less cost and more chance of lighter damage from storms, floods, fires and heatwaves.
+
+	mdr_adapt_tech_1 = {
+		research_cost = 1.75
+		start_year = 1985
+
+		mdr_disaster_resilience = 0.05
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_adapt_tech_2
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 48 y = 2 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { gdp_per_capita > 10 } }
+			modifier = { add = 10 has_idea = mdr_disaster_severe }
+		}
+	}
+
+	mdr_adapt_tech_2 = {
+		research_cost = 1.75
+		start_year = 2000
+
+		mdr_disaster_resilience = 0.03
+		repair_speed_infrastructure_factor = 0.05
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_adapt_tech_3
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 48 y = 8 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { gdp_per_capita > 10 } }
+			modifier = { add = 10 has_idea = mdr_disaster_severe }
+		}
+	}
+
+	mdr_adapt_tech_3 = {
+		research_cost = 1.75
+		start_year = 2015
+
+		mdr_disaster_resilience = 0.04
+		production_speed_mdr_early_warning_center_factor = 0.15
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_adapt_tech_4
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 48 y = 14 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { gdp_per_capita > 10 } }
+			modifier = { add = 10 has_idea = mdr_disaster_severe }
+		}
+	}
+
+	mdr_adapt_tech_4 = {
+		research_cost = 1.75
+		start_year = 2030
+
+		mdr_disaster_resilience = 0.03
+		production_speed_mdr_coastal_dikes_factor = 0.15
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_adapt_tech_5
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 48 y = 20 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { gdp_per_capita > 10 } }
+			modifier = { add = 10 has_idea = mdr_disaster_severe }
+		}
+	}
+
+	mdr_adapt_tech_5 = {
+		research_cost = 1.75
+		start_year = 2045
+
+		mdr_disaster_resilience = 0.04
+		production_speed_infrastructure_factor = 0.03
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_adapt_tech_6
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 48 y = 26 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { gdp_per_capita > 10 } }
+			modifier = { add = 10 has_idea = mdr_disaster_severe }
+		}
+	}
+
+	mdr_adapt_tech_6 = {
+		research_cost = 1.75
+		start_year = 2060
+
+		mdr_disaster_resilience = 0.04
+		repair_speed_infrastructure_factor = 0.1
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		path = {
+			leads_to_tech = mdr_adapt_tech_7
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civilian_folder
+			position = { x = 48 y = 32 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { gdp_per_capita > 10 } }
+			modifier = { add = 10 has_idea = mdr_disaster_severe }
+		}
+	}
+
+	mdr_adapt_tech_7 = {
+		research_cost = 1.75
+		start_year = 2075
+
+		mdr_disaster_resilience = 0.04
+		agricolture_productivity_modifier = 0.01
+
+		categories = {
+			CAT_industry
+			CAT_Civilian
+		}
+
+		folder = {
+			name = civilian_folder
+			position = { x = 48 y = 38 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 check_variable = { gdp_per_capita > 10 } }
+			modifier = { add = 10 has_idea = mdr_disaster_severe }
+		}
+	}
+}

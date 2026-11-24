@@ -1,0 +1,445 @@
+# Market shocks: oil (Millennium Dawn's price), grain, uranium and rare earths (Realpolitik's prices).
+# Each resource has a price multiplier (global.mdr_shock_oil, _grain, _uranium, _ree) that moves toward its target while the shock
+# lasts and back to 1 afterwards. Oil works through Millennium Dawn's base price (global.starting_oil_price), which its
+# monthly recalculate_resources_price multiplies by supply and demand. Millennium Dawn's own 2008 financial crisis is kept.
+# Rule "historical": the real shocks on their dates, plus the obvious ones the game causes (a Gulf war, Hormuz closed...).
+# Rule "dynamic": no dates; the game-caused shocks plus random ones.
+
+# Input temp variables: mdr_shock_res (1 oil, 2 grain, 3 uranium, 4 rare earths), mdr_shock_target (price multiplier),
+# mdr_shock_weeks, mdr_shock_cause (news text). A shock replaces the current one only if it is stronger.
+mdr_shock_start = {
+	set_temp_variable = { mdr_shock_new = mdr_shock_target }
+	subtract_from_temp_variable = { mdr_shock_new = 1 }
+	set_temp_variable = { mdr_shock_new_abs = mdr_shock_new }
+	if = { limit = { check_variable = { mdr_shock_new_abs < 0 } } multiply_temp_variable = { mdr_shock_new_abs = -1 } }
+
+	if = { limit = { check_variable = { mdr_shock_res = 1 } }
+		set_temp_variable = { mdr_shock_old = global.mdr_shock_oil_target }
+		set_temp_variable = { mdr_shock_left = global.mdr_shock_oil_weeks }
+	}
+	else_if = { limit = { check_variable = { mdr_shock_res = 2 } }
+		set_temp_variable = { mdr_shock_old = global.mdr_shock_grain_target }
+		set_temp_variable = { mdr_shock_left = global.mdr_shock_grain_weeks }
+	}
+	else_if = { limit = { check_variable = { mdr_shock_res = 3 } }
+		set_temp_variable = { mdr_shock_old = global.mdr_shock_uranium_target }
+		set_temp_variable = { mdr_shock_left = global.mdr_shock_uranium_weeks }
+	}
+	else = {
+		set_temp_variable = { mdr_shock_old = global.mdr_shock_ree_target }
+		set_temp_variable = { mdr_shock_left = global.mdr_shock_ree_weeks }
+	}
+	subtract_from_temp_variable = { mdr_shock_old = 1 }
+	if = { limit = { check_variable = { mdr_shock_old < 0 } } multiply_temp_variable = { mdr_shock_old = -1 } }
+
+	if = {
+		limit = {
+			OR = {
+				check_variable = { mdr_shock_left < 1 }
+				check_variable = { mdr_shock_new_abs > mdr_shock_old }
+			}
+		}
+		set_variable = { global.mdr_shock_cause = mdr_shock_cause }
+		if = { limit = { check_variable = { mdr_shock_res = 1 } }
+			set_variable = { global.mdr_shock_oil_target = mdr_shock_target }
+			set_variable = { global.mdr_shock_oil_weeks = mdr_shock_weeks }
+			if = { limit = { check_variable = { mdr_shock_new > 0 } } news_event = { id = mdr_shocks.1 } }
+			else = { news_event = { id = mdr_shocks.2 } }
+		}
+		else_if = { limit = { check_variable = { mdr_shock_res = 2 } }
+			set_variable = { global.mdr_shock_grain_target = mdr_shock_target }
+			set_variable = { global.mdr_shock_grain_weeks = mdr_shock_weeks }
+			if = { limit = { check_variable = { mdr_shock_new > 0 } } news_event = { id = mdr_shocks.3 } }
+			else = { news_event = { id = mdr_shocks.4 } }
+		}
+		else_if = { limit = { check_variable = { mdr_shock_res = 3 } }
+			set_variable = { global.mdr_shock_uranium_target = mdr_shock_target }
+			set_variable = { global.mdr_shock_uranium_weeks = mdr_shock_weeks }
+			if = { limit = { check_variable = { mdr_shock_new > 0 } } news_event = { id = mdr_shocks.5 } }
+			else = { news_event = { id = mdr_shocks.6 } }
+		}
+		else = {
+			set_variable = { global.mdr_shock_ree_target = mdr_shock_target }
+			set_variable = { global.mdr_shock_ree_weeks = mdr_shock_weeks }
+			if = { limit = { check_variable = { mdr_shock_new > 0 } } news_event = { id = mdr_shocks.7 } }
+			else = { news_event = { id = mdr_shocks.8 } }
+		}
+		log = "[GetDateText]: MDR market shock: resource [?mdr_shock_res], x[?mdr_shock_target|2] for [?mdr_shock_weeks] weeks, cause [?mdr_shock_cause]"
+	}
+}
+
+# Global, once a week (mdr_weekly_global), before the grain and uranium markets.
+mdr_shocks_weekly = {
+	if = { limit = { NOT = { has_global_flag = mdr_shocks_init } }
+		set_global_flag = mdr_shocks_init
+		set_variable = { global.mdr_shock_oil = 1 }
+		set_variable = { global.mdr_shock_grain = 1 }
+		set_variable = { global.mdr_shock_uranium = 1 }
+		set_variable = { global.mdr_shock_oil_target = 1 }
+		set_variable = { global.mdr_shock_grain_target = 1 }
+		set_variable = { global.mdr_shock_uranium_target = 1 }
+		set_variable = { global.mdr_shock_ree = 1 }
+		set_variable = { global.mdr_shock_ree_target = 1 }
+		set_variable = { global.mdr_base_oil_price = global.starting_oil_price }
+		if = { limit = { check_variable = { global.mdr_base_oil_price < 0.1 } } set_variable = { global.mdr_base_oil_price = 7.2 } }
+		# Shocks dated before the start of the game are skipped.
+		set_temp_variable = { mdr_shock_mute = 1 }
+		mdr_shocks_historical = yes
+		set_temp_variable = { mdr_shock_mute = 0 }
+	}
+
+	if = { limit = { has_game_rule = { rule = mdr_rule_market_shocks option = historical } }
+		mdr_shocks_historical = yes
+	}
+	mdr_shocks_from_game = yes
+	if = { limit = { has_game_rule = { rule = mdr_rule_market_shocks option = dynamic } }
+		mdr_shocks_random = yes
+	}
+
+	# Move each multiplier: a quarter of the way to the target while the shock lasts, a tenth of the way back to 1 after.
+	if = { limit = { check_variable = { global.mdr_shock_oil_weeks > 0 } }
+		subtract_from_variable = { global.mdr_shock_oil_weeks = 1 }
+		set_temp_variable = { mdr_shock_step = global.mdr_shock_oil_target }
+		subtract_from_temp_variable = { mdr_shock_step = global.mdr_shock_oil }
+		multiply_temp_variable = { mdr_shock_step = 0.25 }
+	}
+	else = {
+		set_variable = { global.mdr_shock_oil_target = 1 }
+		set_temp_variable = { mdr_shock_step = 1 }
+		subtract_from_temp_variable = { mdr_shock_step = global.mdr_shock_oil }
+		multiply_temp_variable = { mdr_shock_step = 0.1 }
+	}
+	add_to_variable = { global.mdr_shock_oil = mdr_shock_step }
+
+	if = { limit = { check_variable = { global.mdr_shock_grain_weeks > 0 } }
+		subtract_from_variable = { global.mdr_shock_grain_weeks = 1 }
+		set_temp_variable = { mdr_shock_step = global.mdr_shock_grain_target }
+		subtract_from_temp_variable = { mdr_shock_step = global.mdr_shock_grain }
+		multiply_temp_variable = { mdr_shock_step = 0.25 }
+	}
+	else = {
+		set_variable = { global.mdr_shock_grain_target = 1 }
+		set_temp_variable = { mdr_shock_step = 1 }
+		subtract_from_temp_variable = { mdr_shock_step = global.mdr_shock_grain }
+		multiply_temp_variable = { mdr_shock_step = 0.1 }
+	}
+	add_to_variable = { global.mdr_shock_grain = mdr_shock_step }
+
+	if = { limit = { check_variable = { global.mdr_shock_uranium_weeks > 0 } }
+		subtract_from_variable = { global.mdr_shock_uranium_weeks = 1 }
+		set_temp_variable = { mdr_shock_step = global.mdr_shock_uranium_target }
+		subtract_from_temp_variable = { mdr_shock_step = global.mdr_shock_uranium }
+		multiply_temp_variable = { mdr_shock_step = 0.25 }
+	}
+	else = {
+		set_variable = { global.mdr_shock_uranium_target = 1 }
+		set_temp_variable = { mdr_shock_step = 1 }
+		subtract_from_temp_variable = { mdr_shock_step = global.mdr_shock_uranium }
+		multiply_temp_variable = { mdr_shock_step = 0.1 }
+	}
+	add_to_variable = { global.mdr_shock_uranium = mdr_shock_step }
+
+	if = { limit = { check_variable = { global.mdr_shock_ree_weeks > 0 } }
+		subtract_from_variable = { global.mdr_shock_ree_weeks = 1 }
+		set_temp_variable = { mdr_shock_step = global.mdr_shock_ree_target }
+		subtract_from_temp_variable = { mdr_shock_step = global.mdr_shock_ree }
+		multiply_temp_variable = { mdr_shock_step = 0.25 }
+	}
+	else = {
+		set_variable = { global.mdr_shock_ree_target = 1 }
+		set_temp_variable = { mdr_shock_step = 1 }
+		subtract_from_temp_variable = { mdr_shock_step = global.mdr_shock_ree }
+		multiply_temp_variable = { mdr_shock_step = 0.1 }
+	}
+	add_to_variable = { global.mdr_shock_ree = mdr_shock_step }
+
+	# Millennium Dawn's oil price follows its base price at the next monthly recalculation.
+	set_variable = { global.starting_oil_price = global.mdr_base_oil_price }
+	multiply_variable = { global.starting_oil_price = global.mdr_shock_oil }
+}
+
+# Input: temp mdr_shock_mute = 1 marks past shocks as done without starting them.
+# Each line: flag, date, resource, multiplier, weeks, cause.
+mdr_shocks_historical = {
+	if = { limit = { date > 2003.03.20 NOT = { has_global_flag = mdr_hshock_2003_iraq } }
+		set_global_flag = mdr_hshock_2003_iraq
+		if = { limit = { NOT = { check_variable = { mdr_shock_mute = 1 } } }
+			set_temp_variable = { mdr_shock_res = 1 } set_temp_variable = { mdr_shock_target = 1.3 } set_temp_variable = { mdr_shock_weeks = 26 } set_temp_variable = { mdr_shock_cause = 1 }
+			mdr_shock_start = yes
+		}
+	}
+	if = { limit = { date > 2006.06.01 NOT = { has_global_flag = mdr_hshock_2006_uranium } }
+		set_global_flag = mdr_hshock_2006_uranium
+		if = { limit = { NOT = { check_variable = { mdr_shock_mute = 1 } } }
+			set_temp_variable = { mdr_shock_res = 3 } set_temp_variable = { mdr_shock_target = 2.5 } set_temp_variable = { mdr_shock_weeks = 80 } set_temp_variable = { mdr_shock_cause = 8 }
+			mdr_shock_start = yes
+		}
+	}
+	if = { limit = { date > 2007.06.01 NOT = { has_global_flag = mdr_hshock_2007_grain } }
+		set_global_flag = mdr_hshock_2007_grain
+		if = { limit = { NOT = { check_variable = { mdr_shock_mute = 1 } } }
+			set_temp_variable = { mdr_shock_res = 2 } set_temp_variable = { mdr_shock_target = 1.8 } set_temp_variable = { mdr_shock_weeks = 68 } set_temp_variable = { mdr_shock_cause = 10 }
+			mdr_shock_start = yes
+		}
+	}
+	if = { limit = { date > 2007.10.01 NOT = { has_global_flag = mdr_hshock_2008_oil_peak } }
+		set_global_flag = mdr_hshock_2008_oil_peak
+		if = { limit = { NOT = { check_variable = { mdr_shock_mute = 1 } } }
+			set_temp_variable = { mdr_shock_res = 1 } set_temp_variable = { mdr_shock_target = 1.8 } set_temp_variable = { mdr_shock_weeks = 43 } set_temp_variable = { mdr_shock_cause = 2 }
+			mdr_shock_start = yes
+		}
+	}
+	if = { limit = { date > 2008.10.01 NOT = { has_global_flag = mdr_hshock_2008_oil_crash } }
+		set_global_flag = mdr_hshock_2008_oil_crash
+		if = { limit = { NOT = { check_variable = { mdr_shock_mute = 1 } } }
+			# Replaces the 2008 peak: the end of a stronger shock is not a weaker one.
+			set_variable = { global.mdr_shock_oil_weeks = 0 }
+			set_temp_variable = { mdr_shock_res = 1 } set_temp_variable = { mdr_shock_target = 0.55 } set_temp_variable = { mdr_shock_weeks = 28 } set_temp_variable = { mdr_shock_cause = 3 }
+			mdr_shock_start = yes
+		}
+	}
+	if = { limit = { date > 2010.01.01 NOT = { has_global_flag = mdr_hshock_2010_oil_plateau } }
+		set_global_flag = mdr_hshock_2010_oil_plateau
+		if = { limit = { NOT = { check_variable = { mdr_shock_mute = 1 } } }
+			set_variable = { global.mdr_shock_oil_weeks = 0 }
+			set_temp_variable = { mdr_shock_res = 1 } set_temp_variable = { mdr_shock_target = 1.35 } set_temp_variable = { mdr_shock_weeks = 238 } set_temp_variable = { mdr_shock_cause = 4 }
+			mdr_shock_start = yes
+		}
+	}
+	if = { limit = { date > 2010.09.01 NOT = { has_global_flag = mdr_hshock_2010_ree_quotas } }
+		set_global_flag = mdr_hshock_2010_ree_quotas
+		if = { limit = { NOT = { check_variable = { mdr_shock_mute = 1 } } }
+			set_temp_variable = { mdr_shock_res = 4 } set_temp_variable = { mdr_shock_target = 4 } set_temp_variable = { mdr_shock_weeks = 60 } set_temp_variable = { mdr_shock_cause = 19 }
+			mdr_shock_start = yes
+		}
+	}
+	if = { limit = { date > 2011.03.11 NOT = { has_global_flag = mdr_hshock_2011_fukushima } }
+		set_global_flag = mdr_hshock_2011_fukushima
+		if = { limit = { NOT = { check_variable = { mdr_shock_mute = 1 } } }
+			set_temp_variable = { mdr_shock_res = 3 } set_temp_variable = { mdr_shock_target = 0.6 } set_temp_variable = { mdr_shock_weeks = 260 } set_temp_variable = { mdr_shock_cause = 9 }
+			mdr_shock_start = yes
+		}
+	}
+	if = { limit = { date > 2014.10.01 NOT = { has_global_flag = mdr_hshock_2014_oil_crash } }
+		set_global_flag = mdr_hshock_2014_oil_crash
+		if = { limit = { NOT = { check_variable = { mdr_shock_mute = 1 } } }
+			set_variable = { global.mdr_shock_oil_weeks = 0 }
+			set_temp_variable = { mdr_shock_res = 1 } set_temp_variable = { mdr_shock_target = 0.6 } set_temp_variable = { mdr_shock_weeks = 86 } set_temp_variable = { mdr_shock_cause = 5 }
+			mdr_shock_start = yes
+		}
+	}
+	if = { limit = { date > 2020.03.15 NOT = { has_global_flag = mdr_hshock_2020_oil_covid } }
+		set_global_flag = mdr_hshock_2020_oil_covid
+		if = { limit = { NOT = { check_variable = { mdr_shock_mute = 1 } } }
+			set_variable = { global.mdr_shock_oil_weeks = 0 }
+			set_temp_variable = { mdr_shock_res = 1 } set_temp_variable = { mdr_shock_target = 0.4 } set_temp_variable = { mdr_shock_weeks = 26 } set_temp_variable = { mdr_shock_cause = 6 }
+			mdr_shock_start = yes
+		}
+	}
+	if = { limit = { date > 2022.03.01 NOT = { has_global_flag = mdr_hshock_2022_ukraine } }
+		set_global_flag = mdr_hshock_2022_ukraine
+		if = { limit = { NOT = { check_variable = { mdr_shock_mute = 1 } } }
+			set_variable = { global.mdr_shock_oil_weeks = 0 }
+			set_temp_variable = { mdr_shock_res = 1 } set_temp_variable = { mdr_shock_target = 1.5 } set_temp_variable = { mdr_shock_weeks = 34 } set_temp_variable = { mdr_shock_cause = 7 }
+			mdr_shock_start = yes
+			set_temp_variable = { mdr_shock_res = 2 } set_temp_variable = { mdr_shock_target = 1.4 } set_temp_variable = { mdr_shock_weeks = 34 } set_temp_variable = { mdr_shock_cause = 7 }
+			mdr_shock_start = yes
+		}
+	}
+}
+
+# Both rules: shocks the game itself causes. Each kind waits two years before it can happen again.
+mdr_shocks_from_game = {
+	# A war between Gulf producers, or the United States against one of them.
+	if = {
+		limit = {
+			NOT = { has_global_flag = mdr_dshock_gulf_cooldown }
+			OR = {
+				AND = { country_exists = USA country_exists = PER USA = { has_war_with = PER } }
+				# Under the historical rule the 2003 invasion (Millennium Dawn mission USA_invasion_in_iraq_mission) has its own shock.
+				AND = {
+					country_exists = USA country_exists = IRQ USA = { has_war_with = IRQ }
+					NOT = { AND = { has_game_rule = { rule = mdr_rule_market_shocks option = historical } date > 2002.06.01 date < 2012.01.01 } }
+				}
+				AND = { country_exists = USA country_exists = SAU USA = { has_war_with = SAU } }
+				AND = { country_exists = PER country_exists = SAU PER = { has_war_with = SAU } }
+				AND = { country_exists = PER country_exists = IRQ PER = { has_war_with = IRQ } }
+				AND = { country_exists = PER country_exists = UAE PER = { has_war_with = UAE } }
+				AND = { country_exists = IRQ country_exists = KUW IRQ = { has_war_with = KUW } }
+				AND = { country_exists = IRQ country_exists = SAU IRQ = { has_war_with = SAU } }
+			}
+		}
+		set_global_flag = { flag = mdr_dshock_gulf_cooldown days = 730 value = 1 }
+		set_temp_variable = { mdr_shock_res = 1 } set_temp_variable = { mdr_shock_target = 1.6 } set_temp_variable = { mdr_shock_weeks = 26 } set_temp_variable = { mdr_shock_cause = 11 }
+		mdr_shock_start = yes
+	}
+	# The Strait of Hormuz closed (Millennium Dawn's flag or Realpolitik's strait system).
+	if = {
+		limit = {
+			NOT = { has_global_flag = mdr_dshock_hormuz_cooldown }
+			has_global_flag = HORMUZ_BLOCKED
+		}
+		set_global_flag = { flag = mdr_dshock_hormuz_cooldown days = 730 value = 1 }
+		set_temp_variable = { mdr_shock_res = 1 } set_temp_variable = { mdr_shock_target = 2 } set_temp_variable = { mdr_shock_weeks = 20 } set_temp_variable = { mdr_shock_cause = 12 }
+		mdr_shock_start = yes
+	}
+	# A war between Russia and Ukraine: oil and the Black Sea grain.
+	if = {
+		limit = {
+			NOT = { has_global_flag = mdr_dshock_blacksea_cooldown }
+			country_exists = SOV
+			country_exists = UKR
+			SOV = { has_war_with = UKR }
+			# Under the historical rule: Crimea in 2014 did not move prices, and 2022 has its own shock.
+			NOT = {
+				AND = {
+					has_game_rule = { rule = mdr_rule_market_shocks option = historical }
+					OR = {
+						AND = { date > 2014.01.01 date < 2016.01.01 }
+						date > 2022.01.01
+					}
+				}
+			}
+		}
+		set_global_flag = { flag = mdr_dshock_blacksea_cooldown days = 730 value = 1 }
+		set_temp_variable = { mdr_shock_res = 1 } set_temp_variable = { mdr_shock_target = 1.3 } set_temp_variable = { mdr_shock_weeks = 26 } set_temp_variable = { mdr_shock_cause = 13 }
+		mdr_shock_start = yes
+		set_temp_variable = { mdr_shock_res = 2 } set_temp_variable = { mdr_shock_target = 1.4 } set_temp_variable = { mdr_shock_weeks = 26 } set_temp_variable = { mdr_shock_cause = 13 }
+		mdr_shock_start = yes
+	}
+	# China, which mines most of the world's rare earths, at war with a big buyer of them.
+	if = {
+		limit = {
+			NOT = { has_global_flag = mdr_dshock_china_cooldown }
+			country_exists = CHI
+			CHI = {
+				OR = {
+					AND = { country_exists = USA has_war_with = USA }
+					AND = { country_exists = JAP has_war_with = JAP }
+					AND = { country_exists = TAI has_war_with = TAI }
+					AND = { country_exists = KOR has_war_with = KOR }
+					AND = { country_exists = RAJ has_war_with = RAJ }
+				}
+			}
+		}
+		set_global_flag = { flag = mdr_dshock_china_cooldown days = 730 value = 1 }
+		set_temp_variable = { mdr_shock_res = 4 } set_temp_variable = { mdr_shock_target = 3 } set_temp_variable = { mdr_shock_weeks = 40 } set_temp_variable = { mdr_shock_cause = 20 }
+		mdr_shock_start = yes
+	}
+	# Several countries in severe drought at once: Millennium Dawn's droughts (its agrarian economies) or a severe or
+	# catastrophic heatwave from Realpolitik's disasters (mdr_disasters.txt, type 6), which can hit any country.
+	if = { limit = { NOT = { has_global_flag = mdr_dshock_drought_cooldown } }
+		set_temp_variable = { mdr_shock_droughts = 0 }
+		every_country = {
+			limit = {
+				OR = {
+					has_idea = AGRI_extreme_drought_ongoing
+					has_idea = AGRI_harsh_drought_ongoing
+					AND = {
+						check_variable = { mdr_disaster_type = 6 }
+						OR = { has_idea = mdr_disaster_severe has_idea = mdr_disaster_catastrophe }
+					}
+				}
+			}
+			add_to_temp_variable = { mdr_shock_droughts = 1 }
+		}
+		if = { limit = { check_variable = { mdr_shock_droughts > 3 } }
+			set_global_flag = { flag = mdr_dshock_drought_cooldown days = 730 value = 1 }
+			set_temp_variable = { mdr_shock_res = 2 } set_temp_variable = { mdr_shock_target = 1.5 } set_temp_variable = { mdr_shock_weeks = 30 } set_temp_variable = { mdr_shock_cause = 14 }
+			mdr_shock_start = yes
+		}
+	}
+}
+
+# Dynamic rule only: rare shocks without a visible cause, about one of each kind every ten to fifteen years.
+mdr_shocks_random = {
+	if = { limit = { date > 2001.01.01 NOT = { has_global_flag = mdr_rshock_cooldown } }
+		random_list = {
+			750 = { }
+			1 = {
+				set_temp_variable = { mdr_shock_res = 1 } set_temp_variable = { mdr_shock_target = 0.55 } set_temp_variable = { mdr_shock_weeks = 52 } set_temp_variable = { mdr_shock_cause = 15 }
+				mdr_shock_start = yes
+				set_global_flag = { flag = mdr_rshock_cooldown days = 365 value = 1 }
+			}
+			1 = {
+				set_temp_variable = { mdr_shock_res = 1 } set_temp_variable = { mdr_shock_target = 1.7 } set_temp_variable = { mdr_shock_weeks = 40 } set_temp_variable = { mdr_shock_cause = 16 }
+				mdr_shock_start = yes
+				set_global_flag = { flag = mdr_rshock_cooldown days = 365 value = 1 }
+			}
+			1 = {
+				set_temp_variable = { mdr_shock_res = 2 } set_temp_variable = { mdr_shock_target = 1.6 } set_temp_variable = { mdr_shock_weeks = 40 } set_temp_variable = { mdr_shock_cause = 17 }
+				mdr_shock_start = yes
+				set_global_flag = { flag = mdr_rshock_cooldown days = 365 value = 1 }
+			}
+			1 = {
+				set_temp_variable = { mdr_shock_res = 3 } set_temp_variable = { mdr_shock_target = 2 } set_temp_variable = { mdr_shock_weeks = 52 } set_temp_variable = { mdr_shock_cause = 18 }
+				mdr_shock_start = yes
+				set_global_flag = { flag = mdr_rshock_cooldown days = 365 value = 1 }
+			}
+			1 = {
+				set_temp_variable = { mdr_shock_res = 4 } set_temp_variable = { mdr_shock_target = 2.5 } set_temp_variable = { mdr_shock_weeks = 40 } set_temp_variable = { mdr_shock_cause = 21 }
+				mdr_shock_start = yes
+				set_global_flag = { flag = mdr_rshock_cooldown days = 365 value = 1 }
+			}
+		}
+	}
+}
+
+# Country scope, monthly: the Dutch disease. A country that lives off oil exports booms when oil is dear and falls into
+# crisis when it is cheap. Dependency = oil export income / total income (Millennium Dawn's oil_exports, display_income).
+mdr_oil_dependency_monthly = {
+	set_variable = { mdr_oil_dependency = 0 }
+	if = { limit = { check_variable = { display_income > 0 } check_variable = { oil_exports > 0 } }
+		set_variable = { mdr_oil_dependency = oil_exports }
+		divide_variable = { mdr_oil_dependency = display_income }
+		clamp_variable = { var = mdr_oil_dependency min = 0 max = 1 }
+	}
+	set_variable = { mdr_oil_bust_strength = 0 }
+	set_variable = { mdr_oil_boom_strength = 0 }
+	if = { limit = { check_variable = { mdr_oil_dependency > 0.15 } }
+		# Bust: dependency x how far below normal the price is (oil at 60% of normal and half the income from oil: 0.2).
+		if = { limit = { check_variable = { global.mdr_shock_oil < 0.85 } }
+			set_variable = { mdr_oil_bust_strength = 1 }
+			subtract_from_variable = { mdr_oil_bust_strength = global.mdr_shock_oil }
+			multiply_variable = { mdr_oil_bust_strength = mdr_oil_dependency }
+		}
+		else_if = { limit = { check_variable = { global.mdr_shock_oil > 1.2 } }
+			set_variable = { mdr_oil_boom_strength = global.mdr_shock_oil }
+			subtract_from_variable = { mdr_oil_boom_strength = 1 }
+			multiply_variable = { mdr_oil_boom_strength = mdr_oil_dependency }
+		}
+	}
+
+	if = { limit = { check_variable = { mdr_oil_bust_strength > 0 } }
+		set_variable = { mdr_oil_bust_stability = mdr_oil_bust_strength }
+		multiply_variable = { mdr_oil_bust_stability = -0.5 }
+		set_variable = { mdr_oil_bust_pp = mdr_oil_bust_strength }
+		multiply_variable = { mdr_oil_bust_pp = -0.5 }
+		set_variable = { mdr_oil_bust_inflation = mdr_oil_bust_strength }
+		multiply_variable = { mdr_oil_bust_inflation = 0.5 }
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = mdr_oil_bust } } }
+			add_dynamic_modifier = { modifier = mdr_oil_bust }
+			# Countries that live off oil also enter Millennium Dawn's recession, once per bust.
+			if = { limit = { check_variable = { mdr_oil_bust_strength > 0.1 } }
+				recession = yes
+			}
+		}
+	}
+	else_if = { limit = { has_dynamic_modifier = { modifier = mdr_oil_bust } }
+		remove_dynamic_modifier = { modifier = mdr_oil_bust }
+	}
+
+	if = { limit = { check_variable = { mdr_oil_boom_strength > 0 } }
+		# Boom: easy money and calm, but the rest of the industry builds slower (the Dutch disease).
+		set_variable = { mdr_oil_boom_stability = mdr_oil_boom_strength }
+		multiply_variable = { mdr_oil_boom_stability = 0.2 }
+		set_variable = { mdr_oil_boom_industry = mdr_oil_boom_strength }
+		multiply_variable = { mdr_oil_boom_industry = -0.3 }
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = mdr_oil_boom } } }
+			add_dynamic_modifier = { modifier = mdr_oil_boom }
+		}
+	}
+	else_if = { limit = { has_dynamic_modifier = { modifier = mdr_oil_boom } }
+		remove_dynamic_modifier = { modifier = mdr_oil_boom }
+	}
+}

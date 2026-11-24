@@ -1,0 +1,11 @@
+focus_tree = {
+	shared_focus = mdr_demo_root # Realpolitik: hidden demography branch (common/national_focus/mdr_demography.txt)
+	id = chimera_focus
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = ALN
+		}
+	}
+}

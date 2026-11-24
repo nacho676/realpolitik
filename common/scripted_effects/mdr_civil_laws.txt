@@ -1,0 +1,161 @@
+# Assembly, civil society, union and surveillance laws (common/ideas/mdr_civil_laws.txt).
+# Hidden unrest (mdr_unrest_hidden, 0 to 100): banning protests and unions quiets the streets but stores up anger. Free
+# assembly lets it out. Past 60 it can burst into a social explosion (mdr_society.5).
+
+# Input: temp variable mdr_civil_target (1 to 4) for each mdr_<law>_set below.
+mdr_assembly_set = {
+	remove_ideas = { mdr_assembly_free mdr_assembly_regulated mdr_assembly_restricted mdr_assembly_banned }
+	if = { limit = { check_variable = { mdr_civil_target = 1 } } add_ideas = mdr_assembly_free }
+	else_if = { limit = { check_variable = { mdr_civil_target = 2 } } add_ideas = mdr_assembly_regulated }
+	else_if = { limit = { check_variable = { mdr_civil_target = 3 } } add_ideas = mdr_assembly_restricted }
+	else = { add_ideas = mdr_assembly_banned }
+}
+
+mdr_ngo_set = {
+	remove_ideas = { mdr_ngo_free mdr_ngo_registered mdr_ngo_foreign_agents mdr_ngo_banned }
+	if = { limit = { check_variable = { mdr_civil_target = 1 } } add_ideas = mdr_ngo_free }
+	else_if = { limit = { check_variable = { mdr_civil_target = 2 } } add_ideas = mdr_ngo_registered }
+	else_if = { limit = { check_variable = { mdr_civil_target = 3 } } add_ideas = mdr_ngo_foreign_agents }
+	else = { add_ideas = mdr_ngo_banned }
+}
+
+mdr_union_set = {
+	remove_ideas = { mdr_unions_free mdr_unions_regulated mdr_unions_state mdr_unions_banned }
+	if = { limit = { check_variable = { mdr_civil_target = 1 } } add_ideas = mdr_unions_free }
+	else_if = { limit = { check_variable = { mdr_civil_target = 2 } } add_ideas = mdr_unions_regulated }
+	else_if = { limit = { check_variable = { mdr_civil_target = 3 } } add_ideas = mdr_unions_state }
+	else = { add_ideas = mdr_unions_banned }
+}
+
+mdr_surveillance_set = {
+	remove_ideas = { mdr_privacy_protected mdr_surveillance_judicial mdr_surveillance_mass mdr_surveillance_total }
+	if = { limit = { check_variable = { mdr_civil_target = 1 } } add_ideas = mdr_privacy_protected }
+	else_if = { limit = { check_variable = { mdr_civil_target = 2 } } add_ideas = mdr_surveillance_judicial }
+	else_if = { limit = { check_variable = { mdr_civil_target = 3 } } add_ideas = mdr_surveillance_mass }
+	else = { add_ideas = mdr_surveillance_total }
+}
+
+# Country init, after the media law: free press 1, regulated 2, pressured 3, censored 3, total control 4.
+mdr_civil_laws_start = {
+	set_temp_variable = { mdr_civil_base = mdr_media_level }
+	if = { limit = { check_variable = { mdr_civil_base > 3 } } subtract_from_temp_variable = { mdr_civil_base = 1 } }
+	clamp_temp_variable = { var = mdr_civil_base min = 1 max = 4 }
+
+	set_temp_variable = { mdr_civil_target = mdr_civil_base }
+	mdr_assembly_set = yes
+
+	set_temp_variable = { mdr_civil_target = mdr_civil_base }
+	# Russia's foreign agents law came in 2012.
+	if = { limit = { original_tag = SOV } set_temp_variable = { mdr_civil_target = 2 } }
+	mdr_ngo_set = yes
+
+	set_temp_variable = { mdr_civil_target = mdr_civil_base }
+	# Single state unions in the communist states; no unions at all in the Gulf monarchies.
+	if = { limit = { OR = { original_tag = CHI original_tag = VIE original_tag = CUB original_tag = LAO original_tag = NKO } } set_temp_variable = { mdr_civil_target = 3 } }
+	else_if = { limit = { OR = { original_tag = SAU original_tag = UAE original_tag = QAT original_tag = KUW original_tag = OMA original_tag = BAH } } set_temp_variable = { mdr_civil_target = 4 } }
+	# Russia kept legal unions with the right to strike.
+	else_if = { limit = { original_tag = SOV } set_temp_variable = { mdr_civil_target = 2 } }
+	mdr_union_set = yes
+
+	set_temp_variable = { mdr_civil_target = mdr_civil_base }
+	# China's Golden Shield.
+	if = { limit = { original_tag = CHI } set_temp_variable = { mdr_civil_target = 4 } }
+	mdr_surveillance_set = yes
+
+	mdr_retirement_start = yes
+	set_variable = { mdr_unrest_hidden = 0 }
+}
+
+# Weekly. A regime that suspends elections cannot keep the freest level, and a democracy cannot keep the harshest.
+mdr_civil_laws_realign = {
+	if = { limit = { has_elections = no }
+		set_temp_variable = { mdr_civil_target = 2 }
+		if = { limit = { has_idea = mdr_assembly_free } mdr_assembly_set = yes }
+		if = { limit = { has_idea = mdr_ngo_free } mdr_ngo_set = yes }
+		if = { limit = { has_idea = mdr_unions_free } mdr_union_set = yes }
+		if = { limit = { has_idea = mdr_privacy_protected } mdr_surveillance_set = yes }
+	}
+	else = {
+		set_temp_variable = { mdr_civil_target = 3 }
+		if = { limit = { has_idea = mdr_assembly_banned } mdr_assembly_set = yes }
+		if = { limit = { has_idea = mdr_ngo_banned } mdr_ngo_set = yes }
+		if = { limit = { has_idea = mdr_unions_banned } mdr_union_set = yes }
+		if = { limit = { has_idea = mdr_surveillance_total } mdr_surveillance_set = yes }
+	}
+}
+
+# Weekly: protest strength (Millennium Dawn), radicalisation and hidden unrest.
+mdr_civil_laws_weekly = {
+	if = { limit = { NOT = { has_variable = mdr_assembly_level } }
+		mdr_civil_laws_start = yes
+	}
+	if = { limit = { NOT = { has_variable = mdr_retire_level } }
+		mdr_retirement_start = yes
+	}
+	mdr_civil_laws_realign = yes
+
+	set_temp_variable = { mdr_civil_protest = 0 }
+	set_temp_variable = { mdr_civil_hidden = 0 }
+	if = { limit = { has_idea = mdr_assembly_free } add_to_temp_variable = { mdr_civil_protest = 0.4 } add_to_temp_variable = { mdr_civil_hidden = -1.5 } }
+	else_if = { limit = { has_idea = mdr_assembly_regulated } add_to_temp_variable = { mdr_civil_hidden = -0.5 } }
+	else_if = { limit = { has_idea = mdr_assembly_restricted } add_to_temp_variable = { mdr_civil_protest = -0.6 } add_to_temp_variable = { mdr_civil_hidden = 0.6 } }
+	else_if = { limit = { has_idea = mdr_assembly_banned } add_to_temp_variable = { mdr_civil_protest = -1.5 } add_to_temp_variable = { mdr_civil_hidden = 1.5 } }
+	if = { limit = { has_idea = mdr_unions_banned } add_to_temp_variable = { mdr_civil_hidden = 0.5 } }
+	if = { limit = { has_idea = mdr_surveillance_mass } add_to_temp_variable = { mdr_civil_protest = -0.3 } }
+	else_if = { limit = { has_idea = mdr_surveillance_total } add_to_temp_variable = { mdr_civil_protest = -0.8 } add_to_temp_variable = { mdr_civil_hidden = 0.5 } }
+	# Anger only builds up while there is something to be angry about.
+	if = { limit = { check_variable = { mdr_civil_hidden > 0 } has_stability > 0.7 } multiply_temp_variable = { mdr_civil_hidden = 0.5 } }
+
+	if = { limit = { has_variable = protest_strength }
+		add_to_variable = { protest_strength = mdr_civil_protest }
+		clamp_variable = { var = protest_strength min = 0 max = 100 }
+		if = { limit = { has_idea = mdr_assembly_banned }
+			random = { chance = 8 add_to_variable = { protest_radicalisation = 1 } clamp_variable = { var = protest_radicalisation min = 0 max = 10 } }
+		}
+		if = { limit = { has_idea = mdr_surveillance_total }
+			random = { chance = 10 add_to_variable = { protest_radicalisation = -1 } clamp_variable = { var = protest_radicalisation min = 0 max = 10 } }
+		}
+	}
+	add_to_variable = { mdr_unrest_hidden = mdr_civil_hidden }
+	clamp_variable = { var = mdr_unrest_hidden min = 0 max = 100 }
+
+	# The lid comes off.
+	if = { limit = { mdr_society_on = yes check_variable = { mdr_unrest_hidden > 60 } NOT = { has_country_flag = mdr_explosion_cd } }
+		random = {
+			chance = 5
+			set_country_flag = { flag = mdr_explosion_cd days = 365 value = 1 }
+			country_event = { id = mdr_society.5 }
+		}
+	}
+}
+
+# Raising the retirement age: protests in the street, and a stability hit where governments face voters.
+mdr_retirement_raised = {
+	if = { limit = { has_variable = mdr_retire_level }
+		if = { limit = { has_variable = protest_strength }
+			add_to_variable = { protest_strength = 8 }
+			clamp_variable = { var = protest_strength min = 0 max = 100 }
+		}
+		if = { limit = { has_elections = yes } add_stability = -0.03 }
+	}
+}
+
+# Input: temp variable mdr_civil_target (1 to 5: 60, 62, 65, 67, 70 years). Sets the level first so it brings no protests.
+mdr_retirement_set = {
+	set_variable = { mdr_retire_level = mdr_civil_target }
+	remove_ideas = { mdr_retire_60 mdr_retire_62 mdr_retire_65 mdr_retire_67 mdr_retire_70 }
+	if = { limit = { check_variable = { mdr_civil_target = 1 } } add_ideas = mdr_retire_60 }
+	else_if = { limit = { check_variable = { mdr_civil_target = 2 } } add_ideas = mdr_retire_62 }
+	else_if = { limit = { check_variable = { mdr_civil_target = 3 } } add_ideas = mdr_retire_65 }
+	else_if = { limit = { check_variable = { mdr_civil_target = 4 } } add_ideas = mdr_retire_67 }
+	else = { add_ideas = mdr_retire_70 }
+}
+
+# Retirement age around 2000: 65 in rich countries, 60 elsewhere; 60 in France, Italy, Japan and Korea; 67 in Norway and Iceland.
+mdr_retirement_start = {
+	if = { limit = { check_variable = { gdp_per_capita > 15 } } set_temp_variable = { mdr_civil_target = 3 } }
+	else = { set_temp_variable = { mdr_civil_target = 1 } }
+	if = { limit = { OR = { original_tag = FRA original_tag = ITA original_tag = JAP original_tag = KOR } } set_temp_variable = { mdr_civil_target = 1 } }
+	else_if = { limit = { OR = { original_tag = NRY original_tag = ICE } } set_temp_variable = { mdr_civil_target = 4 } }
+	mdr_retirement_set = yes
+}

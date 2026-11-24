@@ -1,0 +1,40 @@
+# The AI farms more land when it cannot feed its people, and much more during a shortage.
+mdr_ai_build_cropland = {
+	enable = {
+		any_owned_state = {
+			is_controlled_by = ROOT
+			has_state_flag = mdr_arable_land
+		}
+		OR = {
+			check_variable = { mdr_food_self_sufficiency < 95 }
+			check_variable = { global.mdr_wheat_price > 0.12 }
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = mdr_cropland
+		value = 5
+	}
+}
+
+mdr_ai_build_cropland_shortage = {
+	enable = {
+		any_owned_state = {
+			is_controlled_by = ROOT
+			has_state_flag = mdr_arable_land
+		}
+		OR = {
+			check_variable = { mdr_food_unmet > 0 }
+			check_variable = { mdr_food_unfed > 0 }
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = mdr_cropland
+		value = 15
+	}
+}

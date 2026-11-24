@@ -1,0 +1,239 @@
+mdr_rule_covid = {
+	name = "MDR_RULE_COVID"
+	group = "MDR_RULES"
+	icon = "GFX_production_licenses"
+
+	default = {
+		name = historical
+		text = "MDR_RULE_COVID_HISTORICAL"
+		desc = "MDR_RULE_COVID_HISTORICAL_DESC"
+	}
+	option = {
+		name = dynamic
+		text = "MDR_RULE_COVID_DYNAMIC"
+		desc = "MDR_RULE_COVID_DYNAMIC_DESC"
+		allow_achievements = yes
+	}
+	option = {
+		name = original
+		text = "MDR_RULE_COVID_ORIGINAL"
+		desc = "MDR_RULE_COVID_ORIGINAL_DESC"
+		allow_achievements = yes
+	}
+	option = {
+		name = disabled
+		text = "MDR_RULE_COVID_DISABLED"
+		desc = "MDR_RULE_COVID_DISABLED_DESC"
+		allow_achievements = yes
+	}
+}
+
+mdr_rule_disasters = {
+	name = "MDR_RULE_DISASTERS"
+	group = "MDR_RULES"
+	icon = "GFX_production_licenses"
+
+	default = {
+		name = historical
+		text = "MDR_RULE_DISASTERS_HISTORICAL"
+		desc = "MDR_RULE_DISASTERS_HISTORICAL_DESC"
+	}
+	option = {
+		name = dynamic
+		text = "MDR_RULE_DISASTERS_DYNAMIC"
+		desc = "MDR_RULE_DISASTERS_DYNAMIC_DESC"
+		allow_achievements = yes
+	}
+	option = {
+		name = disabled
+		text = "MDR_RULE_DISASTERS_DISABLED"
+		desc = "MDR_RULE_DISASTERS_DISABLED_DESC"
+		allow_achievements = yes
+	}
+}
+
+mdr_rule_world_events = {
+	name = "MDR_RULE_WORLD_EVENTS"
+	group = "MDR_RULES"
+	icon = "GFX_production_licenses"
+
+	default = {
+		name = historical
+		text = "MDR_RULE_WORLD_EVENTS_HISTORICAL"
+		desc = "MDR_RULE_WORLD_EVENTS_HISTORICAL_DESC"
+	}
+	option = {
+		name = dynamic
+		text = "MDR_RULE_WORLD_EVENTS_DYNAMIC"
+		desc = "MDR_RULE_WORLD_EVENTS_DYNAMIC_DESC"
+		allow_achievements = yes
+	}
+}
+
+mdr_rule_diagnostics = {
+	name = "MDR_RULE_DIAGNOSTICS"
+	group = "MDR_RULES"
+	icon = "GFX_production_licenses"
+
+	default = {
+		name = no
+		text = "MDR_RULE_DIAGNOSTICS_NO"
+		desc = "MDR_RULE_DIAGNOSTICS_NO_DESC"
+	}
+	option = {
+		name = yes
+		text = "MDR_RULE_DIAGNOSTICS_YES"
+		desc = "MDR_RULE_DIAGNOSTICS_YES_DESC"
+		allow_achievements = yes
+	}
+}
+
+mdr_rule_market_shocks = {
+	name = "MDR_RULE_SHOCKS"
+	group = "MDR_RULES"
+	icon = "GFX_production_licenses"
+
+	default = {
+		name = historical
+		text = "MDR_RULE_SHOCKS_HISTORICAL"
+		desc = "MDR_RULE_SHOCKS_HISTORICAL_DESC"
+	}
+	option = {
+		name = dynamic
+		text = "MDR_RULE_SHOCKS_DYNAMIC"
+		desc = "MDR_RULE_SHOCKS_DYNAMIC_DESC"
+		allow_achievements = yes
+	}
+}
+
+mdr_rule_ammo = {
+	name = "MDR_RULE_AMMO"
+	group = "MDR_RULES"
+	icon = "GFX_production_licenses"
+
+	default = {
+		name = enabled
+		text = "MDR_RULE_ENABLED"
+		desc = "MDR_RULE_AMMO_ENABLED_DESC"
+	}
+	option = {
+		name = disabled
+		text = "MDR_RULE_DISABLED"
+		desc = "MDR_RULE_AMMO_DISABLED_DESC"
+		allow_achievements = yes
+	}
+}
+
+mdr_rule_food = {
+	name = "MDR_RULE_FOOD"
+	group = "MDR_RULES"
+	icon = "GFX_production_licenses"
+
+	default = {
+		name = enabled
+		text = "MDR_RULE_ENABLED"
+		desc = "MDR_RULE_FOOD_ENABLED_DESC"
+	}
+	option = {
+		name = disabled
+		text = "MDR_RULE_DISABLED"
+		desc = "MDR_RULE_FOOD_DISABLED_DESC"
+		allow_achievements = yes
+	}
+}
+
+mdr_rule_climate = {
+	name = "MDR_RULE_CLIMATE"
+	group = "MDR_RULES"
+	icon = "GFX_production_licenses"
+
+	default = {
+		name = enabled
+		text = "MDR_RULE_ENABLED"
+		desc = "MDR_RULE_CLIMATE_ENABLED_DESC"
+	}
+	option = {
+		name = disabled
+		text = "MDR_RULE_DISABLED"
+		desc = "MDR_RULE_CLIMATE_DISABLED_DESC"
+		allow_achievements = yes
+	}
+}
+
+mdr_rule_straits = {
+	name = "MDR_RULE_STRAITS"
+	group = "MDR_RULES"
+	icon = "GFX_production_licenses"
+
+	default = {
+		name = enabled
+		text = "MDR_RULE_ENABLED"
+		desc = "MDR_RULE_STRAITS_ENABLED_DESC"
+	}
+	option = {
+		name = disabled
+		text = "MDR_RULE_DISABLED"
+		desc = "MDR_RULE_STRAITS_DISABLED_DESC"
+		allow_achievements = yes
+	}
+}
+
+mdr_rule_society = {
+	name = "MDR_RULE_SOCIETY"
+	group = "MDR_RULES"
+	icon = "GFX_production_licenses"
+
+	default = {
+		name = enabled
+		text = "MDR_RULE_ENABLED"
+		desc = "MDR_RULE_SOCIETY_ENABLED_DESC"
+	}
+	option = {
+		name = disabled
+		text = "MDR_RULE_DISABLED"
+		desc = "MDR_RULE_SOCIETY_DISABLED_DESC"
+		allow_achievements = yes
+	}
+}
+
+mdr_rule_ships = {
+	name = "MDR_RULE_SHIPS"
+	group = "MDR_RULES"
+	icon = "GFX_production_licenses"
+
+	default = {
+		name = enabled
+		text = "MDR_RULE_ENABLED"
+		desc = "MDR_RULE_SHIPS_ENABLED_DESC"
+	}
+	option = {
+		name = disabled
+		text = "MDR_RULE_DISABLED"
+		desc = "MDR_RULE_SHIPS_DISABLED_DESC"
+		allow_achievements = yes
+	}
+}
+
+mdr_rule_ai = {
+	name = "MDR_RULE_AI"
+	group = "MDR_RULES"
+	icon = "GFX_production_licenses"
+
+	default = {
+		name = improved
+		text = "MDR_RULE_AI_IMPROVED"
+		desc = "MDR_RULE_AI_IMPROVED_DESC"
+	}
+	option = {
+		name = normal
+		text = "MDR_RULE_AI_NORMAL"
+		desc = "MDR_RULE_AI_NORMAL_DESC"
+		allow_achievements = yes
+	}
+	option = {
+		name = expert
+		text = "MDR_RULE_AI_EXPERT"
+		desc = "MDR_RULE_AI_EXPERT_DESC"
+		allow_achievements = yes
+	}
+}

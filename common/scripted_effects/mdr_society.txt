@@ -1,0 +1,17 @@
+# Social explosion helpers (events/mdr_society_events.txt). The rest of the old society system (inequality, strikes, brain drain)
+# was removed on 2026-11-23; hidden unrest and the explosion belong to the civil laws (mdr_civil_laws.txt).
+
+# Input: temp variable mdr_society_cost_share (fraction of GDP). Pays it from the treasury.
+mdr_society_pay = {
+	set_temp_variable = { treasury_change = gdp_total }
+	multiply_temp_variable = { treasury_change = mdr_society_cost_share }
+	multiply_temp_variable = { treasury_change = -1 }
+	modify_treasury_effect = yes
+}
+
+# Inputs: temp variable mdr_society_protest (added to Millennium Dawn's protest strength).
+mdr_society_protest_change = {
+	add_to_variable = { protest_strength = mdr_society_protest }
+	clamp_variable = { var = protest_strength min = 0 max = 100 }
+	update_protest_dirty_var = yes
+}

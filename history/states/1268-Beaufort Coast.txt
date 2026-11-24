@@ -1,0 +1,23 @@
+state = {
+	id = 1268
+	name = "STATE_1268" # Beaufort Coast
+	manpower = 6500
+
+	state_category = state_00
+
+	history = {
+		owner = CAN
+		victory_points = {
+			16994 1
+		}
+		buildings = {
+			infrastructure = 1
+		}
+		add_core_of = CAN
+		set_state_flag = mdr_polar   # low disaster risk (common/scripted_effects/mdr_disasters.txt)
+		set_variable = { state_renewable_capacity_factor_modifier_var = 0.600 }
+		set_variable = { productivity_state_var = 500 }
+	}
+
+	provinces = { 16902 16913 16922 16929 16933 16954 16960 16971 16994 17007 17011 17017 17020 17021 17022 17024 }
+}

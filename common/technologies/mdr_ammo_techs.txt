@@ -1,0 +1,347 @@
+technologies = {
+	# Ammunition branch, infantry folder, column 13 (11 = camouflage). One technology every ten years, from the folder's first year.
+
+	mdr_ammo_tech_1 = {
+		research_cost = 1.75
+		start_year = 1965
+
+		mdr_ammo_gain_factor = 0.048
+		line_change_production_efficiency_factor = 0.025
+
+		categories = {
+			CAT_inf
+			CAT_Military
+		}
+
+		path = {
+			leads_to_tech = mdr_ammo_tech_2
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = infantry_folder
+			position = { x = 13 y = 0 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_military_factories > 10 }
+			modifier = { add = 10 has_war = yes }
+		}
+	}
+
+	mdr_ammo_tech_2 = {
+		research_cost = 1.75
+		start_year = 1975
+
+		mdr_ammo_gain_factor = 0.02
+		supply_consumption_factor = -0.005
+		mdr_ammo_storage_factor = 0.03
+		production_speed_mdr_fortified_ammo_depot_factor = 0.1
+
+		categories = {
+			CAT_inf
+			CAT_Military
+		}
+
+		path = {
+			leads_to_tech = mdr_ammo_tech_3
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = infantry_folder
+			position = { x = 13 y = 4 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_military_factories > 10 }
+			modifier = { add = 10 has_war = yes }
+		}
+	}
+
+	mdr_ammo_tech_3 = {
+		research_cost = 1.75
+		start_year = 1985
+
+		mdr_ammo_gain_factor = 0.052
+		production_factory_efficiency_gain_factor = 0.02
+
+		categories = {
+			CAT_inf
+			CAT_Military
+		}
+
+		path = {
+			leads_to_tech = mdr_ammo_tech_4
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = infantry_folder
+			position = { x = 13 y = 8 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_military_factories > 10 }
+			modifier = { add = 10 has_war = yes }
+		}
+	}
+
+	mdr_ammo_tech_4 = {
+		research_cost = 1.75
+		start_year = 1995
+
+		mdr_ammo_storage_factor = 0.073
+		mdr_ammo_gain_factor = 0.01
+
+		categories = {
+			CAT_inf
+			CAT_Military
+		}
+
+		path = {
+			leads_to_tech = mdr_ammo_tech_5
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = infantry_folder
+			position = { x = 13 y = 12 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_military_factories > 10 }
+			modifier = { add = 10 has_war = yes }
+		}
+	}
+
+	mdr_ammo_tech_5 = {
+		research_cost = 1.75
+		start_year = 2005
+
+		mdr_ammo_gain_factor = 0.035
+		production_lack_of_resource_penalty_factor = -0.01
+		mdr_ammo_storage_factor = 0.025
+		production_speed_mdr_fortified_ammo_depot_factor = 0.05
+
+		categories = {
+			CAT_inf
+			CAT_Military
+		}
+
+		path = {
+			leads_to_tech = mdr_ammo_tech_6
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = infantry_folder
+			position = { x = 13 y = 16 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_military_factories > 10 }
+			modifier = { add = 10 has_war = yes }
+		}
+	}
+
+	mdr_ammo_tech_6 = {
+		research_cost = 1.75
+		start_year = 2015
+
+		mdr_ammo_gain_factor = 0.01
+		production_factory_max_efficiency_factor = 0.01
+		mdr_ammo_storage_factor = 0.02
+		production_speed_mdr_fortified_ammo_depot_factor = 0.075
+
+		categories = {
+			CAT_inf
+			CAT_Military
+		}
+
+		path = {
+			leads_to_tech = mdr_ammo_tech_7
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = infantry_folder
+			position = { x = 13 y = 20 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_military_factories > 10 }
+			modifier = { add = 10 has_war = yes }
+		}
+	}
+
+	mdr_ammo_tech_7 = {
+		research_cost = 1.75
+		start_year = 2025
+
+		mdr_ammo_storage_factor = 0.02
+		supply_consumption_factor = -0.01
+		mdr_ammo_gain_factor = 0.015
+		line_change_production_efficiency_factor = 0.03
+
+		categories = {
+			CAT_inf
+			CAT_Military
+		}
+
+		path = {
+			leads_to_tech = mdr_ammo_tech_8
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = infantry_folder
+			position = { x = 13 y = 24 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_military_factories > 10 }
+			modifier = { add = 10 has_war = yes }
+		}
+	}
+
+	mdr_ammo_tech_8 = {
+		research_cost = 1.75
+		start_year = 2035
+
+		mdr_ammo_gain_factor = 0.045
+		production_lack_of_resource_penalty_factor = -0.02
+		production_factory_start_efficiency_factor = 0.02
+
+		categories = {
+			CAT_inf
+			CAT_Military
+		}
+
+		path = {
+			leads_to_tech = mdr_ammo_tech_9
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = infantry_folder
+			position = { x = 13 y = 28 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_military_factories > 10 }
+			modifier = { add = 10 has_war = yes }
+		}
+	}
+
+	mdr_ammo_tech_9 = {
+		research_cost = 1.75
+		start_year = 2045
+
+		mdr_ammo_gain_factor = 0.04
+		industrial_capacity_factory = 0.01
+		line_change_production_efficiency_factor = 0.015
+
+		categories = {
+			CAT_inf
+			CAT_Military
+		}
+
+		path = {
+			leads_to_tech = mdr_ammo_tech_10
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = infantry_folder
+			position = { x = 13 y = 32 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_military_factories > 10 }
+			modifier = { add = 10 has_war = yes }
+		}
+	}
+
+	mdr_ammo_tech_10 = {
+		research_cost = 1.75
+		start_year = 2055
+
+		mdr_ammo_storage_factor = 0.077
+		production_speed_mdr_fortified_ammo_depot_factor = 0.1
+		mdr_ammo_gain_factor = 0.015
+
+		categories = {
+			CAT_inf
+			CAT_Military
+		}
+
+		path = {
+			leads_to_tech = mdr_ammo_tech_11
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = infantry_folder
+			position = { x = 13 y = 36 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_military_factories > 10 }
+			modifier = { add = 10 has_war = yes }
+		}
+	}
+
+	mdr_ammo_tech_11 = {
+		research_cost = 1.75
+		start_year = 2065
+
+		mdr_ammo_gain_factor = 0.055
+		industrial_capacity_factory = 0.01
+		production_factory_max_efficiency_factor = 0.01
+
+		categories = {
+			CAT_inf
+			CAT_Military
+		}
+
+		path = {
+			leads_to_tech = mdr_ammo_tech_12
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = infantry_folder
+			position = { x = 13 y = 40 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_military_factories > 10 }
+			modifier = { add = 10 has_war = yes }
+		}
+	}
+
+	mdr_ammo_tech_12 = {
+		research_cost = 1.75
+		start_year = 2075
+
+		mdr_ammo_gain_factor = 0.03
+		mdr_ammo_storage_factor = 0.03
+
+		categories = {
+			CAT_inf
+			CAT_Military
+		}
+
+		folder = {
+			name = infantry_folder
+			position = { x = 13 y = 44 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { add = 10 num_of_military_factories > 10 }
+			modifier = { add = 10 has_war = yes }
+		}
+	}
+}

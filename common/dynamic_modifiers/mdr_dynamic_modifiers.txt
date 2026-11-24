@@ -1,0 +1,198 @@
+# One combined modifier for every arms treaty the country belongs to (or stays out of). Values come from mdr_treaties_recalc.
+mdr_treaties_modifier = {
+	icon = GFX_idea_generic_diplomatic_treaty
+	nuclear_reactor_fuel_production_factor = mdr_tr_reactor
+	nuclear_production_factor = mdr_tr_nukes
+	political_power_factor = mdr_tr_pp
+	army_defence_factor = mdr_tr_defence
+	army_attack_factor = mdr_tr_attack
+	productivity_growth_modifier = mdr_tr_productivity
+	receiving_investment_cost_modifier = mdr_tr_investment
+}
+
+# Enrichment facilities consume uranium; a shortfall cuts reactor fuel output in proportion.
+mdr_uranium_modifier = {
+	icon = GFX_idea_nuclear_energy
+	country_resource_cost_uranium = mdr_uranium_need
+	nuclear_reactor_fuel_production_factor = mdr_uranium_shortfall
+}
+
+# Soil quality of a state with arable land, placed by mdr_cropland_start (black earth, Pampas, Corn Belt... or dry and thin soils).
+mdr_soil_rich = {
+	icon = GFX_idea_agriculture
+	state_resources_wheat_factor = 0.2
+}
+
+mdr_soil_poor = {
+	icon = GFX_idea_risk_of_famine
+	state_resources_wheat_factor = -0.3
+}
+
+# Hunger: grows with the share of the population without enough food (mdr_food_hunger in mdr_food.txt).
+mdr_food_shortage = {
+	icon = GFX_idea_looming_famine
+	stability_factor = mdr_food_pen_stability
+	political_power_factor = mdr_food_pen_pp
+	war_support_factor = mdr_food_pen_ws
+	monthly_population = mdr_food_pen_pop
+	inflation_cost_multiplier_modifier = mdr_food_pen_inflation
+}
+
+# Dutch disease (mdr_oil_dependency_monthly in mdr_shocks.txt): countries that live off oil exports.
+mdr_oil_bust = {
+	icon = GFX_idea_sub_bad_oil_infra_idea
+	stability_factor = mdr_oil_bust_stability
+	political_power_factor = mdr_oil_bust_pp
+	inflation_cost_multiplier_modifier = mdr_oil_bust_inflation
+}
+
+mdr_oil_boom = {
+	icon = GFX_idea_oil_profits
+	stability_factor = mdr_oil_boom_stability
+	production_speed_industrial_complex_factor = mdr_oil_boom_industry
+}
+
+# Capped national bonuses of the Realpolitik buildings (mdr_buildings_weekly in mdr_buildings.txt).
+mdr_buildings_modifier = {
+	icon = GFX_idea_generic_research
+	research_speed_factor = mdr_bld_research
+	energy_use = mdr_bld_energy
+	specialization_land_speed_factor = mdr_bld_campus_land
+	specialization_naval_speed_factor = mdr_bld_campus_naval
+	specialization_air_speed_factor = mdr_bld_campus_air
+	specialization_nuclear_speed_factor = mdr_bld_campus_nuclear
+}
+
+# State pollution levels (mdr_pollution_state in mdr_climate.txt). Only one at a time; they go away when the air clears.
+mdr_pollution_moderate = {
+	icon = GFX_idea_fossil_fuel_industry
+	state_productivity_growth_modifier = -0.01
+	state_resources_wheat_factor = -0.03
+}
+
+mdr_pollution_high = {
+	icon = GFX_idea_mining_industrialists_ast
+	state_productivity_growth_modifier = -0.02
+	state_resources_wheat_factor = -0.07
+	local_manpower = -0.03
+}
+
+mdr_pollution_severe = {
+	icon = GFX_idea_smoke_and_fire_spirit
+	state_productivity_growth_modifier = -0.035
+	state_resources_wheat_factor = -0.12
+	local_manpower = -0.06
+}
+
+# Capitulation by territory and morale (mdr_capitulation_update in mdr_capitulation.txt). Only while at war.
+mdr_national_resistance = {
+	icon = GFX_idea_deep_defence_spirit
+	surrender_limit = mdr_cap_limit
+	max_surrender_limit_offset = mdr_cap_offset
+	forced_surrender_limit = mdr_cap_forced
+}
+
+# Nuclear strike (mdr_nuclear_strike in mdr_nuclear.txt): burned farmland in the state hit, and a country that rallies.
+mdr_nuclear_harvest = {
+	icon = GFX_idea_risk_of_famine
+	state_resources_wheat_factor = -0.5
+}
+
+mdr_nuked_resolve = {
+	icon = GFX_idea_national_unity
+	war_support_factor = 0.15
+}
+
+# Spin-offs of the space budget (mdr_space_refresh in mdr_space.txt).
+mdr_space_modifier = {
+	icon = GFX_idea_generic_research
+	research_speed_factor = mdr_space_bonus_research
+	production_speed_mdr_spaceport_factor = mdr_space_bonus_sites
+}
+
+# What the finished projects and missions added (herramientas/space_program.py).
+mdr_space_program_modifier = {
+	icon = GFX_idea_generic_research
+	research_speed_factor = mdr_sm_research
+	stability_factor = mdr_sm_stability
+	political_power_factor = mdr_sm_pp
+	war_support_factor = mdr_sm_war
+	olv_production_speed_modifier = mdr_sm_olv_s
+	olv_launch_reliability_modifier = mdr_sm_olv_r
+	gnss_production_speed_modifier = mdr_sm_sat
+	comsat_production_speed_modifier = mdr_sm_sat
+	spysat_production_speed_modifier = mdr_sm_sat
+	killsat_production_speed_modifier = mdr_sm_sat
+	mdr_space_science_factor = mdr_sm_science
+	mdr_space_site_science = mdr_sm_site
+	energy_gain_multiplier = mdr_sm_energy
+	industrial_capacity_factory = mdr_sm_factory
+	production_speed_buildings_factor = mdr_sm_build
+	civilian_intel_factor = mdr_sm_intel
+}
+
+# Prestige, colonies, debris and private contracts (mdr_space_standing_update).
+mdr_space_standing_modifier = {
+	icon = GFX_idea_generic_research
+	stability_factor = mdr_st_stability
+	political_power_factor = mdr_st_pp
+	olv_launch_reliability_modifier = mdr_st_debris_r
+	research_speed_factor = mdr_st_col_research
+	industrial_capacity_factory = mdr_st_col_factory
+	olv_production_cost_modifier = mdr_st_olv_c
+	mdr_space_budget_cost_factor = mdr_st_budget
+	mdr_space_science_factor = mdr_pc_science
+	olv_production_speed_modifier = mdr_pc_olv_s
+	gnss_production_speed_modifier = mdr_pc_sat
+	comsat_production_speed_modifier = mdr_pc_sat
+	spysat_production_speed_modifier = mdr_pc_sat
+	killsat_production_speed_modifier = mdr_pc_sat
+	civilian_intel_factor = mdr_pc_intel
+}
+
+# Genetics technologies offset part of a pandemic's penalties (mdr_pandemic_relief_weekly).
+mdr_pandemic_relief = {
+	icon = GFX_idea_health_care
+	stability_factor = mdr_pr_stability
+	industrial_capacity_factory = mdr_pr_output
+	productivity_growth_modifier = mdr_pr_productivity
+}
+
+# Dockyards busy with ships built or refitted for other countries (mdr_sale_dock_load).
+mdr_sale_dockyards = {
+	icon = GFX_idea_navy_strengthened
+	industrial_capacity_dockyard = mdr_sale_dock_malus
+}
+
+# War exhaustion (mdr_war_exhaustion.txt): grows with a long or bloody war, fades in peace.
+mdr_war_exhaustion = {
+	icon = GFX_idea_generic_protest
+	stability_factor = mdr_wex_stability
+	war_support_factor = mdr_wex_war_support
+	army_morale_factor = mdr_wex_morale
+	army_org_regain = mdr_wex_org
+	conscription_factor = mdr_wex_conscription
+	repair_speed_factor = mdr_wex_repair
+}
+
+# Radiation (mdr_radiation.txt). In the state hit, it fades month by month.
+mdr_radiation_state = {
+	icon = GFX_nuclear_fallout
+	local_resources_factor = mdr_rad_resources
+	state_production_speed_buildings_factor = mdr_rad_build
+}
+
+# World radiation after many strikes, on every country.
+mdr_radiation_world = {
+	icon = GFX_nuclear_fallout
+	monthly_population = mdr_radw_pop
+	industrial_capacity_factory = mdr_radw_factory
+	attrition = mdr_radw_attrition
+	stability_factor = mdr_radw_stability
+}
+
+# Multinationals operating here (mdr_mnc.txt): technology and management transfer.
+mdr_mnc_host = {
+	icon = GFX_idea_foreign_capital
+	productivity_growth_modifier = mdr_mnc_prod
+}
