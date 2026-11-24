@@ -1,6 +1,6 @@
 # Millennium Dawn: Realpolitik
 
-A realism submod for **Millennium Dawn 2.0.0 (Developer Version)** for Hearts of Iron IV.
+A realism submod for **Millennium Dawn (Developer Version)** for Hearts of Iron IV. It works with the current versions of Millennium Dawn.
 
 It adds real-world 2000 economics, ammunition, food, uranium, rare earths, climate, disasters, multinational companies, straits, a space program, ship sales, captured generals, a Mongolia focus tree, and much more. Everything is designed to work alongside Millennium Dawn without breaking its systems.
 
