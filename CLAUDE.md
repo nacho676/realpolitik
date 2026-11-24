@@ -7,7 +7,7 @@ El detalle fino de cada dependencia con Millennium Dawn (huellas MD5, líneas ex
 ## Qué es
 
 Submod de realismo para **Millennium Dawn 2.0.3 (Developer Version)** de Hearts of Iron IV.
-Nombre en el lanzador: "Millennium Dawn: Realpolitik" (`descriptor.mod`, versión 0.1.0).
+Nombre en el lanzador: "Millennium Dawn: Realpolitik" (`descriptor.mod`, versión 0.1.1).
 Depende de "Millennium Dawn: Developer Version" o "Millennium Dawn: A Modern Day Mod".
 
 - Carpeta del submod: `Documents/Paradox Interactive/Hearts of Iron IV/mod/MD_Realismo`
